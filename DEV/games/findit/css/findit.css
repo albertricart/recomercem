@@ -1,0 +1,37 @@
+#ControlBox { width:100%; height: auto; padding: 0 0 5px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; grid-gap: 20px; }
+
+.ControlBtns { padding: 5px; background-color: transparent; border: 2px solid #ffcb00; color:#ffcb00; border-radius: 5px; margin: 3px; cursor: pointer; }
+
+#OpenListBtn { background-color: #ffcb00; color:#333; }
+#EndGameBtn {  }
+#ExitBtn {  }
+#CounterdownBox { color: chartreuse; font-size: 26px; text-align: center; padding: 5px 0; }
+#ScoreBox { color: chartreuse; font-size: 26px; text-align: center; padding: 5px 0; }
+#RemainMarkerBox { color: chartreuse; font-size: 26px; text-align: center; padding: 5px 0; }
+
+
+
+.markersBox { position:absolute; top: 0px; left: -50px; width:30px; height: 30px; padding: 5px; margin: 3px; background-color: transparent; border-radius: 25px; box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.8); }
+
+.markersInline { z-index:99; display: block; }
+.markersOffline { z-index:0; display: none; }
+
+.markersActive { background-color: transparent; border: 4px solid #f757a9; cursor: pointer; color:#f757a9; }
+.markersInactive { background-color: transparent; border: 4px solid #bff209; cursor: pointer; color:#bff209; }
+
+.markerOptions { width: 20px; height:20px; position:absolute; cursor:pointer; -webkit-filter: drop-shadow(0px 0px .5px rgb(0, 0, 0)); filter: drop-shadow(0px 0px .5px rgb(0, 0, 0)); }
+#markerTrash { color:#FF0000; top: -10px;  }
+#markerThumbtack { color: #00CCCC; top: 20px; }
+.markerOptsRight { left: 50px; }
+.markerOptsLeft { right: 50px; }
+
+
+#thingsListBox { position: absolute; box-sizing: border-box; width:100%; height: auto; top: 0; margin:0; padding: 10px; z-index:12; background-color: rgba(255,200,0,.9); overflow:hidden; transition: height 1s; } 
+
+#helpDataBox { position: absolute; box-sizing: border-box; width:100%; height: auto; top: 0; margin:0; padding: 10px; z-index:12; background-color: rgba(255,200,0,.9); overflow:hidden; transition: height 1s; } 
+
+.searchItemLst { display:inline-block; padding:0; margin: 3px 10px 3px 10px; } 
+.searchItemLst:before { content:'\25C9'; margin-right:10px; } 
+
+#itmlistH5 { display:inline-block; font-size:16px; font-weight:bold; margin:0; padding:0; }
+
