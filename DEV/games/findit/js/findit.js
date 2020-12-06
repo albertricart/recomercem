@@ -1,10 +1,33 @@
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Init =>
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - onload =>
+
+function onloadFx() {
+
+	setGameData();
+
+	createItemList();
+
+	traslateLang();
+
+	// - - - - - traking mouse pointer
+
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - onload //
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Init //
+
+
+
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Language =>
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - default data lang //
 
 if ( !langElemAry ) {
-	var langElemAry = JSON.parse( '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !"}' );
-	var langTextAry = JSON.parse( '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","itmlistH5":"Find:","ExitBtn":"Exit Game"}' );
+	var langElemAry = JSON.parse( '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:"}' );
+	var langTextAry = JSON.parse( '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game","ExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}' );
 }
 
 // - - - - - funcion de traslate con AJAX
@@ -50,9 +73,9 @@ function traslateLang() {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - activeMarker
 var activeMarker = null; // marcador activo
 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - InExecution control
 var inExecution = true, theOpener = "OpenListBtn"; // marcador activo
-
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - gameData
@@ -67,12 +90,70 @@ var gameData = document.getElementById("ControlBox"); // objeto de informacion d
 // gameData.dataset.markactive="0"
 // gameData.dataset.score="0"
 // gameData.dataset.time="120"
+var fullMarkerSize = parseInt( gameData.dataset.marksize ) + ( parseInt( gameData.dataset.sizextra ) * 2 );
+var halfMarkerSize = parseInt( fullMarkerSize / 2 );
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - gameData
+var gameLayerBox = document.getElementById("GameLayerBox"); // game layer
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - gameData
+var gameImage = document.getElementById("gameImage"); // game image
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - CountDown
 var theCounter, inPause = true; startCountDown( 1000 );
 
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Game Default Data
+if ( !theGameImage ) { var theGameImage = "images/gameimg_1.jpg"; }
+
+if ( !theGameTargets ) { 
+	var theGameTargets = JSON.parse( '[{"description":"Item 00","x":100,"y":100},{"description":"Item 01","x":100,"y":200},{"description":"Item 02","x":100,"y":300},{"description":"Item 03","x":100,"y":400},{"description":"Item 04","x":100,"y":500},{"description":"Item 05","x":300,"y":100},{"description":"Item 06","x":300,"y":200},{"description":"Item 07","x":300,"y":300},{"description":"Item 08","x":300,"y":400},{"description":"Item 09","x":300,"y":500},{"description":"Item 10","x":500,"y":100},{"description":"Item 11","x":500,"y":200},{"description":"Item 12","x":500,"y":300},{"description":"Item 13","x":500,"y":400},{"description":"Item 14","x":500,"y":500},{"description":"Item 15","x":900,"y":100},{"description":"Item 16","x":900,"y":200},{"description":"Item 17","x":900,"y":300},{"description":"Item 18","x":900,"y":400},{"description":"Item 19","x":900,"y":500}]' );
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - setGameData =>
+
+function setGameData() {
+
+	// - - - - carga los set de juegos disponibles. Si no existe, se utilizara el default
+	gameImage.src = theGameImage;
+
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - setGameData //
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SYSTEM VARS //
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Targets =>
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - createItemList =>
+
+function createItemList() {
+
+	var helpDataBox = document.getElementById("thingsListBox");
+	var itmlist;
+
+	for( var i = 0; i < theGameTargets.length; i++ ) {
+
+		itmlist = document.createElement("LI");
+		itmlist.id = "itmlist_" + i;
+		itmlist.classList.add( "searchItemLst" );
+		itmlist.setAttribute( "data-satate", 0 );
+		itmlist.innerHTML = theGameTargets[i]["description"];
+
+		helpDataBox.appendChild( itmlist );
+
+	}
+
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - createItemList //
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Targets =>
 
 
 
@@ -85,22 +166,39 @@ markerFixer.id = "markerThumbtack";
 markerFixer.class="markerOptions";
 markerFixer.classList.add("markerOptions");
 markerFixer.classList.add("markerOptsRight");
-markerFixer.onclick = function () { alert('Fijar Marcador' + activeMarker.id ) };
+markerFixer.onclick = unselectMarker;
 markerFixer.innerHTML = '<svg viewBox="0 0 384 512"><path fill="currentColor" d="M306.5 186.6l-5.7-42.6H328c13.2 0 24-10.8 24-24V24c0-13.2-10.8-24-24-24H56C42.8 0 32 10.8 32 24v96c0 13.2 10.8 24 24 24h27.2l-5.7 42.6C29.6 219.4 0 270.7 0 328c0 13.2 10.8 24 24 24h144v104c0 .9.1 1.7.4 2.5l16 48c2.4 7.3 12.8 7.3 15.2 0l16-48c.3-.8.4-1.7.4-2.5V352h144c13.2 0 24-10.8 24-24 0-57.3-29.6-108.6-77.5-141.4zM50.5 304c8.3-38.5 35.6-70 71.5-87.8L138 96H80V48h224v48h-58l16 120.2c35.8 17.8 63.2 49.4 71.5 87.8z" class=""></path></svg>';
 var markerDelete = document.createElement("DIV");
 markerDelete.id = "markerTrash";
 markerDelete.classList.add("markerOptions");
 markerDelete.classList.add("markerOptsRight");
-markerDelete.onclick = function () { alert('Eliminar Marcador' + activeMarker.id ) };
+markerDelete.onclick = deleteMarker;
 markerDelete.innerHTML = '<svg viewBox="0 0 448 512"><path fill="currentColor" d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z" class=""></path></svg>';
 var markerOptions = document.createElement("DIV");
+markerOptions.id = "markerOption";
 markerOptions.style.display = "block";
 markerOptions.style.position = "relative";
+markerOptions.style.marginTop = "-32px";
 markerOptions.appendChild(markerFixer);
 markerOptions.appendChild(markerDelete);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Crea elemento opciones de marcador //
-						
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - setMarker =>
+
+function checkthis( targetObj ) {
+
+	if ( parseInt( targetObj.dataset.state ) == 1 && targetObj.dataset.id != gameData.dataset.markactive ) { 
+
+		selectMarker( targetObj ); 
+
+	}
+
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - setMarker =>
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - setMarker =>
 
@@ -109,33 +207,37 @@ function setMarker( ev, targetObj ) {
 	// control de marcadores usados
 	if ( parseInt( gameData.dataset.markused ) < parseInt( gameData.dataset.items ) ) {
 
-		var fullMargin = parseInt( gameData.dataset.marksize ) + ( parseInt( gameData.dataset.markborder ) * 2 );
-		var halfMargin = parseInt( fullMargin / 2 );
-		var rect = targetObj.getBoundingClientRect();
+		var varX = parseInt( gameData.dataset.x );
+		var varY = parseInt( gameData.dataset.y );
+
 		// calc X
-		var targetX = parseInt( ev.clientX - rect.left - halfMargin );
+		var targetX = ev.offsetX - halfMarkerSize;
+
 		// calc Y
-		var targetY = parseInt( ev.clientY - rect.top - halfMargin );
+		var targetY = ev.offsetY - halfMarkerSize;
+
+		//console.log( 'fullMarkerSize: ' + fullMarkerSize + ' | halfMarkerSize: ' +  halfMarkerSize + ' | targetX: ' + targetX + ' | targetY: ' + targetY );
 		// control X
-		if ( targetX < 0 ) { targetX = 0; } 
-		else if ( targetX >= ( gameData.dataset.x - halfMargin ) ) { targetX = ( gameData.dataset.x - fullMargin ); }
+		if ( targetX < 0 ) { targetX = 0; } else if ( (targetX + fullMarkerSize) >= ( varX ) ) { targetX = ( varX - fullMarkerSize ); }
 		// control Y
-		if ( targetY < 0 ) { targetY = 0; } 
-		else if ( targetY >= ( gameData.dataset.y - halfMargin ) ) { targetY = ( gameData.dataset.y - fullMargin ); }
+		if ( targetY < 0 ) { targetY = 0; } else if ( (targetY + fullMarkerSize) >= ( varY ) ) { targetY = ( varY - fullMarkerSize ); }
+		//console.log( 'fullMarkerSize: ' + fullMarkerSize + ' | halfMarkerSize: ' +  halfMarkerSize + ' | targetX: ' + targetX + ' | targetY: ' + targetY );
 
 		// selecciona proximo marcador libre
 		markerObj = getNextMarker();
 
-		// asigna como seleccionado
-		selectMarker( markerObj );
-
 		// posiciona y activa marcador
 		markerObj.classList.remove("markersOffline");
 		markerObj.classList.add("markersInline");
-		markerObj.style.top = targetY;
-		markerObj.style.left = targetX;
+		//markerObj.style.top = targetY + "px";
+		markerObj.style.top = (targetY * 100) / gameLayerBox.offsetHeight + "%";
+		//markerObj.style.left = targetX + "px";
+		markerObj.style.left = (targetX * 100) / gameLayerBox.offsetWidth + "%";
+
 		markerObj.dataset.state = "1";
-		alert("habilitando marker con id " + markerObj.id + " en posicion top " + targetY + " y left " + targetX );
+
+		// asigna como seleccionado
+		selectMarker( markerObj );
 
 		// suma a marcadores usados
 		gameData.dataset.markused = parseInt( gameData.dataset.markused ) + 1;
@@ -176,18 +278,100 @@ function selectMarker( targetObj ) {
 
 	gameData.dataset.markactive = targetObj.dataset.id
 
-	activeMarker.style.cursor = "move";
-	activeMarker.classList.remove("markersInactive");
-	activeMarker.classList.add("markersActive");
+	targetObj.style.cursor = "move";
+	targetObj.classList.remove("markersInactive");
+	targetObj.classList.add("markersActive");
 
-	markerObj.appendChild( markerOptions );
+	//console.log( parseInt(targetObj.style.left.substring(0, targetObj.style.left.length-2)) + ' > ( parseInt( ' + gameData.dataset.x + ' ) / 2 ) ' );
 
-	// - - - - - Make the DIV element draggable
-	dragElement( activeMarker );
+	if ( targetObj.offsetLeft > ( gameData.offsetWidth / 2 ) ) {
+		markerFixer.classList.remove("markerOptsRight");
+		markerFixer.classList.add("markerOptsLeft");
+		markerDelete.classList.remove("markerOptsRight");
+		markerDelete.classList.add("markerOptsLeft");
+	} else {
+		markerFixer.classList.remove("markerOptsLeft");
+		markerFixer.classList.add("markerOptsRight");
+		markerDelete.classList.remove("markerOptsLeft");
+		markerDelete.classList.add("markerOptsRight");
+	}
+
+	targetObj.appendChild( markerOptions );
+
+	// - - - - - Make the DIV element PSEUDO-DRAGGABLE
+	dragActiveMarker();
+
+//	targetObj.draggable = "true";
+//	targetObj.ondragstart = onDragStartMarker;	// El evento ocurre cuando el usuario comienza a arrastrar un elemento
 
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - selectMarker //
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - dragActiveMarker =>
+
+function dragActiveMarker(){
+
+	var dragOK = true;
+	
+	var mouseX, mouseY;
+
+	var dataLayer = gameLayerBox.getBoundingClientRect();
+
+    activeMarker.onmousedown = dragMarker; // asigna funcion "dragMarker" de desplazamiento de elemento cuando el boton esta presionado
+
+	function dragMarker( ev ) {
+		ev = ev || window.event; // toma parametro o evento ocurrido
+		ev.preventDefault(); // prevencion de evento por default
+		// - - - - - coordenadas de puntero de raton
+		mouseX = ev.clientX;
+		mouseY = ev.clientY;
+	    document.onmousemove = draggingMarker; // Inicia funcion cuando el mouse se desplaza (no boton presionado)
+	    document.onmouseup = dropMarker; // Finaliza desplazamiento de elemento cuando se suelta el boton del mouse
+	}
+
+	function draggingMarker( ev ) {
+		ev = ev || window.event; // toma parametro o evento ocurrido
+		ev.preventDefault(); // prevencion de evento por default
+		// calcula coordenadas de puntero de raton
+		var tmpX = activeMarker.offsetLeft - ( mouseX - ev.clientX ); 
+		var tmpY = activeMarker.offsetTop - ( mouseY - ev.clientY );
+		// - - - - - control de outside layer
+		if ( tmpX < 0 ) { tmpX = 0; } 
+		else if ( ( tmpX + fullMarkerSize ) >= dataLayer.width ) { tmpX = dataLayer.width - fullMarkerSize; } 
+		if ( tmpY < 0 ) { mouseY = tmpY = 0; } 
+		else if ( ( tmpY + fullMarkerSize ) >= dataLayer.height ) { mouseY = tmpY = dataLayer.height - fullMarkerSize; } 
+		// - - - - - establece posicion de marcador
+		//activeMarker.style.left = ( tmpX ) + "px";
+		activeMarker.style.left = (tmpX * 100) / gameLayerBox.offsetWidth + "%";
+		//activeMarker.style.top = ( tmpY ) + "px";
+		activeMarker.style.top = (tmpY * 100) / gameLayerBox.offsetHeight + "%";
+		mouseX = ev.clientX;		
+		mouseY = ev.clientY;
+		// control de visualizacion de opciones
+		if ( activeMarker.offsetLeft > ( gameData.offsetWidth / 2 ) ) {
+			markerFixer.classList.remove("markerOptsRight");
+			markerFixer.classList.add("markerOptsLeft");
+			markerDelete.classList.remove("markerOptsRight");
+			markerDelete.classList.add("markerOptsLeft");
+		} else {
+			markerFixer.classList.remove("markerOptsLeft");
+			markerFixer.classList.add("markerOptsRight");
+			markerDelete.classList.remove("markerOptsLeft");
+			markerDelete.classList.add("markerOptsRight");
+		}
+
+	}
+
+	function dropMarker() { // stop moving when mouse
+		document.onmouseup = null;
+		document.onmousemove = null;
+	}
+
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - dragActiveMarker //
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - unselectMarker =>
@@ -200,6 +384,7 @@ function unselectMarker() {
 	// modify pointer
 	activeMarker.style.cursor = "pointer";
 
+	// no es necesario para mover pero si lo es para fijar el elemento
 	activeMarker.removeChild( markerOptions );
 
 	// reasign classes
@@ -216,6 +401,25 @@ function unselectMarker() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - unselectMarker =>
 
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - deleteMarker =>
+
+function deleteMarker() {
+
+	activeMarker.classList.remove("markersInline");
+	activeMarker.classList.add("markersOffline");
+	activeMarker.style.top = "0";
+	activeMarker.style.left = "-50px";
+	activeMarker.dataset.state = "0";
+
+	// suma a marcadores usados
+	gameData.dataset.markused = parseInt( gameData.dataset.markused ) - 1;
+	// visualiza marcadores restantes
+	document.getElementById("RemainMarkerBox").innerHTML = ( parseInt( gameData.dataset.items ) - parseInt( gameData.dataset.markused ) ) + " " + langTextAry["txtMarkers"];
+
+	unselectMarker();
+
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - visibilityMarkersAll =>
 
@@ -246,66 +450,6 @@ function visibilityMarkersAll() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - visibilityMarkersAll //
 
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - dragElement =>
-
-function dragElement( targetObj ) {
-
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-  targetObj.onmousedown = dragMouseDown;
-
-	// - - - - - 
-	function dragMouseDown( e ) {
-
-	    e = e || window.event;
-
-	    e.preventDefault();
-
-	    // get the mouse cursor position at startup:
-	    pos3 = e.clientX;
-	    pos4 = e.clientY;
-
-		// asigna funcion de dejar de arrastrar
-	    document.onmouseup = closeDragElement;
-
-	    // asigna funcion de iniciar arrastre
-	    document.onmousemove = elementDrag;
-
-	}
-
-	// - - - - - 
-	function elementDrag( e ) {
-
-	    e = e || window.event;
-
-	    e.preventDefault();
-
-	    // calculate the new cursor position:
-	    pos1 = pos3 - e.clientX;
-	    pos2 = pos4 - e.clientY;
-	    pos3 = e.clientX;
-	    pos4 = e.clientY;
-
-	    // set the element's new position:
-	    targetObj.style.top = ( targetObj.offsetTop - pos2 ) + "px";
-	    targetObj.style.left = ( targetObj.offsetLeft - pos1 ) + "px";
-
-	}
-
-	// - - - - - 
-	function closeDragElement() {
-
-	    // stop moving when mouse button is released:
-	    document.onmouseup = null;
-	    document.onmousemove = null;
-
-	}
-
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - dragElement //
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Markers //
 
 
@@ -317,13 +461,26 @@ function dragElement( targetObj ) {
 
 function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) { 
 
-alert( inExecution + " | " + theOpener + " | " + originObj.id + " | " + boxId );
+	//alert( inExecution + " | " + theOpener + " | " + originObj.id + " | " + boxId );
 
 	if ( !inExecution || theOpener == originObj.id ) {
 
 		var targetObj = document.getElementById( boxId ); 
 	
-		if ( targetObj.dataset.open == "0" ) { 
+		if ( !targetObj ) { // sin elemento para abrir 
+
+			if (!inExecution) { inExecution = true; theOpener = originObj.id; } 
+			else { inExecution = false; theOpener = ""; }
+			
+			visibilityMarkersAll();
+
+			document.getElementById("gameImage").style.visibility = "hidden";
+	
+			pauseCountDown();
+
+			if ( confirm( langTextAry['ExitConfirm'] ) ) { window.location.href = "http://recomercem.es/index.html"; } 
+
+		} else if ( targetObj.dataset.open == "0" ) { 
 	
 			inExecution = true;
 			theOpener = originObj.id;
@@ -388,11 +545,60 @@ function finishGame() {
 	document.getElementById("EndGameBtn").onclick = null;
 	document.getElementById("HelpBtn").onclick = null;
 
+	// - - - - - Control de aciertos (collisions?) =>
 
-	// calc finded elements in array
-	// calc finded elements in array	
+	var targetsFinded = 0;
+	var targetSize = parseInt ( gameData.dataset.marksize );
 
-	alert('Finish the Game & Get my Points');
+	var theMarkers = document.querySelectorAll('.markersBox[data-state="1"]');
+
+	var logstring;
+
+	if ( theMarkers ) {
+
+		for ( var i = 0; i < theMarkers.length; i++ ) { 
+
+			tLeft = theMarkers[i].offsetLeft + halfMarkerSize;
+			tTop = theMarkers[i].offsetTop + halfMarkerSize;
+
+			gotIt = false;
+
+console.log( "Marker point "+tLeft+","+tTop+" => ");
+
+			for( var j = 0; j < theGameTargets.length; j++ ) {
+
+				if ( tLeft > theGameTargets[j]['x'] && tLeft < theGameTargets[j]['x']+targetSize && 
+					 tTop > theGameTargets[j]['y'] && tTop < theGameTargets[j]['y']+targetSize ) {
+
+					gotIt = true;
+
+				}
+
+console.log( "- target "+theGameTargets[j]['x']+","+theGameTargets[j]['y']+" - "+ (theGameTargets[j]['x']+targetSize)+","+(theGameTargets[j]['y']+targetSize)+((gotIt)?"GOT":"") );
+
+			}
+
+			if (gotIt) { 
+				++targetsFinded; 
+console.log( ">>> Encontrado !" );
+			} else {
+console.log( "--- no one got it" );
+			}
+
+		} 
+
+	}
+
+	// - - - - - Control de aciertos (collisions?) //
+
+	var elapsedTime = parseInt ( gameData.dataset.time );
+	var pointsByTarget = parseInt ( elapsedTime / parseInt ( gameData.dataset.items ) );
+	var totalScore = pointsByTarget * targetsFinded;
+
+	gameData.dataset.score = totalScore;
+	document.getElementById("ScoreBox").innerHTML = totalScore + " " + langTextAry["txtPoints"];
+
+	alert("Finish the Game & Get my Points': You\'ve got " + targetsFinded + " of " + gameData.dataset.items + " targets. Your final score is " + totalScore + " points !!!" );
 
 }
 
@@ -454,14 +660,18 @@ function endCountDown() { window.clearTimeout( theCounter ); inPause = false; }
 
 
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TrakingMouse //
 
+var mouseTrack = false; 
+var pntrX = document.getElementById("pointerX"); 
+var pntrY = document.getElementById("pointerY"); 
+//setMouseTrack();
+function setMouseTrack() { 
+	if ( !mouseTrack ) { 
+		gameImage.addEventListener( 'mousemove', e => { pntrX.innerHTML = parseInt(e.offsetX); pntrY.innerHTML = parseInt(e.offsetY); } ); 
+	} else { 
+		gameImage.removeEventListener( 'mousemove', e => { } ); 
+	}
+}
 
-
-
-
-
-
-
-
-
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TrakingMouse //
