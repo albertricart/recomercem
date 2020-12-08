@@ -1,0 +1,37 @@
+@import '../utilities/variables';
+
+@mixin displayInfoItem() {
+    font-weight: 700;
+    font-size: 24px;
+    width: fit-content;
+}
+
+@mixin displayIcon($url, $size) {
+    background-image: url($url);
+    background-position: center;
+    background-size: $size;
+    background-repeat: no-repeat;
+}
+
+
+@mixin menuOption($iconUrl, $iconSize) {
+    flex: 0 0 25%;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $c_menu_secondary;
+    }
+
+    &__icon {
+        margin: auto;
+        width: 30px;
+        height: 30px;
+        @include displayIcon($iconUrl, $iconSize);
+    }
+}
