@@ -25,12 +25,20 @@ function onloadFx() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - default data lang //
 
-if ( !langElemAry ) {
-	var langElemAry = JSON.parse( '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:"}' );
-	var langTextAry = JSON.parse( '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game","ExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}' );
+// - - - - - default lang data
+if ( !setLanguage ) { var setLanguage = 'eng'; }
+
+
+// - - - - - default JSON lang data
+if ( !jsonLangElement ) {
+	var jsonLangElement = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game"}';
+	var jsonLangText = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';
 }
 
-// - - - - - funcion de traslate con AJAX
+var langElemAry = JSON.parse( jsonLangElement );
+var langTextAry = JSON.parse( jsonLangText );
+
+// - - - - - funcion de get Lang Data con AJAX
 function traslateLang( theLang ) {
 	// open the lang config file
 	var xRequest = new XMLHttpRequest();
@@ -478,7 +486,7 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 	
 			pauseCountDown();
 
-			if ( confirm( langTextAry['ExitConfirm'] ) ) { window.location.href = "http://recomercem.es/index.html"; } 
+			if ( confirm( langTextAry['txtExitConfirm'] ) ) { window.location.href = "http://recomercem.es/index.html"; } 
 
 		} else if ( targetObj.dataset.open == "0" ) { 
 	
