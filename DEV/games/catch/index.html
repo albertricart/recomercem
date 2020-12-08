@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc</title>
+    <link rel="shortcut icon" href="assets/basket.png" />
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+</head>
+
+<body>
+    <div class="menu-wrapper animate__animated">
+        <div class="menu animate__animated">
+            <div class="menu-nav">
+                <div class='menu-nav__opt js-menu-opt' id="parameters_opt" data-tab='#tabParam'>
+                    <div class="menu-nav__opt__icon"></div>
+                    <div class="parameters_opt_text">Parameters</div>
+                </div>
+                <div class='menu-nav__opt js-menu-opt' id="language_opt" data-tab='#tabLang'>
+                    <div class="menu-nav__opt__icon"></div>
+                    <div class="language_opt_text">Language</div>
+                </div>
+                <div class='menu-nav__opt js-menu-opt' id="tutorial_opt" data-tab='#tabTuto'>
+                    <div class="menu-nav__opt__icon"></div>
+                    <div class="tutorial_opt_text">Tutorial</div>
+                </div>
+                <div class='menu-nav__opt js-menu-opt' id="controls_opt" data-tab='#tabCtrl'>
+                    <div class="menu-nav__opt__icon"></div>
+                    <div class="controls_opt_text">Controls</div>
+                </div>
+            </div>
+            <div class="menu-body">
+                <div class="menu-body-parameters-selection menu__tab animate__animated" id='tabParam'>
+                    Difficulty
+                    <select name="difficulty" id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Hard</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                <div class="menu-body-language-selection menu__tab animate__animated" id='tabLang'>
+                    <label class="language-radio">Català
+                        <input type="radio" checked="checked" name="radio" value="catala">
+                    </label>
+                    <label class="language-radio">Español
+                        <input type="radio" name="radio" value="spanish">
+                    </label>
+                    <label class="language-radio">English
+                        <input type="radio" name="radio" value="english">
+                    </label>
+                </div>
+                <div class="menu-body-tutorial-slides menu__tab animate__animated" id='tabTuto'>
+                    tab 1
+                </div>
+                <div class="menu-body-controls-selection menu__tab animate__animated" id='tabCtrl'>
+                    <div class="controls-selection-help">Click on the control corresponding button and press the new
+                        key.</div>
+                    <div class="controls-selection__up">
+                        Up
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="controls-selection__left">
+                        Left
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="controls-selection__right">
+                        Right
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="controls-selection__down">
+                        Down
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-start">START GAME</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="game-container">
+
+            <div class="game-container__object"></div>
+
+            <div class="game-container__object"></div>
+
+            <div class="game-container__object"></div>
+
+            <div class="game-container__object"></div>
+
+            <div class="game-container__object"></div>
+
+            <div class="game-container__basket"></div>
+        </div>
+
+        <div class="game-info">
+            <div class="game-info__timer">
+                <p>Time</p>
+                <p id="timeElapsed">0s</p>
+            </div>
+            <div class="game-info__points">
+                <p>Points</p>
+                <p id="points" class="animate__animated">0</p>
+            </div>
+            <div class="game-info__lives">
+                <p>Lives</p>
+                <p id="lives" class="animate__animated">0</p>
+            </div>
+            <div class="game-info__event">
+                <p>Event</p>
+                <div class="game-info__event__icon"></div>
+            </div>
+        </div>
+
+        <div class="game-parameters">
+            <div class="fab-container animate__animated animate__slideInUp">
+                <div class="fab fab-icon-holder">
+                    <i class="fas fa-question"></i>
+                </div>
+                <ul class="fab-options">
+                    <a href="https://github.com/albertricart" target="_blank">
+                        <li>
+                            <span class="fab-label">GitHub</span>
+                            <div class="fab-icon-holder" id="github">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                        </li>
+                    </a>
+                    <a href="https://github.com/albertricart/recomercem" target="_blank">
+                        <li>
+                            <span class="fab-label">Code</span>
+                            <div class="fab-icon-holder" id="code">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                        </li>
+                    </a>
+                    <li>
+                        <span class="fab-label">Language</span>
+                        <div class="fab-icon-holder" id="language">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fab-label">Tutorial</span>
+                        <div class="fab-icon-holder" id="tutorial">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fab-label">Controls</span>
+                        <div class="fab-icon-holder" id="controls">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fab-label">Parameters</span>
+                        <div class="fab-icon-holder" id="parameters">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script src="js/app.js"></script>
+<script src="js/menu.js"></script>
+
+</html>

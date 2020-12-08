@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  color: white; }
+
+select {
+  background-color: #18223A;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 8px 25px;
+  outline: none;
+  opacity: 0.5;
+  color: white;
+  transition: all 0.25s ease; }
+  select:hover {
+    opacity: 1; }
+
+.language-selection {
+  display: flex;
+  flex-direction: column; }
+
+.menu-wrapper {
+  position: fixed;
+  z-index: 4000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.menu {
+  background-color: rgba(0, 0, 32, 0.925);
+  width: 90vh;
+  height: 50vh;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
+  z-index: 3000;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+  .menu-nav {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+    .menu-nav__opt {
+      flex: 0 0 25%;
+      text-align: center;
+      cursor: pointer;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease; }
+      .menu-nav__opt:hover {
+        cursor: pointer;
+        background-color: #404050; }
+      .menu-nav__opt__icon {
+        margin: auto;
+        width: 30px;
+        height: 30px;
+        background-image: url("../assets/parameters.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat; }
+      .menu-nav__opt #parameters_opt {
+        flex: 0 0 25%;
+        text-align: center;
+        cursor: pointer;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease; }
+        .menu-nav__opt #parameters_opt:hover {
+          cursor: pointer;
+          background-color: #404050; }
+        .menu-nav__opt #parameters_opt__icon {
+          margin: auto;
+          width: 30px;
+          height: 30px;
+          background-image: url("./assets/parameters.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat; }
+      .menu-nav__opt #language_opt {
+        flex: 0 0 25%;
+        text-align: center;
+        cursor: pointer;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease; }
+        .menu-nav__opt #language_opt:hover {
+          cursor: pointer;
+          background-color: #404050; }
+        .menu-nav__opt #language_opt__icon {
+          margin: auto;
+          width: 30px;
+          height: 30px;
+          background-image: url("./assets/language.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat; }
+      .menu-nav__opt #tutorial_opt {
+        flex: 0 0 25%;
+        text-align: center;
+        cursor: pointer;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease; }
+        .menu-nav__opt #tutorial_opt:hover {
+          cursor: pointer;
+          background-color: #404050; }
+        .menu-nav__opt #tutorial_opt__icon {
+          margin: auto;
+          width: 30px;
+          height: 30px;
+          background-image: url("./assets/tutorial.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat; }
+      .menu-nav__opt #controls_opt {
+        flex: 0 0 25%;
+        text-align: center;
+        cursor: pointer;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        transition: all 0.3s ease; }
+        .menu-nav__opt #controls_opt:hover {
+          cursor: pointer;
+          background-color: #404050; }
+        .menu-nav__opt #controls_opt__icon {
+          margin: auto;
+          width: 30px;
+          height: 30px;
+          background-image: url("./assets/controls.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat; }
+  .menu__tab {
+    display: none; }
+    .menu__tab.show {
+      display: flex;
+      flex-direction: column; }
+  .menu-body {
+    padding: 16px;
+    flex: 1; }
+  .menu-start {
+    padding: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    font-weight: 300;
+    transition: all 0.3s ease; }
+    .menu-start:hover {
+      cursor: pointer;
+      background-color: #50608C; }
+
+.container {
+  display: grid;
+  grid-template-areas: "game parameters" "info parameters";
+  grid-template-rows: 8.5fr 1.5fr;
+  grid-template-columns: 9fr 1fr;
+  height: 100vh;
+  width: 100%; }
+
+.game-container {
+  grid-area: game;
+  background-color: palegreen;
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  cursor: none; }
+  .game-container__object {
+    width: 50px;
+    height: 50px;
+    background-image: url("../assets/object.png");
+    background-size: cover;
+    position: absolute;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); }
+  .game-container__basket {
+    width: 11vh;
+    height: 10vh;
+    background-image: url("../assets/basket.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    display: none; }
+
+.game-info {
+  display: flex;
+  justify-content: space-evenly;
+  grid-area: info;
+  background-color: rgba(0, 0, 32, 0.925);
+  font-weight: 600;
+  font-size: 20px;
+  z-index: 1000; }
+  .game-info__timer #timeElapsed {
+    font-weight: 700;
+    font-size: 24px;
+    width: fit-content; }
+  .game-info__points #points {
+    font-weight: 700;
+    font-size: 24px;
+    width: fit-content; }
+  .game-info__lives #lives {
+    font-weight: 700;
+    font-size: 24px;
+    width: fit-content; }
+  .game-info__event #event {
+    font-weight: 700;
+    font-size: 24px;
+    width: fit-content; }
+
+.game-parameters {
+  grid-area: parameters;
+  background-color: rebeccapurple;
+  z-index: 5000; }
+  .game-parameters .fab-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    cursor: pointer; }
+    .game-parameters .fab-container:hover {
+      opacity: 0.8; }
+  .game-parameters .fab-icon-holder {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: #ff7539;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
+    .game-parameters .fab-icon-holder:hover {
+      opacity: 0.8; }
+    .game-parameters .fab-icon-holder i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 25px;
+      color: #ffffff; }
+  .game-parameters .fab {
+    width: 60px;
+    height: 60px;
+    background-color: #c30000;
+    background-image: url("../assets/menu-light.png");
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat; }
+    .game-parameters .fab-options {
+      list-style-type: none;
+      margin: 0;
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      transition: all 0.35s ease;
+      transform: scale(0);
+      transform-origin: 85% bottom; }
+      .game-parameters .fab-options li {
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px; }
+      .game-parameters .fab-options #github {
+        background-image: url("../assets/github.png");
+        background-position: center;
+        background-size: 80%;
+        background-repeat: no-repeat; }
+      .game-parameters .fab-options #code {
+        background-image: url("../assets/code.png");
+        background-position: center;
+        background-size: 60%;
+        background-repeat: no-repeat; }
+      .game-parameters .fab-options #language {
+        background-image: url("../assets/language.png");
+        background-position: center;
+        background-size: 70%;
+        background-repeat: no-repeat; }
+      .game-parameters .fab-options #tutorial {
+        background-image: url("../assets/tutorial.png");
+        background-position: center;
+        background-size: 70%;
+        background-repeat: no-repeat; }
+      .game-parameters .fab-options #parameters {
+        background-image: url("../assets/parameters.png");
+        background-position: center;
+        background-size: 70%;
+        background-repeat: no-repeat; }
+      .game-parameters .fab-options #controls {
+        background-image: url("../assets/controls.png");
+        background-position: center;
+        background-size: 70%;
+        background-repeat: no-repeat; }
+    .game-parameters .fab-label {
+      padding: 3px 5px;
+      align-self: center;
+      white-space: nowrap;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 700;
+      background: #666666;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      margin-right: 10px; }
+  .game-parameters .fab:hover + .fab-options,
+  .game-parameters .fab-options:hover {
+    opacity: 1;
+    transform: scale(1); }
+
+a {
+  text-decoration: none; }
+
+/*# sourceMappingURL=style.css.map */

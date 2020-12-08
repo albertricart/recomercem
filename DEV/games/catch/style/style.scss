@@ -1,0 +1,308 @@
+@import '../utilities/variables';
+@import 'mixins';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: $font;
+    color: white;
+}
+
+select {
+    background-color: #18223A;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 25px;
+    outline: none;
+    opacity: 0.5;
+    color: white;
+    transition: all 0.25s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.language-selection {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-wrapper {
+    position: fixed;
+    z-index: 4000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    background-color: $c_bg;
+    width: 90vh;
+    height: 50vh;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+    z-index: 3000;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    &-nav {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid $c_menu-border;
+        
+        &__opt {
+            @include menuOption("../assets/parameters.png", contain);
+
+            #parameters_opt {
+                @include menuOption("./assets/parameters.png", contain);
+            }
+            
+            #language_opt {
+                @include menuOption("./assets/language.png", contain);
+            }
+            
+            #tutorial_opt {
+                @include menuOption("./assets/tutorial.png", contain);
+            }
+            
+            #controls_opt {
+                @include menuOption("./assets/controls.png", contain);
+            }
+
+        }
+    }
+
+
+    &__tab {
+        display: none;
+
+        &.show {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &-body{
+        padding: 16px;
+        flex: 1;
+    }
+
+    &-start{
+        padding: 16px;
+        border-top: 1px solid $c_menu-border;
+        text-align: center;
+        font-weight: 300;
+        transition: all 0.3s ease;
+
+
+        &:hover {
+            cursor: pointer;
+            background-color: $c_menu_en;
+        }
+    }
+
+
+}
+
+
+
+
+.container {
+    display: grid;
+    grid-template-areas:
+        "game parameters"
+        "info parameters";
+    grid-template-rows: 8.5fr 1.5fr;
+    grid-template-columns: 9fr 1fr;
+    height: 100vh;
+    width: 100%;
+}
+
+.game-container {
+    grid-area: game;
+    background-color: palegreen;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    cursor: none;
+
+    &__object {
+        width: 50px;
+        height: 50px;
+        background-image: url("../assets/object.png");
+        background-size: cover;
+        position: absolute;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    &__basket {
+        width: 11vh;
+        height: 10vh;
+        background-image: url("../assets/basket.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        display: none;
+    }
+}
+
+
+.game-info {
+    display: flex;
+    justify-content: space-evenly;
+    grid-area: info;
+    background-color: $c_bg;
+    font-weight: 600;
+    font-size: 20px;
+    z-index: 1000;
+
+    &__timer {
+        #timeElapsed {
+            @include displayInfoItem();
+        }
+    }
+
+    &__points {
+        #points {
+            @include displayInfoItem();
+        }
+    }
+
+    &__lives {
+        #lives {
+            @include displayInfoItem();
+        }
+    }
+
+    &__event {
+        #event {
+            @include displayInfoItem();
+        }
+    }
+}
+
+.game-parameters {
+    grid-area: parameters;
+    background-color: rebeccapurple;
+    z-index: 5000;
+
+    .fab-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .fab-icon-holder {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        background-color: $c_option;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 25px;
+            color: #ffffff;
+        }
+    }
+
+    .fab {
+        width: 60px;
+        height: 60px;
+        background-color: $c_fab;
+        background-image: url("../assets/menu-light.png");
+        background-position: center;
+        background-size: 70%;
+        background-repeat: no-repeat;
+
+        &-options {
+            list-style-type: none;
+            margin: 0;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            transition: all 0.35s ease;
+            transform: scale(0);
+            transform-origin: 85% bottom;
+
+            li {
+                display: flex;
+                justify-content: flex-end;
+                padding: 5px;
+            }
+
+            #github {
+                @include displayIcon("../assets/github.png", 80%);
+            }
+
+            #code {
+                @include displayIcon("../assets/code.png", 60%);
+            }
+
+            #language {
+                @include displayIcon("../assets/language.png", 70%);
+            }
+
+            #tutorial {
+                @include displayIcon("../assets/tutorial.png", 70%);
+            }
+
+            #parameters {
+                @include displayIcon("../assets/parameters.png", 70%);
+            }
+
+            #controls {
+                @include displayIcon("../assets/controls.png", 70%);
+            }
+        }
+
+        &-label {
+            padding: 3px 5px;
+            align-self: center;
+            white-space: nowrap;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 700;
+            background: #666666;
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            margin-right: 10px;
+        }
+    }
+
+    .fab:hover+.fab-options,
+    .fab-options:hover {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+a {
+    text-decoration: none;
+}
