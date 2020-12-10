@@ -5,7 +5,7 @@ var parametersContainer = document.querySelector(".game-parameters");
 var displayTimer = document.querySelector("#timeElapsed");
 var displayPoints = document.querySelector("#points");
 var displayLives = document.querySelector("#lives");
-var displayEvent = document.querySelector("#event");
+var displayEvent = document.querySelector("#eventTimeLeft");
 var objects = document.querySelectorAll(".game-container__object");
 var basket = document.querySelector(".game-container__basket");
 var menu = document.querySelector(".menu");
@@ -13,7 +13,9 @@ var menuStart = document.querySelector(".menu-start");
 var controlsOpt = document.querySelector("#controls_opt");
 var menuWrapper = document.querySelector(".menu-wrapper");
 var controlButtons = document.querySelectorAll(".control-binding");
-
+var fab = document.querySelector(".fab-container");
+fab.style.display = "none";
+var settingsFab = document.querySelector("#settings");
 
 //https://www.w3schools.com/js/js_cookies.asp
 document.cookie = "keyUp=W";
@@ -21,16 +23,19 @@ document.cookie = "keyLeft=A";
 document.cookie = "keyDown=S";
 document.cookie = "keyRight=D";
 
-//CONSTS
-//event time interval(ms)
-const EVENT_INTERVAL = 10000;
 //events id
-const EVENT0 = 0;
-const EVENT1 = 1;
-const EVENT2 = 2;
-const EVENT3 = 3;
-const EVENT4 = 4;
+const EVENT_OBSCURE = 1;
+const DOUBLE_POINTS = 2;
+const CONTROLS_INVERTED = 3;
+const LOCK_Y = 4;
 
+//event time interval(s)
+var eventInterval = 10;
+//event time duration(s)
+var eventDuration = 5;
+var eventTimerId;
+var eventGeneratorId;
+var eventTimer;
 //game speed
 var speed;
 //time since game started
@@ -42,6 +47,7 @@ var timerId;
 //get window size
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
+var pointsToAdd = 1;
 
 //get game container size
 var gameWidth = gameContainer.offsetWidth;
@@ -58,7 +64,12 @@ var keyDown = "S";
 var keyRight = "D";
 
 window.onresize = reportWindowSize;
-document.addEventListener("mousemove", handleMouseMove);
+settingsFab.addEventListener("click", function () {
+  lives = 0;
+  initObjects();
+  openMenu();
+});
+window.addEventListener("mousemove", handleMouseMove);
 document.addEventListener("keypress", handleKeyPress);
 for (let i = 0; i < controlButtons.length; i++) {
   switch (i) {
@@ -81,14 +92,17 @@ for (let i = 0; i < controlButtons.length; i++) {
     awaitBindingResponse(controlButtons[i])
   );
 }
+
 menuStart.addEventListener("click", function () {
   closeMenu();
-  startgame(initObjects, moveObjects, setParameters);
+  setTimeout(function () {
+    startgame(initObjects, moveObjects, setParameters);
+  }, 1000);
 });
 
 openMenu();
 
-function initObjects(objects) {
+function initObjects() {
   //position each object
   for (i = 0; i < objects.length; i++) {
     objects[i].style.top = "-50px";
@@ -121,6 +135,8 @@ function moveObjects(objects) {
       basket.style.display = "none";
       clearInterval(objectRendererId);
       clearInterval(timerId);
+      clearInterval(eventGeneratorId);
+      clearInterval(eventTimerId);
       openMenu();
     }
   }, 10);
@@ -130,11 +146,11 @@ function startgame(initObjects, moveObjects, setParameters) {
   initObjects(objects);
   moveObjects(objects);
   startTimer();
-  setParameters(2, 5, 0);
-  window.setInterval(function () {
-    var event = Math.floor(Math.random() * 4) + 1;
-    triggerEvent(event);
-  }, EVENT_INTERVAL);
+  setParameters(1, 5, 0);
+  eventGeneratorId = setInterval(function () {
+    var random = Math.floor(Math.random() * 3) + 1;
+    triggerEvent(random);
+  }, eventInterval * 1000);
 }
 
 function reportWindowSize() {
@@ -163,24 +179,56 @@ function setParameters(speed, lives, points) {
   displayPoints.innerHTML = points;
 }
 
-function triggerEvent(event) {
-  switch (event) {
-    case EVENT0:
-      displayTimer.backgroundColor = "red";
-      break;
-    case EVENT1:
-      displayTimer.backgroundColor = "red";
-      break;
-    case EVENT2:
-      displayTimer.backgroundColor = "green";
-      break;
-    case EVENT3:
-      displayTimer.backgroundColor = "blue";
-      break;
-    case EVENT4:
-      displayTimer.backgroundColor = "yellow";
-      break;
-  }
+function triggerEvent(eventId) {
+  eventTimer = 0;
+  eventTimerId = setInterval(function () {
+    eventTimer++;
+    displayEvent.innerHTML = eventDuration - eventTimer;
+
+    switch (eventId) {
+      case EVENT_OBSCURE:
+        gameContainer.style.transition = "all 0.15s ease";
+        gameContainer.style.backgroundColor = "rgba(0,0,0,.9)";
+        basket.style.backgroundImage = "url(./assets/basket-dark.png)";
+
+        if (eventTimer == eventDuration || lives == 0) {
+          gameContainer.style.backgroundColor = "palegreen";
+          basket.style.backgroundImage = "url(./assets/basket.png)";
+          clearInterval(eventTimerId);
+        }
+        break;
+
+      case DOUBLE_POINTS:
+        pointsToAdd = 2;
+        if (eventTimer == eventDuration || lives == 0) {
+          pointsToAdd = 1;
+          clearInterval(eventTimerId);
+        }
+        break;
+
+      case CONTROLS_INVERTED:
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mousemove", handleInvertedMouseMove);
+
+        if (eventTimer == eventDuration || lives == 0) {
+          window.removeEventListener("mousemove", handleInvertedMouseMove);
+          window.addEventListener("mousemove", handleMouseMove);
+          clearInterval(eventTimerId);
+        }
+        break;
+
+        case LOCK_Y:
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mousemove", handleLockedMouseMove);
+
+        if (eventTimer == eventDuration || lives == 0) {
+          window.removeEventListener("mousemove", handleLockedMouseMove);
+          window.addEventListener("mousemove", handleMouseMove);
+          clearInterval(eventTimerId);
+        }
+        break;
+    }
+  }, 1000);
 }
 
 function startTimer() {
@@ -203,9 +251,9 @@ function checkCollision(basket, object) {
       basketOffsets.left + basketOffsets.width &&
     objectOffsets.top + objectOffsets.height < basketOffsets.bottom &&
     objectOffsets.top + objectOffsets.height >
-      basketOffsets.top + 0.8 * basketOffsets.height
+      basketOffsets.top + 0.6 * basketOffsets.height
   ) {
-    addPoints(1);
+    addPoints(pointsToAdd);
 
     return true;
   } else {
@@ -213,53 +261,36 @@ function checkCollision(basket, object) {
   }
 }
 
-function addPoints(pointsToAdd) {
-  points += pointsToAdd;
-  if (points % 10 == 0) {
-    animateInfo(displayPoints, "#FFD700", "animate__pulse");
-  }
-  displayPoints.innerHTML = points;
-}
-
-function removeLife(lifesToRemove) {
-  lives -= lifesToRemove;
-  if (lives < 0) {
-    lives = 0;
-  }
-
-  animateInfo(displayLives, "red", "animate__heartBeat");
-  displayLives.innerHTML = lives;
-}
-
-function openMenu() {
-  menuWrapper.style.visibility = "visible";
-  menuWrapper.classList.add("animate__fadeIn");
-  menuWrapper.classList.remove("animate__fadeOut");
-  menu.classList.remove("animate__fadeOutDown");
-  menu.classList.add("animate__fadeInDown");
-}
-
-function closeMenu() {
-  menuWrapper.classList.add("animate__fadeOut");
-  menuWrapper.classList.remove("animate__fadeIn");
-  menu.classList.add("animate__fadeOutDown");
-  menu.classList.remove("animate__fadeInDown");
-  setTimeout(function () {
-    menuWrapper.style.visibility = "hidden";
-  }, 1000);
-}
-
-function awaitBindingResponse(elem) {
-  elem.innerHTML = "Waiting key press...";
-  elem.addEventListener("keypress", function (e) {
-    elem.innerHTML = e.code.replace("Key", "");
-  });
-}
-
 function handleMouseMove(e) {
-  // e = Mouse move event.
-  basket.style.top = e.pageY + "px";
-  basket.style.left = e.pageX + "px";
+  if (
+    e.pageY <= gameHeight - basket.getBoundingClientRect().height + 15 &&
+    e.pageX <= gameWidth - basket.getBoundingClientRect().width
+  ) {
+    // e = Mouse move event.
+    basket.style.top = e.pageY + "px";
+    basket.style.left = e.pageX + "px";
+  }
+}
+
+function handleInvertedMouseMove(e) {
+  if (
+    e.pageY <= gameHeight - basket.getBoundingClientRect().height + 15 &&
+    e.pageX <= gameWidth - basket.getBoundingClientRect().width
+  ) {
+    // e = Mouse move event.
+    basket.style.top = e.pageX + "px";
+    basket.style.left = e.pageY + "px";
+  }
+}
+
+function handleLockedMouseMove(e) {
+  if (
+    e.pageY <= gameHeight - basket.getBoundingClientRect().height + 15 &&
+    e.pageX <= gameWidth - basket.getBoundingClientRect().width
+  ) {
+    // e = Mouse move event.
+    basket.style.left = e.pageX + "px";
+  }
 }
 
 function handleKeyPress(e) {
@@ -296,6 +327,71 @@ function handleKeyPress(e) {
         break;
     }
   }
+}
+
+function addPoints(x) {
+  points += x;
+  //increaseSpeed(0.1);
+  if (points % 10 == 0) {
+    animateInfo(displayPoints, "#FFD700", "animate__pulse");
+    
+  }
+  displayPoints.innerHTML = points;
+}
+
+function increaseSpeed(x) {
+  speed += x;
+}
+
+function removeLife(lifesToRemove) {
+  lives -= lifesToRemove;
+  if (lives < 0) {
+    lives = 0;
+  }
+
+  animateInfo(displayLives, "red", "animate__heartBeat");
+  displayLives.innerHTML = lives;
+}
+
+function openMenu() {
+  hideFab();
+  menuWrapper.style.visibility = "visible";
+  menuWrapper.classList.add("animate__fadeIn");
+  menuWrapper.classList.remove("animate__fadeOut");
+  menu.classList.remove("animate__fadeOutDown");
+  menu.classList.add("animate__fadeInDown");
+}
+
+function closeMenu() {
+  showFab();
+  menuWrapper.classList.add("animate__fadeOut");
+  menuWrapper.classList.remove("animate__fadeIn");
+  menu.classList.add("animate__fadeOutDown");
+  menu.classList.remove("animate__fadeInDown");
+  setTimeout(function () {
+    menuWrapper.style.visibility = "hidden";
+  }, 1000);
+}
+
+function showFab() {
+  fab.style.display = "block";
+  fab.classList.add("animate__slideInUp");
+  fab.classList.remove("animate__fadeOutDown");
+}
+
+function hideFab() {
+  fab.classList.add("animate__fadeOutDown");
+  fab.classList.remove("animate__slideInUp");
+  setTimeout(function () {
+    fab.style.display = "none";
+  }, 1000);
+}
+
+function awaitBindingResponse(elem) {
+  elem.innerHTML = "Waiting key press...";
+  elem.addEventListener("keypress", function (e) {
+    elem.innerHTML = e.code.replace("Key", "");
+  });
 }
 
 function animateInfo($info, $color, $animation) {

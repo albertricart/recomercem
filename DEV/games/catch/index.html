@@ -15,32 +15,86 @@
     <div class="menu-wrapper animate__animated">
         <div class="menu animate__animated">
             <div class="menu-nav">
-                <div class='menu-nav__opt js-menu-opt' id="parameters_opt" data-tab='#tabParam'>
-                    <div class="menu-nav__opt__icon"></div>
+                <div class='menu-nav__opt js-menu-opt' data-tab='#tabParam'>
+                    <div class="menu-nav__icon menu-nav__icon--params"></div>
                     <div class="parameters_opt_text">Parameters</div>
                 </div>
-                <div class='menu-nav__opt js-menu-opt' id="language_opt" data-tab='#tabLang'>
-                    <div class="menu-nav__opt__icon"></div>
+                <div class='menu-nav__opt js-menu-opt' data-tab='#tabLang'>
+                    <div class="menu-nav__icon menu-nav__icon--lang"></div>
                     <div class="language_opt_text">Language</div>
                 </div>
-                <div class='menu-nav__opt js-menu-opt' id="tutorial_opt" data-tab='#tabTuto'>
-                    <div class="menu-nav__opt__icon"></div>
+                <div class='menu-nav__opt js-menu-opt' data-tab='#tabTuto'>
+                    <div class="menu-nav__icon menu-nav__icon--tut"></div>
                     <div class="tutorial_opt_text">Tutorial</div>
                 </div>
-                <div class='menu-nav__opt js-menu-opt' id="controls_opt" data-tab='#tabCtrl'>
-                    <div class="menu-nav__opt__icon"></div>
+                <div class='menu-nav__opt js-menu-opt' data-tab='#tabCtrl'>
+                    <div class="menu-nav__icon menu-nav__icon--controls"></div>
                     <div class="controls_opt_text">Controls</div>
                 </div>
             </div>
             <div class="menu-body">
-                <div class="menu-body-parameters-selection menu__tab animate__animated" id='tabParam'>
-                    Difficulty
-                    <select name="difficulty" id="difficulty">
-                        <option value="easy">Easy</option>
-                        <option value="normal" selected>Normal</option>
-                        <option value="hard">Hard</option>
-                        <option value="custom">Custom</option>
-                    </select>
+                <div class="menu-body-parameters menu__tab animate__animated" id='tabParam'>
+                    <div class="menu-body-parameters__diff">
+                        <label for="difficulty">Difficulty</label>
+                        <select name="difficulty" id="difficulty">
+                            <option value="Easy">Easy</option>
+                            <option value="Normal" selected>Normal</option>
+                            <option value="Hard">Hard</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+
+                    <div class="menu-body-parameters__slideSpeed">
+                        <label for="speed">Initial speed</label>
+                        <input type="range" id="speed" name="speed" min="1" max="5" value="3" class="slider">
+                        <span class="slideSpeed-value"></span>
+                    </div>
+
+                    <div class="menu-body-parameters__slideSpeedIncrement">
+                        <label for="speedIncrement">Speed increment</label>
+                        <input type="range" id="speedIncrement" name="speedIncrement" min="1" max="3" value="2" class="slider">
+                        <span class="speedIncrement-value"></span>
+                    </div>
+
+                    <div class="menu-body-parameters__eventInterval">
+                        <label for="eventInterval">Event interval</label>
+                        <input type="number" id="eventInterval" placeholder="..." min="0" max="60" value="30"/>
+                        <span>s</span>
+                    </div>
+
+                    <div class="menu-body-parameters__eventDuration">
+                        <label for="eventInterval">Event duration</label>
+                        <input type="number" id="eventDuration" placeholder="..." min="0" max="30" value="10"/>
+                        <span>s</span>
+                    </div>
+                    <div class="menu-body-parameters__lives">
+                        <label for="speed">Lives</label>
+                        <input type="range" id="chooseLives" name="chooseLives" min="1" max="5" value="5" class="slider">
+                        <span class="chooseLives-value"></span>
+                    </div>
+                </div>
+                <div class="menu-body-controls menu__tab animate__animated" id='tabCtrl'>
+                    <div class="controls-help">Click on the control corresponding button and press the new
+                        key.</div>
+                    <div class="menu-body-controls__up">
+                        Up
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="menu-body-controls__left">
+                        Left
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="menu-body-controls__right">
+                        Right
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="menu-body-controls__down">
+                        Down
+                        <button type="button" class="control-binding"></button>
+                    </div>
+                </div>
+                <div class="menu-body-tutorial-slides menu__tab animate__animated" id='tabTuto'>
+                    tab 1
                 </div>
                 <div class="menu-body-language-selection menu__tab animate__animated" id='tabLang'>
                     <label class="language-radio">Català
@@ -53,31 +107,12 @@
                         <input type="radio" name="radio" value="english">
                     </label>
                 </div>
-                <div class="menu-body-tutorial-slides menu__tab animate__animated" id='tabTuto'>
-                    tab 1
-                </div>
-                <div class="menu-body-controls-selection menu__tab animate__animated" id='tabCtrl'>
-                    <div class="controls-selection-help">Click on the control corresponding button and press the new
-                        key.</div>
-                    <div class="controls-selection__up">
-                        Up
-                        <button type="button" class="control-binding"></button>
-                    </div>
-                    <div class="controls-selection__left">
-                        Left
-                        <button type="button" class="control-binding"></button>
-                    </div>
-                    <div class="controls-selection__right">
-                        Right
-                        <button type="button" class="control-binding"></button>
-                    </div>
-                    <div class="controls-selection__down">
-                        Down
-                        <button type="button" class="control-binding"></button>
-                    </div>
-                </div>
+
+
             </div>
-            <div class="menu-start">START GAME</div>
+            <div class="menu-start">
+                <div class="menu-start-text">START GAME</div>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -99,7 +134,7 @@
         <div class="game-info">
             <div class="game-info__timer">
                 <p>Time</p>
-                <p id="timeElapsed">0s</p>
+                <p id="timeElapsed">0.00s</p>
             </div>
             <div class="game-info__points">
                 <p>Points</p>
@@ -112,11 +147,12 @@
             <div class="game-info__event">
                 <p>Event</p>
                 <div class="game-info__event__icon"></div>
+                <p id="eventTimeLeft"></p>
             </div>
         </div>
 
         <div class="game-parameters">
-            <div class="fab-container animate__animated animate__slideInUp">
+            <div class="fab-container animate__animated">
                 <div class="fab fab-icon-holder">
                     <i class="fas fa-question"></i>
                 </div>
@@ -138,26 +174,8 @@
                         </li>
                     </a>
                     <li>
-                        <span class="fab-label">Language</span>
-                        <div class="fab-icon-holder" id="language">
-                            <i class="fas fa-comment-alt"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fab-label">Tutorial</span>
-                        <div class="fab-icon-holder" id="tutorial">
-                            <i class="fas fa-comment-alt"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fab-label">Controls</span>
-                        <div class="fab-icon-holder" id="controls">
-                            <i class="fas fa-comment-alt"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="fab-label">Parameters</span>
-                        <div class="fab-icon-holder" id="parameters">
+                        <span class="fab-label">Settings</span>
+                        <div class="fab-icon-holder" id="settings">
                             <i class="fas fa-comment-alt"></i>
                         </div>
                     </li>

@@ -6,16 +6,51 @@ body {
   color: white; }
 
 select {
-  background-color: #18223A;
+  background-color: #6851d0;
   border: 1px solid white;
   border-radius: 5px;
   padding: 8px 25px;
   outline: none;
-  opacity: 0.5;
   color: white;
-  transition: all 0.25s ease; }
+  transition: all 0.25s ease;
+  font-family: "Inter", sans-serif; }
   select:hover {
-    opacity: 1; }
+    cursor: pointer; }
+
+input[type=number] {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 8px 15px;
+  outline: none;
+  color: white;
+  transition: all 0.25s ease;
+  background-color: #6851d0;
+  font-family: "Inter", sans-serif; }
+
+::placeholder {
+  color: white;
+  font-family: "Inter", sans-serif; }
+
+.slider {
+  -webkit-appearance: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 20%;
+  border: 1px solid white;
+  background-color: #6851d0;
+  border-radius: 5px; }
+  .slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 16px;
+    background-color: #6851d0;
+    margin-top: -1px; }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%; }
 
 .language-selection {
   display: flex;
@@ -34,13 +69,13 @@ select {
   align-items: center; }
 
 .menu {
-  background-color: rgba(0, 0, 32, 0.925);
+  background-color: #6851d0;
   width: 90vh;
   height: 50vh;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   overflow: hidden;
   z-index: 3000;
   display: flex;
@@ -60,108 +95,50 @@ select {
       transition: all 0.3s ease; }
       .menu-nav__opt:hover {
         cursor: pointer;
-        background-color: #404050; }
-      .menu-nav__opt__icon {
-        margin: auto;
-        width: 30px;
-        height: 30px;
-        background-image: url("../assets/parameters.png");
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat; }
-      .menu-nav__opt #parameters_opt {
-        flex: 0 0 25%;
-        text-align: center;
-        cursor: pointer;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-weight: 500;
-        transition: all 0.3s ease; }
-        .menu-nav__opt #parameters_opt:hover {
-          cursor: pointer;
-          background-color: #404050; }
-        .menu-nav__opt #parameters_opt__icon {
-          margin: auto;
-          width: 30px;
-          height: 30px;
-          background-image: url("./assets/parameters.png");
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat; }
-      .menu-nav__opt #language_opt {
-        flex: 0 0 25%;
-        text-align: center;
-        cursor: pointer;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-weight: 500;
-        transition: all 0.3s ease; }
-        .menu-nav__opt #language_opt:hover {
-          cursor: pointer;
-          background-color: #404050; }
-        .menu-nav__opt #language_opt__icon {
-          margin: auto;
-          width: 30px;
-          height: 30px;
-          background-image: url("./assets/language.png");
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat; }
-      .menu-nav__opt #tutorial_opt {
-        flex: 0 0 25%;
-        text-align: center;
-        cursor: pointer;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-weight: 500;
-        transition: all 0.3s ease; }
-        .menu-nav__opt #tutorial_opt:hover {
-          cursor: pointer;
-          background-color: #404050; }
-        .menu-nav__opt #tutorial_opt__icon {
-          margin: auto;
-          width: 30px;
-          height: 30px;
-          background-image: url("./assets/tutorial.png");
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat; }
-      .menu-nav__opt #controls_opt {
-        flex: 0 0 25%;
-        text-align: center;
-        cursor: pointer;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-weight: 500;
-        transition: all 0.3s ease; }
-        .menu-nav__opt #controls_opt:hover {
-          cursor: pointer;
-          background-color: #404050; }
-        .menu-nav__opt #controls_opt__icon {
-          margin: auto;
-          width: 30px;
-          height: 30px;
-          background-image: url("./assets/controls.png");
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat; }
+        background-color: #939BB1; }
+    .menu-nav__icon {
+      margin: auto;
+      width: 30px;
+      height: 30px;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat; }
+      .menu-nav__icon--params {
+        background-image: url("../assets/parameters.png"); }
+      .menu-nav__icon--controls {
+        background-image: url("../assets/controls.png"); }
+      .menu-nav__icon--tut {
+        background-image: url("../assets/tutorial.png"); }
+      .menu-nav__icon--lang {
+        background-image: url("../assets/language.png"); }
   .menu__tab {
     display: none; }
     .menu__tab.show {
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      justify-content: space-around; }
+    .menu__tab.hidden {
+      display: none; }
   .menu-body {
     padding: 16px;
     flex: 1; }
   .menu-start {
-    padding: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
-    font-weight: 300;
-    transition: all 0.3s ease; }
-    .menu-start:hover {
-      cursor: pointer;
-      background-color: #50608C; }
+    font-weight: 600;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px; }
+    .menu-start-text {
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      background-color: white;
+      color: black; }
+      .menu-start-text:hover {
+        cursor: pointer;
+        background-color: #F4D9D4; }
 
 .container {
   display: grid;
@@ -183,8 +160,7 @@ select {
     height: 50px;
     background-image: url("../assets/object.png");
     background-size: cover;
-    position: absolute;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); }
+    position: absolute; }
   .game-container__basket {
     width: 11vh;
     height: 10vh;
@@ -196,33 +172,41 @@ select {
 
 .game-info {
   display: flex;
-  justify-content: space-evenly;
   grid-area: info;
-  background-color: rgba(0, 0, 32, 0.925);
+  background-color: rgba(0, 0, 45, 0.95);
   font-weight: 600;
   font-size: 20px;
-  z-index: 1000; }
-  .game-info__timer #timeElapsed {
-    font-weight: 700;
-    font-size: 24px;
-    width: fit-content; }
-  .game-info__points #points {
-    font-weight: 700;
-    font-size: 24px;
-    width: fit-content; }
-  .game-info__lives #lives {
-    font-weight: 700;
-    font-size: 24px;
-    width: fit-content; }
-  .game-info__event #event {
-    font-weight: 700;
-    font-size: 24px;
-    width: fit-content; }
+  z-index: 1000;
+  text-align: center; }
+  .game-info__timer {
+    flex: 1; }
+    .game-info__timer #timeElapsed {
+      font-weight: 700;
+      font-size: 26px;
+      text-align: center; }
+  .game-info__points {
+    flex: 1; }
+    .game-info__points #points {
+      font-weight: 700;
+      font-size: 26px;
+      text-align: center; }
+  .game-info__lives {
+    flex: 1; }
+    .game-info__lives #lives {
+      font-weight: 700;
+      font-size: 26px;
+      text-align: center; }
+  .game-info__event {
+    flex: 1; }
+    .game-info__event #eventTimeLeft {
+      font-weight: 700;
+      font-size: 26px;
+      text-align: center; }
 
 .game-parameters {
   grid-area: parameters;
-  background-color: rebeccapurple;
-  z-index: 5000; }
+  background-color: rgba(0, 0, 45, 0.95);
+  z-index: 3000; }
   .game-parameters .fab-container {
     position: fixed;
     bottom: 20px;
@@ -235,7 +219,7 @@ select {
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    background-color: #ff7539;
+    background-color: #939BB1;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
     .game-parameters .fab-icon-holder:hover {
       opacity: 0.8; }
@@ -249,7 +233,7 @@ select {
   .game-parameters .fab {
     width: 60px;
     height: 60px;
-    background-color: #c30000;
+    background-color: #6851d0;
     background-image: url("../assets/menu-light.png");
     background-position: center;
     background-size: 70%;
@@ -277,25 +261,10 @@ select {
         background-position: center;
         background-size: 60%;
         background-repeat: no-repeat; }
-      .game-parameters .fab-options #language {
-        background-image: url("../assets/language.png");
+      .game-parameters .fab-options #settings {
+        background-image: url("../assets/settings.png");
         background-position: center;
-        background-size: 70%;
-        background-repeat: no-repeat; }
-      .game-parameters .fab-options #tutorial {
-        background-image: url("../assets/tutorial.png");
-        background-position: center;
-        background-size: 70%;
-        background-repeat: no-repeat; }
-      .game-parameters .fab-options #parameters {
-        background-image: url("../assets/parameters.png");
-        background-position: center;
-        background-size: 70%;
-        background-repeat: no-repeat; }
-      .game-parameters .fab-options #controls {
-        background-image: url("../assets/controls.png");
-        background-position: center;
-        background-size: 70%;
+        background-size: 75%;
         background-repeat: no-repeat; }
     .game-parameters .fab-label {
       padding: 3px 5px;
