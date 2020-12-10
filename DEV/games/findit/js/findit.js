@@ -513,12 +513,13 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 
 	if ( !inExecution || theOpener == originObj.id ) {
 
-		var targetObj = document.getElementById( boxId ); 
+		var targetObj;
+
+		if ( boxId ) { targetObj = document.getElementById( boxId ); }
 	
 		if ( !targetObj ) { // sin elemento para abrir 
 
-			if (!inExecution) { inExecution = true; theOpener = originObj.id; } 
-			else { inExecution = false; theOpener = ""; }
+			inExecution = true; theOpener = originObj.id;
 			
 			visibilityMarkersAll();
 
@@ -526,7 +527,27 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 	
 			pauseCountDown();
 
-			if ( confirm( langTextAry['txtExitConfirm'] ) ) { window.location.href = "http://recomercem.es/index.html"; } 
+			originObj.style.backgroundColor = "#ffcb00";
+			originObj.style.color = "#333";
+
+			if ( confirm( langTextAry['txtExitConfirm'] ) ) { 
+				
+				window.location.href = "http://recomercem.es/index.html"; 
+		
+			} else {
+
+				visibilityMarkersAll();
+
+				document.getElementById("gameImage").style.visibility = "visible";
+
+				pauseCountDown();
+
+				originObj.style.backgroundColor = "rgba(0,0,0,0)";
+				originObj.style.color = "#ffcb00";
+
+				inExecution = false; theOpener = "";
+				
+			}
 
 		} else if ( targetObj.dataset.open == "0" ) { 
 	
