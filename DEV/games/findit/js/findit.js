@@ -6,9 +6,13 @@ function onloadFx() {
 
 	setGameData();
 
+	createMarkers();
+
 	createItemList();
 
 	traslateLang();
+
+	document.getElementById("CounterdownBox").innerHTML = gameData.dataset.time + '"';
 
 	// - - - - - traking mouse pointer
 
@@ -31,12 +35,18 @@ if ( !setLanguage ) { var setLanguage = 'eng'; }
 
 // - - - - - default JSON lang data
 if ( !jsonLangElement ) {
-	var jsonLangElement = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game"}';
-	var jsonLangText = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';
+	var jsonLangElement = [];
+	var jsonLangText = [];
+	jsonLangElement['eng'] = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game"}';
+	jsonLangElement['esp'] = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game"}';
+	jsonLangElement['cat'] = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets:","ExitBtn":"Exit Game"}';
+	jsonLangText['eng'] = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';
+	jsonLangText['esp'] = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';
+	jsonLangText['cat'] = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';	
 }
 
-var langElemAry = JSON.parse( jsonLangElement );
-var langTextAry = JSON.parse( jsonLangText );
+var langElemAry = JSON.parse( jsonLangElement[setLanguage] );
+var langTextAry = JSON.parse( jsonLangText[setLanguage] );
 
 // - - - - - funcion de get Lang Data con AJAX
 function traslateLang( theLang ) {
@@ -45,14 +55,14 @@ function traslateLang( theLang ) {
 	xRequest.open('GET', '/lang/text'+theLang+'.js', false); 
 	xRequest.send(null);
 	if (xRequest.status == 200) { 
-		langTextAry = JSON.parse( xRequest.responseText ); 
+		jsonLangText[theLang] = xRequest.responseText; 
 	}
 	// open the lang config file
 	var xRequest = new XMLHttpRequest();
 	xRequest.open('GET', '/lang/elem'+theLang+'.js', false); 
 	xRequest.send(null);
 	if (xRequest.status == 200) { 
-		langElemAry = JSON.parse( xRequest.responseText ); 
+		jsonLangElement[theLang] = xRequest.responseText; 
 		traslateLang();
 	}
 }
@@ -125,7 +135,7 @@ if ( !theGameTargets ) {
 
 function setGameData() {
 
-	// - - - - carga los set de juegos disponibles. Si no existe, se utilizara el default
+	// - - - - carga los set de juegos disponibles. Si no existe, se utilizara el default. Esta funcion se destina a cargar odiferentes set de juegos.
 	gameImage.src = theGameImage;
 
 }
@@ -150,7 +160,7 @@ function createItemList() {
 		itmlist = document.createElement("LI");
 		itmlist.id = "itmlist_" + i;
 		itmlist.classList.add( "searchItemLst" );
-		itmlist.setAttribute( "data-satate", 0 );
+		itmlist.setAttribute( "data-state", 0 );
 		itmlist.innerHTML = theGameTargets[i]["description"];
 
 		helpDataBox.appendChild( itmlist );
@@ -191,6 +201,36 @@ markerOptions.appendChild(markerFixer);
 markerOptions.appendChild(markerDelete);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Crea elemento opciones de marcador //
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - createMarkers =>
+
+function createMarkers() {
+
+	var tmpItems = parseInt( gameData.dataset.items );
+
+	var markerInner = '<svg role="img" style="width: 100%;height: 100%; filter: drop-shadow(0px 0px 2px rgb(0, 0, 0));" viewBox="0 0 320 512" onClick="checkthis(this.parentElement)"><path fill="currentColor" d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z" class=""></path></svg>';
+
+	var helpDataBox = document.getElementById("thingsListBox");
+	var markerElement;
+
+	for( var i = 0; i < tmpItems; i++ ) {
+
+		markerElement = document.createElement("DIV");
+		markerElement.id = "marker_" + i
+		markerElement.classList.add("markersBox");
+		markerElement.classList.add("markersOffline");
+		markerElement.setAttribute( "data-id", i );
+		markerElement.setAttribute( "data-state", 0 );
+		markerElement.innerHTML = markerInner;
+
+		gameLayerBox.appendChild( markerElement );
+
+	}
+
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - createMarkers //
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - setMarker =>
