@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //generar obstaculos
     function generateObstacles() {
-      let obstaclePosition = 1500;
+      let obstaclePosition = 1050;
       
       const obstacle = document.createElement('div');
 
@@ -69,21 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
         obstacle.classList.add('obstacle');
         grid.appendChild(obstacle);
         obstacle.style.left = obstaclePosition + 'px';
-
-
       }
     
+      //movimiento obstaculos, collisions, Game Over
       let timerId = setInterval(function() {
         if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) {
 
           clearInterval(timerId);
-          alert.innerHTML = 'Game Over';
+          //alert.innerHTML = 'Game Over';
           isGameOver = true;
+
           if(go === 0){
 
             goSound.play();
-
             go++;
+            menuGO();
           }
           
           //remove
@@ -91,9 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.removeChild(grid.lastChild);
           }
           
+          
         }
-        if(score <= 200){
 
+        if(score <= 200){
           obstaclePosition -=10;
           obstacle.style.left = obstaclePosition + 'px';
 
@@ -105,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
           obstaclePosition -=15;
           obstacle.style.left = obstaclePosition + 'px';
 
-          if(obstaclePosition === -10){
+          if(obstaclePosition === -15){
           grid.removeChild(obstacle);
           }
 
@@ -113,34 +114,60 @@ document.addEventListener('DOMContentLoaded', () => {
           obstaclePosition -=20;
           obstacle.style.left = obstaclePosition + 'px';
 
-          if(obstaclePosition === -10){
+          if(obstaclePosition === -20){
             grid.removeChild(obstacle);
           }
           
         }
         
-
-        
       },20)
 
       if (!isGameOver) {
-                     //subida de puntuacion
+
+          //subida de puntuacion
           score += 10;
           document.getElementById('score').innerHTML = "SCORE: " + score;
                
           //dificultad por puntuacion
                
           if(score <= 200){
-              randomTime = Math.random() * (5000 - 3500) + 3500;
+
+              randomTime = Math.random() * (5000 - 3500);
+              setTimeout(generateObstacles, randomTime);
+
           } else if (score <= 300){
-              randomTime = Math.random() * (3000 - 2000) + 3500;
-          } else if (score > 300){
-              randomTime = Math.random() * (2000 - 1000) + 1000;
+
+              randomTime = Math.random() * (5000 - 3000);
+              setTimeout(generateObstacles, randomTime);
+
+          } else if (score > 500){
+
+              randomTime = Math.random() * (4000 - 1000);
+              setTimeout(generateObstacles, randomTime);
+
           }
 
-        setTimeout(generateObstacles, randomTime);
+        
 
           }
+    }
+
+    function menuGO(){
+        if(isGameOver){
+
+          //menu (position & border)
+          var menu = document.createElement('div');
+          menu.className = "menu";
+          menu.id = "menu";
+          document.getElementById('back').appendChild(menu);
+          
+          //menu back
+          var menuback = document.createElement('div');
+          menuback.className = "menuback";
+          menuback.id = "menuback";
+          document.getElementById('menu').appendChild(menuback);
+          
+        }
     }
 
     generateObstacles();
