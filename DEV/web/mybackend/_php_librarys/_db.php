@@ -4,9 +4,13 @@
 
 function openDB() {
 
+    // visualiza en consola el data caller
+    getBackTrace();
+
     // - - - - - DB Data conection
-    if ( file_exists( "../../../_data/db.php" ) ) { include_once("../../../_data/db.php"); } 
-    else { echo "Error: not exists '../../../_data/db.php' (".getcwd().")"; }
+    $fileLink = "../../_data/db.php";
+    if ( file_exists( $fileLink ) ) { include( $fileLink ); consoleLog( "Included '".$fileLink."' (".getcwd().")" ); } 
+    else { consoleLog( "Error: not exists '".$fileLink."' (".getcwd().")" ); }
 
     try {
 
@@ -36,15 +40,18 @@ function closeDB() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Select Entity =>
 
-function getEntity( $theTable, int $the_id ) {
+function getEntity( $the_table, int $the_id ) {
+
+    // - - - - - Tables Data
+    $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
 
     $theResult = null;
 
-    if ( !empty( $theTable ) ) {
+    if ( !empty( $the_table ) ) {
 
         $myCnctn = openDB();
 
-        $myQueryText = "SELECT * FROM ".$theTable.(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tablekey' ]." = ".$the_id:"");
+        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"");
         //echo $myQueryText.'<br>';
 
         $myQuery = $myCnctn->prepare( $myQueryText );
@@ -68,6 +75,9 @@ function getEntity( $theTable, int $the_id ) {
 
 function saveEntity( string $the_table, $the_dataAry ) {
 
+    // - - - - - Tables Data
+    $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+
     $theReturn = "";
     
     $isOK = true;
@@ -82,7 +92,7 @@ function saveEntity( string $the_table, $the_dataAry ) {
     if ( $isOK && $dbTableAry[ $the_table ][ 'tableType' ] == 0 ) { $isMaster = true; } else { $isMaster = false; }
 
     // genera control por si es nuevo o modificacion        
-    if ( $isOK && $the_dataAry[ $dbTableAry[ $the_table ][ 'tablekey' ] ] == 0 ) { $isNew = true; } else  { $isNew = false; }
+    if ( $isOK && !empty( $the_dataAry[ $dbTableAry[ $the_table ][ 'tableKey' ] ] ) ) { $isNew = false; } else  { $isNew = true; }
 
     if ( $isOK ) {
 
@@ -99,12 +109,12 @@ function saveEntity( string $the_table, $the_dataAry ) {
                 if ( !empty( $the_dataAry[ $tmpKey ] ) ) {
 
                     $myQueryFieldList.= ((!empty($myQueryFieldList))?', ':'') . $tmpKey;
-                    $myQueryFieldValues.= ((!empty($myQueryFieldValues))?', ':'') . ':' . $tmpKey;    
+                    $myQueryFieldValues.= ((!empty($myQueryFieldValues))?', ':'') . ':' . $tmpKey;
 
                 }    
             }
 
-            $myQueryText = "INSERT INTO `". $dbTableAry[ $the_table ][ 'tableFields' ] . "` ( " .  $myQueryFieldList . " ) VALUES ( " . $myQueryFieldValues . " );";
+            $myQueryText = "INSERT INTO `". $dbTableAry[ $the_table ][ 'tableName' ] . "` ( " .  $myQueryFieldList . " ) VALUES ( " . $myQueryFieldValues . " );";
 
         } else {
         
@@ -120,9 +130,9 @@ function saveEntity( string $the_table, $the_dataAry ) {
                 }    
             }
 
-            $myQueryText = "UPDATE `" . $dbTableAry[ $the_table ][ 'tableFields' ] . 
+            $myQueryText = "UPDATE `" . $dbTableAry[ $the_table ][ 'tableName' ] . 
                 "` SET " .  $myQueryFieldList .
-                " WHERE " . $dbTableAry[ $the_table ][ 'tablekey' ] . " = " . $the_dataAry[ $dbTableAry[ $the_table ][ 'tablekey' ] ] . ";";
+                " WHERE " . $dbTableAry[ $the_table ][ 'tableKey' ] . " = " . $the_dataAry[ $dbTableAry[ $the_table ][ 'tableKey' ] ] . ";";
 
         }
 
@@ -139,8 +149,9 @@ function saveEntity( string $the_table, $the_dataAry ) {
 
             if ( !empty( $the_dataAry[ $tmpKey ] ) ) {
 
-                if ( $dbTableAry[ $the_table ][ 'tableFields' ][ $the_table ][ 'fieldType' ] =='int' ) { $isNum = true; } else { $isNum = false; }
-                $myQuery->bindParam( ':'.$tmpKey, $the_dataAry[ $tmpKey ], (($isNum)?PDO::PARAM_INT:'') );
+                if ( $tmpData['crypt'] ) { $the_dataAry[$tmpKey] = crypt( $the_dataAry[$tmpKey], 'magomo' ); }
+
+                $myQuery->bindParam( ':'.$tmpKey, $the_dataAry[$tmpKey] );
 
             }    
         }
@@ -182,6 +193,9 @@ function saveEntity( string $the_table, $the_dataAry ) {
 
 function delEntity( string $the_table, int $the_id ) {
 
+    // - - - - - Tables Data
+    $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+
     $isOK = true;
 
     $theReturn = "";
@@ -211,9 +225,9 @@ function delEntity( string $the_table, int $the_id ) {
 
         }
 
-        echo "debugDumpParams (delete)<br>";
-        $myQuery->debugDumpParams();
-        echo "<br>";
+        // echo "debugDumpParams (delete)<br>";
+        // $myQuery->debugDumpParams();
+        // echo "<br>";
 
         // - - - - - verifica estado de grabacion
         if ( $isOK ) { // estado OK, graba informacion

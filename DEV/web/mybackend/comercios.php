@@ -1,5 +1,11 @@
 <?php
 
+session_start();	// genera array asociativo con los datos de sesion
+
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'reComercem: El teu comerç de proximitat al barri';
@@ -13,14 +19,9 @@ include_once("_php_partials/01_head.php");
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
 
-
 // - - - - - - - - - - - - - - - - - - - - VISTA/FORM PART
-if ( file_exists( "_php_controllers/comerciosControler.php" ) ) { 
-    include_once("_php_controllers/comerciosControler.php" ); 
-    echo "Cargado: '_php_controllers/comerciosControler.php' (".getcwd().")";
-} 
-else { echo "Error: not exists '_php_controllers/comerciosControler.php' (".getcwd().")"; }
-
+if ( file_exists( "_php_controllers/comerciosControler.php" ) ) { include_once("_php_controllers/comerciosControler.php" ); } 
+else { echo "Error: not exists _php_controllers/comerciosControler.php (".getcwd().")"; }
 
 // - - - - - - - - - - - - - - - - - - - - FOOTER PART
 include_once("_php_partials/99_footer.php");

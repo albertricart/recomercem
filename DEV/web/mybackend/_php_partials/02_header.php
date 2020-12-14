@@ -26,7 +26,7 @@
 </nav>
 
 
-<div class="container bg-light mt-2">
+<div class="container my-5 pb-5">
 
 
 

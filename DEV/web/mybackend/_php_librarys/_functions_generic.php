@@ -26,7 +26,37 @@ function GetIdedArray( $theArray ) {
 
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// Visualiza mensaje en consola de navegador
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FUNCIONES DE TABLA POKEMON //
+function consoleLog( $varLog ) {
+
+    echo '<script>console.log("' . addslashes( $varLog ) . '")</script>';
+
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// Visualiza datos de caller from debug_backtrace
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+function getBackTrace() {
+
+    $backTraceAry = debug_backtrace(); $printComma = false;
+    $varLog = "";
+
+    if (!empty($backTraceAry[2])) {
+
+        $varLog.= "** called from ".$backTraceAry[2]["function"]." ( ";
+
+        foreach( $backTraceAry[2]["args"] as $tmpData ) { $varLog.= (($printComma)?', ':'').print_r($tmpData,true); $printComma = true; }
+
+        $varLog.= " ) in line ".$backTraceAry[2]["line"]." | file ".$backTraceAry[1]["file"];
+        consoleLog( $varLog );
+
+    }
+
+}
 
 ?>
