@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var goSound = new Audio('gameover.wav');
     var go = 0;
 
+    var lang = "esp";
+
 
     var score = 0;
     let isJumping = false;
@@ -127,7 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
           //subida de puntuacion
           score += 10;
-          document.getElementById('score').innerHTML = "SCORE: " + (score - 10);
+          if(lang === "esp"){
+            document.getElementById('score').innerHTML = "PUNTOS: " + (score - 10);
+          } else if(lang === "eng"){
+            document.getElementById('score').innerHTML = "SCORE: " + (score - 10);
+          } else if(lang === "cat"){
+            document.getElementById('score').innerHTML = "PUNTS: " + (score - 10);
+          }
+          
                
           //dificultad por puntuacion
                
@@ -147,9 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
               setTimeout(generateObstacles, randomTime);
 
           }
-
-        
-
           }
     }
 
@@ -167,7 +173,33 @@ document.addEventListener('DOMContentLoaded', () => {
           menuback.className = "menuback";
           menuback.id = "menuback";
           document.getElementById('menu').appendChild(menuback);
+
+          //GAME OVER text
+          var gameovertxt = document.createElement('h1');
+          gameovertxt.className = "gameovertxt";
+          gameovertxt.id = "gameovertxt";
+          document.getElementById('back').appendChild(gameovertxt);
+          gameovertxt.innerHTML = 'Game Over';
+
+          //score text
+          var scoretxt = document.createElement('h3');
+          scoretxt.className = "scoretxt";
+          scoretxt.id = "scoretxt";
+          document.getElementById('back').appendChild(scoretxt);
           
+          if(lang === "esp"){
+
+            scoretxt.innerHTML = 'Tu puntuacion es de: "' + (score - 10) + '" puntos';
+
+          } else if(lang === "eng"){
+
+            scoretxt.innerHTML = 'Your score is: "' + (score - 10) + '" points';
+
+          } else if(lang === "cat"){
+
+            scoretxt.innerHTML = 'La puntuacio es de: "' + (score - 10) + '" punts';
+
+          }
         }
     }
 
