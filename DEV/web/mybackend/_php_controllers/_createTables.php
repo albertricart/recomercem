@@ -1,22 +1,44 @@
 <?php 
 
-include("../../../_data/create_data.php");
+echo "Creating tables reComercem ... "."<br>";
 
-include("../_php_librarys/_db.php");
+$isOK = true;
 
-$myCnctn = openDB();
+if ( file_exists( "../../../_data/create_data.php" ) ) { include_once("../../../_data/create_data.php"); }
+else { echo "no existe '../../../_data/create_data.php'"; $isOK = false; }
 
-foreach( $databaseAry as $tmpData ) {
+if ( file_exists( "../_php_librarys/_db.php" ) ) { include("../_php_librarys/_db.php"); } 
+else { echo "no existe '../_php_librarys/_db.php'"; }
 
-    $myQuery = $myCnctn->prepare( $tmpData );
+if ( $isOK ) {
+
+    $myCnctn = openDB();
+
+    try { // execute & control
+
+        foreach( $databaseAry as $tmpData ) {
+
+            echo "Preparing: " . $tmpData . "<br>";
+            $myQuery = $myCnctn->prepare( $tmpData );
+               
+            echo "Executing PDO ... " . "<br><br>";
+            $myQuery->execute();
+
+        }
+
+    } catch (PDOException $e) { echo 'Error: ' . $e->getMessage(); $isOK = false; }
+
+    if ( $isOK ) { 
+        
+        $myCnctn->commit(); 
+        echo "Commiting PDO ... " . "<br>";
+
+    }
+
+    $myCnctn = closeDB();
 
 }
 
-
-$myQuery->execute();
-
-$theResult = $myQuery->fetchAll();
-
-$myCnctn = closeDB();
+echo "... tables created (?)" . "<br>";
 
 ?>
