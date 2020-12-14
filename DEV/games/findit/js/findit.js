@@ -181,7 +181,7 @@ function createItemList() {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Crea elemento opciones de marcador =>
 var markerFixer = document.createElement("DIV");
 markerFixer.id = "markerThumbtack";
-markerFixer.class="markerOptions";
+//markerFixer.class="markerOptions";
 markerFixer.classList.add("markerOptions");
 markerFixer.classList.add("markerOptsRight");
 markerFixer.onclick = unselectMarker;
