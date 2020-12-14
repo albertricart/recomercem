@@ -13,8 +13,14 @@ include_once("_php_partials/01_head.php");
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
 
+
 // - - - - - - - - - - - - - - - - - - - - VISTA/FORM PART
-include_once("_php_controllers/comerciosControler.php" );
+if ( file_exists( "_php_controllers/comerciosControler.php" ) ) { 
+    include_once("_php_controllers/comerciosControler.php" ); 
+    echo "Cargado: '_php_controllers/comerciosControler.php' (".getcwd().")";
+} 
+else { echo "Error: not exists '_php_controllers/comerciosControler.php' (".getcwd().")"; }
+
 
 // - - - - - - - - - - - - - - - - - - - - FOOTER PART
 include_once("_php_partials/99_footer.php");

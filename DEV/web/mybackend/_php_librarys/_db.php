@@ -4,7 +4,9 @@
 
 function openDB() {
 
-    include("../../../_data/db.php");
+    // - - - - - DB Data conection
+    if ( file_exists( "../../../_data/db.php" ) ) { include_once("../../../_data/db.php"); } 
+    else { echo "Error: not exists '../../../_data/db.php' (".getcwd().")"; }
 
     try {
 

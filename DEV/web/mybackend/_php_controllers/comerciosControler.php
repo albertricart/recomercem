@@ -3,11 +3,11 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
 
 // - - - - - General SETs
-include_once("generalSet.php"); 
-// - - - - - DB Data conection
-include_once("../php_librarys/_db.php"); 
+if ( file_exists( "_generalSet.php" ) ) { include_once("_generalSet.php"); } else { echo "Error: not exists '_generalSet.php' (".getcwd().")"; }
+// - - - - - DB conection & work
+if ( file_exists( "../php_librarys/_db.php" ) ) { include_once("../php_librarys/_db.php"); } else { echo "Error: not exists '_functions_generic.php' (".getcwd().")"; }
 // - - - - - Entity functions
-include_once("../php_librarys/functions_generic.php"); 
+if ( file_exists( "../php_librarys/_functions_generic.php" ) ) { include_once("../php_librarys/_functions_generic.php"); } else { echo "Error: not exists '_functions_generic.php' (".getcwd().")"; }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
 
@@ -19,6 +19,9 @@ $imgOK = false;
 if ( !empty( $_FILES["nptImagen"] ) && is_uploaded_file( $_FILES['nptImagen']['tmp_name'] ) && move_uploaded_file( $_FILES['nptImagen']['tmp_name'], "../media/img/uploaded/".$_FILES['nptImagen']['name'] ) ) { $imgOK = true; }
 
 $theResult = "";
+
+$includeString = "";
+$retu = "";
 
 // - - - - - switch de acciones
 if( !empty( $_REQUEST['idAction'] ) ) { 
@@ -43,14 +46,8 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
                 }
 
-                if ( empty( $theResult ) ) {
-
-                    header( "Location: ../php_views/comercios_list.php?retu=".urlencode( "Entidad añadida correctamente" ) );
-
-                } else {
-
-                    header( "Location: ../php_views/comercios_list.php?retu=".urlencode( $theResult ) );
-                }
+                $retu = urlencode( ((empty($theResult))?"Entidad añadida correctamente":$theResult) );
+                $includeString = "comercios_list.php";
 
             } else {
 
@@ -58,9 +55,9 @@ if( !empty( $_REQUEST['idAction'] ) ) {
                 session_start();	// genera array asociativo con los datos de sesion
                 $_SESSION = array();
                                 
-                // echo "SQL_INSERT"; var_dump($_SESSION); exit(0);
-                header("Location: ../php_views/comercios_form.php");
-
+                // echo "SQL_INSERT"; var_dump($_SESSION);
+                $includeString = "comercios_form.php";
+                
             }
 
         break;
@@ -83,15 +80,9 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
                 }
 
-                if ( empty( $theResult ) ) {
+                $retu = urlencode( ((empty($theResult))?"Entidad modificada correctamente":$theResult) );
+                $includeString = "comercios_list.php";
 
-                    header( "Location: ../php_views/comercios_list.php?retu=".urlencode( "Comercio modificado correctamente" ) );
-
-                } else {
-
-                    header( "Location: ../php_views/comercios_list.php?retu=".urlencode( $theResult ) );
-
-                }
 
             } else if ( !empty( $_POST['id'] ) ) { 
 
@@ -106,8 +97,8 @@ if( !empty( $_REQUEST['idAction'] ) ) {
                 foreach( $EntityAry[$_POST['id']] as $theK => $theD ) { $_SESSION[$theK] = $theD; }
                 $_SESSION['tipos'] = $HasTipoAry; 
 
-                // echo "SQL_UPDATE"; var_dump($_SESSION); exit(0);
-                header("Location: ../php_views/comercios_form.php");
+                // echo "SQL_UPDATE"; var_dump($_SESSION);
+                $includeString = "comercios_form.php";
 
             } else {
 
@@ -129,15 +120,8 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
             }
 
-            if ( empty( $theResult ) ) {
-
-                header( "Location: ../php_views/comercios_list.php?retu=".urlencode( "Entidad eliminada correctamente" ) );
-
-            } else {
-
-                header( "Location: ../php_views/comercios_list.php?retu=".urlencode( $theResult ) );
-
-            }
+            $retu = urlencode( ((empty($theResult))?"Entidad eliminada correctamente":$theResult) );
+            $includeString = "comercios_list.php";            
 
         break;
         // - - - - - - - - - - - - - - - - - - - - - - SQL_DELETE //
@@ -146,6 +130,6 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
 }
 
-exit(0);
+//include_once( "../_php_views/".$includeString );
 
 ?>

@@ -12,11 +12,11 @@
     <li class="nav-item dropdown h4">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu de Opciones</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li class="dropdown-item" href="#"><a href="comercios.php">Comercios</a></li>
-        <li class="dropdown-item" href="#"><a href="ofertas.php">Ofertas</a></li>
-        <li class="dropdown-item" href="#"><a href="tickets.php">Tiquets</a></li>
-        <li class="dropdown-item" href="#"><a href="juegos.php">Juegos</a></li>
-        <li class="dropdown-item" href="#"><a href="usuarios.php">Usuarios</a></li>
+        <li class="dropdown-item" href="#"><a href="comercios.html">Comercios</a></li>
+        <li class="dropdown-item" href="#"><a href="ofertas.html">Ofertas</a></li>
+        <li class="dropdown-item" href="#"><a href="tickets.html">Tiquets</a></li>
+        <li class="dropdown-item" href="#"><a href="juegos.html">Juegos</a></li>
+        <li class="dropdown-item" href="#"><a href="usuarios.html">Usuarios</a></li>
       </ul>
 
     </li>
