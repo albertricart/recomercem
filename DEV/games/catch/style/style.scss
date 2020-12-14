@@ -12,17 +12,61 @@ body {
 }
 
 select {
-    background-color: #18223A;
+    background-color: $c_primary;
     border: 1px solid white;
     border-radius: 5px;
     padding: 8px 25px;
     outline: none;
-    opacity: 0.5;
     color: white;
     transition: all 0.25s ease;
-
+    font-family: $font;
     &:hover {
-        opacity: 1;
+        cursor: pointer;
+    }
+}
+
+input[type=number] {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    outline: none;
+    color: white;
+    transition: all 0.25s ease;
+    background-color: $c_primary;
+    font-family: $font;
+    
+}
+
+::placeholder{
+    color: white;
+    font-family: $font;
+}
+
+.slider {
+    -webkit-appearance: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    width: 20%;
+    border: 1px solid white;
+    background-color: $c_primary;
+    border-radius: 5px;
+
+
+
+    &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        height: 16px;
+        background-color: $c_primary;
+        margin-top: -1px;
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: white;
+        border-radius: 50%;
     }
 }
 
@@ -45,13 +89,13 @@ select {
 }
 
 .menu {
-    background-color: $c_bg;
+    background-color: $c_primary;
     width: 90vh;
     height: 50vh;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
     overflow: hidden;
     z-index: 3000;
     display: flex;
@@ -62,24 +106,46 @@ select {
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid $c_menu-border;
-        
-        &__opt {
-            @include menuOption("../assets/parameters.png", contain);
 
-            #parameters_opt {
-                @include menuOption("./assets/parameters.png", contain);
+        &__opt {
+            flex: 0 0 25%;
+            text-align: center;
+            cursor: pointer;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $c_accent_light;
             }
-            
-            #language_opt {
-                @include menuOption("./assets/language.png", contain);
+
+        }
+
+        &__icon {
+            margin: auto;
+            width: 30px;
+            height: 30px;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+
+            &--params {
+                background-image: url("../assets/parameters.png");
             }
-            
-            #tutorial_opt {
-                @include menuOption("./assets/tutorial.png", contain);
+
+            &--controls {
+                background-image: url("../assets/controls.png");
             }
-            
-            #controls_opt {
-                @include menuOption("./assets/controls.png", contain);
+
+            &--tut {
+                background-image: url("../assets/tutorial.png");
+            }
+
+            &--lang {
+                background-image: url("../assets/language.png");
             }
 
         }
@@ -92,25 +158,42 @@ select {
         &.show {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
+        }
+
+        &.hidden {
+            display: none;
         }
     }
 
-    &-body{
+    &-body {
         padding: 16px;
         flex: 1;
+
+        &-parameters {}
     }
 
-    &-start{
-        padding: 16px;
-        border-top: 1px solid $c_menu-border;
+    &-start {
         text-align: center;
-        font-weight: 300;
-        transition: all 0.3s ease;
+        font-weight: 600;
+        color: white;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
 
 
-        &:hover {
-            cursor: pointer;
-            background-color: $c_menu_en;
+        &-text {
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            background-color: white;
+            color: black;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $c_accent;
+            }
         }
     }
 
@@ -145,7 +228,6 @@ select {
         background-image: url("../assets/object.png");
         background-size: cover;
         position: absolute;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
 
     &__basket {
@@ -162,33 +244,41 @@ select {
 
 .game-info {
     display: flex;
-    justify-content: space-evenly;
     grid-area: info;
     background-color: $c_bg;
     font-weight: 600;
     font-size: 20px;
     z-index: 1000;
+    text-align: center;
 
     &__timer {
+        flex: 1;
+
         #timeElapsed {
             @include displayInfoItem();
         }
     }
 
     &__points {
+        flex: 1;
+
         #points {
             @include displayInfoItem();
         }
     }
 
     &__lives {
+        flex: 1;
+
         #lives {
             @include displayInfoItem();
         }
     }
 
     &__event {
-        #event {
+        flex: 1;
+
+        #eventTimeLeft {
             @include displayInfoItem();
         }
     }
@@ -196,8 +286,8 @@ select {
 
 .game-parameters {
     grid-area: parameters;
-    background-color: rebeccapurple;
-    z-index: 5000;
+    background-color: $c_bg;
+    z-index: 3000;
 
     .fab-container {
         position: fixed;
@@ -215,7 +305,7 @@ select {
         width: 50px;
         height: 50px;
         border-radius: 100%;
-        background-color: $c_option;
+        background-color: $c_accent_light;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 
         &:hover {
@@ -235,11 +325,12 @@ select {
     .fab {
         width: 60px;
         height: 60px;
-        background-color: $c_fab;
+        background-color: $c_primary;
         background-image: url("../assets/menu-light.png");
         background-position: center;
         background-size: 70%;
         background-repeat: no-repeat;
+
 
         &-options {
             list-style-type: none;
@@ -265,20 +356,8 @@ select {
                 @include displayIcon("../assets/code.png", 60%);
             }
 
-            #language {
-                @include displayIcon("../assets/language.png", 70%);
-            }
-
-            #tutorial {
-                @include displayIcon("../assets/tutorial.png", 70%);
-            }
-
-            #parameters {
-                @include displayIcon("../assets/parameters.png", 70%);
-            }
-
-            #controls {
-                @include displayIcon("../assets/controls.png", 70%);
+            #settings {
+                @include displayIcon("../assets/settings.png", 75%);
             }
         }
 
