@@ -33,6 +33,10 @@ if ( $isOK ) {
         $myCnctn->commit(); 
         echo "Commiting PDO ... " . "<br>";
 
+    } else {
+
+        echo "Error, no commiting PDO ... " . "<br>";
+
     }
 
     $myCnctn = closeDB();
