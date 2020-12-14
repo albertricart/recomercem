@@ -115,6 +115,7 @@
   width: 70%;
   height: 70%;
   position: relative;
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
   border: 2px solid black;
@@ -130,4 +131,63 @@
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0.3;
+}
+
+.gameovertxt{
+  position: absolute;
+  font-family: "Righteous", sans-serif;
+  top: 5%;
+  left: 45%;
+  z-index: 3;
+}
+
+.scoretxt{
+  position: absolute;
+  font-family: "Righteous", sans-serif;
+  text-align: center;
+  top: 30%;
+  left: 44%;
+  z-index: 3;
+}
+
+#lang{
+  position: absolute;
+  left: 12%;
+  top: 150px;
+  background-position: center;
+  z-index: 10;
+}
+
+#esp{
+  width: 100px;
+  height: 60px;
+  position: relative;
+  background-image: url(../src/esp.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#eng{
+  width: 100px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  background-image: url(../src/eng.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: grayscale(100%);
+}
+
+#cat{
+  width: 100px;
+  height: 60px;
+  position: relative;
+  background-image: url(../src/cat.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: grayscale(100%);
 }
