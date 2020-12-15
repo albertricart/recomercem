@@ -3,6 +3,13 @@
 // - - - - - - - - - - get Comerc Data
 $EntitiesAry = GetIdedArray( getEntity( "oferta", 0, 1 ) );
 
+// - - - - - - - - - - get Comerc Data
+$ComerciosAry = GetIdedArray( getEntity( "comerc", 0, 0 ) );
+
+//var_dump($EntitiesAry);
+//echo "<br /><br />";
+//var_dump($ComerciosAry);
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
 ?>
 
@@ -22,7 +29,7 @@ if ( !empty( $EntitiesAry ) ) {
         <div class="row">
             
             <!-- nombre entidad -->
-            <div class="col-10 h5 text-dark px-2"><?=$theData['nombre'].' <span class="h6">(id #'.$theData['id'].')</span>'?></div>
+            <div class="col-10 h5 text-dark px-2"><?=$theData['nombre'].' - '.$ComerciosAry[$theData['id_comerc']]['nombre'].' <span class="h6">(id #'.$theData['id'].')</span>'?></div>
 
             <div class="col-1">
 
@@ -71,10 +78,12 @@ if ( !empty( $EntitiesAry ) ) {
 </ul>
 
 <!-- opcion Agregar -->    
+<?php if ( $enableNew ) { ?>
 <a href="<?=$scriptName?>.html?idAction=<?php echo SQL_INSERT;?>" target="_self" style="display: block; position: fixed; right: 10px; bottom: 10px; width: auto; height: auto; padding: 10px; background-color: var(--primary); border-radius: 25px; z-index:100;">
 <svg style="fill: var( --white)" class="text-danger" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 448 512" enable-background="0 0 448 512">
         <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
     </svg>
 </a>
+<?php } ?>
 
 <?php if ( !empty( $_REQUEST['retu'] ) ) { echo '<script>alert("'.$_REQUEST['retu'].'")</script>'; } ?>

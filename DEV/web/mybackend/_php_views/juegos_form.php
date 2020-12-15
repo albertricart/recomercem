@@ -2,10 +2,6 @@
 
 //var_dump($EntityAry[$entityId]);
 
-// - - - - - - - - - - get ScriptName
-$scriptName = explode( '/', $_SERVER['PHP_SELF']);
-$scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
-
 ?>
 
 <form action="<?=$scriptName?>.html?idAction=<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" method="POST" target="_self" enctype="multipart/form-data">
@@ -23,16 +19,21 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 		</div>
 
 		<div class="form-group col-2">
-			<label for="tickets_max" class="col-form-label px-0">Puntuación Máxima</label>
+			<label for="puntuacion_max" class="col-form-label px-0">Puntuación Máxima</label>
 			<input type="number" class="col form-control pl-0 text-center" name="puntuacion_max" size="3" id="puntuacion_max" value="<?=((!empty($EntityAry[$entityId]['puntuacion_max']))?$EntityAry[$entityId]['puntuacion_max']:"")?>" />
 		</div>
 
 		<div class="form-group col-2">
-			<label for="tickets_reservado" class="col-form-label px-0">Orden</label>
+			<label for="orden" class="col-form-label px-0">Orden</label>
 			<input type="number" class="col form-control px-0 text-center" name="orden" size="3" id="orden" value="<?=((!empty($EntityAry[$entityId]['orden']))?$EntityAry[$entityId]['orden']:"")?>" />
 		</div>
 
-		<div class="form-group col-8">
+		<div class="form-group col-4">
+			<label for="url" class="col col-form-label px-0">URL</label>
+			<input type="text" class="col form-control" name="url" id="url" value="<?=((!empty($EntityAry[$entityId]['url']))?$EntityAry[$entityId]['url']:"")?>" />
+		</div>
+
+		<div class="form-group col-4">
 			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 			<label for="imagen" class="col col-form-label px-0">Imagen</label>
 			<input type="file" class="col form-control" name="imagen" id="imagen" />
@@ -40,7 +41,7 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 
 		<!-- control de origen y accion -->
 		<input type="hidden" id="id" name="id" value="<?=((!empty($EntityAry[$entityId]['id']))?$EntityAry[$entityId]['id']:"0")?>" />
-		<?=(($useCID)?'<input type="hidden" id="cid" name="cid" value="'.$cid.'" />':'')?>
+		<?=(($useCID)?'<input type="hidden" id="cid" name="cid" value="'.((!empty($EntityAry[$entityId]['cid']))?$EntityAry[$entityId]['cid']:$cid).'" />':'')?>
 		<input type="hidden" id="idOriginAction" name="idOriginAction" value="<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" />
 		<input type="hidden" id="txtOriginAction" name="txtOriginAction" value="<?=((empty($EntityAry[$entityId]['id']))?'SQL_INSERT':'SQL_UPDATE')?>" />
 

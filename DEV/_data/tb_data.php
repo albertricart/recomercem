@@ -51,7 +51,8 @@ $dbTableAry = array (
             'nombre' => array( 'fieldName' => 'nombre', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'descripcion' => array( 'fieldName' => 'descripcion', 'fieldType' => 'varchar', 'fieldLong' => 250, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'puntuacion_max' => array( 'fieldName' => 'puntuacion_max', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
-            'orden' => array( 'fieldName' => 'orden', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
+            'orden' => array( 'fieldName' => 'orden', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'url' => array( 'fieldName' => 'url', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
             )
         ),
     'oferta' => array (

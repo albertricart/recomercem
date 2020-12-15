@@ -7,6 +7,7 @@ $pageKeywords = 'reComercem, comerç, barri, comercio, barri, proximidad, barrio
 $pageStylesAry = Array( 'index'=>'/css/index.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
 $mainTitle = "Gestión de Ofertas";
+$enableNew = true;
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");

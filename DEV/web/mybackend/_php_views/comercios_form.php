@@ -5,10 +5,6 @@
 // - - - - - - - - - - get Tipo Data
 $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
 
-// - - - - - - - - - - get ScriptName
-$scriptName = explode( '/', $_SERVER['PHP_SELF']);
-$scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
-
 ?>
 
 <form action="<?=$scriptName?>.html?idAction=<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" method="POST" target="_self" enctype="multipart/form-data">
@@ -85,8 +81,8 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 
 		<!-- control de origen y accion -->
 		<input type="hidden" id="id" name="id" value="<?=((!empty($EntityAry[$entityId]['id']))?$EntityAry[$entityId]['id']:"0")?>" />
-		<input type="hidden" id="password" name="password" value="<?=((!empty($EntityAry[$entityId]['password']))?$EntityAry[$entityId]['password']:crypt('reComercem','magomo'))?>" />
-		<?=(($useCID)?'<input type="hidden" id="cid" name="cid" value="'.$cid.'" />':'')?>
+		<input type="hidden" id="password" name="password" value="<?=((!empty($EntityAry[$entityId]['password']))?$EntityAry[$entityId]['password']:password_hash('reComercem', PASSWORD_BCRYPT ))?>" />
+		<?=(($useCID)?'<input type="hidden" id="cid" name="cid" value="'.((!empty($EntityAry[$entityId]['cid']))?$EntityAry[$entityId]['cid']:$cid).'" />':'')?>
 		<input type="hidden" id="idOriginAction" name="idOriginAction" value="<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" />
 		<input type="hidden" id="txtOriginAction" name="txtOriginAction" value="<?=((empty($EntityAry[$entityId]['id']))?'SQL_INSERT':'SQL_UPDATE')?>" />
 

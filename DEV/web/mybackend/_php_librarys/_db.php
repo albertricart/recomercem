@@ -8,9 +8,9 @@ function openDB() {
     getBackTrace();
 
     // - - - - - DB Data conection
-    $fileLink = "../../_data/db.php";
-    if ( file_exists( $fileLink ) ) { include( $fileLink ); consoleLog( "Included '".$fileLink."' (".getcwd().")" ); } 
-    else { consoleLog( "Error: not exists '".$fileLink."' (".getcwd().")" ); }
+    if ( file_exists( "../../_data/db.php" ) ) { include( "../../_data/db.php" );  } 
+    else if ( file_exists( "../_data/db.php" ) ) { include( "../_data/db.php" );  }     
+
 
     try {
 
@@ -40,24 +40,29 @@ function closeDB() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Select Entity =>
 
-function getEntity( $the_table, int $the_id, int $the_sort ) {
+function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_direction = 0, int $the_limit = 0 ) {
 
     // - - - - - Tables Data
-    $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+    if ( file_exists( "../../_data/tb_data.php" ) ) { include( "../../_data/tb_data.php" ); }
+    else if ( file_exists( "../_data/tb_data.php" ) ) { include( "../_data/tb_data.php" ); }
 
     $theResult = null;
     
     switch ( $the_sort ) { 
-        case 1: $stringSort = " ORDER BY nombre";  break;
-        case 2: $stringSort = " ORDER BY cid";  break;
-        default: $stringSort = "";
+        case 1: $addStringQuery = " ORDER BY nombre".(($the_direction==0)?' ASC':' DESC'); break;
+        case 2: $addStringQuery = " ORDER BY cid".(($the_direction==0)?' ASC':' DESC');  break;
+        case 3: $addStringQuery = " ORDER BY orden".(($the_direction==0)?' ASC':' DESC');  break;
+        default: $addStringQuery = "";
     }
+
+    if ( $the_limit > 0 ) { $addStringQuery.= ' LIMIT ' . $the_limit; }
+
 
     if ( !empty( $the_table ) ) {
 
         $myCnctn = openDB();
 
-        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"").$stringSort;
+        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"").$addStringQuery;
         //echo $myQueryText.'<br>';
 
         $myQuery = $myCnctn->prepare( $myQueryText );
@@ -82,7 +87,8 @@ function getEntity( $the_table, int $the_id, int $the_sort ) {
 function saveEntity( string $the_table, $the_dataAry ) {
 
     // - - - - - Tables Data
-    $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+    if ( file_exists( "../../_data/tb_data.php" ) ) { include( "../../_data/tb_data.php" ); } 
+    else if ( file_exists( "../_data/tb_data.php" ) ) { include( "../_data/tb_data.php" ); } 
 
     $theReturn = "";
     
@@ -200,8 +206,9 @@ function saveEntity( string $the_table, $the_dataAry ) {
 function delEntity( string $the_table, int $the_id ) {
 
     // - - - - - Tables Data
-    $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
-
+    if ( file_exists( "../../_data/tb_data.php" ) ) { include( "../../_data/tb_data.php" ); } 
+    else if ( file_exists( "../_data/tb_data.php" ) ) { include( "../_data/tb_data.php" ); } 
+    
     $isOK = true;
 
     $theReturn = "";

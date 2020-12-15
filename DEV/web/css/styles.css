@@ -96,15 +96,17 @@ main {
     height: auto; 
     min-height: 50vh; 
     padding: 50px calc( (100% - 1024px) / 2); 
+    color: var(--colSecondary);
 }
 
 .artlTitle { 
-    background: no-repeat left center;
-    background-size: auto;
-    background-size: 60px auto;
-    color: var(--colWhite);
+    /*background: no-repeat left center;*/
+    /*background-size: auto;*/
+    /*background-size: 60px auto;*/
+    /*padding: 10px 0 10px 90px;*/
+    padding: 10px 0;
+    margin: 0;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
-    padding: 10px 0 10px 90px;
     min-height: 60px; 
     font-size: 50px;
 }

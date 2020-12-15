@@ -30,6 +30,16 @@ include_once("_php_partials/02_header.php");
 
 ?>
 
+<article id="mainStores" class="artlBox">
+
+    <h1 class="artlTitle">Proyecto reComercem</h1>
+
+    <ul class="storesBox">
+        <li></li>
+    </ul>
+
+</article>
+
 <div id="" style=" width: 100%; max-width: 1024px; height: auto; margin: 0 auto; padding: 100px 0;  display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 50px; ">
 
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Modelo%20Relacional%20BD/Model%20Relacional%20BD%20Recomercem.PNG" target="_blank" style="display: block; text-align: center; padding: 20px;">

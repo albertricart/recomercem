@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="form-group col-1">
-			<label for="tickets_max" class="col-form-label px-0">Puntuación</label>
+			<label for="puntuacion" class="col-form-label px-0">Puntuación</label>
 			<input type="number" class="col form-control pl-0 text-center" name="puntuacion" id="puntuacion" value="<?=((!empty($EntityAry[$entityId]['puntuacion']))?$EntityAry[$entityId]['puntuacion']:"")?>" readonly />
 		</div>
 

@@ -8,10 +8,6 @@ $UsuarioAry = GetIdedArray( getEntity( "usuario", $EntityAry[$entityId]['id_usua
 // - - - - - - - - - - get Tipo Data
 $ComercioAry = GetIdedArray( getEntity( "comerc", $EntityAry[$entityId]['id_comerc'], 0 ) );
 
-// - - - - - - - - - - get ScriptName
-$scriptName = explode( '/', $_SERVER['PHP_SELF']);
-$scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
-
 ?>
 
 <form action="<?=$scriptName?>.html?idAction=<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" method="POST" target="_self" enctype="multipart/form-data">
@@ -29,12 +25,12 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 		</div>
 
 		<div class="form-group col-6">
-			<label for="tickets_max" class="col-form-label px-0">Fecha Emision</label>
+			<label for="fecha_emision" class="col-form-label px-0">Fecha Emision</label>
 			<input type="number" class="col form-control pl-0 text-center" name="fecha_emision" size="3" id="fecha_emision" value="<?=((!empty($EntityAry[$entityId]['fecha_emision']))?$EntityAry[$entityId]['fecha_emision']:"")?>" readonly />
 		</div>
 
 		<div class="form-group col-6">
-			<label for="tickets_reservado" class="col-form-label px-0">Fecha de Canje</label>
+			<label for="fecha_canje" class="col-form-label px-0">Fecha de Canje</label>
 			<input type="number" class="col form-control px-0 text-center" name="fecha_canje" size="3" id="fecha_canje" value="<?=((!empty($EntityAry[$entityId]['fecha_canje']))?$EntityAry[$entityId]['fecha_canje']:"")?>" readonly />
 		</div>
 

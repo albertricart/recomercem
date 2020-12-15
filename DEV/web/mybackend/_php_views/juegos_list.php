@@ -71,10 +71,12 @@ if ( !empty( $EntitiesAry ) ) {
 </ul>
 
 <!-- opcion Agregar -->    
+<?php if ( $enableNew ) { ?>
 <a href="<?=$scriptName?>.html?idAction=<?php echo SQL_INSERT;?>" target="_self" style="display: block; position: fixed; right: 10px; bottom: 10px; width: auto; height: auto; padding: 10px; background-color: var(--primary); border-radius: 25px; z-index:100;">
 <svg style="fill: var( --white)" class="text-danger" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 448 512" enable-background="0 0 448 512">
         <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
     </svg>
 </a>
+<?php } ?>
 
 <?php if ( !empty( $_REQUEST['retu'] ) ) { echo '<script>alert("'.$_REQUEST['retu'].'")</script>'; } ?>

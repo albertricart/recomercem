@@ -2,10 +2,6 @@
 
 //var_dump($EntityAry[$entityId]);
 
-// - - - - - - - - - - get ScriptName
-$scriptName = explode( '/', $_SERVER['PHP_SELF']);
-$scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
-
 ?>
 
 <form action="<?=$scriptName?>.html?idAction=<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" method="POST" target="_self" enctype="multipart/form-data">
