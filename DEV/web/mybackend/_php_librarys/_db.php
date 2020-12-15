@@ -40,18 +40,24 @@ function closeDB() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Select Entity =>
 
-function getEntity( $the_table, int $the_id ) {
+function getEntity( $the_table, int $the_id, int $the_sort ) {
 
     // - - - - - Tables Data
     $fileLink = "../../_data/tb_data.php"; if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
 
     $theResult = null;
+    
+    switch ( $the_sort ) { 
+        case 1: $stringSort = " ORDER BY nombre";  break;
+        case 2: $stringSort = " ORDER BY cid";  break;
+        default: $stringSort = "";
+    }
 
     if ( !empty( $the_table ) ) {
 
         $myCnctn = openDB();
 
-        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"");
+        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"").$stringSort;
         //echo $myQueryText.'<br>';
 
         $myQuery = $myCnctn->prepare( $myQueryText );

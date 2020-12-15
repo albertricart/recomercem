@@ -3,7 +3,7 @@
 //var_dump($EntityAry[$entityId]);
 
 // - - - - - - - - - - get Tipo Data
-$TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0 ) );
+$TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
 
 // - - - - - - - - - - get ScriptName
 $scriptName = explode( '/', $_SERVER['PHP_SELF']);
@@ -11,7 +11,7 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 
 ?>
 
-<form action="<?=$scriptName[0]?>.html?idAction=<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" method="POST" target="_self" enctype="multipart/form-data">
+<form action="<?=$scriptName?>.html?idAction=<?=((empty($EntityAry[$entityId]['id']))?SQL_INSERT:SQL_UPDATE)?>" method="POST" target="_self" enctype="multipart/form-data">
 
 	<div class="row">
 
@@ -21,7 +21,7 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 				<select name="tipo" id="tipo" class="custom-select" autofocus>
 					<?
 					foreach( $TipoAry as $tmpData ) {
-					?><option value="<?=$tmpData['id']; ?>"<?=((!empty($EntityAry[$entityId]['tipo']) && $EntityAry[$entityId]['tipo']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['name']; ?></option>
+					?><option value="<?=$tmpData['id']; ?>"<?=((!empty($EntityAry[$entityId]['tipo']) && $EntityAry[$entityId]['tipo']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['nombre']; ?></option>
 					<? } ?>
 				</select>
 			</div>
@@ -64,17 +64,17 @@ $scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
 
 		<div class="form-group col-2">
 			<label for="tickets_max" class="col-form-label px-0">Tickets Máximo</label>
-			<input type="number" class="col form-control pl-0" name="tickets_max" size="3" id="tickets_max" value="<?=((!empty($EntityAry[$entityId]['tickets_max']))?$EntityAry[$entityId]['tickets_max']:"")?>" />
+			<input type="number" class="col form-control pl-0 text-center" name="tickets_max" size="3" id="tickets_max" value="<?=((!empty($EntityAry[$entityId]['tickets_max']))?$EntityAry[$entityId]['tickets_max']:"")?>" />
 		</div>
 
 		<div class="form-group col-2">
 			<label for="tickets_reservado" class="col-form-label px-0">Tickets Reservados</label>
-			<input type="number" class="col form-control px-0" name="tickets_reservado" size="3" id="tickets_reservado" value="<?=((!empty($EntityAry[$entityId]['tickets_reservado']))?$EntityAry[$entityId]['tickets_reservado']:"")?>" />
+			<input type="number" class="col form-control px-0 text-center" name="tickets_reservado" size="3" id="tickets_reservado" value="<?=((!empty($EntityAry[$entityId]['tickets_reservado']))?$EntityAry[$entityId]['tickets_reservado']:"")?>" />
 		</div>
 
 		<div class="form-group col-2">
 			<label for="tickets_disponible" class="col-form-label px-0">Tickets Disponibles</label>
-			<input type="number" class="col form-control px-0" name="tickets_disponible" size="3" id="tickets_reservado" value="<?=((!empty($EntityAry[$entityId]['tickets_disponible']))?$EntityAry[$entityId]['tickets_disponible']:"")?>" />
+			<input type="number" class="col form-control px-0 text-center" name="tickets_disponible" size="3" id="tickets_reservado" value="<?=((!empty($EntityAry[$entityId]['tickets_disponible']))?$EntityAry[$entityId]['tickets_disponible']:"")?>" />
 		</div>
 
 		<div class="form-group col-6">

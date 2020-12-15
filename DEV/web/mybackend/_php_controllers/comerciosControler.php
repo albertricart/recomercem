@@ -24,11 +24,15 @@ else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
 // - - - - - VARS //
 $theResult = "";
+$entityKey = "comerc";
 $includeString = "comercios_list.php";
 $includeChange = "comercios_form.php";
-$entityKey = "comerc";
 $retu = "";
 
+// - - - - - - - - - - get ScriptName
+$scriptName = explode( '/', $_SERVER['PHP_SELF']);
+$scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
+$scriptName = $scriptName[0];
 
 // - - - - - control de uso de CID de imagen
 if ( !empty( $dbTableAry[ $entityKey ][ 'tableFields' ][ 'cid' ] ) ) { 
@@ -115,7 +119,7 @@ if( !empty( $_REQUEST['idAction'] ) ) {
             } else if ( !empty( $_POST['entityId'] ) ) { 
 
                 // - - - - - Load Data if exists
-                $EntityAry = GetIdedArray( getEntity( $entityKey, $_POST['entityId'] ) );
+                $EntityAry = GetIdedArray( getEntity( $entityKey, $_POST['entityId'], 0 ) );
                    
                 // - - - - - session
                 // $_SESSION = array();

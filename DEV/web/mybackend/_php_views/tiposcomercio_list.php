@@ -1,7 +1,7 @@
 <?php
 
-// - - - - - - - - - - get Comerc Data
-$EntitiesAry = GetIdedArray( getEntity( "juego", 0, 1 ) );
+// - - - - - - - - - - get Tipo Data
+$EntitiesAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
 ?>

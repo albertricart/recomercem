@@ -24,9 +24,9 @@ else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
 // - - - - - VARS //
 $theResult = "";
-$entityKey = "oferta";
-$includeString = "ofertas_list.php";
-$includeChange = "ofertas_form.php";
+$entityKey = "tipo_comercio";
+$includeString = "tiposcomercio_list.php";
+$includeChange = "tiposcomercio_form.php";
 $retu = "";
 
 // - - - - - - - - - - get ScriptName

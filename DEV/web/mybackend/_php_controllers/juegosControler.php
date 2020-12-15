@@ -2,22 +2,56 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
 
-// - - - - - DB Data conection
-include_once("../php_librarys/db.php"); 
-// - - - - - Pokemon functions
-include_once("../php_librarys/functions_pokedex.php"); 
+// - - - - - Tables Data
+$fileLink = "../../_data/tb_data.php"; 
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 // - - - - - General SETs
-include_once("../php_controllers/generalSet.php"); 
+$fileLink = "_php_controllers/_generalSet.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - DB conection & work
+$fileLink = "_php_librarys/_db.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - Entity functions
+$fileLink = "_php_librarys/_functions_generic.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } 
+else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - recibe parametros de formulario POST
+
+// - - - - - VARS //
+$theResult = "";
+$entityKey = "juego";
+$includeString = "juegos_list.php";
+$includeChange = "juegos_form.php";
+$retu = "";
+
+// - - - - - - - - - - get ScriptName
+$scriptName = explode( '/', $_SERVER['PHP_SELF']);
+$scriptName = explode( '.', $scriptName[ count($scriptName)-1 ] );
+$scriptName = $scriptName[0];
+
+// - - - - - control de uso de CID de imagen
+if ( !empty( $dbTableAry[ $entityKey ][ 'tableFields' ][ 'cid' ] ) ) { 
+    $useCID = true; 
+    if ( empty( $_POST['cid'] ) ) { $cid = $dbTableAry[ $entityKey ][ 'tableCode' ] . dechex ( time() ); }
+    else { $cid = $_POST['cid']; }
+} else { $useCID = false; }
+
 
 // - - - - - controla y graba imagen
-$imgOK = false;
-if ( !empty( $_FILES["nptImagen"] ) && is_uploaded_file( $_FILES['nptImagen']['tmp_name'] ) && move_uploaded_file( $_FILES['nptImagen']['tmp_name'], "../media/img/uploaded/".$_FILES['nptImagen']['name'] ) ) { $imgOK = true; }
+if ( empty( $_FILES["imagen"] ) ) { $imgOK = false; }
+elseif ( !is_uploaded_file( $_FILES['imagen']['tmp_name'] ) ) { $imgOK = false; }
+elseif ( !move_uploaded_file( $_FILES['imagen']['tmp_name'], "../images/uploaded/".$cid.".jpg" ) ) { $imgOK = false; }
+else { $imgOK = true; }
 
-$theResult = "";
+
+// - - - - - controla entityId
+if ( isset( $_POST[ 'entityId' ] ) ) { $entityId = $_POST[ 'entityId' ]; } else { $entityId = 0; }
+
 
 // - - - - - switch de acciones
 if( !empty( $_REQUEST['idAction'] ) ) { 
@@ -29,34 +63,33 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
             if ( !empty( $_POST['idOriginAction'] ) ) {
                 
-                session_start();	// genera array asociativo con los datos de sesion
-                $_SESSION = array();
+                // - - - - - session
+                // $_SESSION = array();
 
-                if ( !empty( $_POST['txtNumero'] ) && !empty( $_POST['txtNombre'] ) ) { 
+                if ( !empty( $_POST['nombre'] ) ) { 
 
-                    // - - - - - Almacena Pokemon
-                    $theResult = setPokemon( 0, $_POST['txtNumero'], $_POST['txtNombre'], $_POST['txtAltura'], $_POST['txtPeso'], $_POST['txtEvolucion'], (($imgOK)?$_FILES['nptImagen']['name']:""), $_POST['cbxRegion'], $_POST['chxTipo'] );
+                    $tmpDataAry = array();
+                    foreach ( $dbTableAry[ $entityKey ][ 'tableFields' ] as $tmpKey => $tmpData ) {
+                        if ( isset( $_POST[$tmpKey] ) ) { $tmpDataAry[$tmpKey] = $_POST[$tmpKey]; } 
+                    }
+                    // - - - - - agrega cid de imagen
+                    if ( $useCID ) { $tmpDataAry['cid'] = $cid; }
+
+                    // - - - - - Almacena Datos
+                    $theResult = saveEntity( $entityKey, $tmpDataAry );
 
                 }
 
-                if ( empty( $theResult ) ) {
-
-                    header( "Location: ../php_views/pokemon_list.php?retu=".urlencode( "Pokemon añadido correctamente" ) );
-
-                } else {
-
-                    header( "Location: ../php_views/pokemon_list.php?retu=".urlencode( $theResult ) );
-                }
+                $retu = urlencode( ((empty($theResult))?"Entidad añadida correctamente":$theResult) );
 
             } else {
 
-                // - - - - - almacena en session
-                session_start();	// genera array asociativo con los datos de sesion
-                $_SESSION = array();
+                // - - - - - session
+                // $_SESSION = array();
                                 
-                // echo "SQL_INSERT"; var_dump($_SESSION); exit(0);
-                header("Location: ../php_views/pokemon.php");
-
+                // echo "SQL_INSERT"; var_dump($_SESSION);
+                $includeString = $includeChange;
+                
             }
 
         break;
@@ -67,47 +100,38 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
             if ( !empty( $_POST['idOriginAction'] ) ) {
 
-                if ( !empty($_POST['numId']) && !empty( $_POST['txtNumero'] ) && !empty( $_POST['txtNombre'] ) ) { 
+                if ( !empty($_POST['id']) && !empty( $_POST['nombre'] ) ) { 
 
-                    session_start();	// genera array asociativo con los datos de sesion
                     $_SESSION = array();                    
 
-                    // - - - - - Almacena Pokemon
-                    $theResult = setPokemon( $_POST['numId'], $_POST['txtNumero'], $_POST['txtNombre'], $_POST['txtAltura'], $_POST['txtPeso'], $_POST['txtEvolucion'], (($imgOK)?$_FILES['nptImagen']['name']:""), $_POST['cbxRegion'], $_POST['chxTipo'] );
+                    $tmpDataAry = array();
+                    foreach ( $dbTableAry[ $entityKey ][ 'tableFields' ] as $tmpKey => $tmpData ) {
+                        if ( isset( $_POST[$tmpKey] ) ) { $tmpDataAry[$tmpKey] = $_POST[$tmpKey]; } 
+                    }
+
+                    // - - - - - Almacena Datos
+                    $theResult = saveEntity( $entityKey, $tmpDataAry );
 
                 }
 
-                if ( empty( $theResult ) ) {
+                $retu = urlencode( ((empty($theResult))?"Entidad modificada correctamente":$theResult) );
 
-                    header( "Location: ../php_views/pokemon_list.php?retu=".urlencode( "Pokemon modificado correctamente" ) );
+            } else if ( !empty( $_POST['entityId'] ) ) { 
 
-                } else {
+                // - - - - - Load Data if exists
+                $EntityAry = GetIdedArray( getEntity( $entityKey, $_POST['entityId'], 0 ) );
+                   
+                // - - - - - session
+                // $_SESSION = array();
+                // foreach( $EntityAry[$_POST['id']] as $tmpKey => $tmpData ) { $_SESSION[$tmpKey] = $tmpData; }
 
-                    header( "Location: ../php_views/pokemon_list.php?retu=".urlencode( $theResult ) );
-
-                }
-
-            } else if ( !empty( $_POST['idPokemon'] ) ) { 
-
-                // - - - - - Load Pokeon Data if exists
-               	// 'pokemons' => array( 'id' => 0,'numero' => 0,'nombre' => '','altura' => 0,'peso' => 0,'evolucion' => '','imagen' => '','regiones_id' => 0 )
-               	$PokemonsAry = GetIdedArray( getDataes( "pokemons", $_POST['idPokemon'] ) );
-              	// tipos_has_pokemons [ 0.'tipos_id', 1.'pokemons_id' ]
-               	$HasTipoAry = getDataes( "tipos_has_pokemons", $_POST['idPokemon'] );
-
-                   // - - - - - almacena en session
-                session_start();	// genera array asociativo con los datos de sesion
-                $_SESSION = array();
-
-                foreach( $PokemonsAry[$_POST['idPokemon']] as $theK => $theD ) { $_SESSION[$theK] = $theD; }
-                $_SESSION['tipos'] = $HasTipoAry; 
-
-                // echo "SQL_UPDATE"; var_dump($_SESSION); exit(0);
-                header("Location: ../php_views/pokemon.php");
+                // echo "SQL_UPDATE"."<br />"; echo "_REQUEST"."<br />"; var_dump($_REQUEST); echo "_SESSION"."<br />"; var_dump($_SESSION);
+                $includeString = $includeChange;
 
             } else {
 
-                echo 'empty( $_SESSION["save"] ) && $_POST["idPokemon"]';
+                // echo "SQL_UPDATE"."<br />"; echo "_REQUEST"."<br />"; var_dump($_REQUEST); echo "_SESSION"."<br />"; var_dump($_SESSION);
+                echo 'empty( $_SESSION["save"] ) && $_POST["entityId"]';
 
             }
 
@@ -115,28 +139,17 @@ if( !empty( $_REQUEST['idAction'] ) ) {
         // - - - - - - - - - - - - - - - - - - - - - - SQL_UPDATE //
 
         // - - - - - - - - - - - - - - - - - - - - - - SQL_DELETE =>   
-        // Si venim de fer click per esborrar:
-        // - Ens guardem el pokemon a una variable.
-        // - Cridem a la funció per esborrar el pokemon de la base de dades.
-        // - Esborrem la imatge del pokemon guardat del servidor.
+
         case SQL_DELETE: 
 
-            if ( !empty( $_POST['idPokemon'] ) ) { 
+            if ( !empty( $_POST['entityId'] ) ) { 
 
-                // - - - - - Elimina Pokemon
-                $theResult = delPokemon( $_POST['idPokemon'] );
-
-            }
-
-            if ( empty( $theResult ) ) {
-
-                header( "Location: ../php_views/pokemon_list.php?retu=".urlencode( "Pokemon eliminado correctamente" ) );
-
-            } else {
-
-                header( "Location: ../php_views/pokemon_list.php?retu=".urlencode( $theResult ) );
+                // - - - - - Elimina Registro
+                $theResult = delEntity( $entityKey, $_POST['entityId'] );
 
             }
+
+            $retu = urlencode( ((empty($theResult))?"Entidad eliminada correctamente":$theResult) );
 
         break;
         // - - - - - - - - - - - - - - - - - - - - - - SQL_DELETE //
@@ -145,6 +158,6 @@ if( !empty( $_REQUEST['idAction'] ) ) {
 
 }
 
-exit(0);
+include_once( "_php_views/".$includeString );
 
 ?>

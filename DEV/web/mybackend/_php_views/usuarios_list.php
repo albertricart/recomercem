@@ -1,100 +1,34 @@
 <?php
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+// - - - - - - - - - - get Comerc Data
+$EntitiesAry = GetIdedArray( getEntity( "usuario", 0, 1 ) );
 
-// - - - - - DB Data conection
-include("../php_librarys/db.php"); 
-// - - - - - Pokemon functions
-include("../php_librarys/functions_pokedex.php"); 
-// - - - - - General SETs
-include("../php_controllers/generalSet.php"); 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
+?>
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+<ul class="list-group list-group-flush">
 
-?><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pokemon List</title>
+<?
+if ( !empty( $EntitiesAry ) ) {
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    
-</head>
-<body>
+    foreach( $EntitiesAry as $theKey => $theData ) {
 
-<!-- Aquesta página ha de tenir la mateixa navbar de la pàgina pokemon.php. ==>>
-Les característiques de la navbar són les següents:
-En el brand de la navbar ha de sortir la imatge pokeball.png i la paraula pokedex.
-Ha de tenir un menú Datos maestros que ha de ser un desplegable amb l’opció Pokémons. -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+?>
 
-	<a class="navbar-brand" href="../index.php">
-	    <img src="../media/img/pokeball.png" class="rounded float-left mr-3" style="width: 50px; height: 50px;" />
-		<h1 class="navbar-text text-white h2">Pokedex</h1>
-	</a>
+    <li class="list-group-item">
 
-    <ul class="navbar-nav mr-auto pt-2 ml-2">
-      <li class="nav-item dropdown h4">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Datos maestros</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li class="dropdown-item" href="#"><a href="pokemon_list.php">Pokémons</a></li>
-        </ul>
-      </li>
-    </ul>
+    <div class="container">
 
-</nav>
+        <div class="row">
+            
+            <!-- nombre entidad -->
+            <div class="col-10 h5 text-dark px-2"><?=$theData['nombre'].' <span class="h6">(id #'.$theData['id'].')</span>'?></div>
 
-<!-- Té un div contenidor on hi ha una taula amb les següents columnes: -->
-<div class="container-fluid">
+            <div class="col-1">
 
-    <div class="row my-2">
-
-    
-        <?php 
-
-        // 'pokemons' => array( 'id' => 0,'numero' => 0,'nombre' => '','altura' => 0,'peso' => 0,'evolucion' => '','imagen' => '','regiones_id' => 0 )
-        $PokemonsAry = GetIdedArray( getDataes( "pokemons", 0 ) );
-        // 'tipos' => array( 'id', 'nombre' )
-        $TipoAry = GetIdedArray( getDataes( "tipos", 0 ) );
-        // 'regiones' => array( 'id' => 0, 'nombre' => '' )
-        $RegioAry = GetIdedArray( getDataes( "regiones", 0 ) ); 
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
-        
-        if ( !empty( $PokemonsAry ) ) {
-
-            foreach( $PokemonsAry as $theKey => $theData ) {
-                // pokemons [ 0.'id', 1.'numero', 2.'nombre', 3.'altura', 4.'peso', 5.'evolucion', 6.'imagen', 7.'regiones_id' ]
-                // tipos_has_pokemons [ 0.'tipos_id', 1.'pokemons_id' ]
-                // 'tipos' => array( 'id', 'nombre' )
-                // regiones [ 0.'id', 1.'nombre' )
-
-                $HasTipoAry = GetIdedArray( getDataes( "tipos_has_pokemons", $theKey ) );
-        ?>
-
-        <div class="col col-2 card bg-white text-white mx-2 px-0  d-flex flex-column">
-
-            <?php 
-            $imgSrc = "../media/img/uploaded/".$theData['imagen'];
-            if ( empty( $theData['imagen'] ) || !file_exists( $imgSrc ) ) { $imgSrc = "../media/img/noimage.png"; }
-            ?><img class="card-img img-fluid" src="<?php echo $imgSrc; ?>" alt="<?php echo $theData['nombre']?>" />
-
-            <p class="h5 text-dark px-2"><?php echo $theData['numero']." - ".$theData['nombre']?></p>
-
-            <!-- S’ha de mostrar un Badge per cadascun del tipus del pokemon. -->
-            <div class="d-flex flex-wrap px-2 mb-2"><?php 
-                foreach( $HasTipoAry as $theDataTipo ) { 
-                    echo '<div class="btn btn-primary mr-2 mb-2 px-1 py-0 btn-sm">'.$TipoAry[$theDataTipo['tipos_id']]['nombre'].'</div>';
-                } 
-            ?></div>
-
-            <div class="mt-auto p-2 card-footer d-flex flex-row align-items-end justify-content-end">
-
-                <!-- Un formulari que ha d’incloure un botó de submit outline primari, i amb la icona d’editar,  i un input amagat on 
-                es guardi l’id del pokemon. Aquest botó de submit ha d’enviar les dades per POST a pokemonControler.php. -->
-                <form action="../php_controllers/pokemonControler.php" method="POST" target="_self">
-                    <input type="hidden" id="idPokemon" name="idPokemon" value="<?php echo $theData['id'];?>">
+                <!-- opcion Modificar -->
+                <form action="<?=$scriptName?>.html" method="POST" target="_self">
+                    <input type="hidden" id="entityId" name="entityId" value="<?php echo $theData['id'];?>">
                     <input type="hidden" id="idAction" name="idAction" value="<?php echo SQL_UPDATE;?>">
                     <button type="submit" class="p-2 btn border-secondary text-dark w-20 p-20 ml-2">
                         <svg style="fill: var( --dark)" class="text-dark" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 576 512" enable-background="0 0 576 512">
@@ -103,10 +37,13 @@ Ha de tenir un menú Datos maestros que ha de ser un desplegable amb l’opció 
                     </button>
                 </form>
 
-                <!-- Un formulari que ha d’incloure un botó de submit outline danger, i amb la icona de trash,  i un input amagat on 
-                es guardi l’id del pokemon. Aquest botó de submit ha d’enviar les dades per POST a pokemonControler.php. -->
-                <form action="../php_controllers/pokemonControler.php" method="POST" target="_self">
-                    <input type="hidden" id="idPokemon" name="idPokemon" value="<?php echo $theData['id'];?>">
+            </div>
+
+            <div class="col-1">
+
+                <!-- opcion Eliminar -->
+                <form action="<?=$scriptName?>.html" method="POST" target="_self">
+                    <input type="hidden" id="entityId" name="entityId" value="<?php echo $theData['id'];?>">
                     <input type="hidden" id="idAction" name="idAction" value="<?php echo SQL_DELETE;?>">
                     <button type="submit" class="p-2 btn border-danger text-danger w-20 p-20 ml-2">
                         <svg style="fill: var( --danger)" class="text-danger" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 448 512" enable-background="0 0 448 512">
@@ -117,36 +54,27 @@ Ha de tenir un menú Datos maestros que ha de ser un desplegable amb l’opció 
 
             </div>
 
-
         </div>
 
-    <?php
+    </li>
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat =>  
-            
-        }
+<?php
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat =>  
         
     }
+    
+}
 
-    ?>
+?>
 
-    </div>
+</ul>
 
-    <!-- També té un link a pokemon.php. Aquest link ha de tenir l’aspecte d’un botó success gran i circular, 
-    amb la icona plus. Al seu posicionament ha de ser fix i ha d’estar a 10px de la dreta i 10px de la part 
-    de sota. A més el seu z-index ha de ser de 100. -->
-    <a href="../php_controllers/pokemonControler.php?idAction=<?php echo SQL_INSERT;?>" target="_self" style="display: block; position: fixed; right: 10px; bottom: 10px; width: auto; height: auto; padding: 10px; background-color: var(--primary); border-radius: 25px; z-index:100;">
-    <svg style="fill: var( --white)" class="text-danger" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 448 512" enable-background="0 0 448 512">
-            <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
-        </svg>
-    </a>
+<!-- opcion Agregar -->    
+<a href="<?=$scriptName?>.html?idAction=<?php echo SQL_INSERT;?>" target="_self" style="display: block; position: fixed; right: 10px; bottom: 10px; width: auto; height: auto; padding: 10px; background-color: var(--primary); border-radius: 25px; z-index:100;">
+<svg style="fill: var( --white)" class="text-danger" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 448 512" enable-background="0 0 448 512">
+        <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+    </svg>
+</a>
 
-    <?php if ( !empty( $_REQUEST['retu'] ) ) { echo '<script>alert("'.$_REQUEST['retu'].'")</script>'; } ?>
-
-</body>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-
-</html>
+<?php if ( !empty( $_REQUEST['retu'] ) ) { echo '<script>alert("'.$_REQUEST['retu'].'")</script>'; } ?>
