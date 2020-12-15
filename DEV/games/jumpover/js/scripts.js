@@ -62,10 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
       score2.innerHTML = "PUNTS:";
       document.getElementById('howtoplay').innerHTML = "CONTROLS"
       document.getElementById('explain').innerHTML = "Prem espai o fletxa amunt per saltar als lladres"
-    
     }
-
-
+    
     var score = 0;
     let isJumping = false;
     let gravity = 0.9;

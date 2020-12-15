@@ -161,10 +161,13 @@
 
 .reloadiv{
   position: absolute;
-  width: 25px;
-  height: 25px;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
   top: 60%;
   left: 47%;
+  background-color: Transparent;
+  background-repeat:no-repeat;
   background-image: url(../src/reload.png);
   background-size: cover;
   background-repeat: no-repeat;
