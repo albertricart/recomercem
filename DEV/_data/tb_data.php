@@ -87,7 +87,7 @@ $dbTableAry = array (
         ),
     'ticket' => array (
         'tableName' => 'ticket', 
-        'tableCode' => '',
+        'tableCode' => 'TK',
         'tableType' => 1, 
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
@@ -102,7 +102,7 @@ $dbTableAry = array (
         ),
     'usuario' => array (
         'tableName' => 'usuario', 
-        'tableCode' => '',
+        'tableCode' => 'US',
         'tableType' => 0, 
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
