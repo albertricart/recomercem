@@ -5,12 +5,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.querySelector('body');
     const alert = document.getElementById('alert');
 
-    //let randomTime = Math.random() * 4000;
+    //idioma
+    const eng = document.getElementById('eng');
+    const esp = document.getElementById('esp');
+    const cat = document.getElementById('cat');
+    let score2 = document.getElementById('score2');
+
+    var lang = "esp";
+
+    eng.onclick = function(){
+      score2.innerHTML = "SCORE:";
+      lang = "eng";
+      eng.style.filter = "grayscale(100%)";
+      esp.style.filter = "grayscale(0%)";
+      cat.style.filter = "grayscale(0%)";
+      document.getElementById('howtoplay').innerHTML = "CONTROLS"
+      document.getElementById('explain').innerHTML = "Press space, or up arrow to jump the thiefs."
+    }
+    
+    esp.onclick = function(){
+      score2.innerHTML = "PUNTOS:";
+      lang = "esp";
+      eng.style.filter = "grayscale(0%)";
+      esp.style.filter = "grayscale(100%)";
+      cat.style.filter = "grayscale(0%)";
+      document.getElementById('howtoplay').innerHTML = "CONTROLES"
+      document.getElementById('explain').innerHTML = "Pulsa la tecla espacio o flecha hacia arriba para saltar a los ladrones."
+    }
+
+    cat.onclick = function(){
+      score2.innerHTML = "PUNTS:";
+      lang = "cat";
+      eng.style.filter = "grayscale(0%)";
+      esp.style.filter = "grayscale(0%)";
+      cat.style.filter = "grayscale(100%)";
+      document.getElementById('howtoplay').innerHTML = "CONTROLS"
+      document.getElementById('explain').innerHTML = "Prem espai o fletxa amunt per saltar als lladres"
+    }
+
+    //sonidos
     var jumpSound = new Audio('jump.wav');
     var goSound = new Audio('gameover.wav');
     var go = 0;
 
-    var lang = "esp";
+    if(lang === "esp"){
+      score2.innerHTML = "PUNTOS:";
+      document.getElementById('howtoplay').innerHTML = "CONTROLES"
+      document.getElementById('explain').innerHTML = "Pulsa la tecla espacio o flecha hacia arriba para saltar a los ladrones."
+    
+    } else if(lang === "eng"){
+      score2.innerHTML = "SCORE:";
+      document.getElementById('howtoplay').innerHTML = "CONTROLS"
+      document.getElementById('explain').innerHTML = "Press space, or up arrow to jump the thiefs."
+    
+    } else if(lang === "cat"){
+      score2.innerHTML = "PUNTS:";
+      document.getElementById('howtoplay').innerHTML = "CONTROLS"
+      document.getElementById('explain').innerHTML = "Prem espai o fletxa amunt per saltar als lladres"
+    
+    }
 
 
     var score = 0;
@@ -63,8 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //generar obstaculos
     function generateObstacles() {
-      let obstaclePosition = 1480;
-      
+      //let obstaclePosition = 1480;
+      let obstaclePosition = 1050;
+
       const obstacle = document.createElement('div');
 
       if (!isGameOver) {
@@ -130,11 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
           //subida de puntuacion
           score += 10;
           if(lang === "esp"){
-            document.getElementById('score').innerHTML = "PUNTOS: " + (score - 10);
+            document.getElementById('score').innerHTML = (score - 10);
           } else if(lang === "eng"){
-            document.getElementById('score').innerHTML = "SCORE: " + (score - 10);
+            document.getElementById('score').innerHTML = (score - 10);
           } else if(lang === "cat"){
-            document.getElementById('score').innerHTML = "PUNTS: " + (score - 10);
+            document.getElementById('score').innerHTML = (score - 10);
           }
           
                
@@ -189,16 +243,26 @@ document.addEventListener('DOMContentLoaded', () => {
           
           if(lang === "esp"){
 
-            scoretxt.innerHTML = 'Tu puntuacion es de: "' + (score - 10) + '" puntos';
+            scoretxt.innerHTML = 'Tu puntuación es de: "' + (score - 10) + '" puntos';
 
           } else if(lang === "eng"){
-
+            scoretxt.style.left = "38%";
             scoretxt.innerHTML = 'Your score is: "' + (score - 10) + '" points';
 
           } else if(lang === "cat"){
 
-            scoretxt.innerHTML = 'La puntuacio es de: "' + (score - 10) + '" punts';
+            scoretxt.innerHTML = 'La puntuació es de: "' + (score - 10) + '" punts';
 
+          }
+
+          //reload
+          var reload = document.createElement('button');
+          reload.className = "reloadiv";
+          reload.id = "reloadiv";
+          document.getElementById('back').appendChild(reload);
+
+          reload.onclick = function(){
+            window.location.reload(true);
           }
         }
     }
