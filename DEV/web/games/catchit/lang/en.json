@@ -1,0 +1,12 @@
+{
+    "parameters": "Parameters",
+    "language": "Language",
+    "tutorial": "Tutorial",
+    "controls": "Controls",
+    "difficulty": "Difficulty",
+    "easy": "easy",
+    "normal": "normal",
+    "hard": "hard",
+    "lives": "lives",
+    "initialSpeed": "Initial Speed"
+}

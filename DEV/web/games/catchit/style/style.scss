@@ -2,12 +2,10 @@
 @import 'mixins';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-
-
 body {
     margin: 0;
     overflow: hidden;
-    font-family: $font;
+    font-family: $fontInter;
     color: white;
 }
 
@@ -19,7 +17,8 @@ select {
     outline: none;
     color: white;
     transition: all 0.25s ease;
-    font-family: $font;
+    font-family: $fontInter;
+    font-weight: bold;
     &:hover {
         cursor: pointer;
     }
@@ -33,13 +32,13 @@ input[type=number] {
     color: white;
     transition: all 0.25s ease;
     background-color: $c_primary;
-    font-family: $font;
-    
+    font-family: $fontInter;
+    font-weight: bold;
 }
 
 ::placeholder{
     color: white;
-    font-family: $font;
+    font-family: $fontInter;
 }
 
 .slider {
@@ -51,7 +50,6 @@ input[type=number] {
     border: 1px solid white;
     background-color: $c_primary;
     border-radius: 5px;
-
 
 
     &::-webkit-slider-runnable-track {
@@ -91,7 +89,7 @@ input[type=number] {
 .menu {
     background-color: $c_primary;
     width: 90vh;
-    height: 50vh;
+    height: 60vh;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     border-top-left-radius: 16px;
@@ -169,8 +167,10 @@ input[type=number] {
     &-body {
         padding: 16px;
         flex: 1;
-
-        &-parameters {}
+        
+        &-parameters{
+            height: 100%;
+        }
     }
 
     &-start {
@@ -192,7 +192,7 @@ input[type=number] {
 
             &:hover {
                 cursor: pointer;
-                background-color: $c_accent;
+                background-color: $c_accent_light;
             }
         }
     }
@@ -223,17 +223,19 @@ input[type=number] {
     cursor: none;
 
     &__object {
-        width: 50px;
-        height: 50px;
-        background-image: url("../assets/object.png");
-        background-size: cover;
         position: absolute;
+        width: 70px;
+        height: 70px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
     }
 
     &__basket {
-        width: 11vh;
-        height: 10vh;
-        background-image: url("../assets/basket.png");
+        width: 12vh;
+        height: 11vh;
+        background-image: url("../assets/objects/basket.png");
         background-size: contain;
         background-repeat: no-repeat;
         position: absolute;
@@ -277,10 +279,6 @@ input[type=number] {
 
     &__event {
         flex: 1;
-
-        #eventTimeLeft {
-            @include displayInfoItem();
-        }
     }
 }
 

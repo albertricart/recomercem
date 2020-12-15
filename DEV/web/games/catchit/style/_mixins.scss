@@ -2,8 +2,9 @@
 
 @mixin displayInfoItem() {
     font-weight: 700;
-    font-size: 26px;
+    font-size: 28px;
     text-align: center;
+    width: 100%;
 }
 
 @mixin displayIcon($url, $size) {

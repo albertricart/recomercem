@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joc</title>
-    <link rel="shortcut icon" href="assets/basket.png" />
+    <link rel="shortcut icon" href="assets/catch-image.png" />
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
@@ -44,68 +44,104 @@
                         </select>
                     </div>
 
+                    <div class="menu-body-parameters__lives">
+                        <label for="speed">Lives</label>
+                        <input type="range" id="chooseLives" name="chooseLives" min="1" max="5" value="5"
+                            class="slider">
+                        <span class="chooseLives-value" style="font-weight: bold;"></span>
+                    </div>
+
                     <div class="menu-body-parameters__slideSpeed">
                         <label for="speed">Initial speed</label>
-                        <input type="range" id="speed" name="speed" min="1" max="5" value="3" class="slider">
-                        <span class="slideSpeed-value"></span>
+                        <input type="range" id="speed" name="speed" min="1" max="3" value="2" class="slider">
+                        <span class="slideSpeed-value" style="font-weight: bold;"></span>
                     </div>
 
                     <div class="menu-body-parameters__slideSpeedIncrement">
                         <label for="speedIncrement">Speed increment</label>
-                        <input type="range" id="speedIncrement" name="speedIncrement" min="1" max="3" value="2" class="slider">
-                        <span class="speedIncrement-value"></span>
+                        <input type="range" id="speedIncrement" name="speedIncrement" min="1" max="3" value="2"
+                            class="slider">
+                        <span class="speedIncrement-value" style="font-weight: bold;"></span>
                     </div>
 
                     <div class="menu-body-parameters__eventInterval">
                         <label for="eventInterval">Event interval</label>
-                        <input type="number" id="eventInterval" placeholder="..." min="0" max="60" value="30"/>
+                        <input type="number" id="eventInterval" placeholder="..." min="0" max="60" value="30" />
                         <span>s</span>
                     </div>
 
                     <div class="menu-body-parameters__eventDuration">
                         <label for="eventInterval">Event duration</label>
-                        <input type="number" id="eventDuration" placeholder="..." min="0" max="30" value="10"/>
+                        <input type="number" id="eventDuration" placeholder="..." min="0" max="30" value="10" />
                         <span>s</span>
                     </div>
-                    <div class="menu-body-parameters__lives">
-                        <label for="speed">Lives</label>
-                        <input type="range" id="chooseLives" name="chooseLives" min="1" max="5" value="5" class="slider">
-                        <span class="chooseLives-value"></span>
+
+                    <div class="menu-body-parameters__eventsAvailable"></div>
+                    <span>Choose the available events for your next play:</span>
+
+                    <div>
+                        <input type="checkbox" id="lightsOut" name="chooseEvents" class="eventCheckbox" data-eventid="1">
+                        <label for="lightsOut">Lights out</label>
                     </div>
+
+                    <div>
+                        <input type="checkbox" id="pointsX2" name="chooseEvents" class="eventCheckbox" data-eventid="2">
+                        <label for="pointsX2">Double points</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="lockY" name="chooseEvents" class="eventCheckbox" data-eventid="3">
+                        <label for="lockY">Lock Y axis</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="invertAxis" name="chooseEvents" class="eventCheckbox" data-eventid="4">
+                        <label for="invertAxis">Invert axis</label>
+                    </div>
+
                 </div>
                 <div class="menu-body-controls menu__tab animate__animated" id='tabCtrl'>
-                    <div class="controls-help">Click on the control corresponding button and press the new
-                        key.</div>
-                    <div class="menu-body-controls__up">
+                    <div class="controls-help">
+                        <p>Click on the control corresponding button and press the new key.</p>
+                    </div>
+                    <div class="menu-body-controls">
+                        <button type="button" id="up" class="control-binding"></button>
                         Up
-                        <button type="button" class="control-binding"></button>
                     </div>
-                    <div class="menu-body-controls__left">
+                    <div class="menu-body-controls">
+                        <button type="button" id="left" class="control-binding"></button>
                         Left
-                        <button type="button" class="control-binding"></button>
                     </div>
-                    <div class="menu-body-controls__right">
-                        Right
-                        <button type="button" class="control-binding"></button>
-                    </div>
-                    <div class="menu-body-controls__down">
+                    <div class="menu-body-controls">
+                        <button type="button" id="down" class="control-binding"></button>
                         Down
-                        <button type="button" class="control-binding"></button>
+                    </div>
+                    <div class="menu-body-controls">
+                        <button type="button" id="right" class="control-binding"></button>
+                        Right
                     </div>
                 </div>
                 <div class="menu-body-tutorial-slides menu__tab animate__animated" id='tabTuto'>
-                    tab 1
+                    Tutorial
                 </div>
                 <div class="menu-body-language-selection menu__tab animate__animated" id='tabLang'>
-                    <label class="language-radio">Català
-                        <input type="radio" checked="checked" name="radio" value="catala">
-                    </label>
-                    <label class="language-radio">Español
-                        <input type="radio" name="radio" value="spanish">
-                    </label>
-                    <label class="language-radio">English
-                        <input type="radio" name="radio" value="english">
-                    </label>
+                    <p>Select the language to be displayed in:</p>
+
+                    <div>
+                        <input type="radio" id="radioCa" name="lang" value="catala">
+                        <label for="catala">Català</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="radioEs" name="lang" value="spanish">
+                        <label for="spanish">Español</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="radioEn" name="lang" value="english">
+                        <label for="english">English</label>
+                    </div>
+
                 </div>
 
 
@@ -118,15 +154,15 @@
     <div class="container">
         <div class="game-container">
 
-            <div class="game-container__object"></div>
+            <div class="game-container__object" data-objectType="O"></div>
 
-            <div class="game-container__object"></div>
+            <div class="game-container__object" data-objectType="O"></div>
 
-            <div class="game-container__object"></div>
+            <div class="game-container__object" data-objectType="O"></div>
 
-            <div class="game-container__object"></div>
+            <div class="game-container__object" data-objectType="O"></div>
 
-            <div class="game-container__object"></div>
+            <div class="game-container__object" data-objectType="O"></div>
 
             <div class="game-container__basket"></div>
         </div>
@@ -147,7 +183,7 @@
             <div class="game-info__event">
                 <p>Event</p>
                 <div class="game-info__event__icon"></div>
-                <p id="eventTimeLeft"></p>
+                <span id="eventTime"></span>
             </div>
         </div>
 
@@ -188,5 +224,4 @@
 </body>
 <script src="js/app.js"></script>
 <script src="js/menu.js"></script>
-
 </html>

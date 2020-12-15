@@ -13,7 +13,8 @@ select {
   outline: none;
   color: white;
   transition: all 0.25s ease;
-  font-family: "Inter", sans-serif; }
+  font-family: "Inter", sans-serif;
+  font-weight: bold; }
   select:hover {
     cursor: pointer; }
 
@@ -25,7 +26,8 @@ input[type=number] {
   color: white;
   transition: all 0.25s ease;
   background-color: #6851d0;
-  font-family: "Inter", sans-serif; }
+  font-family: "Inter", sans-serif;
+  font-weight: bold; }
 
 ::placeholder {
   color: white;
@@ -71,7 +73,7 @@ input[type=number] {
 .menu {
   background-color: #6851d0;
   width: 90vh;
-  height: 50vh;
+  height: 60vh;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   border-top-left-radius: 16px;
@@ -122,6 +124,8 @@ input[type=number] {
   .menu-body {
     padding: 16px;
     flex: 1; }
+    .menu-body-parameters {
+      height: 100%; }
   .menu-start {
     text-align: center;
     font-weight: 600;
@@ -138,7 +142,7 @@ input[type=number] {
       color: black; }
       .menu-start-text:hover {
         cursor: pointer;
-        background-color: #F4D9D4; }
+        background-color: #939BB1; }
 
 .container {
   display: grid;
@@ -156,15 +160,17 @@ input[type=number] {
   position: relative;
   cursor: none; }
   .game-container__object {
-    width: 50px;
-    height: 50px;
-    background-image: url("../assets/object.png");
-    background-size: cover;
-    position: absolute; }
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; }
   .game-container__basket {
-    width: 11vh;
-    height: 10vh;
-    background-image: url("../assets/basket.png");
+    width: 12vh;
+    height: 11vh;
+    background-image: url("../assets/objects/basket.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -182,26 +188,25 @@ input[type=number] {
     flex: 1; }
     .game-info__timer #timeElapsed {
       font-weight: 700;
-      font-size: 26px;
-      text-align: center; }
+      font-size: 28px;
+      text-align: center;
+      width: 100%; }
   .game-info__points {
     flex: 1; }
     .game-info__points #points {
       font-weight: 700;
-      font-size: 26px;
-      text-align: center; }
+      font-size: 28px;
+      text-align: center;
+      width: 100%; }
   .game-info__lives {
     flex: 1; }
     .game-info__lives #lives {
       font-weight: 700;
-      font-size: 26px;
-      text-align: center; }
+      font-size: 28px;
+      text-align: center;
+      width: 100%; }
   .game-info__event {
     flex: 1; }
-    .game-info__event #eventTimeLeft {
-      font-weight: 700;
-      font-size: 26px;
-      text-align: center; }
 
 .game-parameters {
   grid-area: parameters;
