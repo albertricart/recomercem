@@ -34,11 +34,6 @@ include_once("_php_partials/02_header.php");
 
     <h1 class="artlTitle">Proyecto reComercem</h1>
 
-    <ul class="storesBox">
-        <li></li>
-    </ul>
-
-</article>
 
 <div id="" style=" width: 100%; max-width: 1024px; height: auto; margin: 0 auto; padding: 100px 0;  display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 50px; ">
 
@@ -80,6 +75,8 @@ include_once("_php_partials/02_header.php");
     </a>
 
 </div>
+
+</article>
 
 <?
 

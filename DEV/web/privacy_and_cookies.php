@@ -19,9 +19,15 @@ include_once("_php_partials/02_header.php");
 
     <h1 class="artlTitle">Privacidad y Política de Cookies</h1>
 
-    <ul class="storesBox">
-        <li></li>
-    </ul>
+
+
+
+
+
+
+
+    
+
 
 </article>
 

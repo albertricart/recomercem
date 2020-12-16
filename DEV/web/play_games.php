@@ -37,15 +37,17 @@ include_once("_php_partials/02_header.php");
         Search Store
     </h1>
 
-    <ul class="storesBox">
-        <li></li>
-    </ul>
+
+
+
+
+
+
+
+    
+
 
 </article>
-
-
-
-
 
 <?
 

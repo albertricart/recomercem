@@ -40,17 +40,15 @@ include_once("_php_partials/02_header.php");
         Game Discounts
     </h1>
 
-    <ul class="storesBox">
-        <li></li>
-    </ul>
+
+    
+
+
+
+
+
 
 </article>
-
-
-
-
-
-
 
 <?
 
