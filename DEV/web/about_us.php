@@ -15,11 +15,21 @@ include_once("_php_partials/02_header.php");
 
 ?>
 
+<article id="mainStores" class="artlBox">
+
+    <h1 class="artlTitle">About US</h1>
 
 
 
 
 
+
+
+
+    
+
+
+</article>
 
 <?
 
