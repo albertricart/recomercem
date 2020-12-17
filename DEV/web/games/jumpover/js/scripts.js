@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const body = document.querySelector('body');
     const alert = document.getElementById('alert');
+    const goback = document.getElementById('goback');
 
     //idioma
     const eng = document.getElementById('eng');
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       esp.style.filter = "grayscale(0%)";
       cat.style.filter = "grayscale(100%)";
       document.getElementById('howtoplay').innerHTML = "CONTROLS"
-      document.getElementById('explain').innerHTML = "Prem espai o fletxa amunt per saltar als lladres"
+      document.getElementById('explain').innerHTML = "Prem espai o fletxa amunt per saltar els lladres"
     }
 
     //sonidos
@@ -77,7 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-    document.addEventListener('keyup', control);
+
+    document.addEventListener('keydown', control);
     
     let position = 0;
     //salto
@@ -161,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
           obstaclePosition -=15;
           obstacle.style.left = obstaclePosition + 'px';
 
-          if(obstaclePosition === -20){
+          if(obstaclePosition === -30){
           grid.removeChild(obstacle);
           }
 
@@ -169,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
           obstaclePosition -=20;
           obstacle.style.left = obstaclePosition + 'px';
 
-          if(obstaclePosition === -20){
+          if(obstaclePosition === -30){
             grid.removeChild(obstacle);
           }
           
@@ -192,17 +194,17 @@ document.addEventListener('DOMContentLoaded', () => {
                
           //dificultad por puntuacion
                
-          if(score <= 210){
+          if(score <= 200){
 
               randomTime = (Math.random() * 2500) + 1500;
               setTimeout(generateObstacles, randomTime);
 
-          } else if (score <= 410){
+          } else if (score <= 400){
 
-              randomTime = (Math.random() * 1500) + 1000;
+              randomTime = (Math.random() * 1200) + 800;
               setTimeout(generateObstacles, randomTime);
 
-          } else if (score > 410){
+          } else if (score > 400){
 
               randomTime = (Math.random() * 800) + 200;
               setTimeout(generateObstacles, randomTime);
@@ -260,6 +262,18 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('back').appendChild(reload);
 
           reload.onclick = function(){
+            window.location.reload(true);
+          }
+
+          //salida a summary
+          var summary = document.createElement('button');
+          summary.className = "summarydiv";
+          summary.id = "summarydiv";
+          document.getElementById('back').appendChild(summary);
+
+          summary.onclick = function(){
+            document.getElementById('finalscore').value = score;
+            document.getElementById('endgame').send;
             window.location.reload(true);
           }
         }

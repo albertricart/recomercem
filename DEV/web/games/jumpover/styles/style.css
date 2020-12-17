@@ -13,7 +13,7 @@
     position: absolute;
     width: 60px;
     height: 60px;
-    background-image: url(../src/thief.png);
+    background-image: url(../src/thief2.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -36,7 +36,7 @@
   #score2{
     position: absolute;
     top: 50%;
-    right: 12%;
+    right: 13%;
     font-family: "Righteous", sans-serif;
   }
 
@@ -167,10 +167,24 @@
   width: 30px;
   height: 30px;
   top: 60%;
-  left: 47%;
+  left: 45%;
   background-color: Transparent;
-  background-repeat:no-repeat;
   background-image: url(../src/reload.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 3;
+}
+
+.summarydiv{
+  position: absolute;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  top: 60%;
+  left: 50%;
+  background-color: Transparent;
+  background-image: url(../src/arrow.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -240,4 +254,18 @@
   font-family: "Inter", sans-serif;
   position: relative;
   left: 10%;
+}
+
+#goback{
+  position: absolute;
+  right: 13%;
+  height: 30px;
+  width: 40px;
+  top: 140px;
+  background-image: url(../src/goback.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: Transparent;
+  z-index: 10;
 }
