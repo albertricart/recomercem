@@ -4,7 +4,7 @@
 $pageTitle = 'Game Discounts | reComercem: El teu comerç de proximitat al barri';
 $pageDescription = '"Game Discounts" let you win discount tickets to use in our stores';
 $pageKeywords = 'Game, Discounts, win, discount, tickets, stores, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
-$pageStylesAry = Array(); // example Array('keyname' => '/fullfilepath/filename.css');
+$pageStylesAry = Array( 'games'=>'/css/games.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
@@ -12,6 +12,24 @@ include_once("_php_partials/01_head.php");
 
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Tables Data
+$fileLink = "../_data/tb_data.php"; 
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - General SETs
+$fileLink = "mybackend/_php_controllers/_generalSet.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - DB conection & work
+$fileLink = "mybackend/_php_librarys/_db.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - Entity functions
+$fileLink = "mybackend/_php_librarys/_functions_generic.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
 
 ?>
 
@@ -34,11 +52,45 @@ include_once("_php_partials/02_header.php");
             C97.1,57.25,94.54,59.83,91.38,59.83z M113.35,59.83c-3.15,0-5.71-2.58-5.71-5.76c0-3.18,2.56-5.76,5.71-5.76
             c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
         </svg>
-        Search Store
+        Game Discounts
     </h1>
 
 
+    <ul class="listGameItemsMain">
 
+        <?php
+
+        // - - - - - - - - - - get Comerc Data
+
+        $EntitiesAry = GetIdedArray( getEntity( "juego", 0, 3 ) );
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
+
+        if ( !empty( $EntitiesAry ) ) {
+
+            foreach( $EntitiesAry as $theKey => $theData ) {
+
+        ?>
+
+        <a href="/games<?=$theData['url']?>" target="_self">
+            <li class="listGameItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg)">
+                <div class="listGameItemBox">
+                    <h2 class="listGameItemTitle"><?=$theData['nombre']?></h2>
+                    <p class="listGameItemText"><?=$theData['descripcion']?></p>
+                </div>
+            </li>
+        </a>
+        
+        <?php 
+
+            }
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
+
+        ?>
+
+        </ul>
 
 
 

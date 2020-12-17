@@ -1,0 +1,52 @@
+.listOfferItemsMain { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-gap: 50px; 
+    width: 100%; 
+    height: auto; 
+    margin: 50px 0; 
+    padding: 0; 
+    list-style: none; 
+}
+.listOfferItemContainer { 
+    box-sizing: border-box; 
+    display: block; 
+    position: relative; 
+    border: 0; 
+    margin: 0; 
+    padding: 250px 0 0; 
+    background: top center no-repeat #27bd8b; 
+    background-size: cover; 
+    border-radius: 10px; 
+    border: solid 2px var(--colSecondary); 
+    overflow: hidden; 
+    box-shadow: 1px 1px 5px black;
+}
+.listOfferItemBox { 
+    background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );
+    position: absolute; 
+    top: 0;
+    right: 0; 
+    bottom: 0; 
+    left: 0; 
+}
+.listOfferItemTitle { 
+    margin: 0; 
+    padding: 20px 20px 0; 
+    text-align: center; 
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
+    font-size: 26px; 
+    letter-spacing: 2px; 
+    font-weight: normal; 
+    color: var(--colWhite);
+}
+.listOfferItemText { 
+    margin: 0; 
+    padding: 20px; 
+    text-align: left; 
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
+    font-size: 18px; 
+    letter-spacing: 1px; 
+    line-height: 140%; 
+    color: var(--colWhite);
+}

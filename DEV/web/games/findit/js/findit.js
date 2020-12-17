@@ -527,8 +527,8 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 	
 			pauseCountDown();
 
-			originObj.style.backgroundColor = "#ffcb00";
-			originObj.style.color = "#333";
+			originObj.style.backgroundColor = document.documentElement.style.getPropertyValue("--colPrimary");;
+			originObj.style.color = document.documentElement.style.getPropertyValue("--colWhite");;
 
 			if ( confirm( langTextAry['txtExitConfirm'] ) ) { 
 				
@@ -543,7 +543,7 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 				pauseCountDown();
 
 				originObj.style.backgroundColor = "rgba(0,0,0,0)";
-				originObj.style.color = "#ffcb00";
+				originObj.style.color = document.documentElement.style.getPropertyValue("--colPrimary");;
 
 				inExecution = false; theOpener = "";
 				
@@ -561,8 +561,8 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 			if ( optionText ) { originObj.children[0].innerHTML = langTextAry[openBoxText]+" "; }
 	
 			//originObj.style.backgroundColor = originObj.style.borderTopColor; alert(originObj.id + " : " +originObj.style.borderTopColor);
-			originObj.style.backgroundColor = "#ffcb00";
-			originObj.style.color = "#333";
+			originObj.style.backgroundColor = document.documentElement.style.getPropertyValue("--colPrimary");	// old era "#ffcb00";
+			originObj.style.color = document.documentElement.style.getPropertyValue("--colWhite");
 	
 			visibilityMarkersAll();
 
@@ -583,7 +583,7 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 	
 			originObj.style.backgroundColor = "rgba(0,0,0,0)";
 			//originObj.style.color = originObj.style.borderTopColor; alert(originObj.id + " : " +originObj.style.borderTopColor);
-			originObj.style.color = "#ffcb00";
+			originObj.style.color = document.documentElement.style.getPropertyValue("--colPrimary");	// old era "#ffcb00";
 	
 			visibilityMarkersAll();
 

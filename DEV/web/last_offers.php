@@ -4,7 +4,7 @@
 $pageTitle = 'Last Offers | reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'Last Offers let you get the last offers in our stores';
 $pageKeywords = 'Last, Offers, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
-$pageStylesAry = Array(); // example Array('keyname' => '/fullfilepath/filename.css');
+$pageStylesAry = Array( 'offers'=>'/css/offers.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
@@ -12,6 +12,24 @@ include_once("_php_partials/01_head.php");
 
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Tables Data
+$fileLink = "../_data/tb_data.php"; 
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - General SETs
+$fileLink = "mybackend/_php_controllers/_generalSet.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - DB conection & work
+$fileLink = "mybackend/_php_librarys/_db.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+// - - - - - Entity functions
+$fileLink = "mybackend/_php_librarys/_functions_generic.php";
+if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
 
 ?>
 
@@ -37,17 +55,45 @@ include_once("_php_partials/02_header.php");
             c1.16,0.54,1.74,2.2,1.18,3.39l-14.73,31.6c-0.56,1.19-2.2,1.81-3.35,1.27l-0.91-0.43c-1.16-0.53-1.73-2.19-1.18-3.38
             L55.244,60.391z"/></g></g></g>
         </svg>
-        Game Discounts
+        Last Offers
     </h1>
 
+    <ul class="listOfferItemsMain">
 
+        <?php
+
+        // - - - - - - - - - - get Comerc Data
+        
+        $EntitiesAry = GetIdedArray( getEntity( "oferta", 0, 1, 0, 0 ) );
+
+        $ComerciosAry = GetIdedArray( getEntity( "comerc", 0, 1, 0, 0 ) );
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
+
+        if ( !empty( $EntitiesAry ) ) {
+
+            foreach( $EntitiesAry as $theKey => $theData ) {
+
+        ?>
+
+        <li class="listOfferItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">">
+            <div class="listOfferItemBox">
+                <h2 class="listOfferItemTitle"><?=$theData['nombre']?></h2>
+                <p class="listOfferItemText"><?=$theData['descripcion']?></p>
+            </div>
+        </li>
+           
+        <?php 
+
+            }
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
+
+        ?>
+
+    </ul>
     
-
-
-
-
-
-
 </article>
 
 <?
