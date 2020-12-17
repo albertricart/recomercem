@@ -274,7 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
           summary.onclick = function(){
             document.getElementById('finalscore').value = score;
             document.getElementById('endgame').send;
-            window.location.reload(true);
           }
         }
     }
