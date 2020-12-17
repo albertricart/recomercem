@@ -10,8 +10,6 @@ function onloadFx() {
 
 	createItemList();
 
-	console.log( "calling with traslateLang( 'eng' );" );
-
 	traslateLang( 'eng' );
 
 	document.getElementById("CounterdownBox").innerHTML = gameData.dataset.time + '"';
@@ -32,17 +30,15 @@ function onloadFx() {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - default data lang //
 
 // - - - - - default lang data
-var setLanguage, langElemAry, langTextAry, setAvailableLangs, jsonLangElement = [], jsonLangText = [];
+var setLanguage = 'eng', langElemAry, langTextAry, setAvailableLangs, jsonLangElement = [], jsonLangText = [];
 var setAvailableLangs = [ 'eng', 'esp', 'cat' ];
 // - - - - - default JSON lang data
-jsonLangElement['eng'] = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets (logos and/or icons):","ExitBtn":"Quit Game","langTitle":"Languages:"}';
-jsonLangElement['esp'] = '{"OpenListBtn":"<span>Inicio </span>Juego","HelpBtn":"<span>Ver </span>Ayuda !","itmlistH5":"Encuentra los siguientes objetivos (logos y/o iconos):","ExitBtn":"Abandonar Juego","langTitle":"Idiomas:"}';
-jsonLangElement['cat'] = '{"OpenListBtn":"<span>Inici </span>joc","HelpBtn":"<span>Veure </span>Ajuda !","itmlistH5":"Troba els següents objectius (logos i/o icones)","ExitBtn":"Abandonar Joc","langTitle":"Idiomes:"}';
+jsonLangElement['eng'] = '{"OpenListBtn":"<span>Start </span>Game","EndGameBtn":"Finish Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets (logos and/or icons):","ExitBtn":"Quit Game","langTitle":"Languages:"}';
+jsonLangElement['esp'] = '{"OpenListBtn":"<span>Iniciar </span>Juego","EndGameBtn":"Finalizar Partida","HelpBtn":"<span>Ver </span>Ayuda !","itmlistH5":"Encuentra los siguientes objetivos (logos y/o iconos):","ExitBtn":"Abandonar Juego","langTitle":"Idiomas:"}';
+jsonLangElement['cat'] = '{"OpenListBtn":"<span>Iniciar </span>Joc","EndGameBtn":"Finalitzar Partida","HelpBtn":"<span>Veure </span>Ajuda !","itmlistH5":"Troba els següents objectius (logos i/o icones)","ExitBtn":"Abandonar Joc","langTitle":"Idiomes:"}';
 jsonLangText['eng'] = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';
-jsonLangText['esp'] = '{"txtStart":"Inicio","txtView":"Ver","txtClose":"Cerrar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Puntos","txtMarkers":"Marcadores","txtExitConfirm":"Si sales del juego, perderás todo el trabajo que hiciste. ¿DE VERDAD QUIERES SALIR DEL JUEGO?"}';
-jsonLangText['cat'] = '{"txtStart":"Inici","txtView":"Veure","txtClose":"Tancar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Punts","txtMarkers":"Marcadors","txtExitConfirm":"Si sals del joc, perdràs tot el treball que vas fer. DE DEBÒ VOLS SORTIR DEL JOC?"}';	
-console.log(jsonLangElement);
-console.log(jsonLangText);
+jsonLangText['esp'] = '{"txtStart":"Inicio","txtView":"Ver","txtClose":"Cerrar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Puntos","txtMarkers":"Marcas","txtExitConfirm":"Si sales del juego, perderás todo el trabajo que hiciste. ¿DE VERDAD QUIERES SALIR DEL JUEGO?"}';
+jsonLangText['cat'] = '{"txtStart":"Inici","txtView":"Veure","txtClose":"Tancar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Punts","txtMarkers":"Marques","txtExitConfirm":"Si sals del joc, perdràs tot el treball que vas fer. DE DEBÒ VOLS SORTIR DEL JOC?"}';	
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Genera lista de idiomas =>
 for( tmpKey in setAvailableLangs ) {
@@ -51,7 +47,7 @@ for( tmpKey in setAvailableLangs ) {
 	tmpElement.style.padding = "3px 0";
 	tmpElement.style.textTransform = "uppercase";
 	tmpElement.style.cursor = "pointer";	
-	tmpElement.onclick = traslateLang( this.id );
+	tmpElement.addEventListener("click", function () { traslateLang( this.id ); });
 	tmpElement.innerHTML = setAvailableLangs[ tmpKey ];
 	document.getElementById('langList').appendChild(tmpElement);
 }
@@ -82,19 +78,26 @@ function traslateLang( theLang ) {
 
 function traslateLang( keyLang ) {
 
+	// traduccion de elementos juego
 	setLanguage = keyLang;
-
-console.log( keyLang );
-
 	langElemAry = JSON.parse( jsonLangElement[ keyLang ] );
 	langTextAry = JSON.parse( jsonLangText[ keyLang ] );
+	for( var indexKey in langElemAry ) { document.getElementById( indexKey ).innerHTML = langElemAry[ indexKey ]; }
 
-	for( var indexKey in langElemAry ) {
+	// info extras
+	document.getElementById("ScoreBox").innerHTML = "0 " + langTextAry['txtPoints'];
+	var tmpMarkers = ( parseInt( gameData.dataset.items ) - parseInt( gameData.dataset.markused ) );
+	document.getElementById("RemainMarkerBox").innerHTML =  + tmpMarkers + " " + langTextAry['txtMarkers'];
 
-		document.getElementById( indexKey ).innerHTML = langElemAry[ indexKey ];
-
+	// traduccion de pistas
+	var itmlist;
+	for( var i = 0; i < theGameClues[ keyLang ].length; i++ ) {
+		itmlist = document.getElementById("itmlist_"+i);
+		itmlist.innerHTML = theGameClues[ keyLang ][i];
 	}
 
+	// traduccion de ayuda
+	document.getElementById("helpDataBox").innerHTML = theGameHelp[ keyLang ];
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - funcion de traslate //
@@ -145,7 +148,48 @@ var theCounter, inPause = true; startCountDown( 1000 );
 if ( !theGameImage ) { var theGameImage = "images/gameimg_1.jpg"; }
 
 if ( !theGameTargets ) { 
-	var theGameTargets = JSON.parse( '[{"description":"Item 00","x":100,"y":100},{"description":"Item 01","x":100,"y":200},{"description":"Item 02","x":100,"y":300},{"description":"Item 03","x":100,"y":400},{"description":"Item 04","x":100,"y":500},{"description":"Item 05","x":300,"y":100},{"description":"Item 06","x":300,"y":200},{"description":"Item 07","x":300,"y":300},{"description":"Item 08","x":300,"y":400},{"description":"Item 09","x":300,"y":500},{"description":"Item 10","x":500,"y":100},{"description":"Item 11","x":500,"y":200},{"description":"Item 12","x":500,"y":300},{"description":"Item 13","x":500,"y":400},{"description":"Item 14","x":500,"y":500},{"description":"Item 15","x":900,"y":100},{"description":"Item 16","x":900,"y":200},{"description":"Item 17","x":900,"y":300},{"description":"Item 18","x":900,"y":400},{"description":"Item 19","x":900,"y":500}]' );
+	//	var theGameTargets = JSON.parse( '[{"description":"Item 00","x":100,"y":100},{"description":"Item 01","x":100,"y":200},{"description":"Item 02","x":100,"y":300},{"description":"Item 03","x":100,"y":400},{"description":"Item 04","x":100,"y":500},{"description":"Item 05","x":300,"y":100},{"description":"Item 06","x":300,"y":200},{"description":"Item 07","x":300,"y":300},{"description":"Item 08","x":300,"y":400},{"description":"Item 09","x":300,"y":500},{"description":"Item 10","x":500,"y":100},{"description":"Item 11","x":500,"y":200},{"description":"Item 12","x":500,"y":300},{"description":"Item 13","x":500,"y":400},{"description":"Item 14","x":500,"y":500},{"description":"Item 15","x":900,"y":100},{"description":"Item 16","x":900,"y":200},{"description":"Item 17","x":900,"y":300},{"description":"Item 18","x":900,"y":400},{"description":"Item 19","x":900,"y":500}]' );
+	var theGameTargets = [
+		{"x":19,"y":100,"xx":89,"yy":153},
+		{"x":153,"y":98,"xx":231,"yy":158},
+		{"x":277,"y":14,"xx":349,"yy":68},
+		{"x":424,"y":76,"xx":493,"yy":133},
+		{"x":924,"y":96,"xx":1007,"yy":143},
+		{"x":114,"y":311,"xx":181,"yy":368},
+		{"x":14,"y":348,"xx":76,"yy":403},
+		{"x":899,"y":212,"xx":966,"yy":282},
+		{"x":911,"y":302,"xx":996,"yy":345},
+		{"x":702,"y":196,"xx":767,"yy":257},
+		{"x":376,"y":248,"xx":443,"yy":309},
+		{"x":281,"y":250,"xx":353,"yy":320},
+		{"x":467,"y":200,"xx":526,"yy":261},
+		{"x":397,"y":335,"xx":474,"yy":406},
+		{"x":587,"y":393,"xx":655,"yy":449},
+		{"x":878,"y":449,"xx":949,"yy":516},
+		{"x":958,"y":478,"xx":1011,"yy":566},
+		{"x":788,"y":533,"xx":925,"yy":568},
+		{"x":673,"y":504,"xx":761,"yy":562},
+		{"x":85,"y":526,"xx":173,"yy":572}
+	];
+}
+
+if ( !theGameClues ) { 
+
+	var theGameClues = [];
+	theGameClues['eng'] = ["Complete development IDE from Microsoft.","Internet services company with a recognized and pioneering search engine founded in 1994.","Open source, cross-platform, runtime environment based on JavaScript.","General-purpose programming language that is especially adapted to web development.","Search engine that emphasizes privacy by not recording user information.","Germany hosting, cloud and domain service provider owned by Deutsche Telekom.","Interpreted programming language, dialect of the ECMAScript standard.","Commodore International Company.","Software icon that allows a user to operate a computer remotely.","Discontinued vector graphic editor for Macromedia / Adobe web designs.","Recognized manufacturer of computers and electronic devices in the USA.","Japanese manufacturer of computers and electronic devices.","Microsoft presentation editing program.","File transfer software based on client server protocol.","Hybrid programming language and general purpose widely used and that its name derives and complements the so-called ANSI.","Cross-platform library or open source toolkit for web site and application design.","Windows 98 logo.","Manufacturer of large equipment and the first Personal Computer with MSDOS.","Version control software designed by Linus Torvalds.","Programming language originally developed by Sun Microsystems (Oracle)."];
+	theGameClues['esp'] = ["Completo IDE de desarrollo de Microsoft.","Empresa de servicios de internet con un reconocido y pionero motor de busqueda fundado 1994.","Entorno en tiempo de ejecución, multiplataforma y de código abierto basado en JavaScript.","Lenguaje de programación de uso general que se adapta especialmente al desarrollo web.","Motor de búsqueda que hace hincapié en la privacidad al no registrar la información del usuario.","Prestador de servicios de alojamiento, cloud y dominios de Alemania cuyo propietaria es Deutsche Telekom.","Lenguaje de programación interpretado, dialecto del estándar ECMAScript.","Empresa Commodore International.","Icono del software que permite a un usuario utilizar un ordenador a distancia.","Editor gráfico vectorial orientado a diseños web de Macromedia/Adobe ya descatalogado.","Reconocido fabricante de ordenadores y dispositivos electronicos de EEUU.","Fabricante japonés de ordenadores y dispositivos electrónicos.","Programa de edición de presentaciones de Microsoft.","Software de transferencia de archivos basado en protocolo cliente servidor.","Lenguaje de programación híbrido y propósito general muy utilizado y que su nombre deriva y complementa el denominado ANSI.","Biblioteca multiplataforma o conjunto de herramientas de código abierto para diseño de sitios y aplicaciones web.","Logotipo de Windows 98.","Fabricante de grandes equipos y del primer Personal Computer con MSDOS.","Software de control de versiones diseñado por Linus Torvalds.","Lenguaje de programación desarrollado originalmente por Sun Microsystems (Oracle)."];
+	theGameClues['cat'] = ["Complet IDE de desenvolupament de Microsoft.","Empresa de serveis d'internet amb un reconegut i pioner motor de cerca fundat 1994.","Entorn en temps d'execució, multiplataforma i de codi obert basat en JavaScript.","Llenguatge de programació d'ús general que s'adapta especialment a el desenvolupament web.","Motor de cerca que posa l'accent en la privacitat a ell no registrar la informació de l'usuari.","Prestador de serveis d'allotjament, cloud i dominis d'Alemanya el propietària és Deutsche Telekom.","Llenguatge de programació interpretat, dialecte de l'estàndard ECMAScript.","Empresa Commodore International.","Icona de l'programari que permet a un usuari utilitzar un ordinador a distància.","Editor gràfic vectorial orientat a dissenys web de Macromedia / Adobe ja descatalogat.","Reconegut fabricant d'ordinadors i dispositius electrònics dels EUA.","Fabricant japonès d'ordinadors i dispositius electrònics.","Programa d'edició de presentacions de Microsoft.","Programari de transferència d'arxius basat en protocol client servidor.","Llenguatge de programació híbrid i propòsit general molt utilitzat i que el seu nom deriva i complementa l'anomenat ANSI.","Biblioteca multiplataforma o conjunt d'eines de codi obert per a disseny de llocs i aplicacions web.","Logotip de Windows 98.","Fabricant de grans equips i del primer Personal Computer amb MSDOS.","Programari de control de versions dissenyat per Linus Torvalds.","Llenguatge de programació desenvolupat originalment per Sun Microsystems (Oracle)"];
+
+}
+
+
+if ( !theGameHelp ) { 
+
+	var theGameHelp = [];
+	theGameHelp['eng'] = "<p>Game inspired by the book series \"Where's Wally\" (Where is Wally), created by the British cartoonist Martin Handford in 1987, where the user has a limited time (5 ') to find the requested objectives and indicate them by using the mouse pointer generating a mark. These pointers are selectable, draggable, dockable, and removable. The number of markers available is the same as the objectives.</p><p>Before starting the game, the tracks of the objectives to be located are displayed and can be seen as many times as desired without time penalty.</p><p>When the user views an option that pauses the game, the execution time stops and the main image is not displayed until the option is returned.</p><p>The game allows you to leave the game without registering any score at any time during the game. After the game is over, points are calculated by dividing the time remaining by the number of objectives and multiplying by the number of targets found.</p>";
+	theGameHelp['esp'] = "<p>Juego inspirado en la serie de libros \“Where's Wally\” (Donde esta Wally), creada por el dibujante británico Martin Handford en 1987, donde el usuario dispone de un tiempo limitado (5’) para encontrar los objetivos solicitados e indicarlos mediante el uso del puntero del mouse generando una marca. Estos punteros son seleccionables, arrastrables, fijables y eliminables. La cantidad de marcadores disponibles es la misma que los objetivos. </p><p>Antes de comenzar el juego se visualizan las pistas de los objetivos a localizar y se pueden ver tantas veces como se desee sin penalización de tiempo.</p><p>Cuando el usuario visualiza alguna opción que genere una pausa sobre el juego, el tiempo de ejecución se detiene y no se visualiza la imagen principal hasta que se retorne de la opción.</p><p>El juego permite abandonar la partida sin registrar ninguna puntuación en cualquier momento de la partida. Una vez finalizado el juego, los puntos se calculan dividiendo el tiempo restante por la cantidad de objetivos y multiplicado por la cantidad de targets encontrados.</p>";
+	theGameHelp['cat'] = "<p>Joc inspirat en la sèrie de llibres \"Where 's Wally\" (On aquesta Wally), creada pel dibuixant britànic Martin Handford el 1987, on l'usuari disposa d'un temps limitat (5') per trobar els objectius sol·licitats i indicar-los mitjançant l'ús de l' punter de el ratolí generant una marca. Aquests punters són seleccionables, arrossegables, fixables i eliminables. La quantitat de marcadors disponibles és la mateixa que els objectius.</p><p>Abans de començar el joc es visualitzen les pistes dels objectius a localitzar i es poden veure tantes vegades com es vulgui sense penalització de temps.</p><p>Quan l'usuari visualitza alguna opció que generi una pausa sobre el joc, el temps d'execució s'atura i no es visualitza la imatge principal fins que es retorni de l'opció.</p><p>El joc permet abandonar la partida sense registrar cap puntuació en qualsevol moment de la partida. Un cop finalitzat el joc, els punts es calculen dividint el temps restant per la quantitat d'objectius i multiplicat per la quantitat de targets trobats.</p>";
+
 }
 
 
@@ -170,7 +214,7 @@ function setGameData() {
 
 function createItemList() {
 
-	var helpDataBox = document.getElementById("thingsListBox");
+	var thingsListBox = document.getElementById("thingsListBox");
 	var itmlist;
 
 	for( var i = 0; i < theGameTargets.length; i++ ) {
@@ -179,9 +223,8 @@ function createItemList() {
 		itmlist.id = "itmlist_" + i;
 		itmlist.classList.add( "searchItemLst" );
 		itmlist.setAttribute( "data-state", 0 );
-		itmlist.innerHTML = theGameTargets[i]["description"];
-
-		helpDataBox.appendChild( itmlist );
+		itmlist.innerHTML = theGameClues[setLanguage][i];
+		thingsListBox.appendChild( itmlist );
 
 	}
 
@@ -229,7 +272,8 @@ function createMarkers() {
 
 	var markerInner = '<svg role="img" style="width: 100%;height: 100%; filter: drop-shadow(0px 0px 2px rgb(0, 0, 0));" viewBox="0 0 320 512" onClick="checkthis(this.parentElement)"><path fill="currentColor" d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z" class=""></path></svg>';
 
-	var helpDataBox = document.getElementById("thingsListBox");
+	var thingsListBox = document.getElementById("thingsListBox");
+
 	var markerElement;
 
 	for( var i = 0; i < tmpItems; i++ ) {
@@ -576,8 +620,8 @@ function displayBox( originObj, boxId, optionText, openBoxText, closeBoxText ) {
 			inExecution = true;
 			theOpener = originObj.id;
 	
-			targetObj.style.padding = "10px"; 
 			targetObj.style.height = "auto"; 
+			targetObj.style.padding = "10px"; 
 			targetObj.dataset.open = "1";
 	
 			if ( optionText ) { originObj.children[0].innerHTML = langTextAry[openBoxText]+" "; }
@@ -637,7 +681,6 @@ function finishGame() {
 	// - - - - - Control de aciertos (collisions?) =>
 
 	var targetsFinded = 0;
-	var targetSize = parseInt ( gameData.dataset.marksize );
 
 	var theMarkers = document.querySelectorAll('.markersBox[data-state="1"]');
 
@@ -656,14 +699,14 @@ console.log( "Marker point "+tLeft+","+tTop+" => ");
 
 			for( var j = 0; j < theGameTargets.length; j++ ) {
 
-				if ( tLeft > theGameTargets[j]['x'] && tLeft < theGameTargets[j]['x']+targetSize && 
-					 tTop > theGameTargets[j]['y'] && tTop < theGameTargets[j]['y']+targetSize ) {
+				if ( tLeft > theGameTargets[j]['x'] && tLeft < theGameTargets[j]['xx'] && 
+					 tTop > theGameTargets[j]['y'] && tTop < theGameTargets[j]['yy'] ) {
 
 					gotIt = true;
 
 				}
 
-console.log( "- target "+theGameTargets[j]['x']+","+theGameTargets[j]['y']+" - "+ (theGameTargets[j]['x']+targetSize)+","+(theGameTargets[j]['y']+targetSize)+((gotIt)?"GOT":"") );
+console.log( "- target "+theGameTargets[j]['x']+","+theGameTargets[j]['y']+" - "+ (theGameTargets[j]['xx'])+","+(theGameTargets[j]['yy'])+((gotIt)?"GOT":"") );
 
 			}
 

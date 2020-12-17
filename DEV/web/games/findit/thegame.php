@@ -70,10 +70,7 @@
 			<ul id="thingsListBox" data-open="1"><h5 id="itmlistH5">Find:</h5></ul>
 
 			<!-- Definir Help Data -->
-			<div id="helpDataBox" data-open="0" style="display:none;">
-				<h5 id="itmlistH5">Help Data:</h5>
-				<p>Please, follow the instructions to get the maximun points & get discount tickets !!!</p>
-			</div>
+			<div id="helpDataBox" data-open="0"></div>
 
 		</div>
 
