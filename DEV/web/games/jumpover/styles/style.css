@@ -269,3 +269,18 @@
   background-color: Transparent;
   z-index: 10;
 }
+
+.playbtn{
+  position: absolute;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  background-color: Transparent;
+  background-image: url(../src/play.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 3;
+}
