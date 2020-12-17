@@ -10,9 +10,7 @@ function onloadFx() {
 
 	createItemList();
 
-	console.log( "calling with traslateLang( 'eng' );" );
-
-	traslateLang( 'eng' );
+	traslateLang( setLanguage );
 
 	document.getElementById("CounterdownBox").innerHTML = gameData.dataset.time + '"';
 
@@ -38,23 +36,24 @@ var setAvailableLangs = [ 'eng', 'esp', 'cat' ];
 jsonLangElement['eng'] = '{"OpenListBtn":"<span>Start </span>Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets (logos and/or icons):","ExitBtn":"Quit Game","langTitle":"Languages:"}';
 jsonLangElement['esp'] = '{"OpenListBtn":"<span>Inicio </span>Juego","HelpBtn":"<span>Ver </span>Ayuda !","itmlistH5":"Encuentra los siguientes objetivos (logos y/o iconos):","ExitBtn":"Abandonar Juego","langTitle":"Idiomas:"}';
 jsonLangElement['cat'] = '{"OpenListBtn":"<span>Inici </span>joc","HelpBtn":"<span>Veure </span>Ajuda !","itmlistH5":"Troba els següents objectius (logos i/o icones)","ExitBtn":"Abandonar Joc","langTitle":"Idiomes:"}';
+console.log(jsonLangElement['eng']);
 jsonLangText['eng'] = '{"txtStart":"Start","txtView":"View","txtClose":"Close","txtPause":"Pause","txtContinue":"Continue","txtPoints":"Points","txtMarkers":"Markers","txtExitConfirm":"If you exit the game, you\'re gonna lose all the work you made it in. DO YOU REALLY WANT TO EXIT THE GAME ?"}';
 jsonLangText['esp'] = '{"txtStart":"Inicio","txtView":"Ver","txtClose":"Cerrar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Puntos","txtMarkers":"Marcadores","txtExitConfirm":"Si sales del juego, perderás todo el trabajo que hiciste. ¿DE VERDAD QUIERES SALIR DEL JUEGO?"}';
-jsonLangText['cat'] = '{"txtStart":"Inici","txtView":"Veure","txtClose":"Tancar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Punts","txtMarkers":"Marcadors","txtExitConfirm":"Si sals del joc, perdràs tot el treball que vas fer. DE DEBÒ VOLS SORTIR DEL JOC?"}';	
-console.log(jsonLangElement);
-console.log(jsonLangText);
+jsonLangText['cat'] = '{"txtStart":"Inici","txtView":"Veure","txtClose":"Tancar","txtPause":"Pausa","txtContinue":"Continuar","txtPoints":"Punts","txtMarkers":"Marcadors","txtExitConfirm":"Si sals del joc, perdràs tot el treball que vas fer. DE DEBÒ VOLS SORTIR DEL JOC?"}';
+console.log(jsonLangText['eng']);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Genera lista de idiomas =>
+var innerText = "";
 for( tmpKey in setAvailableLangs ) {
-	let tmpElement = document.createElement("LI");
-	tmpElement.id = setAvailableLangs[ tmpKey ];
-	tmpElement.style.padding = "3px 0";
-	tmpElement.style.textTransform = "uppercase";
-	tmpElement.style.cursor = "pointer";	
-	tmpElement.onclick = traslateLang( this.id );
-	tmpElement.innerHTML = setAvailableLangs[ tmpKey ];
-	document.getElementById('langList').appendChild(tmpElement);
+	innerText+= '<li id="'+setAvailableLangs[tmpKey]+'" style="padding: 3px 0; text-transform: uppercase; cursor: pointer;" onclick="traslateLang( this.id )"></li>';
 }
+var tmpElement = document.createElement("UL");
+tmpElement.id = 'langList';
+tmpElement.style.padding = '0 0 0 15px'; 
+tmpElement.style.margin = '0';
+tmpElement.innderHTML = innerText;
+document.getElementById('langBox').appendChild(tmpElement);
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Genera lista de idiomas //
 
 // - - - - - funcion de get Lang Data con AJAX
 function traslateLang( theLang ) {
@@ -71,8 +70,7 @@ function traslateLang( theLang ) {
 	xRequest.send(null);
 	if (xRequest.status == 200) { 
 		jsonLangElement[theLang] = xRequest.responseText; 
-		console.log( "calling with traslateLang( "+setLanguage+" );" );
-		traslateLang( setLanguage );
+		traslateLang(theLang);
 	}
 }
 
@@ -84,16 +82,24 @@ function traslateLang( keyLang ) {
 
 	setLanguage = keyLang;
 
-console.log( keyLang );
+	if ( keyLang ) {
 
-	langElemAry = JSON.parse( jsonLangElement[ keyLang ] );
-	langTextAry = JSON.parse( jsonLangText[ keyLang ] );
+		console.log( keyLang );
 
-	for( var indexKey in langElemAry ) {
+		console.log(jsonLangElement['eng']);
 
-		document.getElementById( indexKey ).innerHTML = langElemAry[ indexKey ];
+		langElemAry = JSON.parse( jsonLangElement[ keyLang ] );
 
+		console.log(jsonLangText['eng']);
+
+		langTextAry = JSON.parse( jsonLangText[ keyLang ] );
+	
 	}
+//	for( var indexKey in langElemAry ) {
+
+//		document.getElementById( indexKey ).innerHTML = langElemAry[ indexKey ];
+
+//	}
 
 }
 

@@ -10,7 +10,13 @@
   <link rel="icon" type="image/png" href="src/logo.png"/>
 </head>
 <body>
-   
+
+<?
+// - - - - - - - - - - - - - - - - - - - - Logo & Menu Part =>
+if ( file_exists( "../../_php_partials/00_game_header.php" ) ) { include_once("../../_php_partials/00_game_header.php"); }
+// - - - - - - - - - - - - - - - - - - - - Logo & Menu Part //
+?>
+
 </div>
   <div id="lang">
     <button id="esp" ></button>

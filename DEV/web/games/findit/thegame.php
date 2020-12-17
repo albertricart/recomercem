@@ -29,6 +29,11 @@
 	// - - - - - - - - - - - - - - - - - - - - Logo & Menu Part //
 	?>
 
+	<div id="langBox" style="position: fixed; top: 90px; left: 10px;">
+		<h5 id="langTitle" style="margin: 0 0 5px;">Languages:</h5>
+		<ul id="langList" style="padding: 0 0 0 15px; margin: 0;"></ul>
+	</div>
+
 	<!-- 
 	Define contenedor principal del juego base blanco del juego 90%. 
 	Ratio pantalla juego (imagen) 16:9 - Con un max-width: 1280px el height: 720px (1280 / 16 = 80 * 9 = 720) 

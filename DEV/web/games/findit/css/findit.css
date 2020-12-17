@@ -9,17 +9,6 @@
 #ScoreBox { color: var(--colText); font-size: 22px; text-align: center; padding: 5px 0; }
 #RemainMarkerBox { color: var(--colText); font-size: 22px; text-align: center; padding: 5px 0; }
 
-:root {
-    /* Palette URL: http://paletton.com/#uid=4010u0krAmIiVu6nLqRv5izEKdi */
-    --colPrimary: #B51D19;
-    --colSecondary: #10696D;
-    --colTertiary: #148E1C;
-    --colHighlight: #247BA0;
-    --colText: #333;
-    --colWhite: #fff;
-    --colBlack: #000;
-}
-
 .markersBox { position:absolute; top: 0px; left: -50px; width:30px; height: 30px; padding: 5px; margin: 0; background-color: transparent; border-radius: 25px; box-shadow: 0px 0px 3px 2px inset rgba(0, 0, 0, 0.8); }
 
 .markersInline { z-index:99; display: block; }
