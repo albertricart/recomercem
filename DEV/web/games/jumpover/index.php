@@ -10,6 +10,8 @@
   <link rel="icon" type="image/png" href="src/logo.png"/>
 </head>
 <body>
+   
+</div>
   <div id="lang">
     <button id="esp" ></button>
     <button id="eng"></button>
