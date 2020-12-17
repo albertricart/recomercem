@@ -61,7 +61,7 @@
     
   @keyframes slideright {
     from {
-        background-position: 30000%;
+        background-position: 40000%;
     }
     to {
         background-position: 0%;
@@ -70,7 +70,7 @@
   
   @-webkit-keyframes slideright {
     from {
-        background-position: 30000%;
+        background-position: 40000%;
     }
     to {
         background-position: 0%;
@@ -92,7 +92,7 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    background: url(../src/background.png);
+    background: url(../src/background2.png);
     background-repeat: repeat-x;
     animation: slideright 600s infinite linear;
     -webkit-animation: slideright 600s infinite linear;
@@ -141,7 +141,7 @@
   background-color: aqua;
   background-repeat: no-repeat;
   background-size: contain;
-  opacity: 0.3;
+  opacity: 0.8;
 }
 
 .gameovertxt{
