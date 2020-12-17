@@ -274,7 +274,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         // - - - - - - - - - - get Comerc Data
         
-        $EntitiesAry = GetIdedArray( getEntity( "oferta", 0, 2, 1, 6 ) );
+        $EntitiesAry = GetIdedArray( getEntity( "oferta", 0, 0, 0, 0 ) );
     
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
 

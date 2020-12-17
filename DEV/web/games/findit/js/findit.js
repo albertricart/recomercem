@@ -669,6 +669,14 @@ console.log( "--- no one got it" );
 
 	alert("Finish the Game & Get my Points': You\'ve got " + targetsFinded + " of " + gameData.dataset.items + " targets. Your final score is " + totalScore + " points !!!" );
 
+
+	// resumen de juego y salida a summary
+	document.getElementById('finalscore').value = totalScore;
+	document.getElementById('endgame').send;
+
+
+
+
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - finishGame //
