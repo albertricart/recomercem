@@ -1,3 +1,4 @@
+var mainMenu = document.querySelector(".main-menu");
 var speedControl = document.getElementById("speed");
 var speedIncrementControl = document.getElementById("speedIncrement");
 var livesControl = document.getElementById("chooseLives");
@@ -21,17 +22,69 @@ var radioEs = document.getElementById("radioEs");
 var difficultyValue = difficultyControl.value;
 var output = document.getElementById("demo");
 var controlButtons = document.querySelectorAll(".control-binding");
-
+var tabParameters = document.querySelector(".parameters_opt_text");
+var tabLanguage = document.querySelector(".language_opt_text");
+var tabTutorial = document.querySelector(".tutorial_opt_text");
+var tabControls = document.querySelector(".controls_opt_text");
+var timeText = document.querySelector(".game-time");
+var livesText = document.querySelector(".game-lives");
+var pointsText = document.querySelector(".game-points");
+var eventText = document.querySelector(".game-event");
+var eventTimeText = document.querySelector(".eventTimeText");
+var fabCode = document.querySelector(".fab-code");
+var fabSettings = document.querySelector(".fab-settings");
+var difficultyLabel = document.querySelector(".difficulty-label");
+var livesLabel = document.querySelector(".lives-label");
+var initialSpeedLabel = document.querySelector(".initialSpeed-label");
+var speedIncrementLabel = document.querySelector(".speedIncrement-label");
+var eventIntervalLabel = document.querySelector(".eventInterval-label");
+var eventDurationLabel = document.querySelector(".eventDuration-label");
+var chooseEventDesc = document.querySelector(".chooseEventDesc");
+var lightsOutLabel = document.querySelector(".lightsOut-label");
+var doublePointsLabel = document.querySelector(".doublePoints-label");
+var lockYLabel = document.querySelector(".lockY-label");
+var invertAxisLabel = document.querySelector(".invertAxis-label");
+var upLabel = document.querySelector(".up-label");
+var leftLabel = document.querySelector(".left-label");
+var rightLabel = document.querySelector(".right-label");
+var downLabel = document.querySelector(".down-label");
+var easyOpt = document.querySelector(".easy-opt");
+var normalOpt = document.querySelector(".normal-opt");
+var hardOpt = document.querySelector(".hard-opt");
+var customOpt = document.querySelector(".custom-opt");
+var controlsDesc = document.querySelector(".controlsDesc");
+var languageDesc = document.querySelector(".languageDesc");
+var settingsMenuBack = document.querySelector(".menu-back");
+var settingsMenuBackText = document.querySelector(".menu-back-text");
+var lang = navigator.language.substring(0, 2);
+var langArray;
 
 var menuOpts = document.querySelectorAll(".js-menu-opt");
 var previousTab = document.querySelector(menuOpts[0].dataset.tab);
 displayMenuOpt(previousTab, menuOpts[0].dataset.tab);
+getLanguageJson();
 
-var keyUp ;
-var keyLeft ;
+var keyUp;
+var keyLeft;
 var keyDown;
 var keyRight;
 setControls();
+
+eventIntervalControl.onchange = function(){
+  if(parseInt(eventIntervalControl.value) <= parseInt(eventDurationControl.value)){
+    eventDurationControl.value = eventIntervalControl.value;
+  }
+}
+
+eventDurationControl.onchange = function(){
+  if(parseInt(eventDurationControl.value) >= parseInt(eventIntervalControl.value)){
+    eventIntervalControl.value= eventDurationControl.value ;
+  }
+}
+
+settingsMenuBack.addEventListener("click", function(){
+  closeSettingsMenu();
+});
 
 buttonUp.addEventListener("keypress", function (e) {
   setCookie("keyUp", e.code);
@@ -125,7 +178,21 @@ function displayMenuOpt(tab, tabName) {
 }
 
 function manageLanguage() {
-  lang = navigator.language.substring(0, 2);
+  radioCa.onchange = function () {
+    lang = "ca";
+    getLanguageJson()
+  };
+
+  radioEn.onchange = function () {
+    lang = "en";
+    getLanguageJson()
+  };
+
+  radioEs.onchange = function () {
+    lang = "es";
+    getLanguageJson()
+  };
+
   switch (lang) {
     case "en":
       radioEn.checked = true;
@@ -139,10 +206,68 @@ function manageLanguage() {
       radioCa.checked = true;
       break;
 
-      default:
-        radioEn.checked = true;
-        break;
+    default:
+      radioEn.checked = true;
+      lang = "en";
+      break;
   }
+
+  
+}
+
+function getLanguageJson() {
+  fetch("./lang/" + lang + ".json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      setLanguage(data);
+    })
+    .catch(function () {
+      this.dataError = true;
+    });
+}
+
+function setLanguage(data){
+  langArray = data;
+  timeText.innerHTML = langArray.time;
+  livesText.innerHTML = langArray.lives;
+  pointsText.innerHTML = langArray.points;
+  eventText.innerHTML = langArray.event;
+  fabCode.innerHTML = langArray.code;
+  fabSettings.innerHTML = langArray.settings;
+  difficultyLabel.innerHTML = langArray.difficulty;
+  livesLabel.innerHTML = langArray.lives;
+  initialSpeedLabel.innerHTML = langArray.initialSpeed;
+  speedIncrementLabel.innerHTML = langArray.speedIncrement;
+  eventIntervalLabel.innerHTML = langArray.eventInterval;
+  eventDurationLabel.innerHTML = langArray.eventDuration;
+  chooseEventDesc.innerHTML = langArray.chooseEvents;
+  lightsOutLabel.innerHTML = langArray.lightsOut;
+  doublePointsLabel.innerHTML = langArray.doublePoints;
+  lockYLabel.innerHTML = langArray.lockY;
+  invertAxisLabel.innerHTML = langArray.invertAxis;
+  controlsDesc.innerHTML = langArray.controlsDesc;
+  languageDesc.innerHTML = langArray.languageDesc;
+  tabParameters.innerHTML = langArray.parameters;
+  tabControls.innerHTML = langArray.controls;
+  tabLanguage.innerHTML = langArray.language;
+  tabTutorial.innerHTML = langArray.tutorial;
+  gameStartText.innerHTML = langArray.startGame;
+  upLabel.innerHTML = langArray.up;
+  downLabel.innerHTML = langArray.down;
+  leftLabel.innerHTML = langArray.left;
+  rightLabel.innerHTML = langArray.right;
+  easyOpt.innerHTML = langArray.easy;
+  normalOpt.innerHTML = langArray.normal;
+  hardOpt.innerHTML = langArray.hard;
+  customOpt.innerHTML = langArray.custom;
+  mainMenuPlay.innerHTML = langArray.play;
+  mainMenuSettings.innerHTML = langArray.settings;
+  settingsMenuBackText.innerHTML = langArray.back;
 }
 
 function updateParameters() {
@@ -152,11 +277,11 @@ function updateParameters() {
       break;
 
     case "Normal":
-      asignParametersValues(1, 1, 15, 7, 5, true, true, true, false);
+      asignParametersValues(2, 1, 15, 7, 5, true, true, true, false);
       break;
 
     case "Hard":
-      asignParametersValues(3, 2, 15, 13, 5, true, true, true, true);
+      asignParametersValues(2, 2, 15, 13, 5, true, true, true, true);
       break;
   }
 
@@ -206,10 +331,11 @@ function awaitBindingResponse(elem) {
 }
 
 function setCookie(cname, cvalue) {
-  document.cookie = cname + "=" + cvalue + "; expires=Tue, 19 Jan 2038 03:14:07 UTC" ;
+  document.cookie =
+    cname + "=" + cvalue + "; expires=Tue, 19 Jan 2038 03:14:07 UTC";
 }
 
-function setControls(){
+function setControls() {
   keyUp = getCookie("keyUp");
   keyLeft = getCookie("keyLeft");
   keyDown = getCookie("keyDown");
@@ -227,7 +353,6 @@ function setControls(){
   if (getCookie("keyRight") == "") {
     keyRight = "KeyD";
   }
-
 }
 
 function getCookie(cname) {

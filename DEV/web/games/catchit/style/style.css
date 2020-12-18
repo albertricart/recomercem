@@ -5,8 +5,14 @@ body {
   font-family: "Inter", sans-serif;
   color: white; }
 
+.catch-it {
+  height: 93vh; }
+
+#menuBox.menuVisible {
+  z-index: inherit; }
+
 select {
-  background-color: #6851d0;
+  background-color: #B51D19;
   border: 1px solid white;
   border-radius: 5px;
   padding: 8px 25px;
@@ -25,7 +31,7 @@ input[type=number] {
   outline: none;
   color: white;
   transition: all 0.25s ease;
-  background-color: #6851d0;
+  background-color: #B51D19;
   font-family: "Inter", sans-serif;
   font-weight: bold; }
 
@@ -40,12 +46,12 @@ input[type=number] {
   outline: none;
   width: 20%;
   border: 1px solid white;
-  background-color: #6851d0;
+  background-color: #B51D19;
   border-radius: 5px; }
   .slider::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     height: 16px;
-    background-color: #6851d0;
+    background-color: #B51D19;
     margin-top: -1px; }
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -61,24 +67,91 @@ input[type=number] {
 .menu-wrapper {
   position: fixed;
   z-index: 4000;
-  top: 0;
+  top: 7vh;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: center;
   align-items: center; }
 
+.game-over {
+  margin: auto;
+  width: 35%;
+  height: 25%;
+  background-color: #ffe6e6;
+  color: black;
+  text-align: center;
+  border: 2px solid #B51D19;
+  border-radius: 16px;
+  background-image: url("../assets/catch-image-blur.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-content: center; }
+  .game-over-opts {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center; }
+
+.main-menu {
+  margin: auto;
+  top: 50%;
+  transform: translateY(50%);
+  width: 35%;
+  height: 40%;
+  background-color: #ffe6e6;
+  color: black;
+  text-align: center;
+  border: 2px solid #B51D19;
+  border-radius: 16px;
+  background-image: url("../assets/catch-image-blur.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-content: center; }
+  .main-menu-opts {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center; }
+
+.opt {
+  margin: auto;
+  padding: 15px 50px;
+  background-color: #B51D19;
+  border: 1px solid #B51D19;
+  border-radius: 4px;
+  text-align: center;
+  color: white;
+  transition: all 0.25s ease; }
+  .opt:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white; }
+
 .menu {
-  background-color: #6851d0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  visibility: hidden;
+  background-color: #B51D19;
   width: 90vh;
-  height: 60vh;
+  height: 60%;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  overflow: hidden;
+  overflow: auto;
+  overflow-x: hidden;
   z-index: 3000;
   display: flex;
   justify-content: space-between;
@@ -126,21 +199,21 @@ input[type=number] {
     flex: 1; }
     .menu-body-parameters {
       height: 100%; }
-  .menu-start {
+  .menu-back {
     text-align: center;
     font-weight: 600;
     color: white;
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 5px; }
-    .menu-start-text {
+    .menu-back-text {
       border-radius: 8px;
       transition: all 0.4s ease;
       padding-top: 15px;
       padding-bottom: 15px;
       background-color: white;
       color: black; }
-      .menu-start-text:hover {
+      .menu-back-text:hover {
         cursor: pointer;
         background-color: #939BB1; }
 
@@ -149,16 +222,22 @@ input[type=number] {
   grid-template-areas: "game parameters" "info parameters";
   grid-template-rows: 8.5fr 1.5fr;
   grid-template-columns: 9fr 1fr;
-  height: 100vh;
+  height: 93vh;
   width: 100%; }
 
 .game-container {
   grid-area: game;
-  background-color: palegreen;
   display: flex;
   justify-content: space-evenly;
+  background-image: url("../assets/back.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   position: relative;
-  cursor: none; }
+  cursor: none;
+  border: 2px solid #ffe6e6;
+  border-radius: 3px;
+  transition: all 0.15s ease; }
   .game-container__object {
     position: absolute;
     width: 70px;
@@ -179,11 +258,12 @@ input[type=number] {
 .game-info {
   display: flex;
   grid-area: info;
-  background-color: rgba(0, 0, 45, 0.95);
+  background-color: #E8B3A8;
   font-weight: 600;
   font-size: 20px;
   z-index: 1000;
-  text-align: center; }
+  text-align: center;
+  color: black; }
   .game-info__timer {
     flex: 1; }
     .game-info__timer #timeElapsed {
@@ -206,11 +286,30 @@ input[type=number] {
       text-align: center;
       width: 100%; }
   .game-info__event {
-    flex: 1; }
+    color: white;
+    flex: 1;
+    background-color: #B51D19;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 2px; }
+    .game-info__event-desc {
+      flex: 4; }
+    .game-info__event__icon {
+      width: 45px;
+      height: 45px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      align-self: center; }
+
+.displayInfoCurrentEvent {
+  display: flex;
+  display: row;
+  justify-content: center; }
 
 .game-parameters {
   grid-area: parameters;
-  background-color: rgba(0, 0, 45, 0.95);
+  background-color: #E8B3A8;
   z-index: 3000; }
   .game-parameters .fab-container {
     position: fixed;
@@ -224,7 +323,7 @@ input[type=number] {
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    background-color: #939BB1;
+    background-color: #B51D19;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
     .game-parameters .fab-icon-holder:hover {
       opacity: 0.8; }
@@ -238,7 +337,7 @@ input[type=number] {
   .game-parameters .fab {
     width: 60px;
     height: 60px;
-    background-color: #6851d0;
+    background-color: #B51D19;
     background-image: url("../assets/menu-light.png");
     background-position: center;
     background-size: 70%;
