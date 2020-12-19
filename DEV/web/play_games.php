@@ -90,14 +90,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
-        </ul>
-
-
-
-
-
-    
-
+    </ul>
 
 </article>
 
