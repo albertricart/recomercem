@@ -1,0 +1,12 @@
+.btnGeneral {
+    margin: 50px auto;
+    background-color: var(--colSecondary);
+    color: var(--colWhite);
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 20px;
+    display: block;
+    cursor: pointer;
+}
+
+.btnGeneral:hover { background-color: var(--colPrimary); }
