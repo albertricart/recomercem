@@ -13,11 +13,12 @@
     "eventInterval": "Intervalo entre eventos",
     "eventDuration": "Duración de evento",
     "chooseEvents": "Elige los eventos para la siguiente partida",
-    "lightsOut": "Sin luces",
-    "doublePoints": "Puntuación doble",
-    "lockY": "Bloquear eje vertical",
-    "invertAxis": "Invertir ejes",
-    "startGame": "EMPEZAR NUEVA PARTIDA",
+    "lightsOut": "Sin Luces",
+    "doublePoints": "Puntuación Doble",
+    "lockY": "Lado a lado",
+    "invertAxis": "Invertir Controles",
+    "dodge": "Esquívalos",
+    "startGame": "NUEVA PARTIDA",
     "languageDesc": "Elige el idioma",
     "controlsDesc": "Haz click en el control correspondiente y asigna la nueva tecla.",
     "up": "Arriba",
@@ -36,6 +37,6 @@
     "continue": "CONTINUAR",
     "quit": "SALIR",
     "back": "ATRÁS",
-    "play": "JUGAR"
-
+    "play": "JUGAR",
+    "finalScore": "PUNTUACIÓN FINAL"
 }

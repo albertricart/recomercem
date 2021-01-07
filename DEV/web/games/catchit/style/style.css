@@ -5,79 +5,49 @@ body {
   font-family: "Inter", sans-serif;
   color: white; }
 
-.catch-it {
-  height: 93vh; }
+.catch-it-nav {
+  z-index: 10000;
+  background-color: white;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 93vh;
+  left: 0; }
+
+.catch-it-app {
+  position: fixed;
+  top: 7vh;
+  left: 0;
+  right: 0;
+  bottom: 0; }
 
 #menuBox.menuVisible {
   z-index: inherit; }
-
-select {
-  background-color: #B51D19;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 8px 25px;
-  outline: none;
-  color: white;
-  transition: all 0.25s ease;
-  font-family: "Inter", sans-serif;
-  font-weight: bold; }
-  select:hover {
-    cursor: pointer; }
-
-input[type=number] {
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 8px 15px;
-  outline: none;
-  color: white;
-  transition: all 0.25s ease;
-  background-color: #B51D19;
-  font-family: "Inter", sans-serif;
-  font-weight: bold; }
-
-::placeholder {
-  color: white;
-  font-family: "Inter", sans-serif; }
-
-.slider {
-  -webkit-appearance: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-  width: 20%;
-  border: 1px solid white;
-  background-color: #B51D19;
-  border-radius: 5px; }
-  .slider::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
-    height: 16px;
-    background-color: #B51D19;
-    margin-top: -1px; }
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%; }
 
 .language-selection {
   display: flex;
   flex-direction: column; }
 
 .menu-wrapper {
+  visibility: visible;
   position: fixed;
   z-index: 4000;
   top: 7vh;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   align-items: center; }
 
 .game-over {
-  margin: auto;
-  width: 35%;
+  position: absolute;
+  top: 20%;
+  left: 30%;
   height: 25%;
+  width: 35%;
+  padding: 15px;
+  visibility: hidden;
   background-color: #ffe6e6;
   color: black;
   text-align: center;
@@ -91,16 +61,17 @@ input[type=number] {
   flex-direction: column;
   align-content: center; }
   .game-over-opts {
-    margin-top: 15px;
+    flex: 3;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-content: center; }
 
 .main-menu {
+  position: absolute;
+  top: 20%;
+  left: 30%;
   margin: auto;
-  top: 50%;
-  transform: translateY(50%);
   width: 35%;
   height: 40%;
   background-color: #ffe6e6;
@@ -116,14 +87,15 @@ input[type=number] {
   flex-direction: column;
   align-content: center; }
   .main-menu-opts {
-    flex: 4;
+    flex: 5;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-content: center; }
 
 .opt {
-  margin: auto;
+  width: fit-content;
+  align-self: center;
   padding: 15px 50px;
   background-color: #B51D19;
   border: 1px solid #B51D19;
@@ -136,11 +108,10 @@ input[type=number] {
     color: black;
     background-color: white; }
 
-.menu {
+.settings-menu {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 10%;
+  left: 25%;
   margin: auto;
   visibility: hidden;
   background-color: #B51D19;
@@ -156,64 +127,62 @@ input[type=number] {
   display: flex;
   justify-content: space-between;
   flex-direction: column; }
-  .menu-nav {
+  .settings-menu-nav {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
-    .menu-nav__opt {
-      flex: 0 0 25%;
+    .settings-menu-nav__opt {
+      flex: 0 0 33.33%;
       text-align: center;
       cursor: pointer;
       padding-top: 15px;
       padding-bottom: 15px;
       font-weight: 500;
       transition: all 0.3s ease; }
-      .menu-nav__opt:hover {
+      .settings-menu-nav__opt:hover {
         cursor: pointer;
         background-color: #939BB1; }
-    .menu-nav__icon {
+    .settings-menu-nav__icon {
       margin: auto;
       width: 30px;
       height: 30px;
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat; }
-      .menu-nav__icon--params {
+      .settings-menu-nav__icon--params {
         background-image: url("../assets/parameters.png"); }
-      .menu-nav__icon--controls {
+      .settings-menu-nav__icon--controls {
         background-image: url("../assets/controls.png"); }
-      .menu-nav__icon--tut {
-        background-image: url("../assets/tutorial.png"); }
-      .menu-nav__icon--lang {
+      .settings-menu-nav__icon--lang {
         background-image: url("../assets/language.png"); }
-  .menu__tab {
+  .settings-menu__tab {
     display: none; }
-    .menu__tab.show {
+    .settings-menu__tab.show {
       display: flex;
       flex-direction: column;
       justify-content: space-around; }
-    .menu__tab.hidden {
+    .settings-menu__tab.hidden {
       display: none; }
-  .menu-body {
+  .settings-menu-body {
     padding: 16px;
     flex: 1; }
-    .menu-body-parameters {
+    .settings-menu-body-parameters {
       height: 100%; }
-  .menu-back {
+  .settings-menu-back {
     text-align: center;
     font-weight: 600;
     color: white;
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 5px; }
-    .menu-back-text {
+    .settings-menu-back-text {
       border-radius: 8px;
       transition: all 0.4s ease;
       padding-top: 15px;
       padding-bottom: 15px;
       background-color: white;
       color: black; }
-      .menu-back-text:hover {
+      .settings-menu-back-text:hover {
         cursor: pointer;
         background-color: #939BB1; }
 
@@ -247,8 +216,8 @@ input[type=number] {
     background-position: center;
     background-size: contain; }
   .game-container__basket {
-    width: 12vh;
-    height: 11vh;
+    width: 13vh;
+    height: 12vh;
     background-image: url("../assets/objects/basket.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -335,6 +304,7 @@ input[type=number] {
       font-size: 25px;
       color: #ffffff; }
   .game-parameters .fab {
+    visibility: hidden;
     width: 60px;
     height: 60px;
     background-color: #B51D19;
@@ -388,5 +358,54 @@ input[type=number] {
 
 a {
   text-decoration: none; }
+
+select {
+  background-color: #B51D19;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 8px 25px;
+  outline: none;
+  color: white;
+  transition: all 0.25s ease;
+  font-family: "Inter", sans-serif;
+  font-weight: bold; }
+  select:hover {
+    cursor: pointer; }
+
+input[type=number] {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 8px 15px;
+  outline: none;
+  color: white;
+  transition: all 0.25s ease;
+  background-color: #B51D19;
+  font-family: "Inter", sans-serif;
+  font-weight: bold; }
+
+::placeholder {
+  color: white;
+  font-family: "Inter", sans-serif; }
+
+.slider {
+  -webkit-appearance: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 20%;
+  border: 1px solid white;
+  background-color: #B51D19;
+  border-radius: 5px; }
+  .slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 16px;
+    background-color: #B51D19;
+    margin-top: -1px; }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%; }
 
 /*# sourceMappingURL=style.css.map */

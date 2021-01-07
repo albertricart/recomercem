@@ -9,73 +9,30 @@ body {
     color: white;
 }
 
-.catch-it {
-    height: 93vh;
+.catch-it-nav {
+    z-index: 10000;
+    background-color: white;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 93vh;
+    left: 0;
+}
+
+.catch-it-app {
+    position: fixed;
+    top: 7vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 #menuBox.menuVisible {
     z-index: inherit;
 }
 
-select {
-    background-color: $c_primary;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 8px 25px;
-    outline: none;
-    color: white;
-    transition: all 0.25s ease;
-    font-family: $fontInter;
-    font-weight: bold;
 
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-input[type=number] {
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 8px 15px;
-    outline: none;
-    color: white;
-    transition: all 0.25s ease;
-    background-color: $c_primary;
-    font-family: $fontInter;
-    font-weight: bold;
-}
-
-::placeholder {
-    color: white;
-    font-family: $fontInter;
-}
-
-.slider {
-    -webkit-appearance: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    width: 20%;
-    border: 1px solid white;
-    background-color: $c_primary;
-    border-radius: 5px;
-
-
-    &::-webkit-slider-runnable-track {
-        -webkit-appearance: none;
-        height: 16px;
-        background-color: $c_primary;
-        margin-top: -1px;
-    }
-
-    &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 16px;
-        height: 16px;
-        background: white;
-        border-radius: 50%;
-    }
-}
 
 .language-selection {
     display: flex;
@@ -83,20 +40,25 @@ input[type=number] {
 }
 
 .menu-wrapper {
+    visibility: visible;
     position: fixed;
     z-index: 4000;
     top: 7vh;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .7);
     align-items: center;
 }
 
-.game-over{
-    margin: auto;
-    width: 35%;
+.game-over {
+    position: absolute;
+    top: 20%;
+    left: 30%;
     height: 25%;
+    width: 35%;
+    padding: 15px;
+    visibility: hidden;
     background-color: #ffe6e6;
     color: black;
     text-align: center;
@@ -111,19 +73,20 @@ input[type=number] {
     align-content: center;
 
     &-opts {
-        margin-top: 15px;
+        flex: 3;
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-around;
         align-content: center;
     }
 }
 
 
 .main-menu {
+    position: absolute;
+    top: 20%;
+    left: 30%;
     margin: auto;
-    top: 50%;
-    transform: translateY(50%);
     width: 35%;
     height: 40%;
     background-color: #ffe6e6;
@@ -141,16 +104,17 @@ input[type=number] {
 
 
     &-opts {
-        flex: 4;
+        flex: 5;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
         align-content: center;
     }
 }
 
 .opt {
-    margin: auto;
+    width: fit-content;
+    align-self: center;
     padding: 15px 50px;
     background-color: $c_primary;
     border: 1px solid $c_primary;
@@ -167,11 +131,10 @@ input[type=number] {
 }
 
 
-.menu {
+.settings-menu {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 25%;
     margin: auto;
     visibility: hidden;
     background-color: $c_primary;
@@ -194,7 +157,7 @@ input[type=number] {
         border-bottom: 1px solid $c_menu-border;
 
         &__opt {
-            flex: 0 0 25%;
+            flex: 0 0 33.33%;
             text-align: center;
             cursor: pointer;
             padding-top: 15px;
@@ -224,10 +187,6 @@ input[type=number] {
 
             &--controls {
                 background-image: url("../assets/controls.png");
-            }
-
-            &--tut {
-                background-image: url("../assets/tutorial.png");
             }
 
             &--lang {
@@ -267,7 +226,7 @@ input[type=number] {
         color: white;
         padding-left: 5px;
         padding-right: 5px;
-        padding-bottom: 5px;     
+        padding-bottom: 5px;
 
         &-text {
             border-radius: 8px;
@@ -283,7 +242,7 @@ input[type=number] {
             }
         }
 
-        
+
     }
 
 }
@@ -327,8 +286,8 @@ input[type=number] {
     }
 
     &__basket {
-        width: 12vh;
-        height: 11vh;
+        width: 13vh;
+        height: 12vh;
         background-image: url("../assets/objects/basket.png");
         background-size: contain;
         background-repeat: no-repeat;
@@ -380,8 +339,8 @@ input[type=number] {
         margin: 5px;
         padding: 2px;
 
-        &-desc{
-            flex:4;
+        &-desc {
+            flex: 4;
         }
 
         &__icon {
@@ -395,7 +354,7 @@ input[type=number] {
     }
 }
 
-.displayInfoCurrentEvent{
+.displayInfoCurrentEvent {
     display: flex;
     display: row;
     justify-content: center;
@@ -440,6 +399,7 @@ input[type=number] {
     }
 
     .fab {
+        visibility: hidden;
         width: 60px;
         height: 60px;
         background-color: $c_primary;
@@ -501,4 +461,65 @@ input[type=number] {
 
 a {
     text-decoration: none;
+}
+
+select {
+    background-color: $c_primary;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 25px;
+    outline: none;
+    color: white;
+    transition: all 0.25s ease;
+    font-family: $fontInter;
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+input[type=number] {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    outline: none;
+    color: white;
+    transition: all 0.25s ease;
+    background-color: $c_primary;
+    font-family: $fontInter;
+    font-weight: bold;
+}
+
+::placeholder {
+    color: white;
+    font-family: $fontInter;
+}
+
+.slider {
+    -webkit-appearance: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    width: 20%;
+    border: 1px solid white;
+    background-color: $c_primary;
+    border-radius: 5px;
+
+
+    &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        height: 16px;
+        background-color: $c_primary;
+        margin-top: -1px;
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: white;
+        border-radius: 50%;
+    }
 }

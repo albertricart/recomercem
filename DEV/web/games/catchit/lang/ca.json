@@ -1,5 +1,5 @@
 {
-    "parameters": "Parametres",
+    "parameters": "Paràmetres",
     "language": "Idioma",
     "tutorial": "Tutorial",
     "controls": "Controls",
@@ -9,15 +9,16 @@
     "hard": "Difícil",
     "custom": "Personalitzat",
     "initialSpeed": "Velocidat inicial",
-    "speedIncrement": "Increment de velocidat",
+    "speedIncrement": "Increment de velocitat",
     "eventInterval": "Interval entre esdeveniments",
     "eventDuration": "Duració del esdeveniment",
     "chooseEvents": "Escull els esdeveniments per la següent partida",
-    "lightsOut": "Sense llums",
-    "doublePoints": "Puntuació doble",
-    "lockY": "Bloquejar eix vertical",
-    "invertAxis": "Invertir eixos",
-    "startGame": "COMENÇAR NOVA PARTIDA",
+    "lightsOut": "Sense Llums",
+    "doublePoints": "Puntuació Doble",
+    "lockY": "Costat a costat",
+    "invertAxis": "Invertir Controls",
+    "dodge": "Esquívals",
+    "startGame": "NOVA PARTIDA",
     "languageDesc": "Escull l'idioma",
     "controlsDesc": "Fes click al control corresponent i assigna la nova tecla.",
     "up": "Adalt",
@@ -36,5 +37,6 @@
     "continue": "CONTINUAR",
     "quit": "SORTIR",
     "back": "ENRERE",
-    "play": "JUGAR"
+    "play": "JUGAR",
+    "finalScore": "PUNTUACIÓ FINAL"
 }

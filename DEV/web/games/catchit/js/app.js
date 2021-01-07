@@ -1,32 +1,70 @@
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+function preloadImage(url) {
+  var img = new Image();
+  img.src = url;
+}
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+/*========= MENUS =========*/
+var mainMenu = document.querySelector(".main-menu");
+var settingsMenu = document.querySelector(".settings-menu");
+var gameOver = document.querySelector(".game-over");
+var menuWrapper = document.querySelector(".menu-wrapper");
+var mainMenuPlay = document.querySelector(".main-menu-game-start");
+var mainMenuSettings = document.querySelector(".main-menu-game-settings");
+var settingsMenuBack = document.querySelector(".settings-menu-back");
+
+/*========= SOUNDS =========*/
+var coinSound = new Audio('./sounds/coin.mp3');
+var gameOverSound = new Audio('./sounds/gameover.wav');
+
+
+var objectNames = ["apple", "banana", "dress", "hat", "orange", "pants1", "pants2", "pear", "shirt", "shirt2", "shoe2", "shoe3", "skirt", "watermelon"];
+
 //get elements references
 var gameContainer = document.querySelector(".game-container");
-var infoContainer = document.querySelector(".game-info");
-var parametersContainer = document.querySelector(".game-parameters");
 var displayTimer = document.querySelector("#timeElapsed");
 var displayPoints = document.querySelector("#points");
 var displayLives = document.querySelector("#lives");
 var displayEventTime = document.querySelector("#eventTime");
 var eventIcon = document.querySelector(".game-info__event__icon");
 var basket = document.querySelector(".game-container__basket");
-var mainMenuPlay = document.querySelector(".main-menu-game-start");
-var mainMenuSettings = document.querySelector(".main-menu-game-settings");
-var settingsMenu = document.querySelector(".menu");
-var gameOver = document.querySelector(".game-over");
-var menuWrapper = document.querySelector(".menu-wrapper");
 var fab = document.querySelector(".fab-container");
-fab.style.display = "none";
 var settingsFab = document.querySelector("#settings");
 var availableEvents = document.querySelectorAll(".eventCheckbox");
 var selectedEvents = [];
 var objects = document.querySelectorAll(".game-container__object");
+var imgs;
 
-//events id
+//events id's
 const EVENT_OBSCURE = 1;
 const DOUBLE_POINTS = 2;
 const LOCK_Y = 3;
 const CONTROLS_INVERTED = 4;
 const DODGE = 5;
 
+var currentEvent = 0;
 //event time interval(s)
 var eventInterval = 10;
 //event time duration(s)
@@ -46,167 +84,25 @@ var timerId;
 //get window size
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
-var pointsToAdd = 1;
+var pointsToAdd = 5;
 
 //get game container size
 var gameWidth = gameContainer.offsetWidth;
 var gameHeight = gameContainer.offsetHeight;
 
-gameOver.style.visibility = "hidden";
 window.onresize = reportWindowSize;
-mainMenuSettings.addEventListener("click", function () {
-  openSettingsMenu();
-});
 
 settingsFab.addEventListener("click", function () {
   lives = 0;
   openSettingsMenu();
 });
+
 window.addEventListener("mousemove", handleMouseMove);
 document.addEventListener("keypress", handleKeyPress);
-mainMenuPlay.addEventListener("click", function () {
-  closeMainMenu();
-  setTimeout(function () {
-    startgame(initObjects, moveObjects, setParameters);
-  }, 1000);
-});
 
 //MAIN APP
-openMainMenu(0);
+openMainMenu();
 
-/**
- *
- *  HANDLE OBJECTS
- *
- */
-
-function initObjects() {
-  //get bomb index from last game
-  let bombIndex = returnBomb();
-  //if there is bomb
-  if (bombIndex != -1) {
-    //delete bomb
-    removeBomb(objects[bombIndex]);
-  }
-
-  //position each object
-  for (i = 0; i < objects.length; i++) {
-    objects[i].style.backgroundImage = getRandomObjectUrl();
-    objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
-
-    if (i == 0) {
-      objects[i].style.left = gameWidth * 0.05 + "px";
-    } else {
-      objects[i].style.left =
-        parseFloat(objects[i - 1].style.left) + gameWidth / 5 + "px";
-    }
-  }
-
-  //set bomb on random object
-  setBomb(objects[getRandomInt(0, objects.length - 1)]);
-  gameContainer.style.cursor = "none";
-  basket.style.display = "block";
-}
-
-function setBomb(object) {
-  object.dataset.objectType = "B";
-  object.style.backgroundImage = "url(./assets/objects/bomb.png)";
-}
-
-function isBomb(object) {
-  if (object.dataset.objectType == "B") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function returnBomb() {
-  for (let i = 0; i < objects.length; i++) {
-    if (isBomb(objects[i])) {
-      return i;
-    }
-  }
-  return -1;
-}
-
-function removeBomb(object) {
-  object.dataset.objectType = "O";
-  object.style.backgroundImage = getRandomObjectUrl();
-}
-
-function moveObjects() {
-  objectRendererId = setInterval(function () {
-    if (lives != 0) {
-      for (let i = 0; i < objects.length; i++) {
-        //if object gets to bottom, remove life and get back to top
-        if (parseFloat(objects[i].style.top) >= gameHeight) {
-          if (isBomb(objects[i])) {
-            removeBomb(objects[i]);
-          } else {
-            removeLife(1);
-            objects[i].style.backgroundImage = getRandomObjectUrl();
-          }
-
-          objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
-        } else {
-          if (
-            returnBomb() == -1 &&
-            parseFloat(objects[i].style.top) <=
-              -objects[i].getBoundingClientRect().height
-          ) {
-            setBomb(objects[i]);
-          }
-
-          if (checkCollision(basket, objects[i])) {
-            //if objects collide
-            if (isBomb(objects[i])) {
-              removeLife(1);
-              removeBomb(objects[i]);
-            } else {
-              addPoints(pointsToAdd);
-              objects[i].style.backgroundImage = getRandomObjectUrl();
-            }
-
-            objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
-          } else {
-            //if object is above bottom and hasn't collided keep moving
-            objects[i].style.top =
-              parseFloat(objects[i].style.top) + speed + "px";
-          }
-        }
-      }
-    } else {
-      gameContainer.style.cursor = "auto";
-      basket.style.display = "none";
-      clearInterval(objectRendererId);
-      clearInterval(timerId);
-      clearInterval(eventGeneratorId);
-      eventTimer = 0;
-      nextEvent = 0;
-      selectedEvents.splice(0, selectedEvents.length);
-      openMainMenu(1);
-    }
-  }, 10);
-}
-
-function checkCollision(basket, object) {
-  var basketOffsets = basket.getBoundingClientRect();
-  var objectOffsets = object.getBoundingClientRect();
-
-  if (
-    objectOffsets.left + objectOffsets.width > basketOffsets.left &&
-    objectOffsets.left + objectOffsets.width <
-      basketOffsets.left + basketOffsets.width &&
-    objectOffsets.top + objectOffsets.height < basketOffsets.bottom &&
-    objectOffsets.top + objectOffsets.height >
-      basketOffsets.top + 0.6 * basketOffsets.height
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
 /**
  *
@@ -245,15 +141,15 @@ function startTimer() {
     if (lives != 0) {
       timeElapsed += 0.01;
       displayTimer.innerHTML = timeElapsed.toFixed(2) + "s";
-      
-      if(nextEvent <= 0){
-        displayEventTime.innerHTML = langArray.current + ': ' + (eventDuration - eventTimer) + "s";
-      }else if(nextEvent>0){
-        nextEvent-=0.01;
-        displayEventTime.innerHTML = langArray.next + ': ' + nextEvent.toFixed(2) + "s";
+
+      if (nextEvent <= 0) {
+        displayEventTime.innerHTML = langArray.current + ": " + (eventDuration - eventTimer) + "s";
+      } else if (nextEvent > 0) {
+        nextEvent -= 0.01;
+        displayEventTime.innerHTML = langArray.next + ": " + nextEvent.toFixed(2) + "s";
       }
 
-      if(eventTimer == eventDuration){
+      if (eventTimer == eventDuration) {
         nextEvent = eventInterval;
       }
     }
@@ -263,77 +159,264 @@ function startTimer() {
 function triggerEvent(eventId) {
   eventTimer = 0;
   auxSpeed = speed;
-  
+  currentEvent = eventId;
+  var eventName;
+
   eventTimerId = setInterval(function () {
     eventTimer++;
-    eventIcon.classList.add("animate__pulse");
-    eventIcon.classList.remove("animate__pulse");
-
-    switch (eventId) {
-      case EVENT_OBSCURE:
-        gameContainer.style.backgroundImage = "url(./assets/back-dark.png)";
-        eventIcon.style.backgroundImage = "url(./assets/lights-out.png)";
-        basket.style.backgroundImage = "url(./assets/objects/dark/basket.png)";
-        document.querySelector(".currentEventName").innerHTML = "    Lights Out";
-
-        if (eventTimer == eventDuration || lives == 0) {
-          document.querySelector(".currentEventName").innerHTML = "";
-          gameContainer.style.backgroundImage = "url(./assets/back.png)";
-          basket.style.backgroundImage = "url(./assets/objects/basket.png)";
-          eventIcon.style.backgroundImage = "none";
-          clearInterval(eventTimerId);
-        }
-        break;
-
-      case DOUBLE_POINTS:
-        pointsToAdd = 2;
-        document.querySelector(".currentEventName").innerHTML = "    Double Points";
-        eventIcon.style.backgroundImage = "url(./assets/double-points.png)";
-        if (eventTimer == eventDuration || lives == 0) {
-          document.querySelector(".currentEventName").innerHTML = "";
-          pointsToAdd = 1;
-          eventIcon.style.backgroundImage = "none";
-          clearInterval(eventTimerId);
-          
-        }
-        break;
-
-      case CONTROLS_INVERTED:
-        speed = 1;
-        document.querySelector(".currentEventName").innerHTML = "    Controls inverted";
-        eventIcon.style.backgroundImage = "url(./assets/invert.png)";
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.addEventListener("mousemove", handleInvertedMouseMove);
-
-        if (eventTimer == eventDuration || lives == 0) {
-          document.querySelector(".currentEventName").innerHTML = "";
-          window.removeEventListener("mousemove", handleInvertedMouseMove);
-          window.addEventListener("mousemove", handleMouseMove);
-          eventIcon.style.backgroundImage = "none";
-          speed = auxSpeed;
-          clearInterval(eventTimerId);
-          
-        }
-        break;
-
-      case LOCK_Y:
-        document.querySelector(".currentEventName").innerHTML = "    Lock Y";
-        eventIcon.style.backgroundImage = "url(./assets/lock.png)";
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.addEventListener("mousemove", handleLockedMouseMove);
-
-        if (eventTimer == eventDuration || lives == 0) {
-          eventIcon.style.backgroundImage = "none";
-          document.querySelector(".currentEventName").innerHTML = "";
-          window.removeEventListener("mousemove", handleLockedMouseMove);
-          window.addEventListener("mousemove", handleMouseMove);
-          clearInterval(eventTimerId);
-          
-        }
-        break;
-    }
+    if (eventTimer == eventDuration || lives == 0) clearEvent(currentEvent);
   }, 1000);
+
+
+  switch (eventId) {
+    case EVENT_OBSCURE:
+      objects.forEach(object => {
+        object.style.backgroundImage = getObjectUrl(object.dataset.objectimg, true);
+      });
+      gameContainer.style.backgroundImage = "url(./assets/back-dark.png)";
+      eventIcon.style.backgroundImage = "url(./assets/lights-out.png)";
+      basket.style.backgroundImage = "url(./assets/objects/dark/basket.png)";
+      eventName = langArray["lightsOut"];
+      break;
+
+    case DOUBLE_POINTS:
+      pointsToAdd = 10;
+      document.querySelector(".currentEventName").innerHTML = "    Double Points";
+      eventIcon.style.backgroundImage = "url(./assets/double-points.png)";
+      eventName = langArray["doublePoints"];
+      break;
+
+    case CONTROLS_INVERTED:
+      speed = 1;
+      document.querySelector(".currentEventName").innerHTML = "    Controls inverted";
+      eventIcon.style.backgroundImage = "url(./assets/invert.png)";
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mousemove", handleInvertedMouseMove);
+      eventName = langArray["invertAxis"];
+      break;
+
+    case LOCK_Y:
+      document.querySelector(".currentEventName").innerHTML = "    Lock Y";
+      eventIcon.style.backgroundImage = "url(./assets/lock.png)";
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mousemove", handleLockedMouseMove);
+      eventName = langArray["lockY"];
+      break;
+
+    case DODGE:
+      document.querySelector(".currentEventName").innerHTML = "    Dodge";
+      eventIcon.style.backgroundImage = "url(./assets/objects/bomb.png)";
+      objects.forEach(object => {
+        if (isBomb(object)) {
+          removeBomb(object);
+        } else {
+          setBomb(object);
+        }
+      });
+      eventName = langArray["dodge"];
+      break;
+  }
 }
+
+function clearEvent(event) {
+  eventIcon.style.backgroundImage = "none";
+  document.querySelector(".currentEventName").innerHTML = "";
+  clearInterval(eventTimerId);
+  currentEvent = 0;
+  switch (event) {
+    case EVENT_OBSCURE:
+      objects.forEach(object => {
+        object.style.backgroundImage = getObjectUrl(object.dataset.objectimg, false);
+      });
+
+      gameContainer.style.backgroundImage = "url(./assets/back.png)";
+      basket.style.backgroundImage = "url(./assets/objects/basket.png)";
+      break;
+
+    case DOUBLE_POINTS:
+      pointsToAdd = 5;
+      break;
+
+    case CONTROLS_INVERTED:
+      window.removeEventListener("mousemove", handleInvertedMouseMove);
+      window.addEventListener("mousemove", handleMouseMove);
+      speed = auxSpeed;
+      break;
+
+    case LOCK_Y:
+      window.removeEventListener("mousemove", handleLockedMouseMove);
+      window.addEventListener("mousemove", handleMouseMove);
+      break;
+  }
+}
+
+/**
+ *
+ *  HANDLE OBJECTS
+ *
+ */
+
+function initObjects() {
+  //get bomb index from last game
+  let bombIndex = returnBomb();
+  //if there is bomb
+  if (bombIndex != -1) {
+    //delete bomb
+    removeBomb(objects[bombIndex]);
+  }
+
+
+  for (i = 0; i < objects.length; i++) {
+    //give image to object 
+    setObjectImage(objects[i], getRandomObjectName());
+
+    //position each object
+    if (i == 0) {
+      objects[i].style.left = gameWidth * 0.05 + "px";
+    } else {
+      objects[i].style.left = parseFloat(objects[i - 1].style.left) + gameWidth / 5 + "px";
+    }
+    objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
+  }
+
+  //set bomb on random object
+  setBomb(objects[getRandomInt(0, objects.length - 1)]);
+
+  //hide cursor
+  gameContainer.style.cursor = "none";
+  //show basket
+  basket.style.display = "block";
+}
+
+function setBomb(object) {
+  object.dataset.objecttype = "B";
+  object.dataset.objectimg = "bomb";
+  object.style.backgroundImage = "url(./assets/objects/bomb.png)";
+}
+
+function isBomb(object) {
+  if (object.dataset.objecttype == "B") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function returnBomb() {
+  for (let i = 0; i < objects.length; i++) {
+    if (isBomb(objects[i])) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function removeBomb(object) {
+  object.dataset.objecttype = "O";
+  setObjectImage(object, getRandomObjectName());
+}
+
+function moveObjects() {
+  let name;
+  objectRendererId = setInterval(function () {
+    if (lives != 0) {
+      for (let i = 0; i < objects.length; i++) {
+        //if object gets to bottom, remove life and get back to top
+        if (parseFloat(objects[i].style.top) >= gameHeight) {
+          if (isBomb(objects[i])) {
+            removeBomb(objects[i]);
+          } else {
+            removeLife(1);
+            setObjectImage(objects[i], getRandomObjectName());
+          }
+
+          objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
+        } else {
+          if (
+            returnBomb() == -1 &&
+            parseFloat(objects[i].style.top) <=
+            -objects[i].getBoundingClientRect().height
+          ) {
+            setBomb(objects[i]);
+          }
+
+          if (checkCollision(basket, objects[i])) {
+            //if objects collide
+            if (isBomb(objects[i])) {
+              removeLife(1);
+              removeBomb(objects[i]);
+            } else {
+              addPoints(pointsToAdd);
+              setObjectImage(objects[i], getRandomObjectName());
+            }
+            objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
+          } else {
+            //if object is above bottom and hasn't collided keep moving
+            objects[i].style.top = parseFloat(objects[i].style.top) + speed + "px";
+          }
+        }
+      }
+    } else {
+      gameContainer.style.cursor = "auto";
+      basket.style.display = "none";
+      clearInterval(objectRendererId);
+      clearInterval(timerId);
+      clearInterval(eventGeneratorId);
+      eventTimer = 0;
+      nextEvent = 0;
+      selectedEvents.splice(0, selectedEvents.length);
+      gameOverSound.play();
+      openGameOver();
+    }
+  }, 10);
+}
+
+function checkCollision(basket, object) {
+  var basketOffsets = basket.getBoundingClientRect();
+  var objectOffsets = object.getBoundingClientRect();
+
+  if (
+    objectOffsets.left + objectOffsets.width > basketOffsets.left &&
+    objectOffsets.left + objectOffsets.width <
+    basketOffsets.left + basketOffsets.width &&
+    objectOffsets.top + objectOffsets.height < basketOffsets.bottom &&
+    objectOffsets.top + objectOffsets.height >
+    basketOffsets.top + 0.6 * basketOffsets.height
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function setObjectImage(object, objectName) {
+  object.dataset.objectimg = objectName;
+
+  if (currentEvent == EVENT_OBSCURE) {
+    object.style.backgroundImage = getObjectUrl(objectName, true);
+  } else {
+    if (currentEvent == DODGE) {
+
+    }
+    object.style.backgroundImage = getObjectUrl(objectName, false);
+
+  }
+
+}
+
+function getRandomObjectName() {
+  return objectNames[getRandomInt(0, objectNames.length - 1)];
+}
+
+function getObjectUrl(objectName, dark) {
+  if (dark) {
+    return "url(./assets/objects/dark/" + objectName + ".png)";
+  } else {
+    return "url(./assets/objects/" + objectName + ".png)";
+  }
+}
+
+
 
 /**
  *
@@ -396,12 +479,12 @@ function handleKeyPress(e) {
         basket.style.left = offsets.left - 30 + "px";
         break;
       case keyDown:
-        basket.style.top = offsets.top + 30 + "px";
         //move down (Y-)
+        basket.style.top = offsets.top + 30 + "px";
         break;
       case keyRight:
-        basket.style.left = offsets.left + 30 + "px";
         //move right (X+)
+        basket.style.left = offsets.left + 30 + "px";
         break;
     }
   }
@@ -416,8 +499,9 @@ function handleKeyPress(e) {
 function addPoints(x) {
   points += x;
   increaseSpeed(speedIncrement);
-  if (points % 10 == 0) {
+  if (points % 30 == 0) {
     animateInfo(displayPoints, "#a36d00", "animate__pulse");
+    coinSound.play();
   }
   displayPoints.innerHTML = points;
 }
@@ -451,81 +535,119 @@ function getSelectedEvents() {
  *  MENUS
  *
  */
-function openGameOver() {
-  mainMenu.style.visibility = "hidden";
-  gameOver.style.visibility = "visible";
-  menuWrapper.style.visibility = "visible";
-  menuWrapper.classList.add("animate__fadeIn");
-  menuWrapper.classList.remove("animate__fadeOut");
-  gameOver.classList.add("animate__fadeIn");
-  gameOver.classList.remove("animate__fadeOut");
-  document.querySelector(".game-points").innerHTML = points;
-  document.querySelector(".quit").addEventListener("click", function(){
-    closeGameOver(0);
-  });
-document.querySelector(".continue").addEventListener("click", function(){
-  closeGameOver(1);
-  mainMenu.style.visibility = "visible";
-  });
-}
-
-function closeGameOver(option) {
-  switch (option) {
+function manageMenu(elem, state, animIn, animOut) {
+  switch (state) {
+    //close
     case 0:
-      document.getElementById("finalscore").value = points;
-      document.getElementById("endgame").submit();
+      elem.classList.add(animOut);
+      elem.classList.remove(animIn);
       break;
-      case 1:        
-        gameOver.style.visibility = "hidden";
-        break;
+
+    //open
+    case 1:
+      elem.classList.add(animIn);
+      elem.classList.remove(animOut);
+      break;
   }
 }
 
-function openMainMenu(opt) {
-  switch(opt){
-    case 1:
-      openGameOver();
-      break;
 
-      default:
-        break;
-  }
-  
+function openMainMenu() {
   hideFab();
-  menuWrapper.classList.add("animate__fadeIn");
-  menuWrapper.classList.remove("animate__fadeOut");
+  //open wrapper
+  // manageMenu(menuWrapper, 1, "animate__fadeIn", "animate__fadeOut");
+  //open mainMenu
+  manageMenu(mainMenu, 1, "animate__fadeInDown", "animate__fadeOutDown");
+
+  mainMenuSettings.addEventListener("click", function () {
+    openSettingsMenu(settingsMenu);
+  });
+
+  mainMenuPlay.addEventListener("click", function () {
+    closeMainMenu();
+    setTimeout(function () {
+      startgame(initObjects, moveObjects, setParameters);
+    }, 1000);
+  });
 }
 
 function closeMainMenu() {
   showFab();
-  mainMenu.style.visibility = "hidden";
-  menuWrapper.classList.add("animate__fadeOut");
-  menuWrapper.classList.remove("animate__fadeIn");
-  setTimeout(function () {
-    menuWrapper.style.visibility = "hidden";
-  }, 1000);
+  //close mainMenu
+  manageMenu(mainMenu, 0, "animate__fadeInDown", "animate__fadeOutDown");
+  //close wrapper
+  manageMenu(menuWrapper, 0, "animate__fadeIn", "animate__fadeOut");
+  // setTimeout(function () {
+  //   menuWrapper.style.visibility = "hidden";
+  // }, 1000);
 }
 
+function openGameOver() {
+  manageMenu(menuWrapper, 1, "animate__fadeIn", "animate__fadeOut");
+  gameOver.style.visibility = "visible";
+  manageMenu(gameOver, 1, "animate__fadeInDown", "animate__fadeOutDown");
+
+  document.querySelector(".game-points").innerHTML = points;
+
+  document.querySelector(".quit").addEventListener("click", function () {
+    closeGameOver(0);
+  });
+  document.querySelector(".continue").addEventListener("click", function () {
+    closeGameOver(1);
+  });
+}
+
+
+function closeGameOver(option) {
+  switch (option) {
+    //quit
+    case 0:
+      document.getElementById("finalscore").value = points;
+      document.getElementById("endgame").submit();
+      break;
+
+    //continue
+    case 1:
+      manageMenu(gameOver, 0, "animate__fadeInDown", "animate__fadeOutDown");
+      //open main menu again
+      setTimeout(function () {
+        gameOver.style.visibility = "hidden";
+        manageMenu(mainMenu, 1, "animate__fadeInDown", "animate__fadeOutDown");
+      }, 500);
+      break;
+  }
+}
+
+
 function openSettingsMenu() {
-  menuWrapper.style.visibility = "visible";
   settingsMenu.style.visibility = "visible";
+  //open wrapper
+  manageMenu(settingsMenu, 1, "animate__fadeInDown", "animate__fadeOutDown");
+
+  settingsMenuBack.addEventListener("click", function () {
+    closeSettingsMenu();
+  });
 }
 
 function closeSettingsMenu() {
-  settingsMenu.style.visibility = "hidden";
+  manageMenu(settingsMenu, 0, "animate__fadeInDown", "animate__fadeOutDown");
+  setTimeout(function () {
+    settingsMenu.style.visibility = "hidden";
+  }, 500);
+
 }
 
 function showFab() {
-  fab.style.display = "block";
-  fab.classList.add("animate__slideInUp");
-  fab.classList.remove("animate__fadeOutDown");
+  //open fab
+  manageMenu(fab, 1, "animate__slideInUp", "animate__fadeOutDown");
+  fab.style.visibility = "visible";
 }
 
 function hideFab() {
-  fab.classList.add("animate__fadeOutDown");
-  fab.classList.remove("animate__slideInUp");
+  //close fab
   setTimeout(function () {
-    fab.style.display = "none";
+    manageMenu(fab, 0, "animate__slideInUp", "animate__fadeOutDown");
+    fab.style.visibility = "hidden";
   }, 1000);
 }
 
@@ -552,34 +674,29 @@ function reportWindowSize() {
     if (i == 0) {
       objects[i].style.left = gameWidth * 0.05 + "px";
     } else {
-      objects[i].style.left =
-        parseFloat(objects[i - 1].style.left) + (gameWidth * 1.05) / 5 + "px";
+      objects[i].style.left = parseFloat(objects[i - 1].style.left) + (gameWidth * 1.05) / 5 + "px";
     }
   }
 
-  console.log(
-    "Window resized to " + "(" + windowWidth + ", " + windowHeight + ")"
-  );
+  console.log("Window resized to " + "(" + windowWidth + ", " + windowHeight + ")");
   console.log("Game resized to " + "(" + gameWidth + ", " + gameHeight + ")");
 }
 
-function setParameters(
-  speed,
-  speedIncrement,
-  eventInterval,
-  eventDuration,
-  lives,
-  points
-) {
+function setParameters(speed, speedIncrement, eventInterval, eventDuration, lives, points) {
   this.speed = speed;
   this.speedIncrement = speedIncrement;
   this.lives = lives;
   this.points = points;
-  this.eventInterval = eventInterval;
-  this.eventDuration = eventDuration;
   getSelectedEvents();
   displayLives.innerHTML = lives;
   displayPoints.innerHTML = points;
+  if (eventInterval < 0 || eventDuration < 0) {
+    this.eventInterval = 0;
+    this.eventDuration = 0;
+  } else {
+    this.eventInterval = eventInterval;
+    this.eventDuration = eventDuration;
+  }
 }
 
 function animateInfo(info, color, animation) {
@@ -591,66 +708,3 @@ function animateInfo(info, color, animation) {
   info.classList.add(animation);
 }
 
-function getRandomObjectUrl() {
-  //var objectName = "url(./assets/objects/" + files[getRandomInt(0, files.length)] + ")";
-  var returnUrl;
-  switch (getRandomInt(0, 10)) {
-    case 0:
-      returnUrl = "url(./assets/objects/hat.png)";
-      break;
-
-    case 1:
-      returnUrl = "url(./assets/objects/apple.png)";
-      break;
-
-    case 2:
-      returnUrl = "url(./assets/objects/banana.png)";
-      break;
-
-    case 3:
-      returnUrl = "url(./assets/objects/pear.png)";
-      break;
-
-    case 4:
-      returnUrl = "url(./assets/objects/orange.png)";
-      break;
-
-    case 5:
-      returnUrl = "url(./assets/objects/dress.png)";
-      break;
-
-    case 6:
-      returnUrl = "url(./assets/objects/shirt.png)";
-      break;
-
-    case 7:
-      returnUrl = "url(./assets/objects/shirt2.png)";
-      break;
-
-    case 8:
-      returnUrl = "url(./assets/objects/pants1.png)";
-      break;
-
-    case 9:
-      returnUrl = "url(./assets/objects/pants2.png)";
-      break;
-
-    case 10:
-      returnUrl = "url(./assets/objects/shoe2.png)";
-      break;
-
-    case 11:
-      returnUrl = "url(./assets/objects/shoe3.png)";
-      break;
-
-    case 12:
-      returnUrl = "url(./assets/objects/watermelon.png)";
-      break;
-
-    case 13:
-      returnUrl = "url(./assets/objects/skirt.png)";
-      break;
-  }
-
-  return returnUrl;
-}

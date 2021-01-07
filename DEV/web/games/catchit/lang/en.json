@@ -13,11 +13,12 @@
     "eventInterval": "Event interval",
     "eventDuration": "Event duration",
     "chooseEvents": "Choose the available events for your next play",
-    "lightsOut": "Lights out",
-    "doublePoints": "Double points",
-    "lockY": "Lock Y axis",
-    "invertAxis": "Invert axis",
-    "startGame": "START NEW GAME",
+    "lightsOut": "Lights Out",
+    "doublePoints": "Double Points",
+    "lockY": "Side to Side",
+    "invertAxis": "Inverted Controls",
+    "dodge": "Dodge Them",
+    "startGame": "NEW GAME",
     "languageDesc": "Select the language to be displayed in:",
     "controlsDesc": "Click on the control corresponding button and press the new key.",
     "up": "Up",
@@ -36,5 +37,6 @@
     "continue": "CONTINUE",
     "quit": "QUIT",
     "back": "BACK",
-    "play": "PLAY"
+    "play": "PLAY",
+    "finalScore": "FINAL SCORE"
 }
