@@ -40,7 +40,7 @@ function closeDB() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Select Entity =>
 
-function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_direction = 0, int $the_limit = 0 ) {
+function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_direction = 0, int $the_limit = 0, string $the_search = "" ) {
 
     // - - - - - Tables Data
     if ( file_exists( "../../_data/tb_data.php" ) ) { include( "../../_data/tb_data.php" ); }
@@ -62,8 +62,9 @@ function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_directi
 
         $myCnctn = openDB();
 
-        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"").$addStringQuery;
+        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:$the_search).$addStringQuery;
         //echo $myQueryText.'<br>';
+        echo '<script>console.log("'.$myQueryText.'")</script>';
 
         $myQuery = $myCnctn->prepare( $myQueryText );
 

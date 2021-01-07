@@ -23,7 +23,8 @@
     box-shadow: 1px 1px 5px black;
 }
 .listOfferItemBox { 
-    background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );
+    /*background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );*/
+    background-color: rgba(0,0,0,.65);
     position: absolute; 
     top: 0;
     right: 0; 
