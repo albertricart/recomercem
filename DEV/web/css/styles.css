@@ -110,9 +110,10 @@ main {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     min-height: 60px; 
     font-size: 50px;
+    text-align: left;
 }
 
-
+.artlTitleIcon { height: 70px; vertical-align: bottom; }
 
 
 
@@ -167,7 +168,7 @@ footer {
     background-size: auto; 
     background-size: 70px; 
     padding: 0 0 0 100px; 
-    height: 60px; 
+    height: auto; 
 }
 
 #footerDataUl li { 
@@ -193,3 +194,58 @@ a:link { color: inherit; text-decoration: inherit; }
 a:hover { color: inherit; text-decoration: inherit; }
 a:visited { color: inherit; text-decoration: inherit; }
 a:active { color: inherit; text-decoration: inherit; }
+
+
+
+
+@media (max-width: 1044px) {
+
+    .artlBox { padding-left: 10px; padding-right: 10px; }
+    
+    .artlTitle { min-height: none; font-size: 30px; }
+
+    .artlTitleIcon { height: 55px; }
+
+}
+
+
+
+@media (max-width: 550px) {
+
+    .artlTitle { 
+
+        min-height: none; 
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .artlTitleIcon { height: 40px; vertical-align: bottom; }
+
+    
+    #iconMenu { margin: 0 10px 0 20px; }
+
+    #iconUser { margin: 0 0 0 20px; }
+    
+    #iconLanguage { margin: 0 0 0 20px; }
+
+    #footerData { 
+        float: none;  
+        width: min-content;
+        margin: 0 auto; 
+        font-size: 14px; 
+        white-space: nowrap;
+    }
+
+    #footerImage {
+        display: block;
+        float: none; 
+        width: 100%; 
+        max-width: 300px;
+        margin: 0 auto; 
+    }
+    
+}
+
+
+
+  

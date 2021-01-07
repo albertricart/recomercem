@@ -20,7 +20,7 @@ include_once("_php_partials/02_header.php");
     <div class="optcontainer">
         <div class="optnicon">
         
-            <svg id="icon_search" viewBox="0 0 145 156" style="width: 90%;">
+            <svg id="icon_search" viewBox="0 0 145 156" style="width: 90%;" class="indexicons">
                 <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colPrimary)" d="M34.719,62.879v37.75c0,3.85,1.5,5.37,5.31,5.37h39.41v-33.93
             	h21.25v33.93h0.28c3.81,0,5.31-1.52,5.31-5.37v-37.75l3.83,0.7c1.68,0,2.25-1.09,1.67-3.08l-5.27-15.51
             	c-0.18-0.61-0.44-1.11-0.79-1.48v-3.54c0-1.64-1.32-2.97-2.94-2.97h-65.68c-1.62,0-2.94,1.33-2.94,2.97v5.94l0.01,0.16l-4.95,14.43
@@ -48,7 +48,7 @@ include_once("_php_partials/02_header.php");
 
     <div class="optcontainer">
         <div  class="optnicon">
-            <svg id="icon_game" viewBox="0 0 133 110">
+            <svg id="icon_game" viewBox="0 0 133 110" class="indexicons">
                 <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colPrimary)" d="M0,56.29c0,6.87,2.39,13.18,6.37,18.14L1.73,91.89
                 C0.03,98.32,6,106.5,13.96,108.66l2.83,0.76c7.96,2.15,17.19-1.93,18.89-8.35l4.96-18.67c4.92-2.33,9.08-6.02,11.98-10.6h26.56
                 c3.47,5.47,8.73,9.68,14.94,11.79l4.64,17.48c1.7,6.42,10.93,10.5,18.89,8.35l2.83-0.76c7.96-2.16,13.93-10.34,12.23-16.77
@@ -74,7 +74,7 @@ include_once("_php_partials/02_header.php");
 
     <div class="optcontainer">
         <div class="optnicon">
-            <svg id="icon_offer" viewBox="0 0 136 129">
+            <svg id="icon_offer" viewBox="0 0 136 129" class="indexicons">
                 <g><path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colPrimary)" d="M125.514,5.271c5.61,3.02,7.93,9.97,5.27,15.69l-0.29-0.16
                 l-15.42,30.75c-0.63,0.6-0.88,1.53-0.56,2.4c0.42,1.16,1.69,1.76,2.84,1.34c0.27-0.1,0.51-0.25,0.71-0.43l0.18,0.1l16.03-32.1
                 c3.61-7.65,0.5-16.97-7.01-21c-7.57-4.06-16.86-1.26-20.83,6.29c-3.94,7.5-1.22,16.94,6.13,21.28l0.08-0.16
@@ -127,7 +127,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainSearch" class="artlBox" style="background-color: #fff;">
 
     <h1 class="artlTitle">
-        <svg id="icon_search2" viewBox="0 0 145 156" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_search2" viewBox="0 0 145 156" class="articlesicons">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M34.719,62.879v37.75c0,3.85,1.5,5.37,5.31,5.37h39.41v-33.93
             h21.25v33.93h0.28c3.81,0,5.31-1.52,5.31-5.37v-37.75l3.83,0.7c1.68,0,2.25-1.09,1.67-3.08l-5.27-15.51
             c-0.18-0.61-0.44-1.11-0.79-1.48v-3.54c0-1.64-1.32-2.97-2.94-2.97h-65.68c-1.62,0-2.94,1.33-2.94,2.97v5.94l0.01,0.16l-4.95,14.43
@@ -186,7 +186,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainGames" class="artlBox" style="background-color: #f7f3f3;">
 
     <h1 class="artlTitle">
-        <svg id="icon_game2" viewBox="0 0 133 110" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_game2" viewBox="0 0 133 110" class="articlesicons">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M0,56.29c0,6.87,2.39,13.18,6.37,18.14L1.73,91.89
             C0.03,98.32,6,106.5,13.96,108.66l2.83,0.76c7.96,2.15,17.19-1.93,18.89-8.35l4.96-18.67c4.92-2.33,9.08-6.02,11.98-10.6h26.56
             c3.47,5.47,8.73,9.68,14.94,11.79l4.64,17.48c1.7,6.42,10.93,10.5,18.89,8.35l2.83-0.76c7.96-2.16,13.93-10.34,12.23-16.77
@@ -246,7 +246,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainOffers" class="artlBox" style="background-color: #fff;">
 
     <h1 class="artlTitle">
-        <svg id="icon_offer2" viewBox="0 0 136 129" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_offer2" viewBox="0 0 136 129" class="articlesicons">
             <g><path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M125.514,5.271c5.61,3.02,7.93,9.97,5.27,15.69l-0.29-0.16
             l-15.42,30.75c-0.63,0.6-0.88,1.53-0.56,2.4c0.42,1.16,1.69,1.76,2.84,1.34c0.27-0.1,0.51-0.25,0.71-0.43l0.18,0.1l16.03-32.1
             c3.61-7.65,0.5-16.97-7.01-21c-7.57-4.06-16.86-1.26-20.83,6.29c-3.94,7.5-1.22,16.94,6.13,21.28l0.08-0.16

@@ -85,7 +85,15 @@
     border-radius: 25px; 
 }
 
-.gamesListItemTextBox { 
-    padding: 10px 0; 
-}
+.gamesListItemTextBox { padding: 10px 0; }
 
+
+
+@media (max-width: 750px) {
+
+    #gamesListBox { 
+        grid-template-columns: 1fr; 
+        grid-gap: 20px; 
+    }
+
+}

@@ -112,7 +112,7 @@ include_once("_php_partials/02_header.php");
 <article id="mainStores" class="artlBox">
 
     <h1 class="artlTitle">
-        <svg id="icon_game" viewBox="0 0 133 110" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_game" viewBox="0 0 133 110" class="artlTitleIcon">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M0,56.29c0,6.87,2.39,13.18,6.37,18.14L1.73,91.89
             C0.03,98.32,6,106.5,13.96,108.66l2.83,0.76c7.96,2.15,17.19-1.93,18.89-8.35l4.96-18.67c4.92-2.33,9.08-6.02,11.98-10.6h26.56
             c3.47,5.47,8.73,9.68,14.94,11.79l4.64,17.48c1.7,6.42,10.93,10.5,18.89,8.35l2.83-0.76c7.96-2.16,13.93-10.34,12.23-16.77
