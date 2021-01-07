@@ -1,0 +1,117 @@
+@import url(//fonts.googleapis.com/css?family=Inter);
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    transition: all 0.3s ease 0s;
+}
+
+.container {
+    height: 100vh;
+}
+
+.signup-image {
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url("../images/uploaded/CO5fd870a6.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+
+.signup-form-wrapper {
+    height: fit-content;
+    margin: 7% auto;
+    border-radius: 16px;
+    padding: 30px 100px;
+    background-color: var(--colWhite);
+}
+
+.signup-form {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.signup-text {
+    margin: 5% 0 10% 0;
+    padding: 0;
+    font-size: 3em;
+    font-weight: 600;
+}
+
+.signup-btn {
+    margin-top: 10%;
+    height: 56px;
+    border: 1px solid var(--colPrimary);
+    border-radius: 10px;
+    color: var(--colWhite);
+    background-color: var(--colPrimary);
+    font-family: "Inter", sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: medium;
+}
+
+.signup-btn:hover {
+    cursor: pointer;
+    border: 1px solid;
+}
+
+
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    font-family: "Inter", sans-serif;
+    height: 56px;
+    width: 325px;
+    margin: 10px 0px;
+    padding: 0px 50px 0px 16px;
+    border: 1px solid rgb(207, 214, 228);
+    outline: none;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.3s ease 0s;
+}
+
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus {
+    border: 1px solid var(--colPrimary);
+    box-shadow: 0px 0px 1px 3px rgba(165, 41, 37, 0.3);
+}
+
+.error-message {
+    color: rgb(255, 23, 73);
+    font-size: 12px;
+}
+
+.login{
+    display: flex;
+    width: fit-content;
+    margin: 10px auto 0 auto;    
+}
+
+
+.showpw {
+    width: 24px;
+    height: 24px;
+    background-image: url("../images/visibility.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 16px;
+    top: 26px;
+    cursor: pointer;
+    border-radius: 360px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    transition: all 0.1s ease 0s;
+}
