@@ -80,7 +80,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
         <li class="listOfferItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">">
             <div class="listOfferItemBox">
                 <h2 class="listOfferItemTitle"><?=$theData['nombre']?></h2>
-                <p class="listOfferItemText"><?=$theData['descripcion']?></p>
+                <p class="listOfferItemText"><?=nl2br($theData['descripcion'])?></p>
             </div>
         </li>
         </a>
