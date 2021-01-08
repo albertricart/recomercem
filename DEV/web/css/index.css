@@ -70,9 +70,6 @@
 
 
 
-.articlesicons { height: 70px; vertical-align: bottom; }
-
-
 #storesBox { 
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr; 
@@ -260,10 +257,6 @@
 }
 
 @media (max-width: 750px) { 
-
-    .artlTitle { font-size: 30px; text-align: center; page-break-after: 10px; }
-
-    .articlesicons { height: 40px; vertical-align: bottom; }
 
     .listOfferItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
 

@@ -4,7 +4,7 @@
 $pageTitle = "Search Stores | reComercem: El teu comerç de proximitat al barri";
 $pageDescription = "'Store Search' let you find the service and products offered need near you";
 $pageKeywords = "Store, Search, Service, find, service, products, offered, near, you, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought";
-$pageStylesAry = Array( 'search'=>'/css/search.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
+$pageStylesAry = Array( 'search'=>'/css/search.css', 'searchform'=>'/css/search_form.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
@@ -31,16 +31,12 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
 
-var_dump($_REQUEST);
-
-$TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
-
 ?>
 
 <article id="mainOffers" class="artlBox">
 
     <h1 class="artlTitle">
-        <svg id="icon_search2" viewBox="0 0 145 156" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_search2" viewBox="0 0 145 156" class="artlTitleIcon">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M34.719,62.879v37.75c0,3.85,1.5,5.37,5.31,5.37h39.41v-33.93
             h21.25v33.93h0.28c3.81,0,5.31-1.52,5.31-5.37v-37.75l3.83,0.7c1.68,0,2.25-1.09,1.67-3.08l-5.27-15.51
             c-0.18-0.61-0.44-1.11-0.79-1.48v-3.54c0-1.64-1.32-2.97-2.94-2.97h-65.68c-1.62,0-2.94,1.33-2.94,2.97v5.94l0.01,0.16l-4.95,14.43
@@ -65,15 +61,14 @@ $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
         <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="Nombre de comercio" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
         <select id="bytype" name="bytype" type="text" class="searchFormInput">
             <option value="0">Tipo de Comercio</option>
-            <? foreach( $TipoAry as $tmpData ) {
+            <? $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
+            foreach( $TipoAry as $tmpData ) {
             ?><option value="<?=$tmpData['id']; ?>"<?=((!empty($_POST['bytype']) && $_POST['bytype']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['nombre']; ?></option><? 
             } ?>
         </select>
         <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="Etiquetas separadas por coma" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
         <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()">Buscar</button>
     </form>
-    
-
 
     <?php
 

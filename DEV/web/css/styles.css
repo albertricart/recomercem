@@ -117,7 +117,6 @@ main {
 .artlTitleIcon { height: 70px; vertical-align: bottom; }
 
 
-
 footer { 
     box-sizing: border-box; 
     width: 100%; 
@@ -252,3 +251,14 @@ a:active { color: inherit; text-decoration: inherit; }
 
 
   
+
+
+
+@media (max-width: 750px) { 
+
+    .artlTitle { font-size: 30px; text-align: center; page-break-after: 10px; }
+
+    .articlesicons { height: 40px; vertical-align: bottom; }
+
+}
+
