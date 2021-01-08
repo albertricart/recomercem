@@ -86,7 +86,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
     //echo '<br><br>'.print_r($_POST, true).'<br><br>';        
     echo '<script>console.log("'.$the_search.'")</script>';
 
-    if (!empty($_POST['xim'])) { $xim=intval($_POST['xim']); } else { $xim=0; }
+    if (!empty($_REQUEST['xim'])) { $xim=intval($_REQUEST['xim']); } else { $xim=0; }
 
     $EntitiesAry = GetIdedArray( getEntity( "comerc", $xim, 1, 0, 0, $the_search ) );
 
@@ -163,7 +163,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             <div class="listStoreItemBox">
                 <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2>
             </div>
-            <form id="<?=$theData['cid']?>"  href="/search_stores.html" method="POST" target="_self">
+            <form id="<?=$theData['cid']?>"  href="/search_stores.html?xim=<?=$theData['id']?>" method="POST" target="_self">
                 <input type="hidden" name="xim" value="<?=$theData['id']?>" />
                 <input type="hidden" name="byname" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
                 <input type="hidden" name="bytype" value="<?=((!empty($_POST['bytype']))?$_POST['bytype']:'')?>" />
