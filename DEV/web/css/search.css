@@ -7,7 +7,6 @@
 }
 
 
-
 .listStoreItemsMain { 
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
@@ -18,35 +17,39 @@
     padding: 0; 
     list-style: none; 
 }
+
 .listStoreItemContainer { 
-    box-sizing: border-box; 
-    display: block; 
-    position: relative; 
-    border: 0; margin: 0; 
-    padding: 250px 0 0; 
-    background: top center no-repeat #27bd8b; 
-    background-size: cover; 
-    border-radius: 10px; 
-    border: solid 2px var(--colSecondary); 
-    overflow: hidden; 
-    box-shadow: 1px 1px 5px black;
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    border: 0;
+    margin: 0;
+    padding: 250px 0 0;
+    background: top center no-repeat;
+    background-size: cover;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0px 0px 3px black;
     cursor: pointer;
 }
+
 .listStoreItemBox { 
-    background-color: rgba( 255, 255, 255,0.8); 
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
-    left: 0; 
+    background-color: rgba(11, 11, 11, 0.8);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: var(--colWhite);
 }
+
 .listStoreItemTitle { 
-    margin: 0; 
-    padding: 20px 20px 20px; 
-    text-align: center; 
-    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 26px; 
-    letter-spacing: 2px; 
-    font-weight: normal; 
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: normal;
 }
 .listStoreItemText { 
     margin: 0; 
@@ -60,7 +63,7 @@
 
 
 
-#searchForm { display: block; box-sizing: border-box; width: 100%; height: auto; padding: 0; margin: 20px 0; }
+#searchForm { display: block; box-sizing: border-box; width: 100%; height: auto; padding: 0; margin: 14px 0; }
 .searchFormInput { box-sizing: border-box; height: auto; padding: 10px; margin: 20px 0; border: 1px solid var(--colPrimary); border-radius: 5px; color: var(--colPrimary); font-size: 14px; }
 #byname { width: 20%; }
 #bytype { width: 20%; }
@@ -69,9 +72,43 @@
 
 
 
-#storeImage { float: left; max-width: 320px; width: 100%; margin: 0 20px 20px 0; }
+#storeImage { float: left; width: 40%; padding: 0 30px 30px 0; background-color: var(--colWhite); }
 
-.storeTitle { margin: 0; padding: 0px 20px; text-align: left; font-family: 'OpenSans', Arial, Helvetica, sans-serif; font-size: 26px; letter-spacing: 2px; font-weight: bold; }
+.storeTitle { margin: 0 0 20px; padding: 20px 0px; text-align: center; font-family: 'OpenSans', Arial, Helvetica, sans-serif; font-size: 28px; letter-spacing: 2px; font-weight: bold; color: var(--colWhite); background-color: var(--colSecondary); }
 
-.storeText { margin: 0; padding: 10px 0; text-align: left; font-family: 'OpenSans', Arial, Helvetica, sans-serif; font-size: 16px; letter-spacing: .5px; line-height: 140%; }
+.storeSubtitle { margin: 0 0 20px; padding: 20px 0px; text-align: right; font-family: 'OpenSans', Arial, Helvetica, sans-serif; font-size: 28px; letter-spacing: 2px; font-weight: bold; border-bottom: 5px solid var(--colSecondary); }
+
+.storeText { margin: 0; padding: 10px 0; text-align: left; font-family: 'OpenSans', Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 1px; line-height: 140%; }
+
+
+
+
+.listOfferItemsMain { display: block; width: 100%; height: auto; margin: 50px 0; padding: 0; list-style: none; }
+
+.listOfferItemContainer { box-sizing: border-box; display: block; position: relative; width: 100%; height: auto; min-height: 300px; margin: 40px 0; padding: 0; background: center no-repeat; background-size: cover; overflow: hidden; }
+
+.listOfferItemBox { position: absolute; top: 10px; right: 10px; width: 50%; bottom: 10px; padding: 20px; background-color: rgba(0,0,0,.65); box-sizing: border-box; }
+
+.listOfferItemTitle { 
+    margin: 0; 
+    padding: 10px 0 10px 0; 
+    text-align: left; 
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
+    font-size: 26px; 
+    letter-spacing: 2px; 
+    font-weight: bold;
+    color: var(--colWhite);
+}
+
+.listOfferItemText { 
+    margin: 0; 
+    padding: 20px 0; 
+    text-align: left; 
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
+    font-size: 16px; 
+    letter-spacing: 1px; 
+    line-height: 130%; 
+    color: var(--colWhite);
+}
+
 

@@ -31,8 +31,6 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
 
-var_dump($_REQUEST);
-
 $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
 
 ?>
@@ -112,18 +110,20 @@ $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
     <p class="storeText"><?=$EntitiesAry[$xim]['etiquetas']?></p>
     <div style="clear: both;"></div>
 
+    <? 
+    
+            $OffersAry = GetIdedArray( getEntity( "oferta", 0, 1, 0, 0, ' WHERE id_comerc = '.$xim ) ); 
+
+            if ( !empty( $OffersAry ) ) {
+
+    ?>
+
     <h2 class="storeSubtitle">Our Offers</h2>
 
     <ul class="listOfferItemsMain">
 
     <?
-
-            $OffersAry = GetIdedArray( getEntity( "oferta", 0, 1, 0, 0, ' WHERE id_comerc = '.$xim ) );
-
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
-
-            if ( !empty( $OffersAry ) ) {
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
 
                 foreach( $OffersAry as $theKey => $theData ) {
 
@@ -140,22 +140,21 @@ $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
     <?php 
 
                 }
-            }
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
-
     ?>
 
     </ul>
 
     <?
 
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
+
         } else {
 
     ?>
 
     <ul class="listStoreItemsMain">
-
 
         <?php
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 

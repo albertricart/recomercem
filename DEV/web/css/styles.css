@@ -7,6 +7,7 @@
     --colText: #333;
     --colWhite: #fff;
     --colBlack: #000;
+    --colTxtFooter: #fff;
 }
 
 
@@ -126,8 +127,9 @@ footer {
     margin: 0; 
     /*background-color: #fff; */
     /*background: linear-gradient(4deg, rgba(250, 251, 247, 0.49) 0%, rgba(217, 187, 95, 0.29) 100%);*/
-    background: linear-gradient(7deg, #a3ec523b 0%, rgba(217, 95, 146, 0.75) 100%);
+    /*background: linear-gradient(7deg, #a3ec523b 0%, rgba(217, 95, 146, 0.75) 100%);*/
     /*background: linear-gradient(4deg, #a3ec523b 0%, rgba(217, 187, 95, 0.7) 100%);*/
+    background: linear-gradient(-15deg, #ff0000a8 0%, rgba(255, 55, 55, 0.66) 40%,rgba(253, 28, 28, 0.59) 60%, #f70202 100%);
     box-shadow: 0px -2px 4px rgba(0,0,0,.2);
 }
 
@@ -139,24 +141,25 @@ footer {
     margin: 0; 
     padding: 0; 
     font-family: 'Inter', Arial, Helvetica, sans-serif; 
-    font-size: 12px; 
-    color: var(--colPrimary); 
+    font-size: 14px; 
+    letter-spacing: .4px;
+    color: var(--colTxtFooter); 
 }
 
 #footerDataH2 { 
-    font-size: 12px; 
+    font-size: 14px; 
     margin: 0 0 5px; 
     padding: 0; 
 }
 
 #footerDataH3 { 
-    font-size: 12px; 
+    font-size: 14px; 
     margin: 0 0 5px; 
     padding: 0; 
 }
 
 #footerDataA { 
-    font-size: 12px; 
+    font-size: 14px; 
     margin: 0 0 5px; 
     padding: 0; 
     font-weight: bold;
