@@ -17,11 +17,6 @@ if (isset($_POST['submitBtnLogin'])) {
         if (count($result) == 0) {
             $_SESSION['error'] = "No existe una cuenta asociada al correo introducido";
         } else {
-            
-            // if ((crypt($_POST['password'], "magomo") != $result[0]['password'])) {
-            //     $_SESSION['error'] = "Contraseña incorrecta";
-            // }
-
             if (!password_verify($_POST['password'], $result[0]['password'])) {
                 $_SESSION['error'] = "Contraseña incorrecta";   
             }

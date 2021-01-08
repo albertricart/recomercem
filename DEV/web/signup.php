@@ -9,6 +9,7 @@ include_once("_php_partials/01_head.php");
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
 
+//si hemos introducido el correo y nombre anteriormente se mostrará automaticamente
 if (isset($_SESSION['email']) && isset($_SESSION['nombre'])) {
     $user = [
         "nombre" => $_SESSION['nombre'],
@@ -23,6 +24,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['nombre'])) {
     ];
 }
 
+//si ha habido un error se mostrará por pantalla
 if (isset($_SESSION['error'])) {
     $errorMessage = $_SESSION['error'];
     unset($_SESSION['error']);
@@ -30,6 +32,7 @@ if (isset($_SESSION['error'])) {
     $errorMessage = "";
 }
 ?>
+
 
 <div class="container">
     <div class="signup-image">

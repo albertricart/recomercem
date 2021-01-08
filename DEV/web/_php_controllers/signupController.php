@@ -17,11 +17,13 @@ if (isset($_POST['submitBtnSignup'])) {
     //hacemos las comprobaciones previas antes de conectarnos a la base de datos
     if ($_POST['password'] == $_POST['password-repeat']) {
         //guardamos el hash de la contraseña del usuario
-        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        //$hashed_password = password_hash($_POST['password'], PASSWORD_BCRYPT, ['magomo', 10] );
+
+        //creamos el array asociativo new_user que sera procesado en saveEntity
         $new_user = [
             "nombre" => $nombre,
             "email" => $email,
-            "password" => $hashed_password
+            "password" => $_POST['password']
         ];
         $_SESSION['error'] = saveEntity("usuario", $new_user);
 

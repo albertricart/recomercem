@@ -6,7 +6,7 @@ function openDB()
 {
 
     // visualiza en consola el data caller
-    getBackTrace();
+    //getBackTrace();
 
     // - - - - - DB Data conection
     if (file_exists("../../_data/db.php")) {
