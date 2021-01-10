@@ -6,7 +6,7 @@ $pageDescription = "'reComercem' es un proyecto de promoción de comercios de tu
 
 $pageKeywords = "reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought";
 
-$searchstoreSectionTitle = "Buscar Comercios";
+$sectionTitle = "Buscar Comercios";
 
 $sectionDescription = "";
 
