@@ -1,4 +1,5 @@
 {
+    "game-desc": "Mou la cistella per a recollir els productes i obtenir punts. Aconsegueix 500 punts o més per a demanar el teu tiquet de descompte!", 
     "parameters": "Paràmetres",
     "language": "Idioma",
     "tutorial": "Tutorial",
@@ -29,9 +30,9 @@
     "points": "Punts",
     "lives": "Vides",
     "event": "Esdeveniment",
-    "current": "actual",
-    "next": "següent",
-    "settings": "Configuració",
+    "current": "Temps restant",
+    "next": "Següent esdeveniment en ",
+    "settings": "CONFIGURACIÓ",
     "code": "Codi",
     "timeLeft": "restant",
     "continue": "CONTINUAR",

@@ -1,31 +1,3 @@
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-function preloadImage(url) {
-  var img = new Image();
-  img.src = url;
-}
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
 /*========= MENUS =========*/
 var mainMenu = document.querySelector(".main-menu");
 var settingsMenu = document.querySelector(".settings-menu");
@@ -38,6 +10,7 @@ var settingsMenuBack = document.querySelector(".settings-menu-back");
 /*========= SOUNDS =========*/
 var coinSound = new Audio('./sounds/coin.mp3');
 var gameOverSound = new Audio('./sounds/gameover.wav');
+var bombSound = new Audio('./sounds/bomb.mp3');
 
 
 var objectNames = ["apple", "banana", "dress", "hat", "orange", "pants1", "pants2", "pear", "shirt", "shirt2", "shoe2", "shoe3", "skirt", "watermelon"];
@@ -98,8 +71,9 @@ settingsFab.addEventListener("click", function () {
 });
 
 window.addEventListener("mousemove", handleMouseMove);
-document.addEventListener("keypress", handleKeyPress);
+window.addEventListener("keypress", handleKeyPress);
 
+preloadImages();
 //MAIN APP
 openMainMenu();
 
@@ -142,15 +116,15 @@ function startTimer() {
       timeElapsed += 0.01;
       displayTimer.innerHTML = timeElapsed.toFixed(2) + "s";
 
-      if (nextEvent <= 0) {
-        displayEventTime.innerHTML = langArray.current + ": " + (eventDuration - eventTimer) + "s";
-      } else if (nextEvent > 0) {
-        nextEvent -= 0.01;
-        displayEventTime.innerHTML = langArray.next + ": " + nextEvent.toFixed(2) + "s";
-      }
-
       if (eventTimer == eventDuration) {
         nextEvent = eventInterval;
+      }
+
+      if(currentEvent == 0){
+        nextEvent -= 0.01;
+        displayEventTime.innerHTML = langArray.next + nextEvent.toFixed(0) + "s";
+      }else{
+        displayEventTime.innerHTML = langArray.current + ": " + (eventDuration - eventTimer).toFixed(0) + "s";
       }
     }
   }, 10);
@@ -173,38 +147,37 @@ function triggerEvent(eventId) {
       objects.forEach(object => {
         object.style.backgroundImage = getObjectUrl(object.dataset.objectimg, true);
       });
+
+      eventName = "lightsOut";
       gameContainer.style.backgroundImage = "url(./assets/back-dark.png)";
       eventIcon.style.backgroundImage = "url(./assets/lights-out.png)";
       basket.style.backgroundImage = "url(./assets/objects/dark/basket.png)";
-      eventName = langArray["lightsOut"];
+
       break;
 
     case DOUBLE_POINTS:
       pointsToAdd = 10;
-      document.querySelector(".currentEventName").innerHTML = "    Double Points";
+      eventName = "doublePoints";
       eventIcon.style.backgroundImage = "url(./assets/double-points.png)";
-      eventName = langArray["doublePoints"];
       break;
 
     case CONTROLS_INVERTED:
+      eventName = invertAxis;
       speed = 1;
-      document.querySelector(".currentEventName").innerHTML = "    Controls inverted";
       eventIcon.style.backgroundImage = "url(./assets/invert.png)";
       window.removeEventListener("mousemove", handleMouseMove);
       window.addEventListener("mousemove", handleInvertedMouseMove);
-      eventName = langArray["invertAxis"];
       break;
 
     case LOCK_Y:
-      document.querySelector(".currentEventName").innerHTML = "    Lock Y";
+      eventName = "lockY";
       eventIcon.style.backgroundImage = "url(./assets/lock.png)";
       window.removeEventListener("mousemove", handleMouseMove);
       window.addEventListener("mousemove", handleLockedMouseMove);
-      eventName = langArray["lockY"];
       break;
 
     case DODGE:
-      document.querySelector(".currentEventName").innerHTML = "    Dodge";
+      eventName = "dodge";
       eventIcon.style.backgroundImage = "url(./assets/objects/bomb.png)";
       objects.forEach(object => {
         if (isBomb(object)) {
@@ -213,9 +186,10 @@ function triggerEvent(eventId) {
           setBomb(object);
         }
       });
-      eventName = langArray["dodge"];
       break;
   }
+
+  document.querySelector(".currentEventName").innerHTML = langArray[eventName];
 }
 
 function clearEvent(event) {
@@ -223,6 +197,7 @@ function clearEvent(event) {
   document.querySelector(".currentEventName").innerHTML = "";
   clearInterval(eventTimerId);
   currentEvent = 0;
+  nextEvent = eventInterval;
   switch (event) {
     case EVENT_OBSCURE:
       objects.forEach(object => {
@@ -317,7 +292,6 @@ function removeBomb(object) {
 }
 
 function moveObjects() {
-  let name;
   objectRendererId = setInterval(function () {
     if (lives != 0) {
       for (let i = 0; i < objects.length; i++) {
@@ -357,15 +331,6 @@ function moveObjects() {
         }
       }
     } else {
-      gameContainer.style.cursor = "auto";
-      basket.style.display = "none";
-      clearInterval(objectRendererId);
-      clearInterval(timerId);
-      clearInterval(eventGeneratorId);
-      eventTimer = 0;
-      nextEvent = 0;
-      selectedEvents.splice(0, selectedEvents.length);
-      gameOverSound.play();
       openGameOver();
     }
   }, 10);
@@ -395,11 +360,7 @@ function setObjectImage(object, objectName) {
   if (currentEvent == EVENT_OBSCURE) {
     object.style.backgroundImage = getObjectUrl(objectName, true);
   } else {
-    if (currentEvent == DODGE) {
-
-    }
     object.style.backgroundImage = getObjectUrl(objectName, false);
-
   }
 
 }
@@ -511,6 +472,7 @@ function increaseSpeed(x) {
 }
 
 function removeLife(lifesToRemove) {
+  bombSound.play();
   lives -= lifesToRemove;
   if (lives < 0) {
     lives = 0;
@@ -554,9 +516,8 @@ function manageMenu(elem, state, animIn, animOut) {
 
 function openMainMenu() {
   hideFab();
-  //open wrapper
-  // manageMenu(menuWrapper, 1, "animate__fadeIn", "animate__fadeOut");
   //open mainMenu
+  mainMenu.style.display = "flex";
   manageMenu(mainMenu, 1, "animate__fadeInDown", "animate__fadeOutDown");
 
   mainMenuSettings.addEventListener("click", function () {
@@ -567,6 +528,8 @@ function openMainMenu() {
     closeMainMenu();
     setTimeout(function () {
       startgame(initObjects, moveObjects, setParameters);
+      menuWrapper.style.display = "none";
+      mainMenu.style.display = "none";
     }, 1000);
   });
 }
@@ -575,15 +538,22 @@ function closeMainMenu() {
   showFab();
   //close mainMenu
   manageMenu(mainMenu, 0, "animate__fadeInDown", "animate__fadeOutDown");
-  //close wrapper
-  manageMenu(menuWrapper, 0, "animate__fadeIn", "animate__fadeOut");
-  // setTimeout(function () {
-  //   menuWrapper.style.visibility = "hidden";
-  // }, 1000);
+  menuWrapper.style.cursor = "none";
 }
 
 function openGameOver() {
-  manageMenu(menuWrapper, 1, "animate__fadeIn", "animate__fadeOut");
+  gameContainer.style.cursor = "auto";
+  basket.style.display = "none";
+  clearInterval(objectRendererId);
+  clearInterval(timerId);
+  clearInterval(eventGeneratorId);
+  eventTimer = 0;
+  nextEvent = 0;
+  selectedEvents.splice(0, selectedEvents.length);
+  gameOverSound.play();
+
+  menuWrapper.style.display = "block";
+  menuWrapper.style.cursor = "auto";
   gameOver.style.visibility = "visible";
   manageMenu(gameOver, 1, "animate__fadeInDown", "animate__fadeOutDown");
 
@@ -612,6 +582,8 @@ function closeGameOver(option) {
       //open main menu again
       setTimeout(function () {
         gameOver.style.visibility = "hidden";
+        //open mainMenu
+        mainMenu.style.display = "flex";
         manageMenu(mainMenu, 1, "animate__fadeInDown", "animate__fadeOutDown");
       }, 500);
       break;
@@ -647,7 +619,6 @@ function hideFab() {
   //close fab
   setTimeout(function () {
     manageMenu(fab, 0, "animate__slideInUp", "animate__fadeOutDown");
-    fab.style.visibility = "hidden";
   }, 1000);
 }
 
@@ -656,6 +627,21 @@ function hideFab() {
  *  MISC
  *
  */
+
+function preloadImages() {
+  gameContainer.style.backgroundImage = "url(./assets/back-dark.png)";
+  gameContainer.style.backgroundImage = "url(./assets/back.png)";
+  // var img = new Image();
+  // img.src = "url(../assets/back.png)";
+  // img.src = "url(../assets/back-dark.png)";
+  // img.src = "url(../assets/objects/bomb.png)";
+  // img.src = "url(../assets/objects/dark/bomb.png)";
+  // objectNames.forEach(imageName => {
+  //   img.src = "url(../assets/objects/ " + imageName + ".png)";
+  //   img.src = "url(../assets/objects/dark/ " + imageName + ".png)";
+  // });
+}
+
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);

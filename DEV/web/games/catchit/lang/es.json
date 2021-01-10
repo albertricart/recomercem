@@ -1,4 +1,5 @@
 {
+    "game-desc": "Mueve la cesta para recoger productos con los que obtendrás puntos. Consigue 500 puntos o más para pedir tu ticket de descuento!",
     "parameters": "Parámetros",
     "language": "Idioma",
     "tutorial": "Tutorial",
@@ -29,9 +30,9 @@
     "points": "Puntos",
     "lives": "Vidas",
     "event": "Evento",
-    "current": "actual",
-    "next": "siguiente",
-    "settings": "Configuración",
+    "current": "Tiempo restante",
+    "next": "Siguiente evento en ",
+    "settings": "CONFIGURACIÓN",
     "code": "Código",
     "timeLeft": "restante",
     "continue": "CONTINUAR",

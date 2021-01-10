@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joc</title>
+    <title>Catch It | reComercem: El teu comerç de proximitat al barri</title>
     <link rel="shortcut icon" href="assets/catch-image.png" />
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -14,17 +14,24 @@
 <body>
 
     <div class="catch-it-nav">
-        <?
+        <?php
         // - - - - - - - - - - - - - - - - - - - - Logo & Menu Part =>
         if ( file_exists( "../../_php_partials/00_game_header.php" ) ) { include_once("../../_php_partials/00_game_header.php"); }
         // - - - - - - - - - - - - - - - - - - - - Logo & Menu Part //
         ?>
+
+        <script> </script>
     </div>
 
     <div class="catch-it-app">
         <div class="menu-wrapper animate__animated">
             <div class="main-menu animate__animated">
-                <h1 style="flex: 1;">CATCH IT</h1>
+                <h1>CATCH IT</h1>
+                <div class="game-desc">
+                    <div style="background-image: url('./assets/info.svg'); margin-right: 10px; width:100px; height:50px; background-size: contain; background-repeat: no-repeat;"></div>
+                    <p class="lang" key="game-desc" style="margin: 0;"></p>
+                </div>
+                
                 <div class="main-menu-opts">
                     <div class="main-menu-game-start opt lang" key="play">PLAY</div>
                     <div class="main-menu-game-settings opt lang" key="settings">SETTINGS</div>
@@ -208,15 +215,14 @@
                     <p id="lives" class="animate__animated">0</p>
                 </div>
                 <div class="game-info__event">
-                    <span class="game-event lang" key="event" style="flex: 1;">Event</span>
-                    <div class="game-info__event-desc" style="text-align: center;">
+                    <span class="game-event lang" key="event">Event</span>
+                    <div class="game-info__event-desc">
+                        <p id="eventTime" style="margin:0;"> <span class="eventTimeText"> </span></p> 
                         <div class="displayInfoCurrentEvent">
                             <div class="game-info__event__icon animate__animated">
                             </div>
-                            <span class="currentEventName" style="vertical-align: middle;"></span>
+                            <span class="currentEventName" style="margin-top: 12px; margin-left: 5px;"></span>
                         </div>
-
-                        <span id="eventTime"> <span class="eventTimeText"> </span></span>
                     </div>
                 </div>
             </div>

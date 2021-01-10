@@ -32,7 +32,16 @@ body {
     z-index: inherit;
 }
 
-
+.game-desc {
+    display: flex;
+    font-weight: 450;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding: 20px 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .95);
+    text-align: left;
+}
 
 .language-selection {
     display: flex;
@@ -73,22 +82,27 @@ body {
     align-content: center;
 
     &-opts {
-        flex: 3;
+        flex: 1;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-content: center;
+        padding: 0px 50px;
+    }
+
+    h2 {
+        margin: 0;
     }
 }
 
 
 .main-menu {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 30%;
     margin: auto;
     width: 35%;
-    height: 40%;
+    height: 50%;
     background-color: #ffe6e6;
     color: black;
     text-align: center;
@@ -104,7 +118,7 @@ body {
 
 
     &-opts {
-        flex: 5;
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -113,20 +127,23 @@ body {
 }
 
 .opt {
-    width: fit-content;
+    min-width: 50%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     align-self: center;
-    padding: 15px 50px;
-    background-color: $c_primary;
-    border: 1px solid $c_primary;
-    border-radius: 4px;
+    border-radius: 8px;
     text-align: center;
     color: white;
+    font-weight: 500;
     transition: all 0.25s ease;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 1px solid var(--colPrimary);
+    background-color: var(--colPrimary);
 
     &:hover {
         cursor: pointer;
-        color: black;
-        background-color: white;
+        box-shadow: inset 0px 0px 1px 3px rgba(235, 235, 235, 0.671);
     }
 }
 
@@ -137,7 +154,7 @@ body {
     left: 25%;
     margin: auto;
     visibility: hidden;
-    background-color: $c_primary;
+    background-color: var(--colPrimary);
     width: 90vh;
     height: 60%;
     border-bottom-left-radius: 8px;
@@ -164,10 +181,13 @@ body {
             padding-bottom: 15px;
             font-weight: 500;
             transition: all 0.3s ease;
+            border-radius: 4px;
+            box-sizing: border-box;
+
 
             &:hover {
                 cursor: pointer;
-                background-color: $c_accent_light;
+                box-shadow: inset 0px 0px 1px 3px rgba(235, 235, 235, 0.671);
             }
 
         }
@@ -338,10 +358,8 @@ body {
         border-radius: 10px;
         margin: 5px;
         padding: 2px;
-
-        &-desc {
-            flex: 4;
-        }
+        display: flex;
+        flex-direction: column;
 
         &__icon {
             width: 45px;
@@ -351,13 +369,22 @@ body {
             background-size: contain;
             align-self: center;
         }
+
+        &-desc {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
     }
 }
 
 .displayInfoCurrentEvent {
     display: flex;
-    display: row;
+    flex-direction: row;
     justify-content: center;
+    vertical-align: middle;
 }
 
 .game-parameters {
@@ -366,10 +393,11 @@ body {
     z-index: 3000;
 
     .fab-container {
+        visibility: hidden;
         position: fixed;
         bottom: 20px;
         right: 20px;
-        z-index: 999;
+        z-index: 5000;
         cursor: pointer;
 
         &:hover {
@@ -399,9 +427,9 @@ body {
     }
 
     .fab {
-        visibility: hidden;
-        width: 60px;
-        height: 60px;
+        visibility: visible;
+        width: 70px;
+        height: 70px;
         background-color: $c_primary;
         background-image: url("../assets/menu-light.png");
         background-position: center;

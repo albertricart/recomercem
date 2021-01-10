@@ -1,4 +1,5 @@
 {
+    "game-desc": "Move the basket to pick up products that will earn you points. Get 500 points or more in order to claim your discount!",
     "parameters": "Parameters",
     "language": "Language",
     "tutorial": "Tutorial",
@@ -29,9 +30,9 @@
     "points": "Points",
     "lives": "Lives",
     "event": "Event",
-    "current": "current",
-    "next": "next",
-    "settings": "Settings",
+    "current": "Time left",
+    "next": "Next event in ",
+    "settings": "SETTINGS",
     "code": "Code",
     "timeLeft": "left",
     "continue": "CONTINUE",

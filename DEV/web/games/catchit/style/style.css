@@ -25,6 +25,16 @@ body {
 #menuBox.menuVisible {
   z-index: inherit; }
 
+.game-desc {
+  display: flex;
+  font-weight: 450;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.95);
+  text-align: left; }
+
 .language-selection {
   display: flex;
   flex-direction: column; }
@@ -61,19 +71,22 @@ body {
   flex-direction: column;
   align-content: center; }
   .game-over-opts {
-    flex: 3;
+    flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-content: center; }
+    align-content: center;
+    padding: 0px 50px; }
+  .game-over h2 {
+    margin: 0; }
 
 .main-menu {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 30%;
   margin: auto;
   width: 35%;
-  height: 40%;
+  height: 50%;
   background-color: #ffe6e6;
   color: black;
   text-align: center;
@@ -87,26 +100,29 @@ body {
   flex-direction: column;
   align-content: center; }
   .main-menu-opts {
-    flex: 5;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-content: center; }
 
 .opt {
-  width: fit-content;
+  min-width: 50%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   align-self: center;
-  padding: 15px 50px;
-  background-color: #B51D19;
-  border: 1px solid #B51D19;
-  border-radius: 4px;
+  border-radius: 8px;
   text-align: center;
   color: white;
-  transition: all 0.25s ease; }
+  font-weight: 500;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  margin: 5px;
+  border: 1px solid var(--colPrimary);
+  background-color: var(--colPrimary); }
   .opt:hover {
     cursor: pointer;
-    color: black;
-    background-color: white; }
+    box-shadow: inset 0px 0px 1px 3px rgba(235, 235, 235, 0.671); }
 
 .settings-menu {
   position: absolute;
@@ -114,7 +130,7 @@ body {
   left: 25%;
   margin: auto;
   visibility: hidden;
-  background-color: #B51D19;
+  background-color: var(--colPrimary);
   width: 90vh;
   height: 60%;
   border-bottom-left-radius: 8px;
@@ -138,10 +154,12 @@ body {
       padding-top: 15px;
       padding-bottom: 15px;
       font-weight: 500;
-      transition: all 0.3s ease; }
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      box-sizing: border-box; }
       .settings-menu-nav__opt:hover {
         cursor: pointer;
-        background-color: #939BB1; }
+        box-shadow: inset 0px 0px 1px 3px rgba(235, 235, 235, 0.671); }
     .settings-menu-nav__icon {
       margin: auto;
       width: 30px;
@@ -260,9 +278,9 @@ body {
     background-color: #B51D19;
     border-radius: 10px;
     margin: 5px;
-    padding: 2px; }
-    .game-info__event-desc {
-      flex: 4; }
+    padding: 2px;
+    display: flex;
+    flex-direction: column; }
     .game-info__event__icon {
       width: 45px;
       height: 45px;
@@ -270,21 +288,29 @@ body {
       background-repeat: no-repeat;
       background-size: contain;
       align-self: center; }
+    .game-info__event-desc {
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly; }
 
 .displayInfoCurrentEvent {
   display: flex;
-  display: row;
-  justify-content: center; }
+  flex-direction: row;
+  justify-content: center;
+  vertical-align: middle; }
 
 .game-parameters {
   grid-area: parameters;
   background-color: #E8B3A8;
   z-index: 3000; }
   .game-parameters .fab-container {
+    visibility: hidden;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 999;
+    z-index: 5000;
     cursor: pointer; }
     .game-parameters .fab-container:hover {
       opacity: 0.8; }
@@ -304,9 +330,9 @@ body {
       font-size: 25px;
       color: #ffffff; }
   .game-parameters .fab {
-    visibility: hidden;
-    width: 60px;
-    height: 60px;
+    visibility: visible;
+    width: 70px;
+    height: 70px;
     background-color: #B51D19;
     background-image: url("../assets/menu-light.png");
     background-position: center;
