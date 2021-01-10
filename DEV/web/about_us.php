@@ -40,7 +40,7 @@ include_once("_php_partials/02_header.php");
 
     <div class="text">
         <p>
-            Somos un grupo de 3 alumnos del <b>Centre D'Estudis Politecnics</b>, que nos hemos juntado para crear este proyecto, "Recomerçem".
+            <b>Xtrem</b> somos un grupo de 3 alumnos del <b>Centre D'Estudis Politecnics</b>, que nos hemos juntado para crear este proyecto, "Recomerçem".
         </p>
         <br>
         <p>
