@@ -4,8 +4,18 @@
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'reComercem: El teu comerç de proximitat al barri';
 $pageKeywords = 'reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
+// - - - - - - - - - - - - - - - - - - - - ADD CSSs & JSs SCRIPTS
 $pageStylesAry = Array( 'index'=>'/css/index.css', 'searchform'=>'/css/search_form.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
@@ -39,11 +49,11 @@ include_once("_php_partials/02_header.php");
             	c-0.85-0.66-1.92-1.06-3.08-1.06c-2.76,0-5,2.24-5,5C105.999,118.559,106.709,119.949,107.819,120.859z"/>
             </svg>
         </div>
-        <h2 class="optntitle">Search<br />Store</h2>
+        <h2 class="optntitle"><?=$searchstoreItemTitle?></h2>
         <a id="menuStores" href="/search_stores.html" target="_self">
-            <button type="button" class="optnbutton">Find</button>
+            <button type="button" class="optnbutton"><?=$searchstoreItemButton?></button>
         </a>
-        <p class="optntext">Encuentra el comercio de proximidad que necesitas, toda la información por sector, nombre, etiquetas.</p>
+        <p class="optntext"><?=$searchstoreItemSpeach?></p>
     </div>
 
     <div class="optcontainer">
@@ -65,11 +75,11 @@ include_once("_php_partials/02_header.php");
                 c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
             </svg>
         </div>
-        <h2 class="optntitle">Game<br />Discounts</h2>
+        <h2 class="optntitle"><?=$gamediscountsItemTitle?></h2>
         <a id="menuGames" href="/play_games.html" target="_self">
-            <button type="button" class="optnbutton">Play</button>
+            <button type="button" class="optnbutton"><?=$gamediscountsItemButton?></button>
         </a>
-        <p class="optntext">Participa, diviértete y gana fantasticos tickets de descuentos en los comercios del barrio</p>
+        <p class="optntext"><?=$gamediscountsItemSpeach?></p>
     </div>
 
     <div class="optcontainer">
@@ -94,11 +104,11 @@ include_once("_php_partials/02_header.php");
                 L55.244,60.391z"/></g></g></g>
             </svg>
         </div>
-        <h2 class="optntitle">Last<br />Offers</h2>
+        <h2 class="optntitle"><?=$lastoffersItemTitle?></h2>
         <a id="menuOffers" href="/last_offers.html" target="_self">
-            <button type="button" class="optnbutton">View</button>
+            <button type="button" class="optnbutton"><?=$lastoffersItemButton?></button>
         </a>
-        <p class="optntext">Descubre las últimas ofertas y novedades de los comecios de cercanía</p>
+        <p class="optntext"><?=$lastoffersItemSpeach?></p>
     </div>
 
 </div>
@@ -145,20 +155,20 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c0-1.79-0.94-3.36-2.35-4.25c-0.07-0.11-0.16-0.23-0.25-0.34l-26.9-32.48c-0.38-0.46-0.88-0.75-1.42-0.87
             c-0.85-0.66-1.92-1.06-3.08-1.06c-2.76,0-5,2.24-5,5C105.999,118.559,106.709,119.949,107.819,120.859z"/>
         </svg>
-        Search Store
+        <?=$searchstoreSectionTitle?>
     </h1>
 
     <form action="/search_stores.html" method="POST" target="_self" id="searchForm">
-        <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="Nombre de comercio" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
+        <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="<?=$bynameText?>" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
         <select id="bytype" name="bytype" type="text" class="searchFormInput">
-            <option value="0">Tipo de Comercio</option>
+            <option value="0"><?=$bytypeText?></option>
             <? $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
             foreach( $TipoAry as $tmpData ) {
             ?><option value="<?=$tmpData['id']; ?>"<?=((!empty($_POST['bytype']) && $_POST['bytype']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['nombre']; ?></option><? 
             } ?>
         </select>
-        <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="Etiquetas separadas por coma" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
-        <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()">Buscar</button>
+        <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="<?=$bytagText?>" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
+        <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()"><?=$searchText?></button>
     </form>
 
     <ul class="listStoreItemsMain">
@@ -180,7 +190,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
         <a href="/search_stores.html?xim=<?=$theData['id']?>" target="_self">
         <li class="listStoreItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">
             <div class="listStoreItemBox">
-                <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2><? /* <p class="listStoreItemText"><?=$theData['descripcion']?></p> */ ?>
+                <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2>
             </div>
         </li>
         </a>
@@ -217,7 +227,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             C97.1,57.25,94.54,59.83,91.38,59.83z M113.35,59.83c-3.15,0-5.71-2.58-5.71-5.76c0-3.18,2.56-5.76,5.71-5.76
             c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
         </svg>
-        Game Discounts
+        <?=$gamediscountsSectionTitle?>
     </h1>
 
     <ul class="listGameItemsMain">
@@ -280,7 +290,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c1.16,0.54,1.74,2.2,1.18,3.39l-14.73,31.6c-0.56,1.19-2.2,1.81-3.35,1.27l-0.91-0.43c-1.16-0.53-1.73-2.19-1.18-3.38
             L55.244,60.391z"/></g></g></g>
         </svg>
-        Last Offers
+        <?=$lastoffersSectionTitle?>
     </h1>
 
     <ul class="listOfferItemsMain">

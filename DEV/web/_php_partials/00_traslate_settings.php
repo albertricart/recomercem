@@ -2,9 +2,25 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Set Language =>
 
-if ( !empty( $_REQUEST['lx'] ) ) { $setLanguage = $_REQUEST['lx']; } 
-else if ( !empty( $_COOKIE['setLanguage'] ) ) { $setLanguage = $_COOKIE['setLanguage']; } 
-else { $setLanguage = 'esp'; }
+if ( !empty( $_REQUEST['lx'] ) ) { 
+
+    $setLanguage = $_REQUEST['lx']; 
+
+$flags = '!empty( $_REQUEST["lx"] ) - '.$_REQUEST['lx'];
+
+} else if ( !empty( $_COOKIE['setLanguage'] ) ) {
+
+    $setLanguage = $_COOKIE['setLanguage']; 
+
+$flags = '!empty( $_COOKIE["setLanguage"] )'.$_COOKIE['setLanguage'];
+
+} else {
+
+    $setLanguage = 'esp';
+
+$flags = '!empty( $_REQUEST["setLanguage"] ) && !empty( $_COOKIE["setLanguage"] ) - '.$setLanguage;
+
+}
 
 if ( PHP_VERSION_ID < 70300 ) { 
 
@@ -16,14 +32,12 @@ if ( PHP_VERSION_ID < 70300 ) {
         'httponly' => false,    // or false
         'samesite' => 'Strict' // None || Lax  || Strict
         );
-
     setcookie( "setLanguage", $setLanguage, $cookieOpts ); 
 
 } else { 
 
     // setcookie( "setLanguage", $setLanguage, $cookieOpts['expires'], $cookieOpts['path'], $cookieOpts['domain'], $cookieOpts['secure'], $cookieOpts['httponly'] ); 
     $expiresDate = gmdate('D, d M Y H:i:s', time()+60*60*24*7 ).' GMT';
-
     header("Set-Cookie: setLanguage=".$setLanguage."; expires=".$expiresDate."; SameSite=Strict");
 
 }

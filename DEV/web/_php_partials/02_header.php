@@ -37,7 +37,7 @@
         c14.36,0,26-11.64,26-26.01c0-14.36-11.64-26-26-26C11.64,0,0,11.64,0,26c0,4.37,1.08,8.49,2.98,12.1L0,52.01L12.43,48.19z"/>
     </svg>
 
-    <ul id="langSelec" class="menuHidden" data-close="menuHidden" data-open="menuVisible" style="list-style: none; overflow: hidden; position: absolute; right: 120px; height: 0; width: auto; min-width: 100px; margin: 10px 0 0; padding: 0px; transition: height 2s; visibility: hidden; background-color: var(--colWhite); box-shadow: 0px 1px 2px rgba(0,0,0,.35); z-index: 99;">
+    <ul id="langSelec" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
         <li class="menuItem"><a id="langEsp" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=esp"?>" target="_self" class="menuLink">Español</a></li>
         <li class="menuItem"><a id="langCat" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=cat"?>" target="_self" class="menuLink">Català</a></li>
         <li class="menuItem"><a id="langEng" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=eng"?>" target="_self" class="menuLink">English</a></li>
