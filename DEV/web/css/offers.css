@@ -23,7 +23,8 @@
     box-shadow: 1px 1px 5px black;
 }
 .listOfferItemBox { 
-    background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );
+    /*background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );*/
+    background-color: rgba(0,0,0,.65);
     position: absolute; 
     top: 0;
     right: 0; 
@@ -35,7 +36,7 @@
     padding: 20px 20px 0; 
     text-align: center; 
     font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 26px; 
+    font-size: 20px; 
     letter-spacing: 2px; 
     font-weight: normal; 
     color: var(--colWhite);
@@ -45,8 +46,16 @@
     padding: 20px; 
     text-align: left; 
     font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 18px; 
+    font-size: 14px; 
     letter-spacing: 1px; 
     line-height: 140%; 
     color: var(--colWhite);
+}
+
+
+
+@media (max-width: 750px) { 
+
+    .listOfferItemsMain { grid-template-columns: 1fr; margin-bottom: 10px; }
+
 }

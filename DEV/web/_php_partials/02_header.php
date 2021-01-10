@@ -18,7 +18,7 @@
     C3.27,13.45,13.45,3.27,26.01,3.27z M26.01,0C11.64,0,0,11.64,0,26c0,14.37,11.64,26.01,26.01,26.01c14.36,0,26-11.64,26-26.01
     C52.01,11.64,40.37,0,26.01,0z"/></svg>
 
-    <svg id="iconLanguage" x="0px" y="0px" width="52.01px" height="52.01px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01">
+    <svg id="iconLanguage" x="0px" y="0px" width="52.01px" height="52.01px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01" onclick="viewLang()">
     <path fill="currentColor" d="M30.65,11.1c4.88,1.52,8.74,5.38,10.26,10.26c-1.84-1.24-4.39-2.24-7.39-2.87
         C32.89,15.49,31.89,12.94,30.65,11.1z M41.61,25.98V26c0,2.62-3.06,4.06-7.62,4.74c0.19-1.51,0.29-3.1,0.29-4.74
         c0-1.63-0.1-3.22-0.29-4.73C38.54,21.94,41.59,23.38,41.61,25.98z M40.91,30.65c-1.53,4.88-5.38,8.73-10.26,10.25
@@ -36,6 +36,12 @@
         l0.22-0.94C3.96,33.79,2.93,30.01,2.93,26C2.93,13.26,13.26,2.93,26.01,2.93z M12.43,48.19c3.95,2.42,8.6,3.82,13.58,3.82
         c14.36,0,26-11.64,26-26.01c0-14.36-11.64-26-26-26C11.64,0,0,11.64,0,26c0,4.37,1.08,8.49,2.98,12.1L0,52.01L12.43,48.19z"/>
     </svg>
+
+    <ul id="langSelec" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
+        <li class="menuItem"><a id="langEsp" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=esp"?>" target="_self" class="menuLink">Español</a></li>
+        <li class="menuItem"><a id="langCat" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=cat"?>" target="_self" class="menuLink">Català</a></li>
+        <li class="menuItem"><a id="langEng" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=eng"?>" target="_self" class="menuLink">English</a></li>
+    </ul>
 
     <ul id="menuBox" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
         <li class="menuItem"><a id="menuHome" href="/index.html" target="_self" class="menuLink">Home</a></li>

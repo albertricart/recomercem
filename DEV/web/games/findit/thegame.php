@@ -29,6 +29,11 @@
 	// - - - - - - - - - - - - - - - - - - - - Logo & Menu Part //
 	?>
 
+	<div id="langBox" style="position: fixed; top: 90px; left: 10px;">
+		<h5 id="langTitle" style="margin: 0 0 5px;">Languages:</h5>
+		<ul id="langList" style="padding: 0 0 0 15px; margin: 0;"></ul>
+	</div>
+
 	<!-- 
 	Define contenedor principal del juego base blanco del juego 90%. 
 	Ratio pantalla juego (imagen) 16:9 - Con un max-width: 1280px el height: 720px (1280 / 16 = 80 * 9 = 720) 
@@ -65,10 +70,7 @@
 			<ul id="thingsListBox" data-open="1"><h5 id="itmlistH5">Find:</h5></ul>
 
 			<!-- Definir Help Data -->
-			<div id="helpDataBox" data-open="0" style="display:none;">
-				<h5 id="itmlistH5">Help Data:</h5>
-				<p>Please, follow the instructions to get the maximun points & get discount tickets !!!</p>
-			</div>
+			<div id="helpDataBox" data-open="0"></div>
 
 		</div>
 

@@ -1,3 +1,8 @@
+/*========= MENUS =========*/
+var menuOpts = document.querySelectorAll(".js-menu-opt");
+var previousTab = document.querySelector(menuOpts[0].dataset.tab);
+
+/*========= GAME PARAMETERS =========*/
 var speedControl = document.getElementById("speed");
 var speedIncrementControl = document.getElementById("speedIncrement");
 var livesControl = document.getElementById("chooseLives");
@@ -11,6 +16,8 @@ var checkboxLightsOut = document.getElementById("lightsOut");
 var checkboxDoublePoints = document.getElementById("pointsX2");
 var checkboxLockY = document.getElementById("lockY");
 var checkboxInvertAxis = document.getElementById("invertAxis");
+var checkboxDodge = document.getElementById("dodge");
+var controlButtons = document.querySelectorAll(".control-binding");
 var buttonUp = document.getElementById("up");
 var buttonDown = document.getElementById("down");
 var buttonLeft = document.getElementById("left");
@@ -18,20 +25,36 @@ var buttonRight = document.getElementById("right");
 var radioCa = document.getElementById("radioCa");
 var radioEn = document.getElementById("radioEn");
 var radioEs = document.getElementById("radioEs");
-var difficultyValue = difficultyControl.value;
-var output = document.getElementById("demo");
-var controlButtons = document.querySelectorAll(".control-binding");
 
-
-var menuOpts = document.querySelectorAll(".js-menu-opt");
-var previousTab = document.querySelector(menuOpts[0].dataset.tab);
-displayMenuOpt(previousTab, menuOpts[0].dataset.tab);
-
-var keyUp ;
-var keyLeft ;
+/*========= USER KEYBOARD CONTROLS =========*/
+var keyUp;
+var keyLeft;
 var keyDown;
 var keyRight;
+
+/*========= LANGUAGE MANAGEMENT =========*/
+var lang = navigator.language.substring(0, 2);
+var langArray;
+var translatables = document.querySelectorAll(".lang");
+
+/*========= MISC =========*/
+var difficultyValue = difficultyControl.value;
+
+displayMenuOpt(previousTab, menuOpts[0].dataset.tab);
+getLanguageJson();
 setControls();
+
+eventIntervalControl.onchange = function () {
+  if (parseInt(eventIntervalControl.value) <= parseInt(eventDurationControl.value)) {
+    eventDurationControl.value = eventIntervalControl.value;
+  }
+};
+
+eventDurationControl.onchange = function () {
+  if (parseInt(eventDurationControl.value) >= parseInt(eventIntervalControl.value)) {
+    eventIntervalControl.value = eventDurationControl.value;
+  }
+};
 
 buttonUp.addEventListener("keypress", function (e) {
   setCookie("keyUp", e.code);
@@ -80,6 +103,7 @@ setCustomOnInput(checkboxLightsOut, null);
 setCustomOnInput(checkboxDoublePoints, null);
 setCustomOnInput(checkboxLockY, null);
 setCustomOnInput(checkboxInvertAxis, null);
+setCustomOnInput(checkboxDodge, null);
 
 for (var x = 0; x < menuOpts.length; x++) {
   menuOpts[x].addEventListener("click", function () {
@@ -113,50 +137,29 @@ function displayMenuOpt(tab, tabName) {
 
     case "#tabCtrl":
       displayKeyControls();
+      //alert(document.cookie);
       break;
 
     case "#tabLang":
       manageLanguage();
       break;
-
-    case "#tabTuto":
-      break;
   }
 }
 
-function manageLanguage() {
-  lang = navigator.language.substring(0, 2);
-  switch (lang) {
-    case "en":
-      radioEn.checked = true;
-      break;
-
-    case "es":
-      radioEs.checked = true;
-      break;
-
-    case "ca":
-      radioCa.checked = true;
-      break;
-
-      default:
-        radioEn.checked = true;
-        break;
-  }
-}
+/*========= GAME PARAMETERS =========*/
 
 function updateParameters() {
   switch (difficultyValue) {
     case "Easy":
-      asignParametersValues(1, 1, 25, 10, 5, true, false, true, false);
+      asignParametersValues(1, 1, 25, 10, 5, true, false, true, false, true);
       break;
 
     case "Normal":
-      asignParametersValues(1, 1, 15, 7, 5, true, true, true, false);
+      asignParametersValues(2, 1, 15, 7, 5, true, true, true, false, true);
       break;
 
     case "Hard":
-      asignParametersValues(3, 2, 15, 13, 5, true, true, true, true);
+      asignParametersValues(2, 2, 15, 13, 5, true, true, true, true, true);
       break;
   }
 
@@ -165,17 +168,7 @@ function updateParameters() {
   livesSliderText.innerHTML = livesControl.value;
 }
 
-function asignParametersValues(
-  speed,
-  speedIncrement,
-  eventInterval,
-  eventDuration,
-  lives,
-  lightsOut,
-  doublePoints,
-  lockY,
-  invertAxis
-) {
+function asignParametersValues(speed, speedIncrement, eventInterval, eventDuration, lives, lightsOut, doublePoints, lockY, invertAxis, dodge) {
   speedControl.value = speed;
   speedIncrementControl.value = speedIncrement;
   eventIntervalControl.value = eventInterval;
@@ -185,7 +178,10 @@ function asignParametersValues(
   checkboxDoublePoints.checked = doublePoints;
   checkboxLockY.checked = lockY;
   checkboxInvertAxis.checked = invertAxis;
+  checkboxDodge.checked = dodge;
 }
+
+/*========= USER KEYBOARD CONTROLS =========*/
 
 function displayKeyControls() {
   for (let i = 0; i < controlButtons.length; i++) {
@@ -205,11 +201,7 @@ function awaitBindingResponse(elem) {
   });
 }
 
-function setCookie(cname, cvalue) {
-  document.cookie = cname + "=" + cvalue + "; expires=Tue, 19 Jan 2038 03:14:07 UTC" ;
-}
-
-function setControls(){
+function setControls() {
   keyUp = getCookie("keyUp");
   keyLeft = getCookie("keyLeft");
   keyDown = getCookie("keyDown");
@@ -227,7 +219,13 @@ function setControls(){
   if (getCookie("keyRight") == "") {
     keyRight = "KeyD";
   }
+}
 
+/*========= COOKIES =========*/
+
+function setCookie(cname, cvalue) {
+  document.cookie =
+    cname + "=" + cvalue + "; expires=Tue, 19 Jan 2038 03:14:07 UTC";
 }
 
 function getCookie(cname) {
@@ -243,4 +241,66 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+/*========= LANGUAGE =========*/
+
+function manageLanguage() {
+  radioCa.onchange = function () {
+    lang = "ca";
+    getLanguageJson();
+  };
+
+  radioEn.onchange = function () {
+    lang = "en";
+    getLanguageJson();
+  };
+
+  radioEs.onchange = function () {
+    lang = "es";
+    getLanguageJson();
+  };
+
+  switch (lang) {
+    case "en":
+      radioEn.checked = true;
+      break;
+
+    case "es":
+      radioEs.checked = true;
+      break;
+
+    case "ca":
+      radioCa.checked = true;
+      break;
+
+    default:
+      radioEn.checked = true;
+      lang = "en";
+      break;
+  }
+}
+
+function getLanguageJson() {
+  fetch("./lang/" + lang + ".json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP error " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setLanguage(data);
+    })
+    .catch(function () {
+      this.dataError = true;
+    });
+}
+
+function setLanguage(data) {
+  langArray = data;
+  translatables.forEach((element) => {
+    let key = element.getAttribute("key");
+    element.innerHTML = langArray[key];
+  });
 }

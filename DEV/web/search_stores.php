@@ -1,11 +1,21 @@
 <?php
 
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
-$pageTitle = ' Search Stores | reComercem: El teu comerç de proximitat al barri';
-$pageDescription = '"Store Search" let you find the service and products offered need near you';
-$pageKeywords = 'Store, Search, Service, find, service, products, offered, near, you, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
-$pageStylesAry = Array( 'search'=>'/css/search.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
+$pageTitle = "Search Stores | reComercem: El teu comerç de proximitat al barri";
+$pageDescription = "'Store Search' let you find the service and products offered need near you";
+$pageKeywords = "Store, Search, Service, find, service, products, offered, near, you, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought";
+// - - - - - - - - - - - - - - - - - - - - ADD CSSs & JSs SCRIPTS
+$pageStylesAry = Array( 'search'=>'/css/search.css', 'searchform'=>'/css/search_form.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
@@ -15,6 +25,9 @@ include_once("_php_partials/02_header.php");
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
 
 // - - - - - Tables Data
 $fileLink = "../_data/tb_data.php"; 
@@ -36,7 +49,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainOffers" class="artlBox">
 
     <h1 class="artlTitle">
-        <svg id="icon_search2" viewBox="0 0 145 156" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_search2" viewBox="0 0 145 156" class="artlTitleIcon">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M34.719,62.879v37.75c0,3.85,1.5,5.37,5.31,5.37h39.41v-33.93
             h21.25v33.93h0.28c3.81,0,5.31-1.52,5.31-5.37v-37.75l3.83,0.7c1.68,0,2.25-1.09,1.67-3.08l-5.27-15.51
             c-0.18-0.61-0.44-1.11-0.79-1.48v-3.54c0-1.64-1.32-2.97-2.94-2.97h-65.68c-1.62,0-2.94,1.33-2.94,2.97v5.94l0.01,0.16l-4.95,14.43
@@ -54,47 +67,142 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c0-1.79-0.94-3.36-2.35-4.25c-0.07-0.11-0.16-0.23-0.25-0.34l-26.9-32.48c-0.38-0.46-0.88-0.75-1.42-0.87
             c-0.85-0.66-1.92-1.06-3.08-1.06c-2.76,0-5,2.24-5,5C105.999,118.559,106.709,119.949,107.819,120.859z"/>
         </svg>
-        Search Offers
+        <?=$sectionTitle?>
     </h1>
 
+    <?=((!empty($sectionDescription))?'<p>'.$sectionDescription.'<p/>':'')?>
+
+    <form action="/search_stores.html" method="POST" target="_self" id="searchForm">
+        <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="<?=$bynameText?>" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
+        <select id="bytype" name="bytype" type="text" class="searchFormInput">
+            <option value="0"><?=$bytypeText?></option>
+            <? $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
+            foreach( $TipoAry as $tmpData ) {
+            ?><option value="<?=$tmpData['id']; ?>"<?=((!empty($_POST['bytype']) && $_POST['bytype']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['nombre']; ?></option><? 
+            } ?>
+        </select>
+        <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="<?=$bytagText?>" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
+        <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()"><?=$searchText?></button>
+    </form>
+
+    <?php
+
+    // - - - - - - - - - - get Comerc Data =>
+
+    $the_search = "";
+    if (!empty($_POST['byname'])) { $the_search .= ((!empty($the_search))?' AND':' WHERE')." nombre LIKE '%".trim($_POST['byname'])."%'"; }
+    if (!empty($_POST['bytype'])) { $the_search .= ((!empty($the_search))?' AND':' WHERE')." tipo = ".trim($_POST['bytype']); }
+    $the_tags = "";
+    if (!empty($_POST['bytag'])) { 
+        $tagsAry = explode( ',', trim($_POST['bytag']));
+        foreach( $tagsAry as $tmpData ) { $the_tags .= ((!empty($the_tags))?' AND ':'')." etiquetas LIKE '%".trim($tmpData)."%'"; }
+    }
+    if(!empty($the_tags)) { $the_search .= ((!empty($the_search))?' AND':' WHERE')." ".$the_tags; }
+    //echo '<br><br>'.print_r($_POST, true).'<br><br>';        
+    echo '<script>console.log("'.$the_search.'")</script>';
+
+    if (!empty($_REQUEST['xim'])) { $xim=intval($_REQUEST['xim']); } else { $xim=0; }
+
+    $EntitiesAry = GetIdedArray( getEntity( "comerc", $xim, 1, 0, 0, $the_search ) );
+
+    // - - - - - - - - - - get Comerc Data //         
+
+    if ( !empty( $EntitiesAry ) ) {
+
+        if ( $xim != 0 ) {
+
+    ?>
+
+    <img id="storeImage" src="/images/uploaded/<?=$EntitiesAry[$xim]['cid']?>.jpg" />
+    <h2 class="storeTitle"><?=$EntitiesAry[$xim]['nombre']?></h2>
+    <p class="storeText"><?=$EntitiesAry[$xim]['descripcion']?></p>
+    <p class="storeText"><?=$EntitiesAry[$xim]['direccion']?></p>
+    <p class="storeText"><?=$EntitiesAry[$xim]['telefono']?></p>
+    <p class="storeText"><?=$TipoAry[$EntitiesAry[$xim]['tipo']]['nombre']?></p>
+    <p class="storeText"><?=$EntitiesAry[$xim]['etiquetas']?></p>
+    <div style="clear: both;"></div>
+
+    <h2 class="storeSubtitle">Our Offers</h2>
+
+    <ul class="listOfferItemsMain">
+
+    <?
+
+            $OffersAry = GetIdedArray( getEntity( "oferta", 0, 1, 0, 0, ' WHERE id_comerc = '.$xim ) );
+
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
+
+            if ( !empty( $OffersAry ) ) {
+
+                foreach( $OffersAry as $theKey => $theData ) {
+
+    ?>
+
+        <li class="listOfferItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">
+        
+            <div class="listOfferItemBox">
+                <h2 class="listOfferItemTitle"><?=$theData['nombre']?></h2>
+                <p class="listOfferItemText"><?=nl2br($theData['descripcion'])?></p>
+            </div>
+        </li>
+           
+    <?php 
+
+                }
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
+
+    ?>
+
+    </ul>
+
+    <?
+
+        } else {
+
+    ?>
 
     <ul class="listStoreItemsMain">
 
+
         <?php
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
 
-        // - - - - - - - - - - get Comerc Data
-
-        $EntitiesAry = GetIdedArray( getEntity( "comerc", 0, 1, 0, 0 ) );
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
-
-        if ( !empty( $EntitiesAry ) ) {
-
-            foreach( $EntitiesAry as $theKey => $theData ) {
+                foreach( $EntitiesAry as $theKey => $theData ) {
 
         ?>
-
-        <li class="listStoreItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">
+    
+        <li class="listStoreItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);" onclick="document.getElementById('<?=$theData['cid']?>').submit()">
             <div class="listStoreItemBox">
-                <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2><? /* <p class="listStoreItemText"><?=$theData['descripcion']?></p> */ ?>
+                <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2>
             </div>
+            <form id="<?=$theData['cid']?>"  href="/search_stores.html?xim=<?=$theData['id']?>" method="POST" target="_self">
+                <input type="hidden" name="xim" value="<?=$theData['id']?>" />
+                <input type="hidden" name="byname" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
+                <input type="hidden" name="bytype" value="<?=((!empty($_POST['bytype']))?$_POST['bytype']:'')?>" />
+                <input type="hidden" name="bytag" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
+            </form>        
         </li>
-        
+
         <?php 
 
-            }
-        }
+                }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
 
         ?>
 
-        </ul>
+    </ul>
 
+    <?
 
+        }
 
+    }
 
-
+    ?>
 
 </article>
 

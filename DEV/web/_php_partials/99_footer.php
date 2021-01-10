@@ -6,12 +6,12 @@
 
     <div id="footerData">
         <h2 id="footerDataH2">Centre d'Estudis Politecnics</h2>
-        <h3 id="footerDataH3">DAW 2B - Grup 1 "Xtrem Group"</h3>
-        <a id="footerDataA" href="/projecte.html">Projecte "reComercem"</a>
+        <h3 id="footerDataH3">DAW 2B - 2020/21 - Grup 1 "Xtrem Group"</h3>
+        <a id="footerDataA" href="/projecte.html">1º Projecte ABP "reComerçem"</a>
         <ul id="footerDataUl">
-            <li>Albert Ricart</li>
-            <li>Mario de la Torre</li>
-            <li>Marcelo Goncevatt</li>
+            <a href="https://albert-ricart.jimdosite.com/" target="_blank"><li>Albert Ricart</li></a>
+            <a href="https://mdelatorreochoa.wixsite.com/misitio" target="_blank"><li>Mario de la Torre</li></a>
+            <a href="http://magomo.es" target="_blank"><li>Marcelo Goncevatt</li></a>
         </ul>
     </div>
 

@@ -9,64 +9,30 @@ body {
     color: white;
 }
 
-select {
-    background-color: $c_primary;
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 8px 25px;
-    outline: none;
-    color: white;
-    transition: all 0.25s ease;
-    font-family: $fontInter;
-    font-weight: bold;
-    &:hover {
-        cursor: pointer;
-    }
+.catch-it-nav {
+    z-index: 10000;
+    background-color: white;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 93vh;
+    left: 0;
 }
 
-input[type=number] {
-    border: 1px solid white;
-    border-radius: 5px;
-    padding: 8px 15px;
-    outline: none;
-    color: white;
-    transition: all 0.25s ease;
-    background-color: $c_primary;
-    font-family: $fontInter;
-    font-weight: bold;
+.catch-it-app {
+    position: fixed;
+    top: 7vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
-::placeholder{
-    color: white;
-    font-family: $fontInter;
+#menuBox.menuVisible {
+    z-index: inherit;
 }
 
-.slider {
-    -webkit-appearance: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    width: 20%;
-    border: 1px solid white;
-    background-color: $c_primary;
-    border-radius: 5px;
 
-
-    &::-webkit-slider-runnable-track {
-        -webkit-appearance: none;
-        height: 16px;
-        background-color: $c_primary;
-        margin-top: -1px;
-    }
-
-    &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 16px;
-        height: 16px;
-        background: white;
-        border-radius: 50%;
-    }
-}
 
 .language-selection {
     display: flex;
@@ -74,27 +40,112 @@ input[type=number] {
 }
 
 .menu-wrapper {
+    visibility: visible;
     position: fixed;
     z-index: 4000;
-    top: 0;
+    top: 7vh;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, .5);
-    display: flex;
-    justify-content: center;
+    background-color: rgba(255, 255, 255, .7);
     align-items: center;
 }
 
-.menu {
+.game-over {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    height: 25%;
+    width: 35%;
+    padding: 15px;
+    visibility: hidden;
+    background-color: #ffe6e6;
+    color: black;
+    text-align: center;
+    border: 2px solid $c_primary;
+    border-radius: 16px;
+    background-image: url("../assets/catch-image-blur.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    &-opts {
+        flex: 3;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-content: center;
+    }
+}
+
+
+.main-menu {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    margin: auto;
+    width: 35%;
+    height: 40%;
+    background-color: #ffe6e6;
+    color: black;
+    text-align: center;
+    border: 2px solid $c_primary;
+    border-radius: 16px;
+    background-image: url("../assets/catch-image-blur.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+
+    &-opts {
+        flex: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+}
+
+.opt {
+    width: fit-content;
+    align-self: center;
+    padding: 15px 50px;
+    background-color: $c_primary;
+    border: 1px solid $c_primary;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
+    transition: all 0.25s ease;
+
+    &:hover {
+        cursor: pointer;
+        color: black;
+        background-color: white;
+    }
+}
+
+
+.settings-menu {
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    margin: auto;
+    visibility: hidden;
     background-color: $c_primary;
     width: 90vh;
-    height: 60vh;
+    height: 60%;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    overflow: hidden;
+    overflow: auto;
+    overflow-x: hidden;
     z-index: 3000;
     display: flex;
     justify-content: space-between;
@@ -106,7 +157,7 @@ input[type=number] {
         border-bottom: 1px solid $c_menu-border;
 
         &__opt {
-            flex: 0 0 25%;
+            flex: 0 0 33.33%;
             text-align: center;
             cursor: pointer;
             padding-top: 15px;
@@ -138,10 +189,6 @@ input[type=number] {
                 background-image: url("../assets/controls.png");
             }
 
-            &--tut {
-                background-image: url("../assets/tutorial.png");
-            }
-
             &--lang {
                 background-image: url("../assets/language.png");
             }
@@ -167,20 +214,19 @@ input[type=number] {
     &-body {
         padding: 16px;
         flex: 1;
-        
-        &-parameters{
+
+        &-parameters {
             height: 100%;
         }
     }
 
-    &-start {
+    &-back {
         text-align: center;
         font-weight: 600;
         color: white;
         padding-left: 5px;
         padding-right: 5px;
         padding-bottom: 5px;
-
 
         &-text {
             border-radius: 8px;
@@ -195,8 +241,9 @@ input[type=number] {
                 background-color: $c_accent_light;
             }
         }
-    }
 
+
+    }
 
 }
 
@@ -210,17 +257,23 @@ input[type=number] {
         "info parameters";
     grid-template-rows: 8.5fr 1.5fr;
     grid-template-columns: 9fr 1fr;
-    height: 100vh;
+    height: 93vh;
     width: 100%;
 }
 
 .game-container {
     grid-area: game;
-    background-color: palegreen;
     display: flex;
     justify-content: space-evenly;
+    background-image: url("../assets/back.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     position: relative;
     cursor: none;
+    border: 2px solid #ffe6e6;
+    border-radius: 3px;
+    transition: all 0.15s ease;
 
     &__object {
         position: absolute;
@@ -233,8 +286,8 @@ input[type=number] {
     }
 
     &__basket {
-        width: 12vh;
-        height: 11vh;
+        width: 13vh;
+        height: 12vh;
         background-image: url("../assets/objects/basket.png");
         background-size: contain;
         background-repeat: no-repeat;
@@ -247,11 +300,12 @@ input[type=number] {
 .game-info {
     display: flex;
     grid-area: info;
-    background-color: $c_bg;
+    background-color: $c_secondary;
     font-weight: 600;
     font-size: 20px;
     z-index: 1000;
     text-align: center;
+    color: black;
 
     &__timer {
         flex: 1;
@@ -278,13 +332,37 @@ input[type=number] {
     }
 
     &__event {
+        color: white;
         flex: 1;
+        background-color: $c_primary;
+        border-radius: 10px;
+        margin: 5px;
+        padding: 2px;
+
+        &-desc {
+            flex: 4;
+        }
+
+        &__icon {
+            width: 45px;
+            height: 45px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            align-self: center;
+        }
     }
+}
+
+.displayInfoCurrentEvent {
+    display: flex;
+    display: row;
+    justify-content: center;
 }
 
 .game-parameters {
     grid-area: parameters;
-    background-color: $c_bg;
+    background-color: $c_secondary;
     z-index: 3000;
 
     .fab-container {
@@ -303,7 +381,7 @@ input[type=number] {
         width: 50px;
         height: 50px;
         border-radius: 100%;
-        background-color: $c_accent_light;
+        background-color: $c_primary;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 
         &:hover {
@@ -321,6 +399,7 @@ input[type=number] {
     }
 
     .fab {
+        visibility: hidden;
         width: 60px;
         height: 60px;
         background-color: $c_primary;
@@ -382,4 +461,65 @@ input[type=number] {
 
 a {
     text-decoration: none;
+}
+
+select {
+    background-color: $c_primary;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 25px;
+    outline: none;
+    color: white;
+    transition: all 0.25s ease;
+    font-family: $fontInter;
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+input[type=number] {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    outline: none;
+    color: white;
+    transition: all 0.25s ease;
+    background-color: $c_primary;
+    font-family: $fontInter;
+    font-weight: bold;
+}
+
+::placeholder {
+    color: white;
+    font-family: $fontInter;
+}
+
+.slider {
+    -webkit-appearance: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    width: 20%;
+    border: 1px solid white;
+    background-color: $c_primary;
+    border-radius: 5px;
+
+
+    &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        height: 16px;
+        background-color: $c_primary;
+        margin-top: -1px;
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: white;
+        border-radius: 50%;
+    }
 }

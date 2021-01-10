@@ -5,7 +5,7 @@
 function openDB() {
 
     // visualiza en consola el data caller
-    getBackTrace();
+    //getBackTrace();
 
     // - - - - - DB Data conection
     if ( file_exists( "../../_data/db.php" ) ) { include( "../../_data/db.php" );  } 
@@ -40,7 +40,7 @@ function closeDB() {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Select Entity =>
 
-function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_direction = 0, int $the_limit = 0 ) {
+function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_direction = 0, int $the_limit = 0, string $the_search = "" ) {
 
     // - - - - - Tables Data
     if ( file_exists( "../../_data/tb_data.php" ) ) { include( "../../_data/tb_data.php" ); }
@@ -62,8 +62,9 @@ function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_directi
 
         $myCnctn = openDB();
 
-        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:"").$addStringQuery;
+        $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:$the_search).$addStringQuery;
         //echo $myQueryText.'<br>';
+        echo '<script>console.log("'.$myQueryText.'")</script>';
 
         $myQuery = $myCnctn->prepare( $myQueryText );
 
@@ -263,4 +264,64 @@ function delEntity( string $the_table, int $the_id ) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Delete Entity //
 
-?>
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - handlePDOErrorMessage =>
+function handlePDOErrorMessage($PDOException) {
+
+    $errorMessage = "";
+
+    if (!empty($PDOException->errorInfo[1])) {
+
+        switch ($PDOException->errorInfo[1]) {
+                //MySQL server-side error codes
+            case 1005:
+                $errorMessage = "No se ha podido crear la tabla (" . $PDOException->errorInfo[2] . ")";
+                break;
+            case 1044:
+                $errorMessage = "Acceso denegado al acceder a la base de datos, usuario/password incorrectos";
+                break;
+            case 1049:
+                $errorMessage = "Base de datos desconocida";
+                break;
+            case 1050:
+                $errorMessage = "Tabla ya existente";
+                break;
+            case 1051:
+                $errorMessage = "Tabla desconocida";
+                break;
+            case 1054:
+                $errorMessage = "Columna desconocida";
+                break;
+            case 1062:
+                $errorMessage = "Este registro ya existe";
+                break;
+            default:
+                $errorMessage = "Error " . $PDOException->errorInfo[1] . ": " . $PDOException->errorInfo[2];
+                break;
+        }
+
+    } else {
+
+        switch ($PDOException->getCode()) {
+            case 1044:
+                $errorMessage = "Acceso denegado al acceder a la base de datos, usuario/password incorrectos";
+                break;
+            case 1049:
+                $errorMessage = "Base de datos desconocida";
+                break;
+            case 2002:
+                $errorMessage = "No se encuentra el servidor";
+                break;
+            default:
+                $errorMessage = "Error " . $PDOException->getCode() . ": " . $PDOException->getMessage();
+                break;
+        }
+
+    }
+
+    return $errorMessage;
+
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - handlePDOErrorMessage //
+
+

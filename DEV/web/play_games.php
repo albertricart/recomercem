@@ -4,8 +4,18 @@
 $pageTitle = 'Game Discounts | reComercem: El teu comerç de proximitat al barri';
 $pageDescription = '"Game Discounts" let you win discount tickets to use in our stores';
 $pageKeywords = 'Game, Discounts, win, discount, tickets, stores, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
+// - - - - - - - - - - - - - - - - - - - - ADD CSSs & JSs SCRIPTS
 $pageStylesAry = Array( 'games'=>'/css/games.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
@@ -15,6 +25,9 @@ include_once("_php_partials/02_header.php");
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
 
 // - - - - - Tables Data
 $fileLink = "../_data/tb_data.php"; 
@@ -52,9 +65,10 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             C97.1,57.25,94.54,59.83,91.38,59.83z M113.35,59.83c-3.15,0-5.71-2.58-5.71-5.76c0-3.18,2.56-5.76,5.71-5.76
             c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
         </svg>
-        Game Discounts
+        <?=$sectionTitle?>
     </h1>
 
+    <?=((!empty($sectionDescription))?'<p>'.$sectionDescription.'<p/>':'')?>
 
     <ul class="listGameItemsMain">
 
@@ -90,14 +104,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
-        </ul>
-
-
-
-
-
-    
-
+    </ul>
 
 </article>
 

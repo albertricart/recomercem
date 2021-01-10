@@ -62,3 +62,14 @@ a:hover { color: inherit; text-decoration: inherit; }
 a:visited { color: inherit; text-decoration: inherit; }
 
 a:active { color: inherit; text-decoration: inherit; }
+
+:root {
+    /* Palette URL: http://paletton.com/#uid=4010u0krAmIiVu6nLqRv5izEKdi */
+    --colPrimary: #B51D19;
+    --colSecondary: #10696D;
+    --colTertiary: #148E1C;
+    --colHighlight: #247BA0;
+    --colText: #333;
+    --colWhite: #fff;
+    --colBlack: #000;
+}

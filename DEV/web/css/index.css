@@ -5,7 +5,7 @@
     padding: 5% calc( (100% - 1024px) / 2); 
     margin: 0; display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
-    grid-gap: 15%; 
+    grid-gap: 10%; 
     background: fixed url(/images/slide_bg.png) center no-repeat; 
     background-size: cover; 
 }
@@ -15,6 +15,8 @@
     background-color: rgba(255,255,255,.85);
     border-radius: 10px; 
 }
+
+.indexicons { width: auto; }
 
 .optnicon { 
     /*border: var(--colPrimary) 7px solid; */
@@ -128,6 +130,7 @@
 }
 
 
+
 .listOfferItemsMain { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
@@ -153,7 +156,8 @@
     box-shadow: 1px 1px 5px black;
 }
 .listOfferItemBox { 
-    background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );
+    /*background-color: linear-gradient(70deg, var(--colBlack), var(--colWhite) );*/
+    background-color: rgba(0,0,0,.65);
     position: absolute; 
     top: 0;
     right: 0; 
@@ -165,7 +169,7 @@
     padding: 20px 20px 0; 
     text-align: center; 
     font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 26px; 
+    font-size: 20px; 
     letter-spacing: 2px; 
     font-weight: normal; 
     color: var(--colWhite);
@@ -175,11 +179,12 @@
     padding: 20px; 
     text-align: left; 
     font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 18px; 
+    font-size: 14px; 
     letter-spacing: 1px; 
     line-height: 140%; 
     color: var(--colWhite);
 }
+
 
 
 .listGameItemsMain { 
@@ -213,7 +218,7 @@
     right: 10px; 
     bottom: 10px; 
     left: 10px; 
-    height: 40%;
+    height: auto;
     border-radius: 0 0 10px 10px;
     box-shadow: 1px 1px 5px black;
 }
@@ -234,4 +239,50 @@
     font-size: 12px; 
     letter-spacing: .5px; 
     line-height: 140%; 
+}
+
+
+@media (max-width: 1044px) {
+
+    #mainoptions { box-sizing: border-box; padding-left: 20px; padding-right: 20px; grid-gap: 50px; }
+
+    .artlBox { padding: 50px 10px 0px; }
+
+}
+
+@media (max-width: 900px) { 
+
+    .listStoreItemsMain { grid-template-columns: 1fr 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+}
+
+@media (max-width: 750px) { 
+
+    .listOfferItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+    .listGameItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+    .listStoreItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+}
+
+@media (max-width: 700px) {
+
+    .optnicon { width: 60%; height: auto; }
+    .optntitle { width: 100%; height: auto; font-size: 20px; }
+
+    #mainoptions { grid-gap:20px; padding: 20px 10px; }
+    .optcontainer { box-sizing: border-box; }
+
+}
+
+@media (max-width: 550px) {
+
+    .optnicon { width: 49%; height: auto; float: left; }
+    .optntitle { width: 49%; height: auto; float: right; font-size: 26px; }
+    .indexicons { max-width: 90px; }
+
+    #mainoptions { box-sizing: border-box; width: auto; grid-template-columns: 1fr; grid-gap:10px; padding: 20px 10px; }
+    .optcontainer { box-sizing: border-box; }
+
 }

@@ -7,6 +7,7 @@
     --colText: #333;
     --colWhite: #fff;
     --colBlack: #000;
+    --colTxtFooter: #fff;
 }
 
 
@@ -54,6 +55,22 @@ main {
     margin: 0; 
 }
 
+#langSelec { 
+    list-style: none; 
+    overflow: hidden; 
+    position: absolute; 
+    right: 120px; 
+    height: 0; 
+    width: auto; 
+    min-width: 100px; 
+    margin: 10px 0 0; 
+    padding: 0px; 
+    transition: height 2s; 
+    visibility: hidden; 
+    background-color: var(--colWhite); 
+    box-shadow: 0px 1px 2px rgba(0,0,0,.35); 
+    z-index: 99; 
+}
 
 #menuBox { 
     background-color: var(--colPrimary); 
@@ -110,10 +127,10 @@ main {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     min-height: 60px; 
     font-size: 50px;
+    text-align: left;
 }
 
-
-
+.artlTitleIcon { height: 70px; vertical-align: bottom; }
 
 
 footer { 
@@ -125,8 +142,9 @@ footer {
     margin: 0; 
     /*background-color: #fff; */
     /*background: linear-gradient(4deg, rgba(250, 251, 247, 0.49) 0%, rgba(217, 187, 95, 0.29) 100%);*/
-    background: linear-gradient(7deg, #a3ec523b 0%, rgba(217, 95, 146, 0.75) 100%);
+    /*background: linear-gradient(7deg, #a3ec523b 0%, rgba(217, 95, 146, 0.75) 100%);*/
     /*background: linear-gradient(4deg, #a3ec523b 0%, rgba(217, 187, 95, 0.7) 100%);*/
+    background: linear-gradient(-15deg, #ff0000a8 0%, rgba(255, 55, 55, 0.66) 40%,rgba(253, 28, 28, 0.59) 60%, #f70202 100%);
     box-shadow: 0px -2px 4px rgba(0,0,0,.2);
 }
 
@@ -138,24 +156,25 @@ footer {
     margin: 0; 
     padding: 0; 
     font-family: 'Inter', Arial, Helvetica, sans-serif; 
-    font-size: 12px; 
-    color: var(--colPrimary); 
+    font-size: 14px; 
+    letter-spacing: .4px;
+    color: var(--colTxtFooter); 
 }
 
 #footerDataH2 { 
-    font-size: 12px; 
+    font-size: 14px; 
     margin: 0 0 5px; 
     padding: 0; 
 }
 
 #footerDataH3 { 
-    font-size: 12px; 
+    font-size: 14px; 
     margin: 0 0 5px; 
     padding: 0; 
 }
 
 #footerDataA { 
-    font-size: 12px; 
+    font-size: 14px; 
     margin: 0 0 5px; 
     padding: 0; 
     font-weight: bold;
@@ -167,7 +186,7 @@ footer {
     background-size: auto; 
     background-size: 70px; 
     padding: 0 0 0 100px; 
-    height: 60px; 
+    height: auto; 
 }
 
 #footerDataUl li { 
@@ -193,3 +212,69 @@ a:link { color: inherit; text-decoration: inherit; }
 a:hover { color: inherit; text-decoration: inherit; }
 a:visited { color: inherit; text-decoration: inherit; }
 a:active { color: inherit; text-decoration: inherit; }
+
+
+
+
+@media (max-width: 1044px) {
+
+    .artlBox { padding-left: 10px; padding-right: 10px; }
+    
+    .artlTitle { min-height: none; font-size: 30px; }
+
+    .artlTitleIcon { height: 55px; }
+
+}
+
+
+
+@media (max-width: 550px) {
+
+    .artlTitle { 
+
+        min-height: none; 
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .artlTitleIcon { height: 40px; vertical-align: bottom; }
+
+    
+    #iconMenu { margin: 0 10px 0 20px; }
+
+    #iconUser { margin: 0 0 0 20px; }
+    
+    #iconLanguage { margin: 0 0 0 20px; }
+
+    #footerData { 
+        float: none;  
+        width: min-content;
+        margin: 0 auto; 
+        font-size: 14px; 
+        white-space: nowrap;
+    }
+
+    #footerImage {
+        display: block;
+        float: none; 
+        width: 100%; 
+        max-width: 300px;
+        margin: 0 auto; 
+    }
+    
+}
+
+
+
+  
+
+
+
+@media (max-width: 750px) { 
+
+    .artlTitle { font-size: 30px; text-align: center; page-break-after: 10px; }
+
+    .articlesicons { height: 40px; vertical-align: bottom; }
+
+}
+

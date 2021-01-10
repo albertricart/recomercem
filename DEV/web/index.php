@@ -4,8 +4,18 @@
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'reComercem: El teu comerç de proximitat al barri';
 $pageKeywords = 'reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
-$pageStylesAry = Array( 'index'=>'/css/index.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
+// - - - - - - - - - - - - - - - - - - - - ADD CSSs & JSs SCRIPTS
+$pageStylesAry = Array( 'index'=>'/css/index.css', 'searchform'=>'/css/search_form.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
@@ -20,7 +30,7 @@ include_once("_php_partials/02_header.php");
     <div class="optcontainer">
         <div class="optnicon">
         
-            <svg id="icon_search" viewBox="0 0 145 156" style="width: 90%;">
+            <svg id="icon_search" viewBox="0 0 145 156" style="width: 90%;" class="indexicons">
                 <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colPrimary)" d="M34.719,62.879v37.75c0,3.85,1.5,5.37,5.31,5.37h39.41v-33.93
             	h21.25v33.93h0.28c3.81,0,5.31-1.52,5.31-5.37v-37.75l3.83,0.7c1.68,0,2.25-1.09,1.67-3.08l-5.27-15.51
             	c-0.18-0.61-0.44-1.11-0.79-1.48v-3.54c0-1.64-1.32-2.97-2.94-2.97h-65.68c-1.62,0-2.94,1.33-2.94,2.97v5.94l0.01,0.16l-4.95,14.43
@@ -39,16 +49,16 @@ include_once("_php_partials/02_header.php");
             	c-0.85-0.66-1.92-1.06-3.08-1.06c-2.76,0-5,2.24-5,5C105.999,118.559,106.709,119.949,107.819,120.859z"/>
             </svg>
         </div>
-        <h2 class="optntitle">Search<br />Store</h2>
+        <h2 class="optntitle"><?=$searchstoreItemTitle?></h2>
         <a id="menuStores" href="/search_stores.html" target="_self">
-            <button type="button" class="optnbutton">Find</button>
+            <button type="button" class="optnbutton"><?=$searchstoreItemButton?></button>
         </a>
-        <p class="optntext">Encuentra el comercio de proximidad que necesitas, toda la información por sector, nombre, etiquetas.</p>
+        <p class="optntext"><?=$searchstoreItemSpeach?></p>
     </div>
 
     <div class="optcontainer">
         <div  class="optnicon">
-            <svg id="icon_game" viewBox="0 0 133 110">
+            <svg id="icon_game" viewBox="0 0 133 110" class="indexicons">
                 <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colPrimary)" d="M0,56.29c0,6.87,2.39,13.18,6.37,18.14L1.73,91.89
                 C0.03,98.32,6,106.5,13.96,108.66l2.83,0.76c7.96,2.15,17.19-1.93,18.89-8.35l4.96-18.67c4.92-2.33,9.08-6.02,11.98-10.6h26.56
                 c3.47,5.47,8.73,9.68,14.94,11.79l4.64,17.48c1.7,6.42,10.93,10.5,18.89,8.35l2.83-0.76c7.96-2.16,13.93-10.34,12.23-16.77
@@ -65,16 +75,16 @@ include_once("_php_partials/02_header.php");
                 c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
             </svg>
         </div>
-        <h2 class="optntitle">Game<br />Discounts</h2>
+        <h2 class="optntitle"><?=$gamediscountsItemTitle?></h2>
         <a id="menuGames" href="/play_games.html" target="_self">
-            <button type="button" class="optnbutton">Play</button>
+            <button type="button" class="optnbutton"><?=$gamediscountsItemButton?></button>
         </a>
-        <p class="optntext">Participa, diviértete y gana fantasticos tickets de descuentos en los comercios del barrio</p>
+        <p class="optntext"><?=$gamediscountsItemSpeach?></p>
     </div>
 
     <div class="optcontainer">
         <div class="optnicon">
-            <svg id="icon_offer" viewBox="0 0 136 129">
+            <svg id="icon_offer" viewBox="0 0 136 129" class="indexicons">
                 <g><path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colPrimary)" d="M125.514,5.271c5.61,3.02,7.93,9.97,5.27,15.69l-0.29-0.16
                 l-15.42,30.75c-0.63,0.6-0.88,1.53-0.56,2.4c0.42,1.16,1.69,1.76,2.84,1.34c0.27-0.1,0.51-0.25,0.71-0.43l0.18,0.1l16.03-32.1
                 c3.61-7.65,0.5-16.97-7.01-21c-7.57-4.06-16.86-1.26-20.83,6.29c-3.94,7.5-1.22,16.94,6.13,21.28l0.08-0.16
@@ -94,11 +104,11 @@ include_once("_php_partials/02_header.php");
                 L55.244,60.391z"/></g></g></g>
             </svg>
         </div>
-        <h2 class="optntitle">Last<br />Offers</h2>
+        <h2 class="optntitle"><?=$lastoffersItemTitle?></h2>
         <a id="menuOffers" href="/last_offers.html" target="_self">
-            <button type="button" class="optnbutton">View</button>
+            <button type="button" class="optnbutton"><?=$lastoffersItemButton?></button>
         </a>
-        <p class="optntext">Descubre las últimas ofertas y novedades de los comecios de cercanía</p>
+        <p class="optntext"><?=$lastoffersItemSpeach?></p>
     </div>
 
 </div>
@@ -127,7 +137,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainSearch" class="artlBox" style="background-color: #fff;">
 
     <h1 class="artlTitle">
-        <svg id="icon_search2" viewBox="0 0 145 156" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_search2" viewBox="0 0 145 156" class="artlTitleIcon">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M34.719,62.879v37.75c0,3.85,1.5,5.37,5.31,5.37h39.41v-33.93
             h21.25v33.93h0.28c3.81,0,5.31-1.52,5.31-5.37v-37.75l3.83,0.7c1.68,0,2.25-1.09,1.67-3.08l-5.27-15.51
             c-0.18-0.61-0.44-1.11-0.79-1.48v-3.54c0-1.64-1.32-2.97-2.94-2.97h-65.68c-1.62,0-2.94,1.33-2.94,2.97v5.94l0.01,0.16l-4.95,14.43
@@ -145,8 +155,21 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c0-1.79-0.94-3.36-2.35-4.25c-0.07-0.11-0.16-0.23-0.25-0.34l-26.9-32.48c-0.38-0.46-0.88-0.75-1.42-0.87
             c-0.85-0.66-1.92-1.06-3.08-1.06c-2.76,0-5,2.24-5,5C105.999,118.559,106.709,119.949,107.819,120.859z"/>
         </svg>
-        Search Store
+        <?=$searchstoreSectionTitle?>
     </h1>
+
+    <form action="/search_stores.html" method="POST" target="_self" id="searchForm">
+        <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="<?=$bynameText?>" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
+        <select id="bytype" name="bytype" type="text" class="searchFormInput">
+            <option value="0"><?=$bytypeText?></option>
+            <? $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
+            foreach( $TipoAry as $tmpData ) {
+            ?><option value="<?=$tmpData['id']; ?>"<?=((!empty($_POST['bytype']) && $_POST['bytype']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['nombre']; ?></option><? 
+            } ?>
+        </select>
+        <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="<?=$bytagText?>" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
+        <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()"><?=$searchText?></button>
+    </form>
 
     <ul class="listStoreItemsMain">
 
@@ -164,11 +187,13 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
+        <a href="/search_stores.html?xim=<?=$theData['id']?>" target="_self">
         <li class="listStoreItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">
             <div class="listStoreItemBox">
-                <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2><? /* <p class="listStoreItemText"><?=$theData['descripcion']?></p> */ ?>
+                <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2>
             </div>
         </li>
+        </a>
            
         <?php 
 
@@ -186,7 +211,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainGames" class="artlBox" style="background-color: #f7f3f3;">
 
     <h1 class="artlTitle">
-        <svg id="icon_game2" viewBox="0 0 133 110" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_game2" viewBox="0 0 133 110" class="artlTitleIcon">
             <path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M0,56.29c0,6.87,2.39,13.18,6.37,18.14L1.73,91.89
             C0.03,98.32,6,106.5,13.96,108.66l2.83,0.76c7.96,2.15,17.19-1.93,18.89-8.35l4.96-18.67c4.92-2.33,9.08-6.02,11.98-10.6h26.56
             c3.47,5.47,8.73,9.68,14.94,11.79l4.64,17.48c1.7,6.42,10.93,10.5,18.89,8.35l2.83-0.76c7.96-2.16,13.93-10.34,12.23-16.77
@@ -202,7 +227,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             C97.1,57.25,94.54,59.83,91.38,59.83z M113.35,59.83c-3.15,0-5.71-2.58-5.71-5.76c0-3.18,2.56-5.76,5.71-5.76
             c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
         </svg>
-        Game Discounts
+        <?=$gamediscountsSectionTitle?>
     </h1>
 
     <ul class="listGameItemsMain">
@@ -246,7 +271,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainOffers" class="artlBox" style="background-color: #fff;">
 
     <h1 class="artlTitle">
-        <svg id="icon_offer2" viewBox="0 0 136 129" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_offer2" viewBox="0 0 136 129" class="artlTitleIcon">
             <g><path fill-rule="evenodd" clip-rule="evenodd" fill="var(--colSecondary)" d="M125.514,5.271c5.61,3.02,7.93,9.97,5.27,15.69l-0.29-0.16
             l-15.42,30.75c-0.63,0.6-0.88,1.53-0.56,2.4c0.42,1.16,1.69,1.76,2.84,1.34c0.27-0.1,0.51-0.25,0.71-0.43l0.18,0.1l16.03-32.1
             c3.61-7.65,0.5-16.97-7.01-21c-7.57-4.06-16.86-1.26-20.83,6.29c-3.94,7.5-1.22,16.94,6.13,21.28l0.08-0.16
@@ -265,7 +290,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c1.16,0.54,1.74,2.2,1.18,3.39l-14.73,31.6c-0.56,1.19-2.2,1.81-3.35,1.27l-0.91-0.43c-1.16-0.53-1.73-2.19-1.18-3.38
             L55.244,60.391z"/></g></g></g>
         </svg>
-        Last Offers
+        <?=$lastoffersSectionTitle?>
     </h1>
 
     <ul class="listOfferItemsMain">
@@ -284,12 +309,14 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
+        <a href="/search_stores.html?xim=<?=$theData['id_comerc']?>" target="_self">
         <li class="listOfferItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">">
             <div class="listOfferItemBox">
                 <h2 class="listOfferItemTitle"><?=$theData['nombre']?></h2>
-                <p class="listOfferItemText"><?=$theData['descripcion']?></p>
+                <p class="listOfferItemText"><?=nl2br($theData['descripcion'])?></p>
             </div>
         </li>
+        </a>
            
         <?php 
 

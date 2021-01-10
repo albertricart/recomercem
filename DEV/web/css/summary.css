@@ -1,0 +1,99 @@
+.artlTitle { margin-bottom: 50px !important; }
+
+.stdTitle { 
+    color: var(--colPrimary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    margin: 20px 0 0;
+    text-align: left;
+    letter-spacing: 1px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.stdSubtitle { 
+    color: var(--colPrimary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    margin: 20px 0 0;
+    text-align: left;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stdText { 
+    color: var(--colPrimary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    margin: 20px 0 0;
+    text-align: left;
+    letter-spacing: 1px;
+    line-height: 180%; 
+    font-size: 16px;
+}
+
+.ltlText { 
+    color: var(--colPrimary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    margin: 20px 0 0;
+    text-align: left;
+    letter-spacing: 1px;
+    line-height: 130%; 
+    font-size: 13px;
+}
+
+#gamesListBox { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-gap: 50px; 
+    width: 100%; 
+    height: auto; 
+    margin: 50px 0; 
+    padding: 0; 
+    list-style: none; 
+}
+
+
+.gamesListItemImgBg { 
+    display: block; 
+    background-color: #555 
+}
+
+.gamesListItemBox { 
+    display: block; 
+    position: relative; 
+    overflow: hidden; 
+    width: 100%; 
+    height: auto; 
+}
+
+.gamesListItemImg { 
+    position: relative; 
+    width: 100%; 
+    height: 200px; 
+    background: no-repeat center; 
+    background-size: cover; 
+}
+
+.gamesListItemAvailable { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    color: var(--colPrimary); 
+    width: 30px; 
+    height: 30; 
+    padding: 10px; 
+    background-color: rgba(255,255,255,.75); 
+    border-radius: 25px; 
+}
+
+.gamesListItemTextBox { padding: 10px 0; }
+
+
+
+@media (max-width: 750px) {
+
+    #gamesListBox { 
+        grid-template-columns: 1fr; 
+        grid-gap: 20px; 
+    }
+
+}

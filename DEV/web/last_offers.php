@@ -4,8 +4,18 @@
 $pageTitle = 'Last Offers | reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'Last Offers let you get the last offers in our stores';
 $pageKeywords = 'Last, Offers, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought';
+// - - - - - - - - - - - - - - - - - - - - ADD CSSs & JSs SCRIPTS
 $pageStylesAry = Array( 'offers'=>'/css/offers.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
@@ -55,8 +65,10 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c1.16,0.54,1.74,2.2,1.18,3.39l-14.73,31.6c-0.56,1.19-2.2,1.81-3.35,1.27l-0.91-0.43c-1.16-0.53-1.73-2.19-1.18-3.38
             L55.244,60.391z"/></g></g></g>
         </svg>
-        Last Offers
+        <?=$sectionTitle?>
     </h1>
+
+    <?=((!empty($sectionDescription))?'<p>'.$sectionDescription.'<p/>':'')?>
 
     <ul class="listOfferItemsMain">
 
@@ -76,12 +88,14 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
+        <a href="/search_stores.html?xim=<?=$theData['id_comerc']?>" target="_self">
         <li class="listOfferItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">">
             <div class="listOfferItemBox">
                 <h2 class="listOfferItemTitle"><?=$theData['nombre']?></h2>
-                <p class="listOfferItemText"><?=$theData['descripcion']?></p>
+                <p class="listOfferItemText"><?=nl2br($theData['descripcion'])?></p>
             </div>
         </li>
+        </a>
            
         <?php 
 
