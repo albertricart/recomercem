@@ -4,8 +4,18 @@
 $pageTitle = "Search Stores | reComercem: El teu comerç de proximitat al barri";
 $pageDescription = "'Store Search' let you find the service and products offered need near you";
 $pageKeywords = "Store, Search, Service, find, service, products, offered, near, you, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought";
+// - - - - - - - - - - - - - - - - - - - - ADD CSSs & JSs SCRIPTS
 $pageStylesAry = Array( 'search'=>'/css/search.css', 'searchform'=>'/css/search_form.css' ); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
@@ -15,6 +25,9 @@ include_once("_php_partials/02_header.php");
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
 
 // - - - - - Tables Data
 $fileLink = "../_data/tb_data.php"; 
@@ -54,20 +67,22 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
             c0-1.79-0.94-3.36-2.35-4.25c-0.07-0.11-0.16-0.23-0.25-0.34l-26.9-32.48c-0.38-0.46-0.88-0.75-1.42-0.87
             c-0.85-0.66-1.92-1.06-3.08-1.06c-2.76,0-5,2.24-5,5C105.999,118.559,106.709,119.949,107.819,120.859z"/>
         </svg>
-        Search Stores
+        <?=$sectionTitle?>
     </h1>
 
+    <?=((!empty($sectionDescription))?'<p>'.$sectionDescription.'<p/>':'')?>
+
     <form action="/search_stores.html" method="POST" target="_self" id="searchForm">
-        <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="Nombre de comercio" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
+        <input id="byname" name="byname" type="text" class="searchFormInput" placeholder="<?=$bynameText?>" value="<?=((!empty($_POST['byname']))?$_POST['byname']:'')?>" />
         <select id="bytype" name="bytype" type="text" class="searchFormInput">
-            <option value="0">Tipo de Comercio</option>
+            <option value="0"><?=$bytypeText?></option>
             <? $TipoAry = GetIdedArray( getEntity( "tipo_comercio", 0, 1 ) );
             foreach( $TipoAry as $tmpData ) {
             ?><option value="<?=$tmpData['id']; ?>"<?=((!empty($_POST['bytype']) && $_POST['bytype']==$tmpData['id'])?" selected":""); ?>><?=$tmpData['nombre']; ?></option><? 
             } ?>
         </select>
-        <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="Etiquetas separadas por coma" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
-        <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()">Buscar</button>
+        <input id="bytag" name="bytag" type="text" class="searchFormInput" placeholder="<?=$bytagText?>" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
+        <button id="searchButtonForm" onclick="document.getElementById('searchForm').submit()"><?=$searchText?></button>
     </form>
 
     <?php
