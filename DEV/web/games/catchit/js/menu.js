@@ -189,6 +189,8 @@ function displayKeyControls() {
   }
 
   setControls();
+  
+  //hide the Key prefix when displaying each key
   buttonUp.innerHTML = keyUp.replace("Key", "");
   buttonDown.innerHTML = keyDown.replace("Key", "");
   buttonLeft.innerHTML = keyLeft.replace("Key", "");

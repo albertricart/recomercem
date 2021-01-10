@@ -46,6 +46,10 @@ if ( PHP_VERSION_ID < 70300 ) {
 $scriptName = explode( '/', $_SERVER['PHP_SELF'] );
 $scriptName = explode( '.', $scriptName[count($scriptName)-1] );
 
-include_once("./languages/".$scriptName[0]."_".$setLanguage.".php");
+if ( file_exists( "./languages/".$scriptName[0]."_".$setLanguage.".php" ) ) {
+
+    include_once( "./languages/".$scriptName[0]."_".$setLanguage.".php" );
+
+}
 
 ?>
