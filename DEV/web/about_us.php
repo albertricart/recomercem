@@ -21,15 +21,15 @@ include_once("_php_partials/02_header.php");
 
     <div class="all">
         <div class="persona">
-            <img src="bitmojiAlbert.png" alt="bitmojiAlbert">
+            <img src="/images/bitmojiAlbert.png" alt="bitmojiAlbert">
         </div>
 
         <div class="persona">
-            <img src="bitmojiMarcelo.png" alt="bitmojiMarcelo">
+            <img src="/images/bitmojiMarcelo.png" alt="bitmojiMarcelo">
         </div>
 
         <div class="persona">
-            <img src="bitmojiMario.png" alt="bitmojiAlbert">
+            <img src="/images/bitmojiMario.png" alt="bitmojiAlbert">
         </div>
     </div>
     <div class="nombres">
