@@ -1,0 +1,43 @@
+.all
+{
+    text-align: center;
+}
+
+.persona
+{
+    display: inline;
+
+}
+
+.nombres
+{
+    text-align: center;
+}
+
+.nombre
+{
+    font-family: 'OpenSans-Bold', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:  #B51D19;
+    text-align: center;
+    display: inline;
+    padding: 95px;
+}
+
+img
+{
+    border-radius: 50%;
+    border: solid 5px #B51D19;
+    width: 300px;
+    height: 300px;
+}
+
+.text
+{
+    font-family: 'OpenSans-Bold', Arial, Helvetica, sans-serif;
+    color:  #B51D19;
+    text-align: justify;
+    padding-top: 100px;
+    padding-left:200px;
+    padding-right: 200px;
+}
