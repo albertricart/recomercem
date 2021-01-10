@@ -94,7 +94,7 @@ input[type=email]:focus {
 .login{
     display: flex;
     width: fit-content;
-    margin: 10px auto 0 auto;    
+    margin: 10px auto 0px auto;    
 }
 
 
@@ -114,4 +114,22 @@ input[type=email]:focus {
     -webkit-box-align: center;
     align-items: center;
     transition: all 0.1s ease 0s;
+}
+
+.cerrarBtn{
+    border: none;
+    outline: none;
+    height: fit-content;
+    padding: 13px 21px;;
+    border-radius: 6px;
+    color: var(--colWhite);
+    background-color: var(--colPrimary);
+    font-family: "Inter", sans-serif;
+    transition: all 0.3s ease;
+    font-size: medium;
+}
+
+
+.cerrarBtn:hover {
+    cursor: pointer;
 }

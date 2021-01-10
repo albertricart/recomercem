@@ -9,6 +9,9 @@ include_once("_php_partials/01_head.php");
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
 
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
 //si hemos introducido el correo anteriormente se mostrará automaticamente
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
@@ -26,31 +29,27 @@ if (isset($_SESSION['error'])) {
 }
 ?>
 
-<?php
-include_once("./mybackend/_php_librarys/_db.php");
-print_r(getEntity("usuario",  0, 0));
-?>
-
 <div class="container">
     <div class="login-image">
+        <?php include_once("./_php_partials/00_cerrar_sesion.php");?>
         <div class="login-form-wrapper">
-            <h1 class="login-text">Log In</h1>
+            <h1 class="login-text"><?=$loginText?></h1>
 
             <form action="./_php_controllers/loginController.php" method="POST" class="login-form">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Introduce tu correo..." value="<?= $email ?>" required></input>
+                <label for="email"><?=$emailText?></label>
+                <input type="email" id="email" name="email" placeholder="<?=$emailPlaceholder?>" value="<?= $email ?>" required></input>
 
-                <label for="password">Contraseña</label>
+                <label for="password"><?=$passwordText?></label>
                 <div style="position: relative;">
-                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña..." required></input>
+                    <input type="password" id="password" name="password" placeholder="<?=$passwordPlaceholder?>" required></input>
                     <div class="showpw"></div>
                 </div>
                 <span class="error-message"><?= $errorMessage ?></span>
 
-                <button type="submit" class="login-btn" name="submitBtnLogin">Log In</button>
+                <button type="submit" class="login-btn" name="submitBtnLogin"><?=$loginText?></button>
             </form>
 
-            <a href="signup.php" class="signup">Crear una nueva cuenta</a>
+            <a href="signup.php" class="signup"><?=$newAccountText?></a>
 
         </div>
     </div>
