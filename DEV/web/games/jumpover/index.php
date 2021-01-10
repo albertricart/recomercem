@@ -10,8 +10,8 @@
   <link rel="icon" type="image/png" href="src/logo.png"/>
 </head>
 <body>
-<div id="cab">
 
+<div id="cab">
 <?
 // - - - - - - - - - - - - - - - - - - - - Logo & Menu Part =>
 if ( file_exists( "../../_php_partials/00_game_header.php" ) ) { include_once("../../_php_partials/00_game_header.php"); }
