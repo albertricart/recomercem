@@ -176,7 +176,7 @@ function saveEntity( string $the_table, $the_dataAry ) {
 
         } catch (PDOException $e) {
 
-            $theReturn = 'Error: ' . $e->getMessage();
+            $theReturn = handlePDOErrorMessage($e);
             $isOK = false;
 
         }
