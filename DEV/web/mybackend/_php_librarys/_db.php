@@ -85,7 +85,7 @@ function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_directi
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Save Entity =>
 
-function saveEntity( string $the_table, $the_dataAry ) {
+function saveEntity( string $the_table, $the_dataAry, $the_condition = array() ) {
 
     // - - - - - Tables Data
     if ( file_exists( "../../_data/tb_data.php" ) ) { include( "../../_data/tb_data.php" ); } 
@@ -101,13 +101,13 @@ function saveEntity( string $the_table, $the_dataAry ) {
     // controla que el array de datos no este vacio
     if ( empty( $the_dataAry ) ) { $isOK = false; }
 
-    // genera control si es master o driver
-    if ( $isOK && $dbTableAry[ $the_table ][ 'tableType' ] == 0 ) { $isMaster = true; } else { $isMaster = false; }
-
-    // genera control por si es nuevo o modificacion        
-    if ( $isOK && !empty( $the_dataAry[ $dbTableAry[ $the_table ][ 'tableKey' ] ] ) ) { $isNew = false; } else  { $isNew = true; }
-
     if ( $isOK ) {
+
+        // genera control si es master o driver
+        if ( $dbTableAry[ $the_table ][ 'tableType' ] == 0 ) { $isMaster = true; } else { $isMaster = false; }
+
+        // genera control por si es nuevo o modificacion        
+        if ( !empty($the_condition) || !empty( $the_dataAry[ $dbTableAry[ $the_table ][ 'tableKey' ] ] ) ) { $isNew = false; } else  { $isNew = true; }
 
         // genera query 
         $myQueryText = '';
@@ -145,7 +145,7 @@ function saveEntity( string $the_table, $the_dataAry ) {
 
             $myQueryText = "UPDATE `" . $dbTableAry[ $the_table ][ 'tableName' ] . 
                 "` SET " .  $myQueryFieldList .
-                " WHERE " . $dbTableAry[ $the_table ][ 'tableKey' ] . " = " . $the_dataAry[ $dbTableAry[ $the_table ][ 'tableKey' ] ] . ";";
+                " WHERE " . ((empty($the_condition)) ? $dbTableAry[ $the_table ][ 'tableKey' ] . " = " . $the_dataAry[ $dbTableAry[ $the_table ][ 'tableKey' ] ] : $the_condition['field'] . " = " . $the_condition['content'] ) . ";";
 
         }
 
@@ -180,6 +180,10 @@ function saveEntity( string $the_table, $the_dataAry ) {
             $isOK = false;
 
         }
+
+        //echo "debugDumpParams (save)<br>";
+        //$myQuery->debugDumpParams();
+        //echo "<br>";
 
         // - - - - - verifica estado de grabacion
         if ( $isOK ) { // estado OK, graba informacion

@@ -51,7 +51,7 @@ $pointsToTicket = 500;
 
 $playedGames = 0;
 
-/// var_dump($_SESSION);
+// var_dump($_SESSION); // var_dump($_REQUEST);
 
 // - - - - - Control si existe y rellena de datos
 if ( !empty( $_SESSION ) ) {
@@ -59,10 +59,23 @@ if ( !empty( $_SESSION ) ) {
     // - - - - - Get & Calc data from session
     $sessionAry = $_SESSION;
 
+    if ( !isset( $sessionAry['games'] ) ) {    
+
+        foreach( $EntitiesAry as $theKey => $theData ) { 
+
+            $sessionAry['games'][$theKey]['active'] = false;
+            if ( $isOK && $theKey == $gameId ) { $sessionAry['games'][$theKey]['score'] = $finalScore; } 
+            else { $sessionAry['games'][$theKey]['score'] = 0; }
+    
+        }
+
+    }
+
     if ( $isOK ) {
         $sessionAry['games'][$gameId]['score'] = $finalScore;
         $sessionAry['games'][$gameId]['active'] = true;
     }
+
     foreach( $sessionAry['games'] as $theKey => $theData ) { 
         $totalPoints += $theData['score']; 
         if ($theData['score']>0) { ++$playedGames; }
@@ -76,16 +89,13 @@ if ( !empty( $_SESSION ) ) {
 
     $sessionAry['user']['cid'] = "";
     $sessionAry['user']['name'] = "";
+    $sessionAry['user']['email'] = "";
 
     foreach( $EntitiesAry as $theKey => $theData ) { 
 
-        //$sessionAry['games'][$theKey]['id'] = $theKey;
         $sessionAry['games'][$theKey]['active'] = false;
-        if ( $isOK && $theKey == $gameId ) { 
-            $sessionAry['games'][$theKey]['score'] = $finalScore; 
-        } else { 
-            $sessionAry['games'][$theKey]['score'] = 0;
-        }
+        if ( $isOK && $theKey == $gameId ) { $sessionAry['games'][$theKey]['score'] = $finalScore; } 
+        else { $sessionAry['games'][$theKey]['score'] = 0; }
 
     }
 
@@ -101,6 +111,19 @@ if ( !empty( $_SESSION ) ) {
 // - - - - - Save session in local
 $_SESSION = $sessionAry;
 
+// - - - - - control user
+if ( !empty( $sessionAry['user']['name'] ) ) { $loggedUser = true; } else { $loggedUser = false; }
+
+if (!$loggedUser) { 
+    
+    header('Location: /login.html?hi'); } 
+
+else {
+
+    saveEntity( "usuario", array('puntuacion'=>$totalPoints,'json'=>json_encode($sessionAry['games'])), array('field'=>'email','content'=>"'".$sessionAry['user']['email']."'") );
+
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Session data //
 
 
@@ -111,8 +134,6 @@ $trsltStringAry = json_decode( $jsonTraslate, true );
 $chngStringAry = json_decode( $jsonChange, true );
 // - - - - - Array de reemplazo
 $replaceStringAry = array( '@@nombre', '@@expresion', '@@juego', '@@puntos', '@@total', '@@jugados', '@@points2ticket' );
-// - - - - - control user
-if ( !empty( $sessionAry['user']['name'] ) ) { $loggedUser = true; } else { $loggedUser = false; }
 // - - - - - control ticket
 if ( $totalPoints >= $pointsToTicket ) { $giveTicket = true; } else { $giveTicket = false; }
 // - - - - - expresion
@@ -120,11 +141,11 @@ if ( $finalScore == 0 ) { $expresion = $chngStringAry['expresion'][0]; }
 elseif ( $finalScore < ( $pointsToTicket * .30 ) ) { $expresion = $chngStringAry['expresion'][1]; }
 else { $expresion = $chngStringAry['expresion'][2]; }
 // - - - - - obtenido
-if ( $totalPoints > 0 ) { $trslt['obtenido'] = $chngStringAry['obtenido']; }
+if ( $finalScore > 0 ) { $trsltStringAry['obtenido'] = $chngStringAry['obtenido']; } 
 // - - - - - jugados
-if ( $playedGames == count( $sessionAry['games'] ) ) { $trslt['jugados'] = $chngStringAry['jugados']; }
+if ( $playedGames == count( $sessionAry['games'] ) ) { $trsltStringAry['jugados'] = $chngStringAry['jugados']; }
 // - - - - - suficiente
-if ( $giveTicket ) { $trslt['suficiente'] = $chngStringAry['suficiente']; }
+if ( $giveTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['suficiente']; }
 // - - - - - replace array
 $replaceDataAry = array(
 	'@@nombre' => $sessionAry['user']['name'],
@@ -168,7 +189,7 @@ include_once("_php_partials/02_header.php");
             C97.1,57.25,94.54,59.83,91.38,59.83z M113.35,59.83c-3.15,0-5.71-2.58-5.71-5.76c0-3.18,2.56-5.76,5.71-5.76
             c3.16,0,5.71,2.58,5.71,5.76C119.06,57.25,116.51,59.83,113.35,59.83z"/>
         </svg>
-        <?=$mainTitle?>
+        <?=$sectionTitle?>
     </h1>
 
     <? if ( $isOK ) { // Control por ejecucion sin parametros ?> 
@@ -183,21 +204,13 @@ include_once("_php_partials/02_header.php");
 
 <script>
 function getMyTicket( the_obj ) {
-
-// control de usuario registrado, si es correcto: 
-
-// - elimina el boton
-the_obj.style.display = 'none';
-
-// - llama ajax getMyTicket.html y envia automatico datos en session (usuario y juegos) y cookies (idioma)
-
-// retorna html que debe crear el elemento y visualizar una ventana con el resultado de la accion.
-
-alert( "<?=$msgEmailTicket?>" );
-
-
+    // control de usuario registrado, si es correcto: 
+    // - elimina el boton
+    the_obj.style.display = 'none';
+    // - llama ajax getMyTicket.html y envia automatico datos en session (usuario y juegos) y cookies (idioma)
+    // retorna html que debe crear el elemento y visualizar una ventana con el resultado de la accion.
+    alert( "<?=$msgEmailTicket?>" );
 }
-
 </script>
 
     <?=(($giveTicket)?'<button class="btnGeneral" onclick="getMyTicket(this)">'.$trsltStringAry['getticket'].'</button>':'')?>

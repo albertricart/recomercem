@@ -6,7 +6,9 @@ $pageDescription = "'Game Discounts' et permetrà guanyar Tickets de Descompte p
 
 $pageKeywords = "Game, Discounts, win, discount, tickets, stores, reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought";
 
-$mainTitle = 'Resum (summary)';
+$sectionTitle = "Jocs Descomptes";
+
+$sectionDescription = "";
 
 $jsonTraslate = '{
     "hola":"Hola @@nombre",

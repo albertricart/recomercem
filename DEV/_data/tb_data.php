@@ -113,7 +113,8 @@ $dbTableAry = array (
             'nombre' => array( 'fieldName' => 'nombre', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'email' => array( 'fieldName' => 'email', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'password' => array( 'fieldName' => 'password', 'fieldType' => 'varchar', 'fieldLong' => 128, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => true ),
-            'puntuacion' => array( 'fieldName' => 'puntuacion', 'fieldType' => 'smallint', 'fieldLong' => 5, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
+            'puntuacion' => array( 'fieldName' => 'puntuacion', 'fieldType' => 'smallint', 'fieldLong' => 5, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'json' => array( 'fieldName' => 'json', 'fieldType' => 'varchar', 'fieldLong' => 1000, 'fieldDef' => '', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
             )
         )
 

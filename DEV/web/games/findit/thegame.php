@@ -1,3 +1,12 @@
+<?
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("../../_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
+?>
 <!DOCTYPE html>
 <html lang="es-es" dir="ltr">
 <head>
@@ -9,6 +18,7 @@
 <meta name="keywords" content="Find It - reComercem Games - DAW2B - Grupo 1: Xtrm Group - Marcelo Goncevatt" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="css/findit.css" rel="stylesheet" type="text/css" />
+<?php if ( !empty( $setLanguage ) ) { echo '<script type="text/javascript">var setLanguage = "'.$setLanguage.'";</script>'."\n"; } ?>
 </head>
 <body onLoad="onloadFx()">
 

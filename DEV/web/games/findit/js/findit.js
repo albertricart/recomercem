@@ -10,7 +10,7 @@ function onloadFx() {
 
 	createItemList();
 
-	traslateLang( 'eng' );
+	traslateLang( setLanguage );
 
 	document.getElementById("CounterdownBox").innerHTML = gameData.dataset.time + '"';
 
@@ -30,7 +30,10 @@ function onloadFx() {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - default data lang //
 
 // - - - - - default lang data
-var setLanguage = 'eng', langElemAry, langTextAry, setAvailableLangs, jsonLangElement = [], jsonLangText = [];
+
+if ( typeof setLanguage != 'string' ) { var setLanguage = 'eng'; }
+
+var langElemAry, langTextAry, setAvailableLangs, jsonLangElement = [], jsonLangText = [];
 var setAvailableLangs = [ 'eng', 'esp', 'cat' ];
 // - - - - - default JSON lang data
 jsonLangElement['eng'] = '{"OpenListBtn":"<span>Start </span>Game","EndGameBtn":"Finish Game","HelpBtn":"<span>View </span>Help !","itmlistH5":"Find the following targets (logos and/or icons):","ExitBtn":"Quit Game","langTitle":"Languages:"}';
