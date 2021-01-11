@@ -1,4 +1,5 @@
 <?php
+//abrimos sesion para poder trabajar con las variables de sesion
 session_start();
 
 $pageStylesAry = array('signup' => '/css/signup.css');

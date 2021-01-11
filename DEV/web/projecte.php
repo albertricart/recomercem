@@ -1,5 +1,6 @@
 <?php
-
+//abrimos sesion para poder trabajar con las variables de sesion
+session_start();
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'reComercem: El teu comerç de proximitat al barri';

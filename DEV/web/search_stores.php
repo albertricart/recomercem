@@ -1,5 +1,6 @@
 <?php
-
+//abrimos sesion para poder trabajar con las variables de sesion
+session_start();
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = "Search Stores | reComercem: El teu comerç de proximitat al barri";
 $pageDescription = "'Store Search' let you find the service and products offered need near you";

@@ -1,5 +1,6 @@
 <?php
-
+//abrimos sesion para poder trabajar con las variables de sesion
+session_start();
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'Game Discounts | reComercem: El teu comerç de proximitat al barri';
 $pageDescription = '"Game Discounts" let you win discount tickets to use in our stores';

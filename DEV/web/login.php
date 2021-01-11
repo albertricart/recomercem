@@ -28,6 +28,8 @@ if (isset($_SESSION['error'])) {
 } else {
     $errorMessage = "";
 }
+
+
 ?>
 
 <div class="container">

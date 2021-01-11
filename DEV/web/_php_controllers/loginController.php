@@ -1,17 +1,18 @@
 <?php
+//abrimos sesion para poder trabajar con las variables de sesion
 session_start();
+
 //obtenemos las funciones necesarias para conectarnos a la base de datos
-include_once("../mybackend/_php_librarys/_db.php");
-include_once("../mybackend/_php_librarys/_functions_generic.php");
+ // - - - - - DB conection & work
+ $fileLink = "../mybackend/_php_librarys/_db.php";
+ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
-//  // - - - - - DB conection & work
-//  $fileLink = "../mybackend/_php_librarys/_db.php";
-//  if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+ // - - - - - Entity functions
+ $fileLink = "../mybackend/_php_librarys/_functions_generic.php";
+ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
-//  // - - - - - Entity functions
-//  $fileLink = "../mybackend/_php_librarys/_functions_generic.php";
-//  if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
+//en el caso que hayamos recibido correctamente el form de login.php
 if (isset($_POST['submitBtnLogin'])) {
     //variable para el mensaje de error
     $_SESSION['error'] = "";
@@ -46,24 +47,28 @@ if (isset($_POST['submitBtnLogin'])) {
         $_SESSION['error'] = "Debes rellenar todos los campos";
     }
 
+
     //en funcion de ha habido error o no iremos a la home o no
     if (empty($_SESSION['error'])) {
-        $cid = $result['cid'];
-        $_SESSION['user']['name'] = $cid;
+        //guardamos en un array de sesion los datos relacionados con el usuario
+        $_SESSION['user']['name'] = $result['cid'];
         $_SESSION['user']['name'] = $result['nombre'];
         $_SESSION['user']['email'] = $result['email'];
 
-        
+        //inicializamos los datos de juego del usuario
         $gamesArray = GetIdedArray( getEntity( "juego", 0, 3 ) );
         foreach($gamesArray as $key => $data){
             $_SESSION['games'][$key]['score'] = 0;
             $_SESSION['games'][$key]['active'] = false;
         }        
 
+        //nos vamos a la home
         header("Location: ../index.php");
         exit();
     } else {
+        //almacenamos en una variable de sesión diferente a la de user, el correo con el que se ha intentado acceder
         $_SESSION['email'] = $_POST['email'];
+        //volvemos al login
         header("Location: ../login.php");
         exit();
     }
