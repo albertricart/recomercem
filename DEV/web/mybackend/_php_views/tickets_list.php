@@ -8,7 +8,8 @@ $EntitiesAry = GetIdedArray( getEntity( "ticket", 0, 0 ) );
 
 <ul class="list-group list-group-flush">
 
-<?
+<?php
+
 if ( !empty( $EntitiesAry ) ) {
 
     foreach( $EntitiesAry as $theKey => $theData ) {

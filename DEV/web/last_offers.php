@@ -1,6 +1,8 @@
 <?php
-//abrimos sesion para poder trabajar con las variables de sesion
-session_start();
+
+// - - - - - Inicia session php que genera array asociativo con los datos de sesion
+session_start(); 
+
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'Last Offers | reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'Last Offers let you get the last offers in our stores';
