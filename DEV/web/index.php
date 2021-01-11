@@ -78,7 +78,7 @@ if(isset($_POST['cerrarSesionBtn']))unset($_SESSION['user']);
             </svg>
         </div>
         <h2 class="optntitle"><?=$gamediscountsItemTitle?></h2>
-        <a id="menuGames" href="/play_games.html" target="_self">
+        <a id="menuGames" href="/summary.html" target="_self">
             <button type="button" class="optnbutton"><?=$gamediscountsItemButton?></button>
         </a>
         <p class="optntext"><?=$gamediscountsItemSpeach?></p>
@@ -248,7 +248,8 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
-        <a href="/games<?=$theData['url']?>" target="_self">
+        <? /* a href="/games<?=$theData['url']?>" target="_self" */ ?>
+        <a href="/summary.html" target="_self">
             <li class="listGameItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg)">
                 <div class="listGameItemBox">
                     <h2 class="listGameItemTitle"><?=$theData['nombre']?></h2>

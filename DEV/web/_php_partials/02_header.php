@@ -50,7 +50,7 @@
     <ul id="menuBox" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
         <li class="menuItem"><a id="menuHome" href="/index.html" target="_self" class="menuLink">Home</a></li>
         <li class="menuItem"><a id="menuStores" href="/search_stores.html" target="_self" class="menuLink">Search Stores</a></li>
-        <li class="menuItem"><a id="menuGames" href="/play_games.html" target="_self" class="menuLink">Game Discounts</a></li>
+        <li class="menuItem"><a id="menuGames" href="/summary.html" target="_self" class="menuLink">Game Discounts</a></li>
         <li class="menuItem"><a id="menuOffers" href="/last_offers.html" target="_self" class="menuLink">Last Offers</a></li>
         <li class="menuItem"><a id="menuProject" href="/projecte.html" target="_self" class="menuLink">The Project</a></li>
         <li class="menuItem"><a id="menuAboutus" href="/about_us.html" target="_self" class="menuLink">About Us</a></li>
