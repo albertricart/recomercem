@@ -10,9 +10,13 @@ $sectionTitle = "Buscar Comerços";
 
 $sectionDescription = "";
 
+$ourOffers = "Nostres Ofertes";
+
 $bynameText = "Nom de comerç";
 $bytypeText = "Tipus de Comerç";
 $bytagText = "Etiquetes separades per coma";
 $searchText = "Buscar";
+
+
 
 ?>
