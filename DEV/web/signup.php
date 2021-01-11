@@ -3,14 +3,16 @@ session_start();
 
 $pageStylesAry = array('signup' => '/css/signup.css');
 
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
 
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
 
-// - - - - - Traslate Settings
-include_once("_php_partials/00_traslate_settings.php");
+
 
 //si hemos introducido el correo y nombre anteriormente se mostrará automaticamente
 if (isset($_SESSION['email']) && isset($_SESSION['nombre'])) {

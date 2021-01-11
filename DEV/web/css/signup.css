@@ -23,7 +23,7 @@ body {
 
 .signup-form-wrapper {
     height: fit-content;
-    margin: 7% auto;
+    margin: 5% auto;
     border-radius: 16px;
     padding: 30px 100px;
     background-color: var(--colWhite);
