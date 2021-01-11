@@ -21,6 +21,8 @@ if (isset($_POST['submitBtnSignup'])) {
 
             //creamos el array asociativo new_user que sera procesado en saveEntity
             $new_user = [
+                "cid" => 'US'. dechex ( time() ),
+                "active" => true,
                 "nombre" => $nombre,
                 "email" => $email,
                 "password" => $_POST['password']
@@ -35,6 +37,7 @@ if (isset($_POST['submitBtnSignup'])) {
 
     //en funcion de ha habido error o no iremos a la home o no
     if (empty($_SESSION['error'])) {
+        $_SESSION['user']['cid'] = $cid;
         $_SESSION['user']['name'] = $nombre;
         $_SESSION['user']['email'] = $email;
         header("Location: ../index.php");

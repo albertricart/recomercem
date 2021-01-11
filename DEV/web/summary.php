@@ -64,7 +64,7 @@ if ( !empty( $_SESSION ) ) {
         $sessionAry['games'][$gameId]['active'] = true;
     }
     foreach( $sessionAry['games'] as $theKey => $theData ) { 
-        $totalPoints+= $theData['score']; 
+        $totalPoints += $theData['score']; 
         if ($theData['score']>0) { ++$playedGames; }
     }
 

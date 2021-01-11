@@ -23,7 +23,7 @@ include_once("_php_partials/01_head.php");
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
 
-if(isset($_POST['cerrarSesionBtn']))unset($_SESSION['user']);
+if(isset($_POST['cerrarSesionBtn']))unset($_SESSION);
 
 ?>
 

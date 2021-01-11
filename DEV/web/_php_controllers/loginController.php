@@ -2,6 +2,15 @@
 session_start();
 //obtenemos las funciones necesarias para conectarnos a la base de datos
 include_once("../mybackend/_php_librarys/_db.php");
+include_once("../mybackend/_php_librarys/_functions_generic.php");
+
+//  // - - - - - DB conection & work
+//  $fileLink = "../mybackend/_php_librarys/_db.php";
+//  if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
+
+//  // - - - - - Entity functions
+//  $fileLink = "../mybackend/_php_librarys/_functions_generic.php";
+//  if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: not exists '".$fileLink."' (".getcwd().")<br>"; }
 
 if (isset($_POST['submitBtnLogin'])) {
     //variable para el mensaje de error
@@ -39,8 +48,18 @@ if (isset($_POST['submitBtnLogin'])) {
 
     //en funcion de ha habido error o no iremos a la home o no
     if (empty($_SESSION['error'])) {
+        $cid = $result['cid'];
+        $_SESSION['user']['name'] = $cid;
         $_SESSION['user']['name'] = $result['nombre'];
         $_SESSION['user']['email'] = $result['email'];
+
+        
+        $gamesArray = GetIdedArray( getEntity( "juego", 0, 3 ) );
+        foreach($gamesArray as $key => $data){
+            $_SESSION['games'][$key]['score'] = 0;
+            $_SESSION['games'][$key]['active'] = false;
+        }        
+
         header("Location: ../index.php");
         exit();
     } else {
