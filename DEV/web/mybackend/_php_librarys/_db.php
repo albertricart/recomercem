@@ -64,7 +64,7 @@ function getEntity( $the_table, int $the_id, int $the_sort = 0, int $the_directi
 
         $myQueryText = "SELECT * FROM ".$dbTableAry[ $the_table ][ 'tableName' ].(($the_id>0)?" WHERE ".$dbTableAry[ $the_table ][ 'tableKey' ]." = ".$the_id:$the_search).$addStringQuery;
         //echo $myQueryText.'<br>';
-        echo '<script>console.log("'.$myQueryText.'")</script>';
+        //echo '<script>console.log("'.$myQueryText.'")</script>';
 
         $myQuery = $myCnctn->prepare( $myQueryText );
 
