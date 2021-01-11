@@ -10,6 +10,8 @@ $sectionTitle = "Search Store";
 
 $sectionDescription = "";
 
+$ourOffers = "Our Offers";
+
 $bynameText = "Store Name";
 $bytypeText = "Store Type";
 $bytagText = "Tags separated by commas";

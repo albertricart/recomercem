@@ -122,7 +122,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
     <p class="storeText"><?=$EntitiesAry[$xim]['etiquetas']?></p>
     <div style="clear: both;"></div>
 
-    <h2 class="storeSubtitle">Our Offers</h2>
+    <h2 class="storeSubtitle"><?=$ourOffers?></h2>
 
     <ul class="listOfferItemsMain">
 
