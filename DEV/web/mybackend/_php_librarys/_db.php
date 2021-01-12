@@ -181,9 +181,9 @@ function saveEntity( string $the_table, $the_dataAry, $the_condition = array() )
 
         }
 
-        //echo "debugDumpParams (save)<br>";
+        //echo '<br /><br />'."debugDumpParams (save): ";
         //$myQuery->debugDumpParams();
-        //echo "<br>";
+        //echo "<br /><br />";
 
         // - - - - - verifica estado de grabacion
         if ( $isOK ) { // estado OK, graba informacion

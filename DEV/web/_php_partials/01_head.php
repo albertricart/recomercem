@@ -37,4 +37,4 @@ if (!empty($pageScriptsAry)) {
       font-family: 'OpenSans-Italic';
       src: url(/third-parties/fonts/open-sans/OpenSans-Italic.ttf);
     }
-    </style>
+</style>

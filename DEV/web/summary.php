@@ -1,7 +1,9 @@
 <?php
 
 // - - - - - Inicia session php que genera array asociativo con los datos de sesion
-session_start(); $consoleLog = array(); if( isset( $_REQUEST['reset'] )) { $_SESSION=array(); $consoleLog[] = "reset session"; }
+session_start(); $consoleLog = array(); 
+if( isset( $_REQUEST['reset'] )) { $_SESSION=array(); $consoleLog[] = "reset session"; }
+if( isset( $_REQUEST['ticket'] )) { $_SESSION['user']['ticket']=0; $consoleLog[] = "reset ticket"; }
 
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';
@@ -87,9 +89,11 @@ if ( !empty( $_SESSION ) ) {
 
 } else {
 
+    $sessionAry['user']['id'] = "";
     $sessionAry['user']['cid'] = "";
     $sessionAry['user']['name'] = "";
     $sessionAry['user']['email'] = "";
+    $sessionAry['user']['ticket'] = 0;
 
     foreach( $EntitiesAry as $theKey => $theData ) { 
 
@@ -124,6 +128,11 @@ else {
 
 }
 
+// - - - - - control ticket
+if ( $totalPoints >= $pointsToTicket ) { $giveTicket = true; } else { $giveTicket = false; }
+if ( $sessionAry['user']['ticket'] != 0 ) { $sendedTicket = true; } else { $sendedTicket = false; }
+
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Session data //
 
 
@@ -134,8 +143,6 @@ $trsltStringAry = json_decode( $jsonTraslate, true );
 $chngStringAry = json_decode( $jsonChange, true );
 // - - - - - Array de reemplazo
 $replaceStringAry = array( '@@nombre', '@@expresion', '@@juego', '@@puntos', '@@total', '@@jugados', '@@points2ticket' );
-// - - - - - control ticket
-if ( $totalPoints >= $pointsToTicket ) { $giveTicket = true; } else { $giveTicket = false; }
 // - - - - - expresion
 if ( $finalScore == 0 ) { $expresion = $chngStringAry['expresion'][0]; }
 elseif ( $finalScore < ( $pointsToTicket * .30 ) ) { $expresion = $chngStringAry['expresion'][1]; }
@@ -146,6 +153,8 @@ if ( $finalScore > 0 ) { $trsltStringAry['obtenido'] = $chngStringAry['obtenido'
 if ( $playedGames == count( $sessionAry['games'] ) ) { $trsltStringAry['jugados'] = $chngStringAry['jugados']; }
 // - - - - - suficiente
 if ( $giveTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['suficiente']; }
+// - - - - - enviado
+if ( $sendedTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['enviado']; }
 // - - - - - replace array
 $replaceDataAry = array(
 	'@@nombre' => $sessionAry['user']['name'],
@@ -164,6 +173,24 @@ $trsltStringAry = str_replace( $replaceStringAry, $replaceDataAry, $trsltStringA
 
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
+
+?>
+<script>
+function getMyTicket( the_obj ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var objResult = JSON.parse( this.responseText );
+            <?=$msgEmailTicket?>
+            if (objResult.result==0) { the_obj.style.display = 'none'; }
+            alert( msgEmailTicket[objResult.result] );
+        }
+    };
+    xhttp.open("GET", "/getMyTicket.html", true);
+    xhttp.send();
+}
+</script>
+<?
 
 // - - - - - - - - - - - - - - - - - - - - HEADER PART
 include_once("_php_partials/02_header.php");
@@ -202,18 +229,7 @@ include_once("_php_partials/02_header.php");
 
     <p class="stdText"><?=$trsltStringAry['jugados']." ".$trsltStringAry['suficiente']?></p> 
 
-<script>
-function getMyTicket( the_obj ) {
-    // control de usuario registrado, si es correcto: 
-    // - elimina el boton
-    the_obj.style.display = 'none';
-    // - llama ajax getMyTicket.html y envia automatico datos en session (usuario y juegos) y cookies (idioma)
-    // retorna html que debe crear el elemento y visualizar una ventana con el resultado de la accion.
-    alert( "<?=$msgEmailTicket?>" );
-}
-</script>
-
-    <?=(($giveTicket)?'<button class="btnGeneral" onclick="getMyTicket(this)">'.$trsltStringAry['getticket'].'</button>':'')?>
+    <?=(($giveTicket && !$sendedTicket )?'<button class="btnGeneral" onclick="getMyTicket(this)">'.$trsltStringAry['getticket'].'</button>':'')?>
 
     <p class="stdSubtitle"><?=$trsltStringAry['resumen']?><p>
     
@@ -226,7 +242,6 @@ function getMyTicket( the_obj ) {
         foreach( $EntitiesAry as $theKey => $theData ) {
             
         ?>
-
 
         <li class="gamesListItemBox">
             <?=(($lastState)?'<a href="/games'.$theData['url'].'" target="_self">':'')?>

@@ -26,6 +26,31 @@ function GetIdedArray( $theArray ) {
 
 }
 
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// Retorna array asociativo de resultado de consulta fetchAll en modo default (FETCH_BOTH) con indice asociado al id
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+function GetSingleRow( $theArray ) {
+
+    $tmpAry = array();
+
+    if ( !empty($theArray) ) {
+
+        $tmpId = '';
+
+        foreach( $theArray[0] as $tmpKey => $tmpData ) {
+
+            if ( gettype( $tmpKey ) == "string" ) { $tmpId = $tmpKey; }
+            else { $tmpAry[$tmpId] = $tmpData; }
+
+        }
+
+    }
+
+    return $tmpAry;
+
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 // Visualiza mensaje en consola de navegador
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

@@ -24,9 +24,15 @@ $jsonChange = '{
     "expresion":["Ups","Bien","Felicidades"]
     ,"obtenido":"@@expresion !!! ... en el juego \"@@juego\" has obtenido @@puntos puntos",
     "jugados":"Ya has jugado a todos los juegos disponibles (@@jugados).",
-    "suficiente":"La cantidad de puntos obtenidos es suficiente para obtener el Ticket de Descuento. Puedes obtenerlo en tu email presionando el siguiente botón."
+    "suficiente":"La cantidad de puntos obtenidos es suficiente para obtener el Ticket de Descuento. Puedes obtenerlo en tu email presionando el siguiente botón.",
+    "enviado":"La cantidad de puntos obtenidos es suficiente para obtener el Ticket de Descuento pero el mismo ya ha sido enviado por email. Si no te ha llegado o tienes algun problema, por favor envíanos un email a incidencias@recomercem.es."
 }';
 
-$msgEmailTicket = "Te hemos enviado un email al correo registrado con el Ticket de Descuento. Recuerda que tienes 7 días para utilizarlo. Que lo disfrutes !!!"
+$msgEmailTicket = 'var msgEmailTicket = [
+    "Te hemos enviado un email al correo registrado con el Ticket de Descuento. Recuerda que tienes 7 días para utilizarlo. Que lo disfrutes !!!", 
+    "Hay un error con la identificación del usuario. Si tienes alguna duda o quieres informar de una incidencia, por favor, escríbenos a incidencias@recomercem.es. Gracias.", 
+    "La puntuuación todavia no es suficiente para obtener el ticket. Si tienes alguna duda o quieres informar de una incidencia, por favor, escríbenos a incidencias@recomercem.es. Gracias.", 
+    "El ticket ya fue enviado con anterioridad. Si tienes alguna duda o quieres informar de una incidencia, por favor, escríbenos a incidencias@recomercem.es. Gracias."
+    ];';
 
 ?>

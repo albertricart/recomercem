@@ -8,7 +8,7 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'cid' => array( 'fieldName' => 'cid', 'fieldType' => 'char', 'fieldLong' => 13, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'active' => array( 'fieldName' => 'active', 'fieldType' => 'tinyint', 'fieldLong' => 1, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'tipo' => array( 'fieldName' => 'tipo', 'fieldType' => 'smallint', 'fieldLong' => 1, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
@@ -32,7 +32,7 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'active' => array( 'fieldName' => 'active', 'fieldType' => 'tinyint', 'fieldLong' => 1, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'nombre' => array( 'fieldName' => 'nombre', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'descripcion' => array( 'fieldName' => 'descripcion', 'fieldType' => 'varchar', 'fieldLong' => 250, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
@@ -45,7 +45,7 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'cid' => array( 'fieldName' => 'cid', 'fieldType' => 'char', 'fieldLong' => 13, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'active' => array( 'fieldName' => 'active', 'fieldType' => 'tinyint', 'fieldLong' => 1, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'nombre' => array( 'fieldName' => 'nombre', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
@@ -62,7 +62,7 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'cid' => array( 'fieldName' => 'cid', 'fieldType' => 'char', 'fieldLong' => 13, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'active' => array( 'fieldName' => 'active', 'fieldType' => 'tinyint', 'fieldLong' => 1, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'id_comerc' => array( 'fieldName' => 'id_comerc', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => 'comerc', 'relationKey' => 'id', 'crypt' => false ),
@@ -79,7 +79,7 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'id_juego' => array( 'fieldName' => 'id_juego', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'id_usuario' => array( 'fieldName' => 'id_usuario', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'puntuacion_tot' => array( 'fieldName' => 'puntuacion_tot', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
@@ -92,7 +92,7 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'cid' => array( 'fieldName' => 'cid', 'fieldType' => 'char', 'fieldLong' => 13, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'id_comerc' => array( 'fieldName' => 'id_comerc', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'id_usuario' => array( 'fieldName' => 'id_usuario', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
@@ -107,13 +107,14 @@ $dbTableAry = array (
         'tableKey' => 'id',
         'tableDef' => 'ENGINE=InnoDB DEFAULT CHARSET=utf8mb4',
         'tableFields' => array (
-            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'id' => array( 'fieldName' => 'id', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'cid' => array( 'fieldName' => 'cid', 'fieldType' => 'char', 'fieldLong' => 13, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'active' => array( 'fieldName' => 'active', 'fieldType' => 'tinyint', 'fieldLong' => 1, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'nombre' => array( 'fieldName' => 'nombre', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'email' => array( 'fieldName' => 'email', 'fieldType' => 'varchar', 'fieldLong' => 50, 'fieldDef' => 'NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'password' => array( 'fieldName' => 'password', 'fieldType' => 'varchar', 'fieldLong' => 128, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => true ),
             'puntuacion' => array( 'fieldName' => 'puntuacion', 'fieldType' => 'smallint', 'fieldLong' => 5, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
+            'ticket' => array( 'fieldName' => 'ticket', 'fieldType' => 'int', 'fieldLong' => 11, 'fieldDef' => 'UNSIGNED NOT NULL', 'relationTable' => '', 'relationKey' => '', 'crypt' => false ),
             'json' => array( 'fieldName' => 'json', 'fieldType' => 'varchar', 'fieldLong' => 1000, 'fieldDef' => '', 'relationTable' => '', 'relationKey' => '', 'crypt' => false )
             )
         )
