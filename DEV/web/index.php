@@ -2,6 +2,7 @@
 
 // - - - - - Inicia session php que genera array asociativo con los datos de sesion
 session_start(); 
+if( isset( $_REQUEST['logout'] )) { $_SESSION = array(); }
 
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';

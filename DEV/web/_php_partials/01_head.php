@@ -8,6 +8,7 @@
 <meta name="keywords" content="<?=((!empty($pageKeywords))?$pageKeywords:'reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought')?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+<link href="/css/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/scripts.js"></script>
 <?php 
 

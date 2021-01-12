@@ -52,4 +52,10 @@ if ( file_exists( "./languages/".$scriptName[0]."_".$setLanguage.".php" ) ) {
 
 }
 
+if ( file_exists( "./languages/"."login_".$setLanguage.".php" ) ) {
+
+    include_once( "./languages/"."login_".$setLanguage.".php" );
+
+}
+
 ?>

@@ -51,17 +51,22 @@ if (isset($_POST['submitBtnLogin'])) {
     //en funcion de ha habido error o no iremos a la home o no
     if (empty($_SESSION['error'])) {
         //guardamos en un array de sesion los datos relacionados con el usuario
-        $_SESSION['user']['name'] = $result['cid'];
+        $_SESSION['user']['id'] = $result['id'];
+        $_SESSION['user']['cid'] = $result['cid'];
         $_SESSION['user']['name'] = $result['nombre'];
         $_SESSION['user']['email'] = $result['email'];
-
-        //inicializamos los datos de juego del usuario
-        $gamesArray = GetIdedArray( getEntity( "juego", 0, 3 ) );
-        foreach($gamesArray as $key => $data){
-            $_SESSION['games'][$key]['score'] = 0;
-            $_SESSION['games'][$key]['active'] = false;
-        }        
-
+        $_SESSION['user']['ticket'] = $result['ticket'];
+        $_SESSION['total'] = $result['puntuacion'];
+        if ( !empty( $result['json'] ) ) { 
+            $_SESSION['games'] = json_decode( $result['json'], true ); 
+        } else {
+            //inicializamos los datos de juego del usuario
+            $gamesArray = GetIdedArray( getEntity( "juego", 0, 3 ) );
+            foreach($gamesArray as $key => $data){
+                $_SESSION['games'][$key]['score'] = 0;
+                $_SESSION['games'][$key]['active'] = false;
+            } 
+        }
         //nos vamos a la home
         header("Location: ../index.php");
         exit();

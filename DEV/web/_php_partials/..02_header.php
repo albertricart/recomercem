@@ -11,12 +11,16 @@
         <g><rect fill="currentColor" width="52" height="10"/><rect y="21" fill="currentColor" width="52" height="10"/><rect y="42" fill="currentColor" width="52" height="10"/></g>
     </svg>
 
-    <svg id="iconUser" <?=((isset($_SESSION['user']))?'style="color: var(--colLogued)" ':'')?>x="0px" y="0px" width="52px" height="52px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01" onclick="viewUser()">
-        <path fill="currentColor" d="M17,21c0,4.97,4.03,9,9.01,9c4.97,0,9-4.03,9-9c0-4.97-4.03-9-9-9
+    <span style="float: right; margin-top: 18px;"><?php if(isset($_SESSION['user']))echo "Hola, " . $_SESSION['user']['name'];?></span>
+
+    <a href="/login.php">
+        <svg id="iconUser" x="0px" y="0px" width="52px" height="52px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01">
+            <path fill="currentColor" d="M17,21c0,4.97,4.03,9,9.01,9c4.97,0,9-4.03,9-9c0-4.97-4.03-9-9-9
         C21.03,12,17,16.03,17,21z M26.01,3.27c12.55,0,22.73,10.18,22.73,22.73c0,7.08-3.23,13.41-8.3,17.58c0.37-0.95,0.57-1.99,0.57-3.07
         c0-4.7-3.81-8.5-8.5-8.5H19.5c-4.69,0-8.5,3.8-8.5,8.5c0,1.08,0.2,2.12,0.57,3.07C6.5,39.41,3.27,33.08,3.27,26
         C3.27,13.45,13.45,3.27,26.01,3.27z M26.01,0C11.64,0,0,11.64,0,26c0,14.37,11.64,26.01,26.01,26.01c14.36,0,26-11.64,26-26.01
         C52.01,11.64,40.37,0,26.01,0z"/></svg>
+    </a>
 
     <svg id="iconLanguage" x="0px" y="0px" width="52.01px" height="52.01px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01" onclick="viewLang()">
     <path fill="currentColor" d="M30.65,11.1c4.88,1.52,8.74,5.38,10.26,10.26c-1.84-1.24-4.39-2.24-7.39-2.87
@@ -36,34 +40,6 @@
         l0.22-0.94C3.96,33.79,2.93,30.01,2.93,26C2.93,13.26,13.26,2.93,26.01,2.93z M12.43,48.19c3.95,2.42,8.6,3.82,13.58,3.82
         c14.36,0,26-11.64,26-26.01c0-14.36-11.64-26-26-26C11.64,0,0,11.64,0,26c0,4.37,1.08,8.49,2.98,12.1L0,52.01L12.43,48.19z"/>
     </svg>
-
-    <ul id="menuUser" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
-        <?php 
-
-        if(isset($_SESSION['user'])) { ?>
-
-        <p id="hiUserText">Hola, <?=$_SESSION['user']['name']?></p>
-        <form action="/index.html?logout" method="POST"><button type="submit" id="cerrarBtnX" name="cerrarSesionBtn">Cerrar Sesión</button></form>
-
-        <?php } else { ?>
-
-        <form id="loginForm" action="./_php_controllers/loginController.php" method="POST" class="login-form">
-            <label for="email"><?=$emailText?></label>
-            <input type="email" id="email" name="email" placeholder="<?=$emailPlaceholder?>" required></input>
-
-            <label for="password"><?=$passwordText?></label>
-            <div style="position: relative;">
-                <input type="password" id="password" name="password" placeholder="<?=$passwordPlaceholder?>" required></input>
-                <div class="showpw"></div>
-            </div>
-            <?=((isset($errorMessage))?'<span class="error-message">'.$errorMessage.'</span>':'')?>
-            <button type="submit" class="login-btn" name="submitBtnLogin"><?=$loginText?></button>
-        </form>
-
-        <a href="signup.php" class="signup"><?=$newAccountText?></a>
-
-        <? } ?>
-    </ul>
 
     <ul id="langSelec" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
         <li class="menuItem"><a id="langEsp" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=esp"?>" target="_self" class="menuLink">Español</a></li>

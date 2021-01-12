@@ -16,6 +16,22 @@ function viewMenu() {
 
 }
 
+function viewUser() {
+
+    var menuObj = document.getElementById("menuUser");
+
+    if ( menuObj.className == menuObj.dataset.open ) {
+
+        menuObj.className = menuObj.dataset.close;
+
+    } else {
+
+        menuObj.className = menuObj.dataset.open;
+
+    }
+
+}
+
 function viewLang() {
 
     var menuObj = document.getElementById("langSelec");

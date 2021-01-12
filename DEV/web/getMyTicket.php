@@ -52,7 +52,12 @@ if( $isKO == 0 ) {
     $mailfrom = 'ticketdiscount@recomercem.com';
     $mailto = $EntitiesAry['email'];
     $mailsubject = 'Ticket de descuento';
-    $mailmenssage = 'Hola, te enviamos tu ticket de descuento. Por favor, indica en el comercio elegido el código de ticket '.$cid;
+    $mailmenssage = 'Hola, te enviamos tu ticket de descuento. '."\r\n".
+        'Por favor, indica en el comercio elegido el código de ticket '.$cid."\r\n".
+        'Recuerda que tienes 7 días para obtener tu descuento del 10% en nuestros comercios, no te demores !!!'."\r\n".
+        'Si tienes alguna duda, comentario o incidencia, por favor, escribenos a hello@recomercem.es'."\r\n".
+        'Muchas gracias por participar !!!'."\r\n"."\r\n".
+        'Equipo reComerçen';
     $mailheaders = 'From: ' . $mailfrom . "\r\n" . 'Reply-To: ' . $mailfrom . "\r\n" . 'XTremGroup - reComerçem: 0.9';
     mail( $mailto, $mailsubject, $mailmenssage, $mailheaders );
 
