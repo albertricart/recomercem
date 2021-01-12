@@ -149,6 +149,7 @@ main {
     min-height: 50vh; 
     padding: 50px calc( (100% - 1024px) / 2); 
     color: var(--colSecondary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
 }
 
 .artlTitle { 

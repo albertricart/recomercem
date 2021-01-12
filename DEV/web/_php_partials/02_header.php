@@ -47,7 +47,7 @@
 
         <?php } else { ?>
 
-        <form id="loginForm" action="./_php_controllers/loginController.php" method="POST" class="login-form">
+        <form id="loginForm" name="loginForm" action="./_php_controllers/loginController.php" method="POST" class="login-form">
             <label for="email"><?=$emailText?></label>
             <input type="email" id="email" name="email" placeholder="<?=$emailPlaceholder?>" required></input>
 

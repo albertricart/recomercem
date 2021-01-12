@@ -23,7 +23,7 @@ if ( !empty( $EntitiesAry ) ) {
         <div class="row">
             
             <!-- nombre entidad -->
-            <div class="col-10 h5 text-dark px-2"><?=$theData['nombre'].' <span class="h6">(id #'.$theData['id'].')</span>'?></div>
+            <div class="col-10 h5 text-dark px-2"><?=$theData['cid'].' <span class="h6">(id #'.$theData['id'].')</span>'?></div>
 
             <div class="col-1">
 

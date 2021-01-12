@@ -10,7 +10,7 @@ $sectionTitle = "Buscar Comercios";
 
 $sectionDescription = "";
 
-$ourOffers = "Nostres Ofertes";
+$ourOffers = "Nuestras Ofertas";
 
 $bynameText = "Nombre de comercio";
 $bytypeText = "Tipo de Comercio";
