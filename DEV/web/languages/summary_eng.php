@@ -8,7 +8,9 @@ $pageKeywords = "Game, Discounts, win, discount, tickets, stores, reComercem, co
 
 $sectionTitle = "Game Discounts";
 
-$sectionDescription = "";
+$sectionDescription = "With the games you can get a 10% Discount ticket on list prices in any of our listed shops. You just have to play all the available games and get in total more than 500 points. Have fun and win !";
+
+$loginAlert = "Remember that in order to play you must register and log in. To do this, click on the user icon in the upper right hand corner of the page.";
 
 $jsonTraslate = '{
     "hola":"Hello @@nombre",

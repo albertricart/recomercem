@@ -125,20 +125,23 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
     <p class="storeText"><?=$EntitiesAry[$xim]['etiquetas']?></p>
     <div style="clear: both;"></div>
 
+
+    <?
+        $OffersAry = GetIdedArray( getEntity( "oferta", 0, 1, 0, 0, ' WHERE id_comerc = '.$xim ) );
+
+        if ( !empty( $OffersAry ) ) {
+
+    ?>
+
     <h2 class="storeSubtitle"><?=$ourOffers?></h2>
 
     <ul class="listOfferItemsMain">
 
     <?
 
-            $OffersAry = GetIdedArray( getEntity( "oferta", 0, 1, 0, 0, ' WHERE id_comerc = '.$xim ) );
-
-
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
 
-            if ( !empty( $OffersAry ) ) {
-
-                foreach( $OffersAry as $theKey => $theData ) {
+            foreach( $OffersAry as $theKey => $theData ) {
 
     ?>
 
@@ -152,10 +155,11 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
            
     <?php 
 
-                }
             }
-
+            
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //
+
+        }
 
     ?>
 

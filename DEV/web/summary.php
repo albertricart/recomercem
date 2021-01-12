@@ -56,10 +56,16 @@ $playedGames = 0;
 // var_dump($_SESSION); // var_dump($_REQUEST);
 
 // - - - - - Control si existe y rellena de datos
+
+$loggedUser = false;
+
 if ( !empty( $_SESSION ) ) {
 
     // - - - - - Get & Calc data from session
     $sessionAry = $_SESSION;
+
+    // - - - - - control user
+    if ( !empty( $sessionAry['user']['name'] ) ) { $loggedUser = true; }
 
     if ( !isset( $sessionAry['games'] ) ) {    
 
@@ -87,6 +93,7 @@ if ( !empty( $_SESSION ) ) {
 
     $consoleLog[] = "update session";
 
+/*
 } else {
 
     $sessionAry['user']['id'] = "";
@@ -109,28 +116,22 @@ if ( !empty( $_SESSION ) ) {
     if ( $isOK ) { ++$playedGames; }
 
     $consoleLog[] = "create session";
+*/
 
 }
 
 // - - - - - Save session in local
 $_SESSION = $sessionAry;
 
-// - - - - - control user
-if ( !empty( $sessionAry['user']['name'] ) ) { $loggedUser = true; } else { $loggedUser = false; }
-
-if (!$loggedUser) { 
+if ($loggedUser) { 
     
-    header('Location: /login.html?hi'); } 
-
-else {
-
     saveEntity( "usuario", array('puntuacion'=>$totalPoints,'json'=>json_encode($sessionAry['games'])), array('field'=>'email','content'=>"'".$sessionAry['user']['email']."'") );
 
 }
 
 // - - - - - control ticket
 if ( $totalPoints >= $pointsToTicket ) { $giveTicket = true; } else { $giveTicket = false; }
-if ( $sessionAry['user']['ticket'] != 0 ) { $sendedTicket = true; } else { $sendedTicket = false; }
+if ( $loggedUser && $sessionAry['user']['ticket'] != 0 ) { $sendedTicket = true; } else { $sendedTicket = false; }
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Session data //
@@ -138,35 +139,37 @@ if ( $sessionAry['user']['ticket'] != 0 ) { $sendedTicket = true; } else { $send
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TRASLATE BLOCK =>
 
-// - - - - - traslate data
-$trsltStringAry = json_decode( $jsonTraslate, true );
-$chngStringAry = json_decode( $jsonChange, true );
-// - - - - - Array de reemplazo
-$replaceStringAry = array( '@@nombre', '@@expresion', '@@juego', '@@puntos', '@@total', '@@jugados', '@@points2ticket' );
-// - - - - - expresion
-if ( $finalScore == 0 ) { $expresion = $chngStringAry['expresion'][0]; }
-elseif ( $finalScore < ( $pointsToTicket * .30 ) ) { $expresion = $chngStringAry['expresion'][1]; }
-else { $expresion = $chngStringAry['expresion'][2]; }
-// - - - - - obtenido
-if ( $finalScore > 0 ) { $trsltStringAry['obtenido'] = $chngStringAry['obtenido']; } 
-// - - - - - jugados
-if ( $playedGames == count( $sessionAry['games'] ) ) { $trsltStringAry['jugados'] = $chngStringAry['jugados']; }
-// - - - - - suficiente
-if ( $giveTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['suficiente']; }
-// - - - - - enviado
-if ( $sendedTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['enviado']; }
-// - - - - - replace array
-$replaceDataAry = array(
-	'@@nombre' => $sessionAry['user']['name'],
-	'@@expresion' => $expresion,
-	'@@juego' => (($isOK)?$EntitiesAry[$gameId]['nombre']:''),
-	'@@puntos' => $finalScore,
-	'@@total' => $totalPoints,
-	'@@jugados' => $playedGames .'/'. count( $sessionAry['games'] ),
-	'@@points2ticket' => $pointsToTicket
-);
+if ( $loggedUser ) {
+        // - - - - - traslate data
+    $trsltStringAry = json_decode( $jsonTraslate, true );
+    $chngStringAry = json_decode( $jsonChange, true );
+    // - - - - - Array de reemplazo
+    $replaceStringAry = array( '@@nombre', '@@expresion', '@@juego', '@@puntos', '@@total', '@@jugados', '@@points2ticket' );
+    // - - - - - expresion
+    if ( $finalScore == 0 ) { $expresion = $chngStringAry['expresion'][0]; }
+    elseif ( $finalScore < ( $pointsToTicket * .30 ) ) { $expresion = $chngStringAry['expresion'][1]; }
+    else { $expresion = $chngStringAry['expresion'][2]; }
+    // - - - - - obtenido
+    if ( $finalScore > 0 ) { $trsltStringAry['obtenido'] = $chngStringAry['obtenido']; } 
+    // - - - - - jugados
+    if ( $playedGames == count( $sessionAry['games'] ) ) { $trsltStringAry['jugados'] = $chngStringAry['jugados']; }
+    // - - - - - suficiente
+    if ( $giveTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['suficiente']; }
+    // - - - - - enviado
+    if ( $sendedTicket ) { $trsltStringAry['suficiente'] = $chngStringAry['enviado']; }
+    // - - - - - replace array
+    $replaceDataAry = array(
+    	'@@nombre' => $sessionAry['user']['name'],
+    	'@@expresion' => $expresion,
+    	'@@juego' => (($isOK)?$EntitiesAry[$gameId]['nombre']:''),
+    	'@@puntos' => $finalScore,
+    	'@@total' => $totalPoints,
+    	'@@jugados' => $playedGames .'/'. count( $sessionAry['games'] ),
+    	'@@points2ticket' => $pointsToTicket
+    );
 
-$trsltStringAry = str_replace( $replaceStringAry, $replaceDataAry, $trsltStringAry );
+    $trsltStringAry = str_replace( $replaceStringAry, $replaceDataAry, $trsltStringAry );
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TRASLATE BLOCK //
 
@@ -219,20 +222,31 @@ include_once("_php_partials/02_header.php");
         <?=$sectionTitle?>
     </h1>
 
-    <? if ( $isOK ) { // Control por ejecucion sin parametros ?> 
+    <p><?=$sectionDescription?></p>
 
-    <h1 class="stdSubtitle"><?=(($loggedUser)?$trsltStringAry['hola']." ":'').$trsltStringAry['obtenido']?></h1>
+    <? 
 
-    <? } ?>
+    if ( $loggedUser ) { ?> 
 
-    <p class="stdText"><?=$trsltStringAry['almacenado']?></p>
+        <h2 class="stdSubtitle" style="margin-top: 50px;"><?=(($loggedUser)?$trsltStringAry['hola']." ":'').' '.(($isOK)?$trsltStringAry['obtenido']:'')?></h2>
 
-    <p class="stdText"><?=$trsltStringAry['jugados']." ".$trsltStringAry['suficiente']?></p> 
+        <p class="stdText"><?=$trsltStringAry['almacenado']?></p>
 
-    <?=(($giveTicket && !$sendedTicket )?'<button class="btnGeneral" onclick="getMyTicket(this)">'.$trsltStringAry['getticket'].'</button>':'')?>
+        <p class="stdText"><?=$trsltStringAry['jugados']." ".$trsltStringAry['suficiente']?></p> 
 
-    <p class="stdSubtitle"><?=$trsltStringAry['resumen']?><p>
+        <?=(($giveTicket && !$sendedTicket )?'<button class="btnGeneral" onclick="getMyTicket(this)">'.$trsltStringAry['getticket'].'</button>':'')?>
+
+        <p class="stdSubtitle"><?=$trsltStringAry['resumen']?><p>
+
+    <? 
     
+    } else {
+
+        echo '<p>'.$loginAlert.'</p>';
+
+    }
+    ?>
+
     <ul id="gamesListBox">
 
         <?php   //var_dump( $sessionAry);
@@ -244,7 +258,7 @@ include_once("_php_partials/02_header.php");
         ?>
 
         <li class="gamesListItemBox">
-            <?=(($lastState)?'<a href="/games'.$theData['url'].'" target="_self">':'')?>
+            <?=(($loggedUser && $lastState)?'<a href="/games'.$theData['url'].'" target="_self">':'')?>
             <span class="gamesListItemImgBg">
                 <div class="gamesListItemImg" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg); <?=((!$lastState)?'opacity: .5;':'')?>"></div>
                 <?=((!$lastState)?'<svg x="0px" y="0px" width="37px" height="50px" viewBox="0 0 37 50" class="gamesListItemAvailable">
@@ -260,14 +274,14 @@ include_once("_php_partials/02_header.php");
             <div class="gamesListItemTextBox">
                 <h2 class="stdTitle"><?=$theData['nombre']?></h2>
                 <p class="ltlText"><?=$theData['descripcion']?></p>
-                <h2 class="stdSubtitle"><?=$sessionAry['games'][$theKey]['score']?> Puntos</h2>
+                <? if ( $loggedUser ) { ?><h2 class="stdSubtitle"><?=$sessionAry['games'][$theKey]['score']?> Puntos</h2><? } ?> 
             </div>
             <?=(($lastState)?'</a>':'')?>
         </li>
         
         <?php 
 
-            $lastState = $sessionAry['games'][$theKey]['score'];
+        if ( $loggedUser ) { $lastState = $sessionAry['games'][$theKey]['score']; } else { $lastState = 0; }
 
         }
 

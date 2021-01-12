@@ -8,7 +8,9 @@ $pageKeywords = "Game, Discounts, win, discount, tickets, stores, reComercem, co
 
 $sectionTitle = "Jocs Descomptes";
 
-$sectionDescription = "";
+$sectionDescription = "Amb els jocs pots obtenir un tiquet de descompte de l'10% sobre preus de llista en qualsevol dels nostres comercion llistats. Només has de jugar tots els jocs disponibles i obtenir en total més de 500 punts. Diverteix-te i guanya!";
+
+$loginAlert = "Recorda que per poder jugar has de registrar i iniciar sessió. Per a això fes clic a la icona d'usuari a la parra superior dreta de la pàgina.";
 
 $jsonTraslate = '{
     "hola":"Hola @@nombre",
