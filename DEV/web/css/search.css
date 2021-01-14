@@ -18,6 +18,12 @@
     list-style: none; 
 }
 
+.listStoreItemLink {
+    display: block; 
+    padding: 10px; 
+}
+.listStoreItemLink:hover { box-shadow: 0px 0px 3px rgba(0,0,0,.3); }
+
 .listStoreItemContainer { 
     box-sizing: border-box;
     display: block;
@@ -27,9 +33,7 @@
     padding: 250px 0 0;
     background: top center no-repeat;
     background-size: cover;
-    border-radius: 3px;
     overflow: hidden;
-    box-shadow: 0px 0px 3px black;
     cursor: pointer;
 }
 
@@ -51,6 +55,7 @@
     letter-spacing: 2px;
     font-weight: normal;
 }
+
 .listStoreItemText { 
     margin: 0; 
     padding: 20px; 

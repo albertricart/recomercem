@@ -11,7 +11,7 @@
         <g><rect fill="currentColor" width="52" height="10"/><rect y="21" fill="currentColor" width="52" height="10"/><rect y="42" fill="currentColor" width="52" height="10"/></g>
     </svg>
 
-    <svg id="iconUser" <?=((isset($_SESSION['user']))?'style="color: var(--colLogued)" ':'')?>x="0px" y="0px" width="52px" height="52px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01" onclick="viewUser()">
+    <svg id="iconUser" <?=((isset($_SESSION['user']))?'style="color: var(--colLogued);" ':'')?>x="0px" y="0px" width="52px" height="52px" viewBox="0 0 52.01 52.01" enable-background="new 0 0 52.01 52.01" onclick="viewUser()">
         <path fill="currentColor" d="M17,21c0,4.97,4.03,9,9.01,9c4.97,0,9-4.03,9-9c0-4.97-4.03-9-9-9
         C21.03,12,17,16.03,17,21z M26.01,3.27c12.55,0,22.73,10.18,22.73,22.73c0,7.08-3.23,13.41-8.3,17.58c0.37-0.95,0.57-1.99,0.57-3.07
         c0-4.7-3.81-8.5-8.5-8.5H19.5c-4.69,0-8.5,3.8-8.5,8.5c0,1.08,0.2,2.12,0.57,3.07C6.5,39.41,3.27,33.08,3.27,26
@@ -42,8 +42,8 @@
 
         if(isset($_SESSION['user'])) { ?>
 
-        <p id="hiUserText">Hola, <?=$_SESSION['user']['name']?></p>
-        <form action="/index.html?logout" method="POST"><button type="submit" id="cerrarBtnX" name="cerrarSesionBtn">Cerrar Sesión</button></form>
+        <p id="hiUserText"><?=$hiUserText.' '.$_SESSION['user']['name']?></p>
+        <form action="/index.html?logout" method="POST"><button type="submit" id="cerrarBtnX" name="cerrarSesionBtn"><?=$closeSessionText?></button></form>
 
         <?php } else { ?>
 
@@ -66,19 +66,13 @@
     </ul>
 
     <ul id="langSelec" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
-        <li class="menuItem"><a id="langEsp" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=esp"?>" target="_self" class="menuLink">Español</a></li>
-        <li class="menuItem"><a id="langCat" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=cat"?>" target="_self" class="menuLink">Català</a></li>
-        <li class="menuItem"><a id="langEng" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=eng"?>" target="_self" class="menuLink">English</a></li>
+        <?php foreach ( $languagesAry as $tmpKey => $tmpData ) { ?>
+        <li class="menuItem"><a id="lang_<?=$tmpKey?>" href="<?=explode( '.', $_SERVER['PHP_SELF'] )[0].".html?lx=".$tmpKey?>" target="_self" class="menuLink"><?=$tmpData?></a></li><?php } ?>
     </ul>
 
     <ul id="menuBox" class="menuHidden" data-close="menuHidden" data-open="menuVisible">
-        <li class="menuItem"><a id="menuHome" href="/index.html" target="_self" class="menuLink">Home</a></li>
-        <li class="menuItem"><a id="menuStores" href="/search_stores.html" target="_self" class="menuLink">Search Stores</a></li>
-        <li class="menuItem"><a id="menuGames" href="/summary.html" target="_self" class="menuLink">Game Discounts</a></li>
-        <li class="menuItem"><a id="menuOffers" href="/last_offers.html" target="_self" class="menuLink">Last Offers</a></li>
-        <li class="menuItem"><a id="menuProject" href="/projecte.html" target="_self" class="menuLink">The Project</a></li>
-        <li class="menuItem"><a id="menuAboutus" href="/about_us.html" target="_self" class="menuLink">About Us</a></li>
-        <li class="menuItem"><a id="menuPrivacy" href="/privacy_and_cookies.html" target="_self" class="menuLink"> Privacy</a></li>
+        <?php foreach ( $optionsMenu as $tmpKey => $tmpData ) { ?>
+        <li class="menuItem"><a id="menu<?=$tmpKey?>" href="<?=$tmpData['url']?>" target="<?=$tmpData['target']?>" class="menuLink"><?=$tmpData['name']?></a></li><?php } ?>
     </ul>
     
 </header>

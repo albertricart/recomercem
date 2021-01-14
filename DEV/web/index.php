@@ -4,6 +4,9 @@
 session_start(); 
 if( isset( $_REQUEST['logout'] )) { $_SESSION = array(); }
 
+// - - - - - control user
+if ( !empty( $_SESSION['user']['name'] ) ) { $loggedUser = true; } else  { $loggedUser = false; }
+
 // - - - - - - - - - - - - - - - - - - - - PAGE DATA
 $pageTitle = 'reComercem: El teu comerç de proximitat al barri';
 $pageDescription = 'reComercem: El teu comerç de proximitat al barri';
@@ -193,7 +196,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
 
-        <a href="/search_stores.html?xim=<?=$theData['id']?>" target="_self">
+        <a href="/search_stores.html?xim=<?=$theData['id']?>" target="_self" class="listStoreItemLink">
         <li class="listStoreItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);">
             <div class="listStoreItemBox">
                 <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2>
@@ -236,35 +239,43 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
         <?=$gamediscountsSectionTitle?>
     </h1>
 
-    <ul class="listGameItemsMain">
+    <ul id="gamesListBox">
 
-        <?php
+        <?php   //var_dump( $sessionAry);
 
-        // - - - - - - - - - - get Comerc Data
-        
         $EntitiesAry = GetIdedArray( getEntity( "juego", 0, 3 ) );
-    
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat => 
-
-        if ( !empty( $EntitiesAry ) ) {
-
-            foreach( $EntitiesAry as $theKey => $theData ) {
-
+        $lastState = 1;
+        foreach( $EntitiesAry as $theKey => $theData ) {
+            
         ?>
 
-        <? /* a href="/games<?=$theData['url']?>" target="_self" */ ?>
-        <a href="/summary.html" target="_self">
-            <li class="listGameItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg)">
-                <div class="listGameItemBox">
-                    <h2 class="listGameItemTitle"><?=$theData['nombre']?></h2>
-                    <p class="listGameItemText"><?=$theData['descripcion']?></p>
-                </div>
-            </li>
-        </a>
-           
+        <li class="gamesListItemBox">
+            <a href="<?=(($loggedUser && $lastState)?'/games'.$theData['url']:'/summary.html')?>" target="_self">
+            <span class="gamesListItemImgBg">
+                <div class="gamesListItemImg" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg); <?=((!$lastState)?'opacity: .5;':'')?>"></div>
+                <?=((!$lastState)?'<svg x="0px" y="0px" width="37px" height="50px" viewBox="0 0 37 50" class="gamesListItemAvailable">
+                    <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M0,23.71v23.9C0,48.93,8.28,50,18.5,50S37,48.93,37,47.61v-23.9
+                    c0-0.64-1.93-1.22-5.09-1.65v1.65c0.1,0.11,0.16,0.23,0.16,0.35c0,0.65-1.52,1.18-3.4,1.18c-1.87,0-3.39-0.53-3.39-1.18
+                    c0-0.12,0.06-0.24,0.16-0.35v-2.22c-2.14-0.11-4.49-0.17-6.94-0.17c-2.51,0-4.91,0.06-7.09,0.18v2.21c0.1,0.11,0.15,0.23,0.15,0.35
+                    c0,0.65-1.52,1.18-3.39,1.18s-3.39-0.53-3.39-1.18c0-0.12,0.05-0.24,0.15-0.35v-1.63C1.87,22.51,0,23.08,0,23.71z M5.47,23.67
+                    c0,0.69,1.21,1.25,2.7,1.25c1.49,0,2.7-0.56,2.7-1.25h0.05V12.15c0-3.05,2.7-5.88,5.6-5.88h3.88c2.9,0,5.59,2.83,5.59,5.88v11.38
+                    c-0.01,0.04-0.01,0.09-0.01,0.14c0,0.69,1.2,1.25,2.69,1.25c1.5,0,2.7-0.56,2.7-1.25h0.11V10.15C31.48,4.89,26.82,0,21.81,0H15.1
+                    c-5,0-9.66,4.89-9.66,10.15v13.52H5.47z"/>
+                </svg>':'')?>
+            </span>
+            <div class="gamesListItemTextBox">
+                <h2 class="stdTitle"><?=$theData['nombre']?></h2>
+                <p class="ltlText"><?=$theData['descripcion']?></p>
+            </div>
+            </a>
+        </li>
+        
         <?php 
 
-            }
+            if ( $loggedUser ) { $lastState = $_SESSION['games'][$theKey]['score']; } else { $lastState = 0; }
+
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - repeat //

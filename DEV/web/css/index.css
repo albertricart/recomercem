@@ -78,8 +78,6 @@
     list-style: none;
 }
 
-
-
 .listStoreItemsMain { 
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
@@ -90,35 +88,45 @@
     padding: 0; 
     list-style: none; 
 }
-.listStoreItemContainer { 
-    box-sizing: border-box; 
+
+.listStoreItemLink {
     display: block; 
-    position: relative; 
-    border: 0; margin: 0; 
-    padding: 250px 0 0; 
-    background: top center no-repeat #27bd8b; 
-    background-size: cover; 
-    border-radius: 10px; 
-    border: solid 2px var(--colSecondary); 
-    overflow: hidden; 
-    box-shadow: 1px 1px 5px black;
+    padding: 10px; 
 }
+.listStoreItemLink:hover { box-shadow: 0px 0px 3px rgba(0,0,0,.3); }
+
+.listStoreItemContainer { 
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    border: 0;
+    margin: 0;
+    padding: 250px 0 0;
+    background: top center no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    cursor: pointer;
+}
+
 .listStoreItemBox { 
-    background-color: rgba( 255, 255, 255,0.8); 
-    position: absolute; 
-    right: 0; 
-    bottom: 0; 
-    left: 0; 
+    background-color: rgba(11, 11, 11, 0.8);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: var(--colWhite);
 }
+
 .listStoreItemTitle { 
-    margin: 0; 
-    padding: 20px 20px 20px; 
-    text-align: center; 
-    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 26px; 
-    letter-spacing: 2px; 
-    font-weight: normal; 
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: normal;
 }
+
 .listStoreItemText { 
     margin: 0; 
     padding: 20px; 
@@ -284,5 +292,96 @@
 
     #mainoptions { box-sizing: border-box; width: auto; grid-template-columns: 1fr; grid-gap:10px; padding: 20px 10px; }
     .optcontainer { box-sizing: border-box; }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.stdText { 
+    color: var(--colPrimary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    margin: 20px 0 0;
+    text-align: left;
+    letter-spacing: 1px;
+    line-height: 180%; 
+    font-size: 16px;
+}
+
+.ltlText { 
+    color: var(--colPrimary);
+    font-family: 'OpenSans', Arial, Helvetica, sans-serif;
+    margin: 20px 0 0;
+    text-align: left;
+    letter-spacing: 1px;
+    line-height: 130%; 
+    font-size: 13px;
+}
+
+#gamesListBox { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-gap: 50px; 
+    width: 100%; 
+    height: auto; 
+    margin: 50px 0; 
+    padding: 0; 
+    list-style: none; 
+}
+
+
+.gamesListItemImgBg { 
+    display: block; 
+    background-color: #555 
+}
+
+.gamesListItemBox { 
+    display: block; 
+    position: relative; 
+    overflow: hidden; 
+    width: 100%; 
+    height: auto; 
+}
+
+.gamesListItemImg { 
+    position: relative; 
+    width: 100%; 
+    height: 200px; 
+    background: no-repeat center; 
+    background-size: cover; 
+}
+
+.gamesListItemAvailable { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    color: var(--colPrimary); 
+    width: 30px; 
+    height: 30; 
+    padding: 10px; 
+    background-color: rgba(255,255,255,.75); 
+    border-radius: 25px; 
+}
+
+.gamesListItemTextBox { padding: 10px 0; }
+
+
+
+@media (max-width: 750px) {
+
+    #gamesListBox { 
+        grid-template-columns: 1fr; 
+        grid-gap: 20px; 
+    }
 
 }

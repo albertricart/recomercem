@@ -181,6 +181,8 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 
         ?>
     
+
+        <span class="listStoreItemLink">
         <li class="listStoreItemContainer" style="background-image: url(/images/uploaded/<?=$theData['cid']?>.jpg);" onclick="document.getElementById('<?=$theData['cid']?>').submit()">
             <div class="listStoreItemBox">
                 <h2 class="listStoreItemTitle"><?=$theData['nombre']?></h2>
@@ -192,6 +194,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
                 <input type="hidden" name="bytag" value="<?=((!empty($_POST['bytag']))?$_POST['bytag']:'')?>" />
             </form>        
         </li>
+        </span>
 
         <?php 
 

@@ -19,6 +19,8 @@
     font-size: 14px; 
 }
 
+.searchFormInput::placeholder { color: var(--colPrimary); }
+
 #byname { width: 20%; }
 
 #bytype { width: 20%; }
