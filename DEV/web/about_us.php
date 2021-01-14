@@ -32,15 +32,15 @@ include_once("_php_partials/02_header.php");
 
     <div class="all">
         <div class="persona">
-            <img src="/images/bitmojiAlbert.png" alt="bitmojiAlbert">
+            <img class="pj" src="/images/bitmojiAlbert.png" alt="bitmojiAlbert">
         </div>
 
         <div class="persona">
-            <img src="/images/bitmojiMarcelo.png" alt="bitmojiMarcelo">
+            <img class="pj" src="/images/bitmojiMarcelo.png" alt="bitmojiMarcelo">
         </div>
 
         <div class="persona">
-            <img src="/images/bitmojiMario.png" alt="bitmojiAlbert">
+            <img class="pj" src="/images/bitmojiMario.png" alt="bitmojiAlbert">
         </div>
         <div class="nombres">
             <div>
