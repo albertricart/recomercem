@@ -2,8 +2,10 @@
     /* Palette URL: http://paletton.com/#uid=4010u0krAmIiVu6nLqRv5izEKdi */
     --colPrimary: #B51D19;
     --colSecondary: #10696D;
+    --colSecondary: #333;
     --colTertiary: #148E1C;
     --colHighlight: #247BA0;
+    --colHighlight: #da9e03;
     --colText: #333;
     --colWhite: #fff;
     --colBlack: #000;
@@ -150,6 +152,8 @@ main {
     padding: 50px calc( (100% - 1024px) / 2); 
     color: var(--colSecondary);
     font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
+    letter-spacing: 1px;
+    line-height: 160%;
 }
 
 .artlTitle { 

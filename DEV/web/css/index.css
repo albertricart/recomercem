@@ -61,8 +61,8 @@
     text-transform: uppercase;
     letter-spacing: 5px;
     font-weight: bold; 
-    border: 1px solid #073782;
-    box-shadow: 2px 2px 2px rgba(0,0,0,.8);
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 2px rgba(0,0,0,.75);
     cursor: pointer;
 }
 
@@ -195,117 +195,6 @@
 
 
 
-.listGameItemsMain { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-gap: 50px; 
-    width: 100%; 
-    height: auto; 
-    margin: 50px 0; 
-    padding: 0; 
-    list-style: none; 
-}
-.listGameItemContainer { 
-    box-sizing: border-box; 
-    display: block; 
-    position: relative; 
-    border: 0; 
-    margin: 0; 
-    padding: 250px 0 0; 
-    background: top center no-repeat #27bd8b; 
-    background-size: cover; 
-    border-radius: 10px; 
-    border: solid 2px var(--colSecondary); 
-    overflow: hidden; 
-    box-shadow: 1px 1px 5px black inset;
-    min-height: 500px;
-}
-.listGameItemBox { 
-    background-color: rgba( 255, 255, 255,0.8); 
-    position: absolute; 
-    right: 10px; 
-    bottom: 10px; 
-    left: 10px; 
-    height: auto;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 1px 1px 5px black;
-}
-.listGameItemTitle { 
-    margin: 0; 
-    padding: 20px 20px 0; 
-    text-align: center; 
-    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 26px; 
-    letter-spacing: 2px; 
-    font-weight: normal; 
-}
-.listGameItemText { 
-    margin: 0; 
-    padding: 20px; 
-    text-align: left; 
-    font-family: 'OpenSans', Arial, Helvetica, sans-serif; 
-    font-size: 12px; 
-    letter-spacing: .5px; 
-    line-height: 140%; 
-}
-
-
-@media (max-width: 1044px) {
-
-    #mainoptions { box-sizing: border-box; padding-left: 20px; padding-right: 20px; grid-gap: 50px; }
-
-    .artlBox { padding: 50px 10px 0px; }
-
-}
-
-@media (max-width: 900px) { 
-
-    .listStoreItemsMain { grid-template-columns: 1fr 1fr; grid-gap: 50px; margin-bottom: 10px; }
-
-}
-
-@media (max-width: 750px) { 
-
-    .listOfferItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
-
-    .listGameItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
-
-    .listStoreItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
-
-}
-
-@media (max-width: 700px) {
-
-    .optnicon { width: 60%; height: auto; }
-    .optntitle { width: 100%; height: auto; font-size: 20px; }
-
-    #mainoptions { grid-gap:20px; padding: 20px 10px; }
-    .optcontainer { box-sizing: border-box; }
-
-}
-
-@media (max-width: 550px) {
-
-    .optnicon { width: 49%; height: auto; float: left; }
-    .optntitle { width: 49%; height: auto; float: right; font-size: 26px; }
-    .indexicons { max-width: 90px; }
-
-    #mainoptions { box-sizing: border-box; width: auto; grid-template-columns: 1fr; grid-gap:10px; padding: 20px 10px; }
-    .optcontainer { box-sizing: border-box; }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .stdText { 
@@ -319,7 +208,7 @@
 }
 
 .ltlText { 
-    color: var(--colPrimary);
+    color: var(--colText);
     font-family: 'OpenSans', Arial, Helvetica, sans-serif;
     margin: 20px 0 0;
     text-align: left;
@@ -377,7 +266,28 @@
 
 
 
-@media (max-width: 750px) {
+
+@media (max-width: 1044px) {
+
+    #mainoptions { box-sizing: border-box; padding-left: 20px; padding-right: 20px; grid-gap: 50px; }
+
+    .artlBox { padding: 50px 10px 0px; }
+
+}
+
+@media (max-width: 900px) { 
+
+    .listStoreItemsMain { grid-template-columns: 1fr 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+}
+
+@media (max-width: 750px) { 
+
+    .listOfferItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+    .listGameItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
+
+    .listStoreItemsMain { grid-template-columns: 1fr; grid-gap: 50px; margin-bottom: 10px; }
 
     #gamesListBox { 
         grid-template-columns: 1fr; 
@@ -385,3 +295,38 @@
     }
 
 }
+
+@media (max-width: 700px) {
+
+    .optnicon { width: 60%; height: auto; }
+    .optntitle { width: 100%; height: auto; font-size: 20px; }
+
+    #mainoptions { grid-gap:20px; padding: 20px 10px; }
+    .optcontainer { box-sizing: border-box; }
+
+}
+
+@media (max-width: 550px) {
+
+    .optnicon { width: 49%; height: auto; float: left; }
+    .optntitle { width: 49%; height: auto; float: right; font-size: 26px; }
+    .indexicons { max-width: 90px; }
+
+    #mainoptions { box-sizing: border-box; width: auto; grid-template-columns: 1fr; grid-gap:10px; padding: 20px 10px; }
+    .optcontainer { box-sizing: border-box; }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

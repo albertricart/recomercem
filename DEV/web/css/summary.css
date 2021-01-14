@@ -1,7 +1,7 @@
 .artlTitle { margin-bottom: 50px !important; }
 
 .stdTitle { 
-    color: var(--colPrimary);
+    color: var(--colText);
     font-family: 'OpenSans', Arial, Helvetica, sans-serif;
     margin: 20px 0 0;
     text-align: left;
@@ -11,7 +11,7 @@
 }
 
 .stdSubtitle { 
-    color: var(--colPrimary);
+    color: var(--colText);
     font-family: 'OpenSans', Arial, Helvetica, sans-serif;
     margin: 20px 0 0;
     text-align: left;
@@ -21,7 +21,7 @@
 }
 
 .stdText { 
-    color: var(--colPrimary);
+    color: var(--colText);
     font-family: 'OpenSans', Arial, Helvetica, sans-serif;
     margin: 20px 0 0;
     text-align: left;
@@ -31,7 +31,7 @@
 }
 
 .ltlText { 
-    color: var(--colPrimary);
+    color: var(--colText);
     font-family: 'OpenSans', Arial, Helvetica, sans-serif;
     margin: 20px 0 0;
     text-align: left;

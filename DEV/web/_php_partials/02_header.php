@@ -77,4 +77,4 @@
     
 </header>
 
-<main>
+<main style="background: right url(/images/pages_bg.png) no-repeat fixed;">
