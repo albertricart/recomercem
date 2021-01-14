@@ -6,7 +6,7 @@ $pageDescription = "'reComercem' és un projecte de promoció de comerços de la
 
 $pageKeywords = "reComercem, comerç, barri, comerç, barri, proximitat, barri, store, neighbourought";
 
-$sectionTitle = "About US";
+$sectionTitle = "Qui som";
 
 $sectionDescription = "";
 
