@@ -23,6 +23,11 @@
     padding: 95px;
 }
 
+.test
+{
+    display: inline-block;
+}
+
 .pj
 {
     border-radius: 50%;

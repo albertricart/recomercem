@@ -43,13 +43,13 @@ include_once("_php_partials/02_header.php");
             <img class="pj" src="/images/bitmojiMario.png" alt="bitmojiAlbert">
         </div>
         <div class="nombres">
-            <div>
+            <div class="test">
                 <p class="nombre">Albert Ricart</p>
             </div>
-            <div>
+            <div class="test">
                 <p class="nombre">Marcelo Goncevatt</p>
             </div>
-            <div>
+            <div class="test">
                 <p class="nombre">Mario De La Torre</p>
             </div>
             
