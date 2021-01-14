@@ -5,13 +5,13 @@
     padding-top: 100px;
     padding-left:200px;
     padding-right: 200px;
-    color:  #B51D19;
+    color:  var(--colText);
 }
 
 .text
 {
     font-family: 'OpenSans-Bold', Arial, Helvetica, sans-serif;
-    color:  #B51D19;
+    color:  var(--colText);
     text-align: justify;
     padding-left:   200px;
     padding-right: 200px;
@@ -20,7 +20,7 @@
 .text2
 {
     font-family: 'OpenSans-Bold', Arial, Helvetica, sans-serif;
-    color:  #B51D19;
+    color:  var(--colText);
     text-align: justify;
     padding-left:   250px;
     padding-right: 200px;

@@ -40,7 +40,7 @@ include_once("_php_partials/02_header.php");
         <p class="text"><?=$cookiestxt?></p>
 
         <h2 class="titulo"><?=$cookies2?></h2>
-        <p class="text"><?=$cookiestxt2?></p>
+        <p class="text"><?=$cookies2txt?></p>
     </div>
 </article>
 
