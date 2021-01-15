@@ -10,6 +10,13 @@ $pageKeywords = 'reComercem, comerç, barri, comercio, barri, proximidad, barrio
 $pageStylesAry = Array(); // example Array('keyname' => '/fullfilepath/filename.css');
 $pageScriptsAry = Array(); // example Array('keyname' => '/fullfilepath/filename.js');
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including =>
+
+// - - - - - Traslate Settings
+include_once("_php_partials/00_traslate_settings.php");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - Including //
+
 // - - - - - - - - - - - - - - - - - - - - HEAD PART
 include_once("_php_partials/01_head.php");
 

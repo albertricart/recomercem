@@ -7,6 +7,18 @@
 <meta name="description" content="<?=((!empty($pageDescription))?$pageDescription:'reComercem: El teu comerç de proximitat al barri')?>" />
 <meta name="keywords" content="<?=((!empty($pageKeywords))?$pageKeywords:'reComercem, comerç, barri, comercio, barri, proximidad, barrio, store, neighbourought')?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    @font-face {
+      font-family: 'Inter';
+      src: url(/third-parties/fonts/inter/Inter-VariableFont_slnt,wght.ttf);
+      font-family: 'OpenSans-Regular';
+      src: url(/third-parties/fonts/open-sans/OpenSans-Regular.ttf);
+      font-family: 'OpenSans-Bold';
+      src: url(/third-parties/fonts/open-sans/OpenSans-Bold.ttf);
+      font-family: 'OpenSans-Italic';
+      src: url(/third-parties/fonts/open-sans/OpenSans-Italic.ttf);
+    }
+</style>
 <link href="/css/styles.css" rel="stylesheet" type="text/css" />
 <link href="/css/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/scripts.js"></script>
@@ -27,15 +39,4 @@ if (!empty($pageScriptsAry)) {
 }
 
 ?>
-<style>
-    @font-face {
-      font-family: 'Inter';
-      src: url(/third-parties/fonts/inter/Inter-VariableFont_slnt,wght.ttf);
-      font-family: 'OpenSans-Regular';
-      src: url(/third-parties/fonts/open-sans/OpenSans-Regular.ttf);
-      font-family: 'OpenSans-Bold';
-      src: url(/third-parties/fonts/open-sans/OpenSans-Bold.ttf);
-      font-family: 'OpenSans-Italic';
-      src: url(/third-parties/fonts/open-sans/OpenSans-Italic.ttf);
-    }
-</style>
+

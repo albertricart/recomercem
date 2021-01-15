@@ -49,15 +49,11 @@ if( $isKO == 0 ) {
     saveEntity( "usuario", array('id'=>$EntitiesAry['id'],'ticket'=>$timestamp));
 
     // - - - - - envio email()
-    $mailfrom = 'ticketdiscount@recomercem.com';
+    $mailfrom = 'ticketdiscount@recomercem.es';
     $mailto = $EntitiesAry['email'];
-    $mailsubject = 'Ticket de descuento';
-    $mailmenssage = 'Hola, te enviamos tu ticket de descuento. '."\r\n".
-        'Por favor, indica en el comercio elegido el código de ticket '.$cid."\r\n".
-        'Recuerda que tienes 7 días para obtener tu descuento del 10% en nuestros comercios, no te demores !!!'."\r\n".
-        'Si tienes alguna duda, comentario o incidencia, por favor, escribenos a hello@recomercem.es'."\r\n".
-        'Muchas gracias por participar !!!'."\r\n"."\r\n".
-        'Equipo reComerçen';
+    if ( file_exists( "./languages/"."emailticket_".$setLanguage.".php" ) ) {
+        include_once( "./languages/"."emailticket_".$setLanguage.".php" );
+    }
     $mailheaders = 'From: ' . $mailfrom . "\r\n" . 'Reply-To: ' . $mailfrom . "\r\n" . 'XTremGroup - reComerçem: 0.9';
     mail( $mailto, $mailsubject, $mailmenssage, $mailheaders );
 
