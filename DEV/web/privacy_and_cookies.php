@@ -34,7 +34,7 @@ include_once("_php_partials/02_header.php");
         <p class="text"><?=$ProteccionDeDatostxt?></p>
 
         <h2 class="titulo"><?=$Usuarios?></h2>
-        <p class="text"><?=$Usuarios?></p>
+        <p class="text"><?=$Usuariostxt?></p>
 
         <h2 class="titulo"><?=$cookies?></h2>
         <p class="text"><?=$cookiestxt?></p>

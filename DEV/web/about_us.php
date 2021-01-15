@@ -29,26 +29,21 @@ include_once("_php_partials/02_header.php");
 <article id="mainStores" class="artlBox">
 
     <h1 class="artlTitle"><?=$sectionTitle?></h1>
-
+    
     <div class="all">
         <div class="persona">
-            <img src="/images/bitmojiAlbert.png" alt="bitmojiAlbert">
+            <img class="pj" src="/images/bitmojiAlbert.png" alt="bitmojiAlbert">
+            <p class="nombre">Albert Ricart</p>
         </div>
-
         <div class="persona">
-            <img src="/images/bitmojiMarcelo.png" alt="bitmojiMarcelo">
+            <img class="pj" src="/images/bitmojiMarcelo.png" alt="bitmojiAlbert">
+            <p class="nombre">Marcelo Goncevatt</p>
         </div>
-
         <div class="persona">
-            <img src="/images/bitmojiMario.png" alt="bitmojiAlbert">
+            <img class="pj" src="/images/bitmojiMario.png" alt="bitmojiAlbert">
+            <p class="nombre">Mario De La Torre</p>
         </div>
     </div>
-    <div class="nombres">
-        <p class="nombre">Albert Ricart</p>
-        <p class="nombre">Marcelo Goncevatt</p>
-        <p class="nombre">Mario De La Torre</p>
-    </div>
-
     <div class="text">
     
         <p><?=$grupoXtremText?></p><br>
