@@ -11,10 +11,16 @@
     @font-face {
       font-family: 'Inter';
       src: url(/third-parties/fonts/inter/Inter-VariableFont_slnt,wght.ttf);
+    }
+    @font-face {
       font-family: 'OpenSans';
       src: url(/third-parties/fonts/open-sans/OpenSans-Regular.ttf);
+    }
+    @font-face {
       font-family: 'OpenSans-Bold';
       src: url(/third-parties/fonts/open-sans/OpenSans-Bold.ttf);
+    }
+    @font-face {
       font-family: 'OpenSans-Italic';
       src: url(/third-parties/fonts/open-sans/OpenSans-Italic.ttf);
     }
