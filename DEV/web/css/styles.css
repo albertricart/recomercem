@@ -167,6 +167,7 @@ main {
     min-height: 60px; 
     font-size: 50px;
     text-align: left;
+    color: var(--colPrimary);
 }
 
 .artlTitleIcon { height: 70px; vertical-align: bottom; }
