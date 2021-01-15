@@ -79,7 +79,7 @@ include_once("_php_partials/02_header.php");
         <img src="/images/poject_icons/icono_wireframes.png" style="max-width: 150px; border: none;" />
         <h2 class="itemTitle">Wireframes</h2>
     </a>
-    <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Paleta%20de%20colores/Paleta%20de%20colors%20recomercem.png" target="_blank" style="display: block; text-align: center; padding: 20px;">
+    <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Paleta_Colores.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
         <img src="/images/poject_icons/icono_paletacolores.png" style="width: 60%; height: auto;" />
         <h2 class="itemTitle">Paleta de Colores</h2>
     </a>
