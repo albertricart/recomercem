@@ -11,7 +11,7 @@
     @font-face {
       font-family: 'Inter';
       src: url(/third-parties/fonts/inter/Inter-VariableFont_slnt,wght.ttf);
-      font-family: 'OpenSans-Regular';
+      font-family: 'OpenSans';
       src: url(/third-parties/fonts/open-sans/OpenSans-Regular.ttf);
       font-family: 'OpenSans-Bold';
       src: url(/third-parties/fonts/open-sans/OpenSans-Bold.ttf);
