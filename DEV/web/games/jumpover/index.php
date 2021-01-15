@@ -19,7 +19,7 @@ if ( file_exists( "../../_php_partials/00_game_header.php" ) ) { include_once(".
 ?>
 
 </div>
-<?
+ <?
 	
 	if ( file_exists( "../../_php_partials/00_game_header.php" ) ) { 
     include_once("../../_php_partials/00_game_header.php"); 
@@ -51,6 +51,11 @@ if ( file_exists( "../../_php_partials/00_game_header.php" ) ) { include_once(".
   <div id="gridtxt">
     <h2 id="howtoplay"></h2>
     <p id="explain"></p>
+    <div id="controls">
+      <img class="cont" src="src/spacebarkey.png" alt="spacebarkey" width="240" height="100">
+      <img class="cont" src="src/upkey.png" alt="upkey" width="100" height="100">
+      
+    </div>
   </div>
 
 <form id="endgame" action="/summary.html" method="POST">
