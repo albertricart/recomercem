@@ -83,23 +83,23 @@ include_once("_php_partials/02_header.php");
 <div id="prjctGrid">
 
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Modelo%20Relacional%20BD/Model%20Relacional%20BD%20Recomercem.PNG" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_basesdedatos.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_basesdedatos.png" class="prjctItemImage" />
         <h2 class="itemTitle">Base de Datos</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Diagrama%20casos%20de%20uso/Diagrama%20casos%20d'us%20-%20Grup%201.jpeg" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_casosdeuso.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_casosdeuso.png" class="prjctItemImage" />
         <h2 class="itemTitle">Casos de Uso</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Varios/Juegos_Descripcion.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_games.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_games.png" class="prjctItemImage" />
         <h2 class="itemTitle">Presentación Juegos</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Mapas%20mentales/grupo/BrainStorm.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_mapamental.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_mapamental.png" class="prjctItemImage" />
         <h2 class="itemTitle">Mapa Mental</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Target%20Customer%20Profile/Persona%20profiles.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_persona.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_persona.png" class="prjctItemImage" />
         <h2 class="itemTitle">Persona Profile</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Varios/Contracte_Constituci%C3%B3_Equip.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
@@ -107,16 +107,20 @@ include_once("_php_partials/02_header.php");
         <h2 class="itemTitle">Grupo 1 DAW2B</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Varios/Proyecto_Descripcion.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_presentacion.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_presentacion.png" class="prjctItemImage" />
         <h2 class="itemTitle">Presentación Proyecto</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Wireframes/WireFrames.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_wireframes.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_wireframes.png" class="prjctItemImage" />
         <h2 class="itemTitle">Wireframes</h2>
     </a>
     <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Paleta%20de%20colores/Paleta_Colores.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
-        <img src="/images/poject_icons/icono_paletacolores.png" class="prjctItemImage" />
+        <img src="/images/project_icons/icono_paletacolores.png" class="prjctItemImage" />
         <h2 class="itemTitle">Paleta de Colores</h2>
+    </a>
+    <a href="https://github.com/albertricart/recomercem/blob/main/Documentacion/Tipograf%C3%ADa/Tipografia%20Recomercem.pdf" target="_blank" style="display: block; text-align: center; padding: 20px;">
+        <img src="/images/project_icons/icono_tipografia.png" class="prjctItemImage" />
+        <h2 class="itemTitle">Tipografías</h2>
     </a>
 
 </div>
