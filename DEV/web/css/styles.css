@@ -170,7 +170,7 @@ main {
     color: var(--colPrimary);
 }
 
-.artlTitleIcon { height: 70px; vertical-align: bottom; }
+.artlTitleIcon { height: 70px; vertical-align: middle; }
 
 
 footer { 

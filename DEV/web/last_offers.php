@@ -49,7 +49,7 @@ if ( file_exists( $fileLink ) ) { include( $fileLink ); } else { echo "Error: no
 <article id="mainGames" class="artlBox">
 
     <h1 class="artlTitle">
-        <svg id="icon_offer2" viewBox="0 0 136 129" style="height: 70px; vertical-align: bottom;">
+        <svg id="icon_offer2" viewBox="0 0 136 129" class="artlTitleIcon">
             <g><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M125.514,5.271c5.61,3.02,7.93,9.97,5.27,15.69l-0.29-0.16
             l-15.42,30.75c-0.63,0.6-0.88,1.53-0.56,2.4c0.42,1.16,1.69,1.76,2.84,1.34c0.27-0.1,0.51-0.25,0.71-0.43l0.18,0.1l16.03-32.1
             c3.61-7.65,0.5-16.97-7.01-21c-7.57-4.06-16.86-1.26-20.83,6.29c-3.94,7.5-1.22,16.94,6.13,21.28l0.08-0.16
