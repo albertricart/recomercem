@@ -1,3 +1,35 @@
+@import url(//fonts.googleapis.com/css?family=Inter);
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    transition: all 0.3s ease 0s;
+}
+
+.container {
+    height: auto;
+    min-height: 100vh;
+    background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url("../images/uploaded/CO5fd86f33.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-image {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.login-form-wrapper {
+    height: fit-content;
+    margin: 30px auto;
+    border-radius: 16px;
+    padding: 30px 100px;
+    background-color: var(--colWhite);
+}
+
 .login-form {
     display: flex;
     justify-content: space-around;
@@ -30,12 +62,13 @@
 }
 
 
-#loginForm { font-family: "Inter", sans-serif; }
 
-#loginForm > input[type=text], input[type=password], input[type=email] {
+input[type=text],
+input[type=password],
+input[type=email] {
     font-family: "Inter", sans-serif;
     height: 56px;
-    width: 100%;
+    width: 325px;
     margin: 10px 0px;
     padding: 0px 50px 0px 16px;
     border: 1px solid rgb(207, 214, 228);
@@ -47,7 +80,9 @@
 }
 
 
-#loginForm > input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus {
     border: 1px solid var(--colPrimary);
     box-shadow: 0px 0px 1px 3px rgba(165, 41, 37, 0.3);
 }
@@ -61,15 +96,12 @@
     display: flex;
     width: fit-content;
     margin: 10px auto 0 auto;
-    font-family: "Inter", sans-serif;
-    display: block;
-    text-align: center;
 }
 
 .showpw {
     width: 24px;
     height: 24px;
-    background-image: url("/images/visibility.svg");
+    background-image: url("../images/visibility.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -85,7 +117,10 @@
 }
 
 .cerrarBtn{
-    cursor: pointer;
+    position: absolute;
+    float: right;
+    right: 5px;
+    margin-top: 5px;
     border: none;
     outline: none;
     height: fit-content;
@@ -99,3 +134,6 @@
 }
 
 
+.cerrarBtn:hover {
+    cursor: pointer;
+}

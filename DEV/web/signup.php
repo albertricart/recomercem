@@ -73,3 +73,10 @@ if (isset($_SESSION['error'])) {
 </div>
 
 <script type="text/javascript" src="/js/signup.js"></script>
+
+<?
+
+// - - - - - - - - - - - - - - - - - - - - FOOTER PART
+include_once("_php_partials/99_footer.php");
+
+?>

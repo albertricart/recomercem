@@ -59,7 +59,7 @@ if ( file_exists( "./languages/".$scriptName[0]."_".$setLanguage.".php" ) ) {
 
     include_once( "./languages/".$scriptName[0]."_".$setLanguage.".php" );
 
-} else { echo "<script>console.log('./languages/".$scriptName[0]."_".$setLanguage.".php')</script>"; }
+}
 
 
 

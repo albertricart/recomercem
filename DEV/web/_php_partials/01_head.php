@@ -26,9 +26,8 @@
     }
 </style>
 <link href="/css/styles.css" rel="stylesheet" type="text/css" />
-<link href="/css/login.css" rel="stylesheet" type="text/css" />
+<link href="/css/logintop.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/scripts.js"></script>
-<script type="text/javascript" src="/js/login.js"></script>
 <?php 
 
 // - - - - - - - - - - - $pageStylesAry

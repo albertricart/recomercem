@@ -21,4 +21,6 @@
 
 </footer>
 
+<script type="text/javascript" src="/js/logintop.js"></script>
+
 </body>

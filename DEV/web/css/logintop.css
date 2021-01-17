@@ -1,48 +1,17 @@
-@import url(//fonts.googleapis.com/css?family=Inter);
-
-body {
-    margin: 0;
-    font-family: "Inter", sans-serif;
-    transition: all 0.3s ease 0s;
-}
-
-.container {
-    height: 100vh;
-}
-
-.login-image {
-    height: 100%;
-    background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url("../images/uploaded/CO5fd86f33.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-}
-
-
-.login-form-wrapper {
-    height: fit-content;
-    margin: 10% auto;
-    border-radius: 16px;
-    padding: 30px 100px;
-    background-color: var(--colWhite);
-}
-
-.login-form {
+.logintopForm {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
 }
 
-.login-text {
+.logintopText {
     margin: 5% 0 10% 0;
     padding: 0;
     font-size: 3em;
     font-weight: 600;
 }
 
-.login-btn {
+.logintopBtn {
     margin-top: 10%;
     height: 56px;
     border: 1px solid var(--colPrimary);
@@ -55,19 +24,18 @@ body {
     font-size: medium;
 }
 
-.login-btn:hover {
+.logintopBtn:hover {
     cursor: pointer;
     border: 1px solid;
 }
 
 
+#loginForm { font-family: "Inter", sans-serif; }
 
-input[type=text],
-input[type=password],
-input[type=email] {
+#emailtop, #passwordtop  {
     font-family: "Inter", sans-serif;
     height: 56px;
-    width: 325px;
+    width: 100%;
     margin: 10px 0px;
     padding: 0px 50px 0px 16px;
     border: 1px solid rgb(207, 214, 228);
@@ -78,29 +46,29 @@ input[type=email] {
     transition: all 0.3s ease 0s;
 }
 
-
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=email]:focus {
+#emailtop:focus, #passwordtop:focus {
     border: 1px solid var(--colPrimary);
     box-shadow: 0px 0px 1px 3px rgba(165, 41, 37, 0.3);
 }
 
-.error-message {
+.errortopMessage {
     color: rgb(255, 23, 73);
     font-size: 12px;
 }
 
-.signup {
+.signuptop {
     display: flex;
     width: fit-content;
     margin: 10px auto 0 auto;
+    font-family: "Inter", sans-serif;
+    display: block;
+    text-align: center;
 }
 
-.showpw {
+#showpwtop {
     width: 24px;
     height: 24px;
-    background-image: url("../images/visibility.svg");
+    background-image: url("/images/visibility.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -115,11 +83,8 @@ input[type=email]:focus {
     transition: all 0.1s ease 0s;
 }
 
-.cerrarBtn{
-    position: absolute;
-    float: right;
-    right: 5px;
-    margin-top: 5px;
+.cerrartopBtn{
+    cursor: pointer;
     border: none;
     outline: none;
     height: fit-content;
@@ -133,6 +98,3 @@ input[type=email]:focus {
 }
 
 
-.cerrarBtn:hover {
-    cursor: pointer;
-}

@@ -47,20 +47,19 @@
 
         <?php } else { ?>
 
-        <form id="loginForm" name="loginForm" action="./_php_controllers/loginController.php" method="POST" class="login-form">
-            <label for="email"><?=$emailText?></label>
-            <input type="email" id="email" name="email" placeholder="<?=$emailPlaceholder?>" required></input>
-
-            <label for="password"><?=$passwordText?></label>
+        <form id="loginForm" name="loginForm" action="./_php_controllers/loginController.php" method="POST" class="logintopForm">
+            <label for="emailtop"><?=$emailText?></label>
+            <input type="email" id="emailtop" name="email" placeholder="<?=$emailPlaceholder?>" required />
+            <label for="passwordtop"><?=$passwordText?></label>
             <div style="position: relative;">
-                <input type="password" id="password" name="password" placeholder="<?=$passwordPlaceholder?>" required></input>
-                <div class="showpw"></div>
+                <input type="password" id="passwordtop" name="password" placeholder="<?=$passwordPlaceholder?>" required />
+                <div id="showpwtop" data-view="0" onclick="showpwtopClick(this)"></div>
             </div>
-            <?=((isset($errorMessage))?'<span class="error-message">'.$errorMessage.'</span>':'')?>
-            <button type="submit" class="login-btn" name="submitBtnLogin"><?=$loginText?></button>
+            <?=((isset($errorMessage))?'<span class="errortopMessage">'.$errorMessage.'</span>':'')?>
+            <button type="submit" class="logintopBtn" name="submitBtnLogin"><?=$loginText?></button>
         </form>
 
-        <a href="signup.php" class="signup"><?=$newAccountText?></a>
+        <a href="signup.php" class="signuptop"><?=$newAccountText?></a>
 
         <? } ?>
     </ul>
