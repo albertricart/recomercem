@@ -50,11 +50,11 @@ include_once("_php_partials/02_header.php");
 
         <p><?=$aboutRecomercemText?></p><br>
 
-        <p><?=$aboutAlbertText?></p><br>
+        <p><?=$aboutAlbertText?><b><a class="links" href="https://albert-ricart.jimdosite.com/" target="_blank"> Albert Ricart </a></b></p><br>
 
-        <p><?=$abourMarceloText?></p><br>
+        <p><?=$abourMarceloText?> <b><a class="links" href="http://magomo.es/" target="_blank">Marcelo Goncevatt</a></b></p><br>
         
-        <p><?=$abourMarioText?></p>
+        <p><?=$abourMarioText?><b><a class="links" href="https://cptmario.github.io/" target="_blank">Mario De La Torre</a></b></p>
 
     </div>
 
