@@ -10,7 +10,7 @@
         <a id="footerDataA" href="/projecte.html">1º Projecte ABP "reComerçem"</a>
         <ul id="footerDataUl">
             <a href="https://albert-ricart.jimdosite.com/" target="_blank"><li>Albert Ricart</li></a>
-            <a href="https://mdelatorreochoa.wixsite.com/misitio" target="_blank"><li>Mario de la Torre</li></a>
+            <a href="https://cptmario.github.io/" target="_blank"><li>Mario de la Torre</li></a>
             <a href="http://magomo.es" target="_blank"><li>Marcelo Goncevatt</li></a>
         </ul>
     </div>
