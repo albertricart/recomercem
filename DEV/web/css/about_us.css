@@ -35,3 +35,8 @@
     color:  var(--coltext);
     text-align: justify;
 }
+
+.links
+{
+    color: var(--colprimary);
+}
