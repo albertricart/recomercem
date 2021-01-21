@@ -17,7 +17,7 @@ $jsonTraslate = '{
     "obtenido":"@@expresion !!! ... in the game \"@@juego\" you have not obtained points",
     "almacenado":"The accumulated total is @@total points.",
     "jugados":"You have not yet played all available games (@@jugados).",
-    "suficiente":"The amount of points obtained is still not enough to obtain the Discount Ticket. Try new games to exceed @@points2ticket points.",
+    "suficiente":"You have not played all the games or the amount of points obtained is still not enough to obtain the Discount Ticket. Try new games to exceed @@points2ticket points.",
     "getticket":"Request your Discount Ticket",
     "resumen":"The current summary of your games is:"
 }';
