@@ -33,58 +33,77 @@ var keyDown;
 var keyRight;
 
 /*========= LANGUAGE MANAGEMENT =========*/
-var lang = navigator.language.substring(0, 2);
+//get language from cookie
+var lang = getCookie("setLanguage");
+//else get system language
+if(lang == ""){
+  lang = navigator.language.substring(0, 2);
+}
+//array containing all translatable content
 var langArray;
+//array containing all translatable DOM elements
 var translatables = document.querySelectorAll(".lang");
 
 /*========= MISC =========*/
 var difficultyValue = difficultyControl.value;
 
+//prepares 1st settings menu tab
 displayMenuOpt(previousTab, menuOpts[0].dataset.tab);
+//gets and sets language
 getLanguageJson();
+//sets users controls
 setControls();
 
+//prevent event duration > event interval
 eventIntervalControl.onchange = function () {
   if (parseInt(eventIntervalControl.value) <= parseInt(eventDurationControl.value)) {
     eventDurationControl.value = eventIntervalControl.value;
   }
 };
 
+//prevent event duration > event interval
 eventDurationControl.onchange = function () {
   if (parseInt(eventDurationControl.value) >= parseInt(eventIntervalControl.value)) {
     eventIntervalControl.value = eventDurationControl.value;
   }
 };
 
+
+//listener for setting up key
 buttonUp.addEventListener("keypress", function (e) {
   setCookie("keyUp", e.code);
   keyUp = e.code;
   buttonUp.innerHTML = e.code.replace("Key", "");
 });
 
+//listener for setting left key
 buttonLeft.addEventListener("keypress", function (e) {
   setCookie("keyLeft", e.code);
   keyLeft = e.code;
   buttonLeft.innerHTML = e.code.replace("Key", "");
 });
 
+//listener for setting down key
 buttonDown.addEventListener("keypress", function (e) {
   setCookie("keyDown", e.code);
   keyDown = e.code;
   buttonDown.innerHTML = e.code.replace("Key", "");
 });
 
+//listener for setting right key
 buttonRight.addEventListener("keypress", function (e) {
   setCookie("keyRight", e.code);
   keyRight = e.code;
   buttonRight.innerHTML = e.code.replace("Key", "");
 });
 
+//update game parameters when changing difficulty preset
 difficultyControl.oninput = function () {
   difficultyValue = difficultyControl.value;
   updateParameters();
 };
 
+//set select value on custom when changing parameters
 function setCustomOnInput(control, display) {
   control.oninput = function () {
     difficultyControl.value = "Custom";
@@ -105,6 +124,7 @@ setCustomOnInput(checkboxLockY, null);
 setCustomOnInput(checkboxInvertAxis, null);
 setCustomOnInput(checkboxDodge, null);
 
+//code necessary for moving around tabs 
 for (var x = 0; x < menuOpts.length; x++) {
   menuOpts[x].addEventListener("click", function () {
     var tabName = this.dataset.tab;
@@ -137,7 +157,6 @@ function displayMenuOpt(tab, tabName) {
 
     case "#tabCtrl":
       displayKeyControls();
-      //alert(document.cookie);
       break;
 
     case "#tabLang":
@@ -249,36 +268,36 @@ function getCookie(cname) {
 
 function manageLanguage() {
   radioCa.onchange = function () {
-    lang = "ca";
+    lang = "cat";
     getLanguageJson();
   };
 
   radioEn.onchange = function () {
-    lang = "en";
+    lang = "eng";
     getLanguageJson();
   };
 
   radioEs.onchange = function () {
-    lang = "es";
+    lang = "esp";
     getLanguageJson();
   };
 
   switch (lang) {
-    case "en":
+    case "eng":
       radioEn.checked = true;
       break;
 
-    case "es":
+    case "esp":
       radioEs.checked = true;
       break;
 
-    case "ca":
+    case "cat":
       radioCa.checked = true;
       break;
 
     default:
       radioEn.checked = true;
-      lang = "en";
+      lang = "eng";
       break;
   }
 }

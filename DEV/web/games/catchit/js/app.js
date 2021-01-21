@@ -12,9 +12,10 @@ var coinSound = new Audio('./sounds/coin.mp3');
 var gameOverSound = new Audio('./sounds/gameover.wav');
 var bombSound = new Audio('./sounds/bomb.mp3');
 
+/*========= OBJECTS =========*/
+var objectNames = ["apple", "banana", "dress", "hat", "orange", "pants1", "pants2", "pear", "shirt", "shirt2", "shoe2", "shoe3", "skirt", "watermelon", "martillo", "lettuce", "tomato", "carrot", "coffee", "newspaper", "beer"];
 
-var objectNames = ["apple", "banana", "dress", "hat", "orange", "pants1", "pants2", "pear", "shirt", "shirt2", "shoe2", "shoe3", "skirt", "watermelon"];
-
+/*========= SELECTORS =========*/
 //get elements references
 var gameContainer = document.querySelector(".game-container");
 var displayTimer = document.querySelector("#timeElapsed");
@@ -30,20 +31,26 @@ var selectedEvents = [];
 var objects = document.querySelectorAll(".game-container__object");
 var imgs;
 
-//events id's
+/*========= EVENT ID'S =========*/
 const EVENT_OBSCURE = 1;
 const DOUBLE_POINTS = 2;
 const LOCK_Y = 3;
 const CONTROLS_INVERTED = 4;
 const DODGE = 5;
 
+
+/*========= GAME VARIABLES =========*/
+//current game ID
 var currentEvent = 0;
-//event time interval(s)
+//default event time interval(s)
 var eventInterval = 10;
-//event time duration(s)
+//default event time duration(s)
 var eventDuration = 5;
+//id for setIntervals
 var eventTimerId;
 var eventGeneratorId;
+var objectRendererId;
+//time since event started
 var eventTimer;
 //game speed
 var speed;
@@ -51,31 +58,38 @@ var speedIncrement;
 //time since game started
 var timeElapsed;
 var points;
+var pointsToAdd = 5;
 var lives;
-var objectRendererId;
 var timerId;
 //get window size
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
-var pointsToAdd = 5;
 
 //get game container size
 var gameWidth = gameContainer.offsetWidth;
 var gameHeight = gameContainer.offsetHeight;
 
+//console log window size
 window.onresize = reportWindowSize;
 
+
+//add game controls
+window.addEventListener("mousemove", handleMouseMove);
+window.addEventListener("keypress", handleKeyPress);
+
+//end game when user clicks on fab -> settings
 settingsFab.addEventListener("click", function () {
   lives = 0;
   openSettingsMenu();
 });
 
-window.addEventListener("mousemove", handleMouseMove);
-window.addEventListener("keypress", handleKeyPress);
 
-preloadImages();
-//MAIN APP
+/*========= MAIN APP =========*/
 openMainMenu();
+
+
+
+
 
 
 /**
@@ -84,7 +98,8 @@ openMainMenu();
  *
  */
 
-function startgame(initObjects, moveObjects, setParameters) {
+//receives functions by parameter and performs callbacks
+function startgame(initObjects, moveObjects, setParameters, startTimer, manageEvents) {
   setParameters(
     parseInt(speedControl.value),
     parseInt(speedIncrementControl.value) / 100,
@@ -99,14 +114,16 @@ function startgame(initObjects, moveObjects, setParameters) {
   manageEvents();
 }
 
+//triggers an event at a determined interval
 function manageEvents() {
   if (selectedEvents.length != 0) {
     eventGeneratorId = setInterval(function () {
       triggerEvent(selectedEvents[getRandomInt(0, selectedEvents.length - 1)]);
-    }, eventInterval * 1000);
+    }, (eventInterval * 1000));
   }
 }
 
+//game timer and event time manager
 function startTimer() {
   timeElapsed = 0;
   eventTimer = 0;
@@ -117,19 +134,21 @@ function startTimer() {
       displayTimer.innerHTML = timeElapsed.toFixed(2) + "s";
 
       if (eventTimer == eventDuration) {
-        nextEvent = eventInterval;
+        eventTimer = 0;
+        nextEvent = eventInterval - eventDuration;
       }
 
-      if(currentEvent == 0){
+      if (currentEvent == 0) {
         nextEvent -= 0.01;
         displayEventTime.innerHTML = langArray.next + nextEvent.toFixed(0) + "s";
-      }else{
+      } else {
         displayEventTime.innerHTML = langArray.current + ": " + (eventDuration - eventTimer).toFixed(0) + "s";
       }
     }
   }, 10);
 }
 
+//triggers the given event
 function triggerEvent(eventId) {
   eventTimer = 0;
   auxSpeed = speed;
@@ -179,19 +198,23 @@ function triggerEvent(eventId) {
     case DODGE:
       eventName = "dodge";
       eventIcon.style.backgroundImage = "url(./assets/objects/bomb.png)";
-      objects.forEach(object => {
-        if (isBomb(object)) {
-          removeBomb(object);
-        } else {
-          setBomb(object);
-        }
-      });
+      setTimeout(function () {
+        objects.forEach(object => {
+          if (isBomb(object)) {
+            removeBomb(object);
+          } else {
+            setBomb(object);
+          }
+        });
+      }, 1000);
+
       break;
   }
 
   document.querySelector(".currentEventName").innerHTML = langArray[eventName];
 }
 
+//clears the given event
 function clearEvent(event) {
   eventIcon.style.backgroundImage = "none";
   document.querySelector(".currentEventName").innerHTML = "";
@@ -305,6 +328,7 @@ function moveObjects() {
           }
 
           objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
+
         } else {
           if (
             returnBomb() == -1 &&
@@ -314,8 +338,9 @@ function moveObjects() {
             setBomb(objects[i]);
           }
 
+          //if players collides with the given object, remove life and get back to top
           if (checkCollision(basket, objects[i])) {
-            //if objects collide
+            //check if bomb
             if (isBomb(objects[i])) {
               removeLife(1);
               removeBomb(objects[i]);
@@ -323,6 +348,7 @@ function moveObjects() {
               addPoints(pointsToAdd);
               setObjectImage(objects[i], getRandomObjectName());
             }
+
             objects[i].style.top = -(getRandomInt(1, 5) * 100) + "px";
           } else {
             //if object is above bottom and hasn't collided keep moving
@@ -331,11 +357,13 @@ function moveObjects() {
         }
       }
     } else {
+      //game ended
       openGameOver();
     }
   }, 10);
 }
 
+//checks if basket and given object collide and returns bool
 function checkCollision(basket, object) {
   var basketOffsets = basket.getBoundingClientRect();
   var objectOffsets = object.getBoundingClientRect();
@@ -354,6 +382,7 @@ function checkCollision(basket, object) {
   }
 }
 
+//set object image with given name
 function setObjectImage(object, objectName) {
   object.dataset.objectimg = objectName;
 
@@ -365,10 +394,12 @@ function setObjectImage(object, objectName) {
 
 }
 
+//returns a random object name
 function getRandomObjectName() {
   return objectNames[getRandomInt(0, objectNames.length - 1)];
 }
 
+//get object image url
 function getObjectUrl(objectName, dark) {
   if (dark) {
     return "url(./assets/objects/dark/" + objectName + ".png)";
@@ -386,32 +417,19 @@ function getObjectUrl(objectName, dark) {
  */
 
 function handleMouseMove(e) {
-  if (
-    e.pageY <= gameHeight - basket.getBoundingClientRect().height + 15 &&
-    e.pageX <= gameWidth - basket.getBoundingClientRect().width
-  ) {
-    // e = Mouse move event.
-    basket.style.top = e.pageY + "px";
-    basket.style.left = e.pageX + "px";
-  }
+  // e = Mouse move event.
+  basket.style.top = e.pageY + "px";
+  basket.style.left = e.pageX + "px";
 }
 
 function handleInvertedMouseMove(e) {
-  if (
-    e.pageY <= gameHeight - basket.getBoundingClientRect().height + 15 &&
-    e.pageX <= gameWidth - basket.getBoundingClientRect().width
-  ) {
-    // e = Mouse move event.
-    basket.style.top = e.pageX + "px";
-    basket.style.left = e.pageY + "px";
-  }
+  // e = Mouse move event.
+  basket.style.top = e.pageX + "px";
+  basket.style.left = e.pageY + "px";
 }
 
 function handleLockedMouseMove(e) {
-  if (
-    e.pageY <= gameHeight - basket.getBoundingClientRect().height + 15 &&
-    e.pageX <= gameWidth - basket.getBoundingClientRect().width
-  ) {
+  if (e.pageY <= gameHeight && e.pageX <= gameWidth) {
     // e = Mouse move event.
     basket.style.left = e.pageX + "px";
   }
@@ -422,18 +440,18 @@ function handleKeyPress(e) {
   let offsets = basket.getBoundingClientRect();
 
   if (offsets.top < 0) {
-    basket.style.top = "0px";
+    basket.style.top = "30px";
   } else if (offsets.left < 0) {
     basket.style.left = "0px";
   } else if (offsets.top > gameHeight - offsets.height) {
-    basket.style.top = gameHeight - offsets.height + "px";
+    basket.style.top = (gameHeight - offsets.height - 10) + "px";
   } else if (offsets.left > gameWidth - offsets.width) {
-    basket.style.left = gameWidth - offsets.width + "px";
+    basket.style.left = (gameWidth - offsets.width - 10) + "px";
   } else {
     switch (e.code) {
       case keyUp:
         //move Up (Y+)
-        basket.style.top = offsets.top - 30 + "px";
+        basket.style.top = (offsets.top - 30) + "px";
         break;
       case keyLeft:
         //move left (X-)
@@ -441,7 +459,7 @@ function handleKeyPress(e) {
         break;
       case keyDown:
         //move down (Y-)
-        basket.style.top = offsets.top + 30 + "px";
+        basket.style.top = (offsets.top - 30) + "px";
         break;
       case keyRight:
         //move right (X+)
@@ -482,6 +500,7 @@ function removeLife(lifesToRemove) {
   displayLives.innerHTML = lives;
 }
 
+//get selected events from settings menu
 function getSelectedEvents() {
   var eventId;
   for (let i = 0; i < availableEvents.length; i++) {
@@ -497,6 +516,8 @@ function getSelectedEvents() {
  *  MENUS
  *
  */
+
+ //function to open and close menus with given animations
 function manageMenu(elem, state, animIn, animOut) {
   switch (state) {
     //close
@@ -527,7 +548,7 @@ function openMainMenu() {
   mainMenuPlay.addEventListener("click", function () {
     closeMainMenu();
     setTimeout(function () {
-      startgame(initObjects, moveObjects, setParameters);
+      startgame(initObjects, moveObjects, setParameters, startTimer, manageEvents);
       menuWrapper.style.display = "none";
       mainMenu.style.display = "none";
     }, 1000);
@@ -628,21 +649,6 @@ function hideFab() {
  *
  */
 
-function preloadImages() {
-  gameContainer.style.backgroundImage = "url(./assets/back-dark.png)";
-  gameContainer.style.backgroundImage = "url(./assets/back.png)";
-  // var img = new Image();
-  // img.src = "url(../assets/back.png)";
-  // img.src = "url(../assets/back-dark.png)";
-  // img.src = "url(../assets/objects/bomb.png)";
-  // img.src = "url(../assets/objects/dark/bomb.png)";
-  // objectNames.forEach(imageName => {
-  //   img.src = "url(../assets/objects/ " + imageName + ".png)";
-  //   img.src = "url(../assets/objects/dark/ " + imageName + ".png)";
-  // });
-}
-
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -694,3 +700,17 @@ function animateInfo(info, color, animation) {
   info.classList.add(animation);
 }
 
+//not working...
+function preloadImages() {
+  gameContainer.style.backgroundImage = "url(./assets/back-dark.png)";
+  gameContainer.style.backgroundImage = "url(./assets/back.png)";
+  // var img = new Image();
+  // img.src = "url(../assets/back.png)";
+  // img.src = "url(../assets/back-dark.png)";
+  // img.src = "url(../assets/objects/bomb.png)";
+  // img.src = "url(../assets/objects/dark/bomb.png)";
+  // objectNames.forEach(imageName => {
+  //   img.src = "url(../assets/objects/ " + imageName + ".png)";
+  //   img.src = "url(../assets/objects/dark/ " + imageName + ".png)";
+  // });
+}
