@@ -443,15 +443,15 @@ function handleKeyPress(e) {
     basket.style.top = "30px";
   } else if (offsets.left < 0) {
     basket.style.left = "0px";
-  } else if (offsets.top > gameHeight - offsets.height) {
-    basket.style.top = (gameHeight - offsets.height - 10) + "px";
+  } else if (offsets.top > gameHeight) {
+    basket.style.top = (gameHeight - offsets.height ) + "px";
   } else if (offsets.left > gameWidth - offsets.width) {
     basket.style.left = (gameWidth - offsets.width - 10) + "px";
   } else {
     switch (e.code) {
       case keyUp:
         //move Up (Y+)
-        basket.style.top = (offsets.top - 30) + "px";
+        basket.style.top = (offsets.top - 80) + "px";
         break;
       case keyLeft:
         //move left (X-)
@@ -459,7 +459,7 @@ function handleKeyPress(e) {
         break;
       case keyDown:
         //move down (Y-)
-        basket.style.top = (offsets.top - 30) + "px";
+        basket.style.top = (offsets.top + 30) + "px";
         break;
       case keyRight:
         //move right (X+)
