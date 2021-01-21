@@ -130,7 +130,7 @@ if ($loggedUser) {
 }
 
 // - - - - - control ticket
-if ( $totalPoints >= $pointsToTicket ) { $giveTicket = true; } else { $giveTicket = false; }
+if ( $totalPoints >= $pointsToTicket && $playedGames == count( $sessionAry['games'] ) ) { $giveTicket = true; } else { $giveTicket = false; }
 if ( $loggedUser && $sessionAry['user']['ticket'] != 0 ) { $sendedTicket = true; } else { $sendedTicket = false; }
 
 
